@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-navbar variant="info">
+      <b-navbar-brand href="#"> Monneda </b-navbar-brand>
+
+      <b-navbar-nav>
+        <b-nav-item href="#"> Feed </b-nav-item>
+        <b-nav-item href="#"> Rede </b-nav-item>
+        <b-nav-item href="#"> Eventos </b-nav-item>
+        <b-nav-item href="#"> Chat </b-nav-item>
+        <b-nav-item href="#"> Notificações </b-nav-item>
+        <b-nav-item href="#"> Hashtags </b-nav-item>
+      </b-navbar-nav>
+
+      <b-navbar-nav class="ml-auto">
+        <b-nav-form>
+          <b-form-input size="sm" placeholder="Pesquisa"></b-form-input>
+          <b-button size="sm"> Search </b-button>
+        </b-nav-form>
+
+        <b-nav-item href="#"> Perfil </b-nav-item>
+        <b-nav-item href="#"> Carteiras </b-nav-item>
+        <b-nav-item href="#"> Opções </b-nav-item>
+      </b-navbar-nav>
+
+    </b-navbar>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  name: 'App'
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
