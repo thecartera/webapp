@@ -1,31 +1,11 @@
 <template>
   <div id="app">
-    <Navbar />
-
-    <b-container>
-      <b-row>
-        <b-col cols="8">
-          <User />
-          <hr>
-          <Wallets />
-        </b-col>
-
-        <b-col cols="4">
-          <section> Side bar </section>
-        </b-col>
-      </b-row>
-    </b-container>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import User from './components/User'
-import Navbar from './components/Navbar'
-import Wallets from './components/Wallets'
-
 export default {
-  name: 'App',
-
-  components: { Navbar, User, Wallets }
+  name: 'App'
 }
 </script>
