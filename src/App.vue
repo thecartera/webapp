@@ -7,7 +7,7 @@
         <b-col cols="8">
           <User />
           <hr>
-          <Wallet />
+          <Wallets />
         </b-col>
 
         <b-col cols="4">
@@ -21,14 +21,11 @@
 <script>
 import User from './components/User'
 import Navbar from './components/Navbar'
-import Wallet from './components/Wallet'
+import Wallets from './components/Wallets'
 
 export default {
   name: 'App',
 
-  components: { Navbar, User, Wallet }
+  components: { Navbar, User, Wallets }
 }
 </script>
-
-<style>
-</style>
