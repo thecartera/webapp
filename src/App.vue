@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar variant="info">
+    <b-navbar sticky variant="info">
       <b-navbar-brand href="#"> Monneda </b-navbar-brand>
 
       <b-navbar-nav>
@@ -26,36 +26,42 @@
     <b-container>
       <b-row>
         <b-col cols="8">
-          <b-card title="Nova publicação">
-            <b-form-textarea></b-form-textarea>
-            <b-button> Post </b-button>
+
+          <b-card>
+            <b-row>
+              <b-col cols="3" align-self="center">
+                <b-avatar
+                  src="https://placekitten.com/300/300"
+                  size="6rem"
+                />
+              </b-col>
+
+              <b-col cols="8" class="text-left">
+                <b-card-body>
+                  <b-card-title> Guilherme Dantas </b-card-title>
+                  <b-card-sub-title> Interessado em mercado de capitais, política e finanças públicas </b-card-sub-title>
+
+                  <b-row>
+                    <b-col> 3.2% Retorno hoje </b-col>
+                    <b-col> 33 seguindo </b-col>
+                    <b-col> 1200 seguidores </b-col>
+                  </b-row>
+                </b-card-body>
+              </b-col>
+            </b-row>
           </b-card>
 
           <hr>
 
-          <b-card title="Tiago Nigro" sub-title="O primo rico">
-            <b-avatar variant="info" src="https://placekitten.com/300/300"></b-avatar>
-            <b-card-text>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </b-card-text>
-
-            <b-card-footer>
-              <b-row>
-                <b-col cols="1">
-                  <b-icon icon="hand-thumbs-up" />
-                </b-col>
-                <b-col cols="1">
-                  <b-icon icon="chat" />
-                </b-col>
-              </b-row>
-            </b-card-footer>
+          <b-card title="Carteira">
+            <b-table hover :items="items" />
           </b-card>
 
         </b-col>
-
         <b-col cols="4">
           <section> Side bar </section>
         </b-col>
+
       </b-row>
     </b-container>
   </div>
@@ -63,7 +69,35 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+
+  data: () => ({
+    items: [
+      { code: 'AAPL34', name: 'Apple DBR', position: 5.3, monthly: 4.4 },
+      { code: 'BBAS3', name: 'Banco do Brasil', position: 7.5, monthly: 3.8 },
+      { code: 'PIBB11', name: 'ETF B3', position: 12.5, monthly: 3.6 },
+      { code: 'VVAR3', name: 'Via Varejo', position: 5.3, monthly: 3.4 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
+      { code: 'CPLE6', name: 'Copel Energia', position: 1.4, monthly: 2.4 }
+    ]
+  })
 }
 </script>
 
