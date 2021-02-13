@@ -12,7 +12,7 @@
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item href="#"> Account </b-nav-item>
+      <b-nav-item to="/me"> Account </b-nav-item>
       <b-nav-item href="#"> Wallets </b-nav-item>
       <b-nav-item href="#"> Settings </b-nav-item>
     </b-navbar-nav>
