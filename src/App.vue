@@ -1,15 +1,18 @@
 <template>
-  <div id="app">
-    <Navbar />
-    <router-view/>
-  </div>
+  <b-container id="app">
+    <b-row>
+      <b-col>
+        <Wallet name="Minha carteira" />
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
+import Wallet from '@/components/Wallet'
 
 export default {
   name: 'App',
-  components: { Navbar }
+  components: { Wallet }
 }
 </script>

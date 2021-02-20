@@ -9,7 +9,11 @@
       </b-row>
     </b-card-title>
 
-    <b-table hover :items="items" />
+    <b-table hover :items="tickers" />
+
+    <b-card-footer>
+      <b-button @click="saveWallet"> Save </b-button>
+    </b-card-footer>
 
     <b-modal :ref="name" :id="name" @ok="newStock">
       <b-form @submit="newStock">
@@ -31,22 +35,23 @@ export default {
   },
 
   data: () => ({
-    items: [
-      { code: 'AAPL34', name: 'Apple DBR', position: 5.3, monthly: 4.4 },
-      { code: 'BBAS3', name: 'Banco do Brasil', position: 7.5, monthly: 3.8 },
-      { code: 'PIBB11', name: 'ETF B3', position: 12.5, monthly: 3.6 },
-      { code: 'VVAR3', name: 'Via Varejo', position: 5.3, monthly: 3.4 },
-      { code: 'BPAC11', name: 'Banco Pactual', position: 7.5, monthly: 2.8 },
-      { code: 'CPLE6', name: 'Copel Energia', position: 1.4, monthly: 2.4 }
-    ],
-
+    tickers: [],
     stock: ''
   }),
 
   methods: {
+    saveWallet (e) {
+      const wallet = { tickers: this.tickers.map(i => i.codneg) }
+      this.finance.save(wallet)
+        .then(r => r.json())
+        .then(console.log)
+    },
+
     newStock (e) {
       e.preventDefault()
-      this.items.push({ code: this.stock, position: 0.0, monthly: 0.0 })
+      this.finance.quote(this.stock)
+        .then(r => r.json())
+        .then(r => this.tickers.push(r))
       this.stock = ''
       this.$refs[this.name].hide()
     }
