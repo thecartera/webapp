@@ -1,29 +1,36 @@
 import Vue from 'vue'
 
-const BASE = 'http://localhost:8080'
+const BASE = 'https://monneda.herokuapp.com'
 
 const buildUrl = (...paths) => [BASE, ...paths].join('/')
 
-const quote = ticker => {
-  const url = buildUrl('tickers', ticker)
-  return fetch(url, { mode: 'cors' })
-}
+const request = (meth, path, opts = {}) => {
+  const url = buildUrl(path)
+  console.log(`${meth}: ${url}`)
 
-const save = wallet => {
-  const url = buildUrl('wallets')
-  console.log(url)
-  console.log(wallet)
-  return fetch(url, {
-    method: 'POST',
+  const options = {
+    method: meth,
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(wallet)
-  })
+    ...opts
+  }
+
+  return fetch(url, options)
+    .then(r => r.json())
+}
+
+const fetchQuote = ticker => {
+  return request('GET', `tickers/${ticker}`)
+}
+
+const postWallet = wallet => {
+  const options = { body: JSON.stringify(wallet) }
+  return request('POST', 'wallets', options)
 }
 
 const finance = {
-  quote,
-  save
+  fetchQuote,
+  postWallet
 }
 
 const plugin = {
