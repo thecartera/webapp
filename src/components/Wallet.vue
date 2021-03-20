@@ -37,7 +37,9 @@ export default {
 
   computed: {
     wallet () {
-      return { tickers: this.tickers.map(i => i.ticker) }
+      return {
+        tickers: this.tickers.map(i => ({ ticker: i.ticker }))
+      }
     }
   },
 
@@ -60,8 +62,9 @@ export default {
     }
 
     const wallet = await this.finance.fetchWallet(this.id)
+
     for (const ticker of wallet.tickers) {
-      this.finance.fetchTicker(ticker)
+      this.finance.fetchTicker(ticker.ticker)
         .then(r => this.tickers.push(r))
     }
   }
