@@ -22,11 +22,7 @@ const request = (meth, path, opts = {}) => {
 }
 
 const fetchTicker = async ticker => {
-  const res = await request('GET', `tickers/${ticker}`)
-  return {
-    ticker: res.codneg,
-    price: res.preult
-  }
+  return request('GET', `tickers/${ticker}`)
 }
 
 const postWallet = wallet => {
