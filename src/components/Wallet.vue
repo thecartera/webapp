@@ -24,32 +24,45 @@ export default {
   name: 'Wallet',
 
   props: {
-    name: {
-      type: String,
-      required: true
+    id: {
+      default: '',
+      type: String
     }
   },
 
   data: () => ({
-    tickers: [],
-    ticker: ''
+    ticker: '',
+    tickers: []
   }),
 
   computed: {
     wallet () {
-      return { tickers: this.tickers.map(i => i.code) }
+      return { tickers: this.tickers.map(i => i.ticker) }
     }
   },
 
   methods: {
-    saveWallet (e) {
-      this.finance.postWallet(this.wallet)
+    async saveWallet (e) {
+      const wallet = await this.finance.postWallet(this.wallet)
+      this.$router.push(`/wallets/${wallet.id}`)
     },
 
-    newTicker (e) {
-      this.finance.fetchQuote(this.ticker)
+    async newTicker (e) {
+      const ticker = await this.finance.fetchTicker(this.ticker)
+      this.tickers.push(ticker)
+      this.ticker = ''
+    }
+  },
+
+  async created () {
+    if (this.id === '') {
+      return
+    }
+
+    const wallet = await this.finance.fetchWallet(this.id)
+    for (const ticker of wallet.tickers) {
+      this.finance.fetchTicker(ticker)
         .then(r => this.tickers.push(r))
-        .then(() => { this.ticker = '' })
     }
   }
 }

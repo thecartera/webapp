@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
-const BASE = 'https://monneda.herokuapp.com'
+// const BASE = 'https://monneda.herokuapp.com'
+const BASE = 'http://localhost:8080'
 
 const buildUrl = (...paths) => [BASE, ...paths].join('/')
 
@@ -14,13 +15,18 @@ const request = (meth, path, opts = {}) => {
     headers: { 'Content-Type': 'application/json' },
     ...opts
   }
+  console.log('opts:', options)
 
   return fetch(url, options)
     .then(r => r.json())
 }
 
-const fetchQuote = ticker => {
-  return request('GET', `tickers/${ticker}`)
+const fetchTicker = async ticker => {
+  const res = await request('GET', `tickers/${ticker}`)
+  return {
+    ticker: res.codneg,
+    price: res.preult
+  }
 }
 
 const postWallet = wallet => {
@@ -28,9 +34,14 @@ const postWallet = wallet => {
   return request('POST', 'wallets', options)
 }
 
+const fetchWallet = id => {
+  return request('GET', `wallets/${id}`)
+}
+
 const finance = {
-  fetchQuote,
-  postWallet
+  fetchTicker,
+  postWallet,
+  fetchWallet
 }
 
 const plugin = {
