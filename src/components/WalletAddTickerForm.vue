@@ -1,11 +1,14 @@
 <template>
   <b-form @keyup.enter.prevent="submit">
     <b-row>
-      <b-col cols="8">
-        <b-form-input v-model="ticker" placeholder="Ticker" />
+      <b-col cols="4">
+        <b-form-input v-model="ticker" placeholder="Código" :formatter="formatter" />
       </b-col>
       <b-col cols="4">
-        <b-form-input v-model="amount" placeholder="Position" />
+        <b-form-input v-model="amount" placeholder="Posição" />
+      </b-col>
+      <b-col cols="4  ">
+        <b-button @click="submit"> Submit </b-button>
       </b-col>
     </b-row>
   </b-form>
@@ -31,6 +34,9 @@ export default {
 
       this.ticker = ''
       this.amount = 0
+    },
+    formatter (value) {
+      return value.toUpperCase()
     }
   }
 }

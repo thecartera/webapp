@@ -34,10 +34,19 @@ const fetchWallet = id => {
   return request('GET', `wallets/${id}`)
 }
 
+function validNewTickerAmount (amount) {
+  if (Number.isInteger(Number(amount)) && amount > 0) {
+    return true
+  } else {
+    return false
+  }
+}
+
 const finance = {
   fetchTicker,
   postWallet,
-  fetchWallet
+  fetchWallet,
+  validNewTickerAmount
 }
 
 const plugin = {
