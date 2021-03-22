@@ -35,7 +35,7 @@ const fetchWallet = id => {
 }
 
 function validNewTickerAmount (amount) {
-  if (Number.isInteger(Number(amount)) && amount > 0) {
+  if (Number.isInteger(Number(amount)) && amount > 0 && (amount < 2 ** 30)) {
     return true
   } else {
     return false
