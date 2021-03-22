@@ -9,19 +9,23 @@
       </b-row>
     </b-card-title>
 
-    <b-table hover :items="tickers" />
+    <b-table hover :items="wallet.tickers" />
 
     <b-card-footer>
-      <b-form @submit.prevent="newTicker">
-        <b-form-input v-model="ticker" placeholder="Ticker code" />
-      </b-form>
+      <WalletAddTickerForm @submit="addTicker" />
     </b-card-footer>
   </b-card>
 </template>
 
 <script>
+import WalletAddTickerForm from '@/components/WalletAddTickerForm'
+
 export default {
   name: 'Wallet',
+
+  components: {
+    WalletAddTickerForm
+  },
 
   props: {
     id: {
@@ -31,14 +35,13 @@ export default {
   },
 
   data: () => ({
-    ticker: '',
     tickers: []
   }),
 
   computed: {
     wallet () {
       return {
-        tickers: this.tickers.map(i => ({ ticker: i.ticker }))
+        tickers: this.tickers.map(({ amount, ticker }) => ({ amount, ticker }))
       }
     }
   },
@@ -49,10 +52,9 @@ export default {
       this.$router.push(`/wallets/${wallet.id}`)
     },
 
-    async newTicker (e) {
-      const ticker = await this.finance.fetchTicker(this.ticker)
-      this.tickers.push(ticker)
-      this.ticker = ''
+    async addTicker ({ ticker, amount }) {
+      const { price } = await this.finance.fetchTicker(ticker)
+      this.tickers.push({ ticker, amount, price })
     }
   },
 
@@ -63,9 +65,9 @@ export default {
 
     const wallet = await this.finance.fetchWallet(this.id)
 
-    for (const ticker of wallet.tickers) {
-      this.finance.fetchTicker(ticker.ticker)
-        .then(r => this.tickers.push(r))
+    for (const { ticker, amount } of wallet.tickers) {
+      const { price } = await this.finance.fetchTicker(ticker)
+      this.tickers.push({ ticker, amount, price })
     }
   }
 }
