@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Wallet from '@/components/Wallet'
+import WalletView from '@/views/WalletView'
 
 Vue.use(VueRouter)
 
@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/wallets/:id?',
     name: 'wallet',
-    component: Wallet,
+    component: WalletView,
     props: true
   }
 ]
