@@ -9,7 +9,8 @@
       </b-row>
     </b-card-title>
 
-    <b-table hover :items="assets" />
+    <b-table @row-clicked="onRowClicked" hover :items="assets">
+    </b-table>
 
     <b-card-footer>
       <WalletAddTickerForm @submit="addTicker" />
@@ -49,6 +50,10 @@ export default {
     async addTicker ({ ticker, amount }) {
       const { price, monthlyGain } = await this.finance.fetchAsset(ticker)
       this.assets.push({ ticker, price, monthlyGain, amount })
+    },
+
+    onRowClicked (_, i) {
+      this.assets.splice(i, 1)
     }
   }
 }
