@@ -3,7 +3,7 @@
     <b-card-title>
       <b-row>
         <b-col> {{ wallet.id }} </b-col>
-        <b-col class="text-right" :class="style"> {{ monthly }}% </b-col>
+        <b-col class="text-right" :class="style"> {{ round(wallet.monthlyGain) }} % </b-col>
       </b-row>
     </b-card-title>
     <b-card-sub-title> {{ created }} </b-card-sub-title>
@@ -46,18 +46,15 @@ export default {
       return new Date(this.wallet.createdAt)
     },
 
-    monthly () {
-      return Math.round(this.wallet.monthlyGain * 100) / 100
-    },
-
     style () {
-      return this.monthly < 0 ? 'text-danger' : 'text-success'
+      return this.wallet.monthlyGain < 0 ? 'text-danger' : 'text-success'
     }
   },
 
   methods: {
     round (val, places = 2) {
-      return Math.round(val * 10 * places) / (places * 10)
+      const decimals = Math.pow(10, places)
+      return Math.round(val * decimals) / decimals
     }
   }
 }
