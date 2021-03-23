@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
-// const BASE = 'https://monneda.herokuapp.com'
-const BASE = 'http://localhost:8080'
+const BASE = 'https://monneda.herokuapp.com'
+// const BASE = 'http://localhost:8080'
 
 const buildUrl = (...paths) => [BASE, ...paths].join('/')
 

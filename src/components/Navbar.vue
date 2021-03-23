@@ -4,11 +4,11 @@
 
     <b-navbar-nav>
       <b-nav-item href="#/"> Home </b-nav-item>
-      <b-nav-item href="#/wallets"> Wallets </b-nav-item>
+      <b-nav-item href="#/wallets"> Carteiras </b-nav-item>
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item> Profile </b-nav-item>
+      <b-nav-item> Perfil </b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </template>

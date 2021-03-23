@@ -8,7 +8,7 @@
         <b-form-input v-model="amount" placeholder="Posição" />
       </b-col>
       <b-col>
-        <b-button @click="submit"> Submit </b-button>
+        <b-button @click="submit"> Adicionar </b-button>
       </b-col>
     </b-row>
   </b-form>

@@ -2,9 +2,9 @@
   <b-card>
     <b-card-title>
       <b-row>
-        <b-col> Wallet </b-col>
+        <b-col> Carteira </b-col>
         <b-col class="text-right">
-          <b-button @click="saveWallet"> Save </b-button>
+          <b-button @click="saveWallet"> Salvar </b-button>
         </b-col>
       </b-row>
     </b-card-title>
