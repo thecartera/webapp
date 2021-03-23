@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import WalletView from '@/views/WalletView'
+import WalletCreate from '@/views/WalletCreate'
 
 Vue.use(VueRouter)
 
@@ -12,7 +13,12 @@ const routes = [
     redirect: '/wallets'
   },
   {
-    path: '/wallets/:id?',
+    path: '/wallets',
+    name: 'wallets',
+    component: WalletCreate
+  },
+  {
+    path: '/wallets/:id',
     name: 'wallet',
     component: WalletView,
     props: true

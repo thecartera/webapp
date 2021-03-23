@@ -21,8 +21,8 @@ const request = (meth, path, opts = {}) => {
     .then(r => r.json())
 }
 
-const fetchTicker = async ticker => {
-  return request('GET', `tickers/${ticker}`)
+const fetchAsset = async ticker => {
+  return request('GET', `assets/${ticker}`)
 }
 
 const postWallet = wallet => {
@@ -34,19 +34,10 @@ const fetchWallet = id => {
   return request('GET', `wallets/${id}`)
 }
 
-function validNewTickerAmount (amount) {
-  if (Number.isInteger(Number(amount)) && amount > 0 && (amount < 2 ** 30)) {
-    return true
-  } else {
-    return false
-  }
-}
-
 const finance = {
-  fetchTicker,
+  fetchAsset,
   postWallet,
-  fetchWallet,
-  validNewTickerAmount
+  fetchWallet
 }
 
 const plugin = {
