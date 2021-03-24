@@ -8,7 +8,7 @@
         <!-- <b-form-input @keypress="onlyNumber($event)" v-model.number="amount" placeholder="Quantidade" /> -->
         <b-form-input
           id="input-live"
-          v-model="quantity"
+          v-model="amount"
           :state="nameState"
           @keypress="onlyNumber($event)"
           aria-describedby="input-live-help input-live-feedback"
@@ -29,27 +29,28 @@ export default {
 
   data: () => ({
     ticker: '',
-    amount: '',
-    quantity: ''
+    amount: ''
   }),
 
   computed: {
     nameState () {
-      if (this.quantity === '') {
+      if (this.amount === '') {
         return 'null'
       }
-      return (this.quantity.length < 10)
+      return (this.amount.length < 10)
     }
   },
 
   methods: {
     submit () {
-      const data = { ticker: this.ticker.toUpperCase(), amount: this.amount }
+      if (this.ticker.length > 0 && this.amount.length > 0) {
+        const data = { ticker: this.ticker.toUpperCase(), amount: this.amount }
 
-      this.$emit('submit', data)
+        this.$emit('submit', data)
 
-      this.ticker = ''
-      this.amount = ''
+        this.ticker = ''
+        this.amount = ''
+      }
     },
 
     onlyNumber (evt) {
@@ -57,7 +58,7 @@ export default {
       // we only want integers.
       // using 'isNaN' lets unwanted chars like '-' and math numbers like 'e'
       const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-      if (evt.key in numbers && this.quantity.length < 9) {
+      if (evt.key in numbers && this.amount.length < 9) {
         return true
       } else {
         evt.preventDefault()
