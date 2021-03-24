@@ -1,14 +1,24 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#"> Monneda </b-navbar-brand>
+  <b-navbar sticky toggleable="lg" type="dark" variant="info">
+    <b-navbar-brand href="#">
+      <img src="../assets/logo40x40.png" alt="Monneda">
+      <!-- <p>Monneda</p> -->
+    </b-navbar-brand>
 
     <b-navbar-nav>
-      <b-nav-item href="#/"> Home </b-nav-item>
-      <b-nav-item href="#/wallets"> Carteiras </b-nav-item>
+      <b-nav-item href="#/wallets/">
+        <b-button pill variant="outline-light">
+          <b-icon icon="wallet2"></b-icon> Nova Carteira
+        </b-button>
+      </b-nav-item>
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item> Perfil </b-nav-item>
+      <b-nav-item>
+        <b-button pill variant="outline-light">
+          <b-icon icon="person-fill"></b-icon> Perfil
+        </b-button>
+      </b-nav-item>
     </b-navbar-nav>
   </b-navbar>
 </template>
