@@ -175,6 +175,8 @@ dist
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
 
+.idea
+
 ### Vue ###
 # gitignore template for Vue.js projects
 #

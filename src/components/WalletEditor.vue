@@ -22,7 +22,7 @@
       <template #cell(amount)="data">
         <span style="font-family:'Courier New'"> {{ data.value }} </span>
       </template>
-      <template #cell(formattedMonthlyGain)="data">
+      <template #cell(formattedGain30d)="data">
         <span :class="positive(data.value)" style="font-family:'Courier New'"> {{ round(data.value) }}% </span>
       </template>
       <template #cell(remove)="data">
@@ -52,7 +52,7 @@ export default {
       { key: 'ticker', label: 'Código', class: 'text-left' },
       { key: 'amount', label: 'Quantidade', class: 'text-left' },
       { key: 'formattedPrice', label: 'Preço Atual', class: 'text-left' },
-      { key: 'formattedMonthlyGain', label: 'Rendimento 30 dias', class: 'text-left' },
+      { key: 'formattedGain30d', label: 'Rendimento 30 dias', class: 'text-left' },
       { key: 'remove', label: '', class: 'text-left' }
     ],
     assets: []
@@ -74,10 +74,10 @@ export default {
     },
 
     async addTicker ({ ticker, amount }) {
-      const { price, monthlyGain } = await this.finance.fetchAsset(ticker)
+      const { price, gain30d } = await this.finance.fetchAsset(ticker)
       const formattedPrice = this.round(price)
-      const formattedMonthlyGain = this.round(monthlyGain)
-      this.assets.push({ ticker, formattedPrice, formattedMonthlyGain, amount })
+      const formattedGain30d = this.round(gain30d)
+      this.assets.push({ ticker, formattedPrice, formattedGain30d, amount })
     },
 
     deleteRow (i) {

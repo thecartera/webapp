@@ -5,7 +5,7 @@
         <b-col>
             <h5 :class="darkGray">
               Rendimento da carteira em 30 dias:
-              <span :class="gainColor"> {{ round(wallet.monthlyGain) }}% </span>
+              <span :class="gainColor"> {{ round(wallet.gain30d) }}% </span>
             </h5>
         </b-col>
       </b-row>
@@ -35,7 +35,7 @@
         <template #cell(weight)="data">
           <span style="font-family:'Courier New'"> {{ round(data.value) }}% </span>
         </template>
-        <template #cell(monthlyGain)="data">
+        <template #cell(gain30d)="data">
           <span :class="positive(data.value)" style="font-family:'Courier New'"> {{ round(data.value) }}% </span>
         </template>
       </b-table>
@@ -62,7 +62,7 @@ export default {
       { key: 'ticker', label: 'Código', class: 'text-left', sortable: true },
       { key: 'weight', label: 'Peso', class: 'text-left', sortable: true },
       { key: 'price', label: 'Preço Atual', class: 'text-left', sortable: true },
-      { key: 'monthlyGain', label: 'Rendimento em 30 dias', class: 'text-left', sortable: true }
+      { key: 'gain30d', label: 'Rendimento em 30 dias', class: 'text-left', sortable: true }
     ]
   }),
 
@@ -73,7 +73,7 @@ export default {
     },
 
     gainColor () {
-      return this.wallet.monthlyGain < 0 ? 'text-danger' : 'text-success'
+      return this.wallet.gain30d < 0 ? 'text-danger' : 'text-success'
     },
 
     darkGray () {
