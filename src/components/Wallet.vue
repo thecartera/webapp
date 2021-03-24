@@ -4,7 +4,7 @@
       <b-row>
         <b-col>
             <h5 :class="darkGray">
-              Retorno da carteira no mês:
+              Rendimento da carteira em 30 dias:
               <span :class="gainColor"> {{ round(wallet.monthlyGain) }}% </span>
             </h5>
         </b-col>
@@ -23,20 +23,20 @@
 
     <b-card-body>
       <b-table hover :fields="fields" :items="wallet.assets" sort-icon-left>
+        <template #cell(index)="data" >
+          <span style="font-family:'Courier New'"> {{ data.index + 1 }} </span>
+        </template>
         <template #cell(ticker)="data">
           <span style="font-family:'Courier New'"> {{ data.value.toUpperCase() }} </span>
         </template>
         <template #cell(price)="data">
-          <span style="font-family:'Courier New'"> R$ {{ round(data.value).toFixed(2) }} </span>
+          <span style="font-family:'Courier New'"> R$ {{ round(data.value) }} </span>
         </template>
         <template #cell(weight)="data">
-          <span style="font-family:'Courier New'"> {{ round(data.value).toFixed(2) }}% </span>
+          <span style="font-family:'Courier New'"> {{ round(data.value) }}% </span>
         </template>
         <template #cell(monthlyGain)="data">
-          <span :class="positive(data.value)" style="font-family:'Courier New'"> {{ round(data.value).toFixed(2) }}% </span>
-          </template>
-        <template #cell(date)="data">
-          <span style="font-family:'Courier New'"> {{ new Date(data.value).toLocaleString('pt-BR').split(' ')[0] }} </span>
+          <span :class="positive(data.value)" style="font-family:'Courier New'"> {{ round(data.value) }}% </span>
         </template>
       </b-table>
     </b-card-body>
@@ -58,11 +58,11 @@ export default {
 
   data: () => ({
     fields: [
-      { key: 'ticker', label: 'Código', class: 'text-left' },
+      { key: 'index', label: ' ', class: 'text-left' },
+      { key: 'ticker', label: 'Código', class: 'text-left', sortable: true },
       { key: 'weight', label: 'Peso', class: 'text-left', sortable: true },
       { key: 'price', label: 'Preço Atual', class: 'text-left', sortable: true },
-      { key: 'date', label: 'Data', class: 'text-left', sortable: true },
-      { key: 'monthlyGain', label: 'Rendimento no mês', class: 'text-left', sortable: true }
+      { key: 'monthlyGain', label: 'Rendimento em 30 dias', class: 'text-left', sortable: true }
     ]
   }),
 
@@ -87,7 +87,8 @@ export default {
   methods: {
     round (val, places = 2) {
       const decimals = Math.pow(10, places)
-      return Math.round(val * decimals) / decimals
+      const rounded = Math.round(val * decimals) / decimals
+      return rounded.toFixed(2)
     },
 
     copyLink () {

@@ -9,7 +9,25 @@
       </b-row>
     </b-card-title>
 
-    <b-table @row-clicked="onRowClicked" hover :items="assets">
+    <b-table :fields="fields" hover :items="assets">
+      <template #cell(index)="data" >
+        <span style="font-family:'Courier New'"> {{ data.index + 1 }} </span>
+      </template>
+      <template #cell(ticker)="data">
+        <span style="font-family:'Courier New'"> {{ data.value.toUpperCase() }} </span>
+      </template>
+      <template #cell(formattedPrice)="data">
+        <span style="font-family:'Courier New'"> R$ {{ data.value }} </span>
+      </template>
+      <template #cell(amount)="data">
+        <span style="font-family:'Courier New'"> {{ data.value }} </span>
+      </template>
+      <template #cell(formattedMonthlyGain)="data">
+        <span :class="positive(data.value)" style="font-family:'Courier New'"> {{ round(data.value) }}% </span>
+      </template>
+      <template #cell(remove)="data">
+          <b-icon icon="x" scale="1.2" @click="deleteRow(data.index)" variant="dark"> {{ data }} </b-icon>
+      </template>
     </b-table>
 
     <b-card-footer>
@@ -29,6 +47,14 @@ export default {
   },
 
   data: () => ({
+    fields: [
+      { key: 'index', label: ' ', class: 'text-left' },
+      { key: 'ticker', label: 'Código', class: 'text-left' },
+      { key: 'amount', label: 'Quantidade', class: 'text-left' },
+      { key: 'formattedPrice', label: 'Preço Atual', class: 'text-left' },
+      { key: 'formattedMonthlyGain', label: 'Rendimento 30 dias', class: 'text-left' },
+      { key: 'remove', label: '', class: 'text-left' }
+    ],
     assets: []
   }),
 
@@ -49,11 +75,23 @@ export default {
 
     async addTicker ({ ticker, amount }) {
       const { price, monthlyGain } = await this.finance.fetchAsset(ticker)
-      this.assets.push({ ticker, price, monthlyGain, amount })
+      const formattedPrice = this.round(price)
+      const formattedMonthlyGain = this.round(monthlyGain)
+      this.assets.push({ ticker, formattedPrice, formattedMonthlyGain, amount })
     },
 
-    onRowClicked (_, i) {
+    deleteRow (i) {
       this.assets.splice(i, 1)
+    },
+
+    round (val, places = 2) {
+      const decimals = Math.pow(10, places)
+      const rounded = Math.round(val * decimals) / decimals
+      return rounded.toFixed(2)
+    },
+
+    positive (value) {
+      return value < 0 ? 'text-danger' : 'text-success'
     }
   }
 }
