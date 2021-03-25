@@ -22,12 +22,15 @@
     </b-card-title>
 
     <b-card-body>
-      <b-table hover :fields="fields" :items="wallet.assets" sort-icon-left>
+      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" sort-icon-left>
         <template #cell(index)="data" >
           <span style="font-family:'Courier New'"> {{ data.index + 1 }} </span>
         </template>
         <template #cell(ticker)="data">
           <span style="font-family:'Courier New'"> {{ data.value.toUpperCase() }} </span>
+        </template>
+        <template #cell(name)="data">
+          <span style="font-family:'Courier New'"> {{ data.value }} </span>
         </template>
         <template #cell(price)="data">
           <span style="font-family:'Courier New'"> R$ {{ round(data.value) }} </span>
@@ -60,6 +63,7 @@ export default {
     fields: [
       { key: 'index', label: ' ', class: 'text-left' },
       { key: 'ticker', label: 'Código', class: 'text-left', sortable: true },
+      { key: 'name', label: 'Companhia', class: 'text-left', sortable: true },
       { key: 'weight', label: 'Peso', class: 'text-left', sortable: true },
       { key: 'price', label: 'Preço Atual', class: 'text-left', sortable: true },
       { key: 'gain30d', label: 'Rendimento em 30 dias', class: 'text-left', sortable: true }
