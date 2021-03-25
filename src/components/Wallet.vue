@@ -110,7 +110,6 @@ export default {
     },
 
     getImageLink (data) {
-      console.log(data)
       const link = data.item.ticker.toUpperCase().replace(/[0-9]/g, '')
       const imageLink = `https://pro.clear.com.br/src/assets/symbols_icons/${link}.png`
       return imageLink
