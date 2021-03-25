@@ -22,24 +22,29 @@
     </b-card-title>
 
     <b-card-body>
-      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" sort-icon-left>
+      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets">
         <template #cell(index)="data" >
-          <span style="font-family:'Courier New'"> {{ data.index + 1 }} </span>
+          <p></p>
+          <p style="font-family:'Courier New'"> {{ data.index + 1 }} </p>
         </template>
-        <template #cell(ticker)="data">
-          <span style="font-family:'Courier New'"> {{ data.value.toUpperCase() }} </span>
+        <template #cell(imageLink)="data">
+          <b-avatar :src="getImageLink(data)" size="3.2em" icon="wallet2" variant="info"></b-avatar>
         </template>
-        <template #cell(name)="data">
-          <span style="font-family:'Courier New'"> {{ data.value }} </span>
-        </template>
-        <template #cell(price)="data">
-          <span style="font-family:'Courier New'"> R$ {{ round(data.value) }} </span>
+        <template #cell(nameticker)="data">
+          <span style="font-size:0.8rem;color:gray"> {{ data.item.name }} </span>
+          <p style="font-family:'Courier New';font-size:1.2rem"> {{ data.item.ticker.toUpperCase() }} </p>
         </template>
         <template #cell(weight)="data">
-          <span style="font-family:'Courier New'"> {{ round(data.value) }}% </span>
+          <span style="font-size:0.8rem;color:gray">Peso</span>
+          <p style="font-family:'Courier New';font-size:1.2rem;color:#0275B1">{{ round(data.value) }}%</p>
+        </template>
+        <template #cell(price)="data">
+          <span style="font-size:0.8rem;color:gray">Preço Atual</span>
+          <p style="font-family:'Courier New';font-size:1.2rem;color:#0275B1"> R$ {{ round(data.value) }} </p>
         </template>
         <template #cell(gain30d)="data">
-          <span :class="positive(data.value)" style="font-family:'Courier New'"> {{ round(data.value) }}% </span>
+          <span style="font-size:0.8rem;color:gray">Retorno (30 dias)</span>
+          <p :class="positive(data.value)" style="font-family:'Courier New';font-size:1.2rem"> {{ round(data.value) }}% </p>
         </template>
       </b-table>
     </b-card-body>
@@ -62,11 +67,11 @@ export default {
   data: () => ({
     fields: [
       { key: 'index', label: ' ', class: 'text-left' },
-      { key: 'ticker', label: 'Código', class: 'text-left', sortable: true },
-      { key: 'name', label: 'Companhia', class: 'text-left', sortable: true },
-      { key: 'weight', label: 'Peso', class: 'text-left', sortable: true },
-      { key: 'price', label: 'Preço Atual', class: 'text-left', sortable: true },
-      { key: 'gain30d', label: 'Rendimento em 30 dias', class: 'text-left', sortable: true }
+      { key: 'imageLink', label: '', class: 'text-left' },
+      { key: 'nameticker', label: '', class: 'text-left' },
+      { key: 'weight', label: 'Peso', class: 'text-center', sortable: true },
+      { key: 'price', label: 'Preço Atual', class: 'text-center', sortable: true },
+      { key: 'gain30d', label: 'Rendimento', class: 'text-center', sortable: true }
     ]
   }),
 
@@ -92,6 +97,7 @@ export default {
     round (val, places = 2) {
       const decimals = Math.pow(10, places)
       const rounded = Math.round(val * decimals) / decimals
+      // console.log(data)
       return rounded.toFixed(2)
     },
 
@@ -101,6 +107,13 @@ export default {
 
     positive (value) {
       return value < 0 ? 'text-danger' : 'text-success'
+    },
+
+    getImageLink (data) {
+      console.log(data)
+      const link = data.item.ticker.toUpperCase().replace(/[0-9]/g, '')
+      const imageLink = `https://pro.clear.com.br/src/assets/symbols_icons/${link}.png`
+      return imageLink
     }
   }
 }
