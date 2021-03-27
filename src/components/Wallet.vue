@@ -110,8 +110,8 @@ export default {
     },
 
     getImageLink (data) {
-      const ticker = data.item.ticker.toUpperCase().substring(0, 4)
-      const imageLink = `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${ticker}.png`
+      const code = data.item.ticker.toUpperCase()
+      const imageLink = `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${code}.png`
       return imageLink
     }
   }

@@ -87,8 +87,8 @@ export default {
       const { price, gain30d, name } = await this.finance.fetchAsset(ticker)
       const formattedPrice = this.round(price)
       const formattedGain30d = this.round(gain30d)
-      const link = ticker.toUpperCase().replace(/[0-9]/g, '')
-      const imageLink = `https://pro.clear.com.br/src/assets/symbols_icons/${link}.png`
+      const code = ticker.toUpperCase()
+      const imageLink = `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${code}.png`
       this.assets.push({ ticker, name, formattedPrice, formattedGain30d, amount, imageLink })
       // workaround to make header not show when no asset added yet.
       this.isStacked = false
