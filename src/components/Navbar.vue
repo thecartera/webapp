@@ -1,7 +1,7 @@
 <template>
   <b-navbar sticky toggleable="lg" type="dark" variant="info">
     <b-navbar-brand href="#">
-      <img src="../assets/logo40x40.png" alt="Monneda">
+      <img src="../assets/logo.png" width="40px" alt="Monneda">
       <!-- <p>Monneda</p> -->
     </b-navbar-brand>
 

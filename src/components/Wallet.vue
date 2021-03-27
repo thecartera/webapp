@@ -59,6 +59,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Wallet',
 
