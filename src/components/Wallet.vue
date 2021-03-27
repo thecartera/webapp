@@ -5,7 +5,7 @@
         <b-col>
           <h5 class="text-dark">
             Rendimento da carteira em 30 dias:
-            <span :class="gainColor"> {{ wallet.gain30d.toFixed(2) }}% </span>
+            <span :class="gainColor"> {{ wallet.gain.toFixed(2) }}% </span>
           </h5>
         </b-col>
       </b-row>
@@ -49,7 +49,7 @@
           <p class="light-blue cell-value"> R$ {{ data.value.toFixed(2) }} </p>
         </template>
 
-        <template #cell(gain30d)="data">
+        <template #cell(gain)="data">
           <span class="cell-name"> Retorno (30 dias) </span>
           <p :class="positive(data.value)" class="cell-value"> {{ data.value.toFixed(2) }}% </p>
         </template>
@@ -76,7 +76,7 @@ export default {
       { key: 'nameticker', label: '', class: 'text-left' },
       { key: 'weight', label: 'Peso', class: 'text-center', sortable: true },
       { key: 'price', label: 'Preço Atual', class: 'text-center', sortable: true },
-      { key: 'gain30d', label: 'Rendimento', class: 'text-center', sortable: true }
+      { key: 'gain', label: 'Rendimento', class: 'text-center', sortable: true }
     ]
   }),
 
@@ -87,7 +87,7 @@ export default {
     },
 
     gainColor () {
-      return this.positive(this.wallet.gain30d)
+      return this.positive(this.wallet.gain)
     }
   },
 
