@@ -29,7 +29,7 @@
         <span style="font-size:0.8rem;color:gray">Preço Atual</span>
         <p style="font-family:'Courier New';font-size:1.2rem;color:#0275B1"> R$ {{ data.value }} </p>
       </template>
-      <template #cell(formattedGain30d)="data">
+      <template #cell(formattedGain)="data">
         <span style="font-size:0.8rem;color:gray">Retorno (30 dias)</span>
         <p :class="positive(data.value)" style="font-family:'Courier New';font-size:1.2rem"> {{ round(data.value) }}% </p>
       </template>
@@ -62,7 +62,7 @@ export default {
       { key: 'nameticker', label: '', class: 'text-left' },
       { key: 'amount', label: 'Quantidade', class: 'text-center', sortable: true },
       { key: 'formattedPrice', label: 'Preço Atual', class: 'text-center', sortable: true },
-      { key: 'formattedGain30d', label: 'Rendimento', class: 'text-center', sortable: true },
+      { key: 'formattedGain', label: 'Rendimento', class: 'text-center', sortable: true },
       { key: 'remove', label: '', class: 'text-center' }
     ],
     assets: [],
@@ -84,12 +84,12 @@ export default {
     },
 
     async addTicker ({ ticker, amount }) {
-      const { price, gain30d, name } = await this.finance.fetchAsset(ticker)
+      const { price, gain, name } = await this.finance.fetchAsset(ticker)
       const formattedPrice = this.round(price)
-      const formattedGain30d = this.round(gain30d)
+      const formattedGain = this.round(gain)
       const code = ticker.toUpperCase()
       const imageLink = `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${code}.png`
-      this.assets.push({ ticker, name, formattedPrice, formattedGain30d, amount, imageLink })
+      this.assets.push({ ticker, name, formattedPrice, formattedGain, amount, imageLink })
       // workaround to make header not show when no asset added yet.
       this.isStacked = false
     },
