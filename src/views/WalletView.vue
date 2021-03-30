@@ -45,7 +45,7 @@ export default {
         user: '@novak',
         name: 'Gabriel Novak',
         title: 'Head of Capitalz Match',
-        description: '📚 Interessado em mercado de capitais, política e finanças públicas \n💰 Capitalz Founder \n🎖 Twitter: GabrielNovak ',
+        description: '📚 Interessado em mercado de capitais \n💰 Capitalz Founder \n🎖 Twitter: GabrielNovak ',
         location: 'Florianópolis, SC'
       }
       return userData
