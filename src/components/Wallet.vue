@@ -24,33 +24,29 @@
     </b-card-title>
 
     <b-card-body>
-      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets">
-        <template #cell(index)="data" >
-          <p></p>
-          <p> {{ data.index + 1 }} </p>
-        </template>
-
+      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small>
         <template #cell(imageLink)="data">
-          <b-avatar :src="getImageLink(data)" size="3.2em" icon="wallet2" variant="info" />
+          <b-avatar :src="getImageLink(data)" size="3.15em" icon="wallet2" variant="light" />
         </template>
 
         <template #cell(nameticker)="data">
+          <span class="cell-name"> {{ data.index + 1 }}. </span>
           <span class="cell-name"> {{ data.item.name }} </span>
           <p class="cell-value"> {{ data.item.ticker.toUpperCase() }} </p>
         </template>
 
         <template #cell(weight)="data">
           <span class="cell-name"> Peso </span>
-          <p class="light-blue cell-value"> {{ data.value.toFixed(2) }}% </p>
+          <p class="light-blue cell-value"> {{ data.value.toFixed(1) }}% </p>
         </template>
 
         <template #cell(price)="data">
-          <span class="cell-name"> Preço Atual </span>
+          <span class="cell-name"> Preço </span>
           <p class="light-blue cell-value"> R$ {{ data.value.toFixed(2) }} </p>
         </template>
 
         <template #cell(gain)="data">
-          <span class="cell-name"> Retorno (30 dias) </span>
+          <span class="cell-name"> Retorno (30d) </span>
           <p :class="positive(data.value)" class="cell-value"> {{ data.value.toFixed(2) }}% </p>
         </template>
       </b-table>
@@ -71,12 +67,11 @@ export default {
 
   data: () => ({
     fields: [
-      { key: 'index', label: ' ', class: 'text-left' },
-      { key: 'imageLink', label: '', class: 'text-left' },
+      { key: 'imageLink', label: '', class: 'text-center' },
       { key: 'nameticker', label: '', class: 'text-left' },
       { key: 'weight', label: 'Peso', class: 'text-center', sortable: true },
-      { key: 'price', label: 'Preço Atual', class: 'text-center', sortable: true },
-      { key: 'gain', label: 'Rendimento', class: 'text-center', sortable: true }
+      { key: 'price', label: 'Preço', class: 'text-center', sortable: true },
+      { key: 'gain', label: 'Retorno', class: 'text-center', sortable: true }
     ]
   }),
 
@@ -107,11 +102,11 @@ export default {
 
 .cell-value {
   font-family: 'Courier New';
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .cell-name {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: gray;
 }
 
