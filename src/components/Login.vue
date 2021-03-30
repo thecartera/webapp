@@ -1,7 +1,6 @@
 <template>
   <div class="row justify-content-center">
     <b-card
-      title="Login"
       img-src="https://cdn.discordapp.com/attachments/750789539890462842/826320661496070144/pexels-gustavo-fring-3874041.jpg"
       img-alt="Image"
       img-top
@@ -9,29 +8,49 @@
       style="max-width: 30rem;min-width: 30rem"
     >
       <b-form @submit="onSubmit">
-        <b-form-group id="input-group-1" label="Seu email" label-for="input-1">
+
+        <!-- EMAIL INPUT -->
+        <b-form-group id="input-group-1" label-for="input-1">
           <b-form-input
             id="input-1"
             v-model="form.email"
             type="email"
-            placeholder="Digite seu email"
+            placeholder="email"
             required
+            style="font-size:1.1rem"
           ></b-form-input>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="Sua senha" label-for="input-2">
+        <!-- PASSWORD INPUT -->
+        <b-form-group id="input-group-2" label-for="input-2">
           <b-form-input
             id="input-2"
             v-model="form.pass"
-            placeholder="Digite sua senha"
+            placeholder="senha"
             required
+            style="font-size:1.1rem"
           ></b-form-input>
-          <a style="font-size:0.8rem" href="#" class="card-link">Esqueceu sua senha?</a>
-          <br>
-          <a style="font-size:0.8rem" href="#/register" class="card-link">Criar conta</a>
         </b-form-group>
-        <div class="row justify-content-around">
-          <b-button type="submit" variant="info" pill>Entrar</b-button>
+
+        <!-- LOG IN -->
+        <div class="row justify-content-center">
+          <div style="width: 93%">
+            <b-button style="font-size:1.3rem" block type="submit" variant="info">Entrar</b-button>
+          </div>
+        </div>
+
+        <p></p>
+
+        <!-- FORGOT PASSWORD -->
+        <div class="row justify-content-center">
+          <a style="font-size:0.9rem" href="#" class="card-link">Esqueceu sua senha?</a>
+        </div>
+
+        <hr>
+
+        <!-- CREATE NEW ACCOUNT -->
+        <div class="row justify-content-center">
+          <b-button style="font-size:1.2rem" href="#/register" variant="success">Criar nova conta</b-button>
         </div>
       </b-form>
       <!-- used to DEBUG
