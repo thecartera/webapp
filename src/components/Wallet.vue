@@ -3,8 +3,8 @@
     <b-card-title>
       <b-row>
         <b-col>
-          <h5 class="text-dark">
-            Rendimento da carteira em 30 dias:
+          <h5 class="text-dark" style="padding: 0rem 0.2rem">
+            Rendimento da carteira (30d):
             <span :class="gainColor"> {{ wallet.gain.toFixed(2) }}% </span>
           </h5>
         </b-col>
@@ -12,13 +12,13 @@
 
       <b-row>
         <b-col>
-          <h6 class="text-secondary"> ID desta carteira: {{ wallet.id }} </h6>
+          <h6 class="text-secondary" style="padding: 0rem 0.2rem"> ID desta carteira: {{ wallet.id }} </h6>
         </b-col>
       </b-row>
       <b-row>
 
         <b-col>
-          <h6 class="text-secondary"> Criada em: {{ created }} </h6>
+          <h6 class="text-secondary" style="padding: 0rem 0.2rem"> Criada em: {{ created }} </h6>
         </b-col>
       </b-row>
     </b-card-title>
@@ -26,7 +26,7 @@
     <b-card-body class="container px-0">
       <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small>
         <template #cell(imageLink)="data">
-          <b-avatar :src="getImageLink(data)" size="3.15em" icon="wallet2" variant="light" />
+          <b-avatar :src="getImageLink(data)" size="3em" icon="wallet2" variant="light" />
         </template>
 
         <template #cell(nameticker)="data">
@@ -42,11 +42,11 @@
 
         <template #cell(price)="data">
           <span class="cell-name"> Preço </span>
-          <p class="light-blue cell-value"> R$ {{ data.value.toFixed(2) }} </p>
+          <p class="light-blue cell-value"> R${{ data.value.toFixed(2) }} </p>
         </template>
 
         <template #cell(gain)="data">
-          <span class="cell-name"> Retorno (30d) </span>
+          <span class="cell-name"> Lucro (30d) </span>
           <p :class="positive(data.value)" class="cell-value"> {{ data.value.toFixed(2) }}% </p>
         </template>
       </b-table>
@@ -71,7 +71,7 @@ export default {
       { key: 'nameticker', label: '', class: 'text-left' },
       { key: 'weight', label: 'Peso', class: 'text-center', sortable: true },
       { key: 'price', label: 'Preço', class: 'text-center', sortable: true },
-      { key: 'gain', label: 'Retorno', class: 'text-center', sortable: true }
+      { key: 'gain', label: 'Lucro', class: 'text-center', sortable: true }
     ]
   }),
 
@@ -102,16 +102,20 @@ export default {
 
 .cell-value {
   font-family: 'Courier New';
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 .cell-name {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: gray;
 }
 
 .light-blue {
   color: #0275B1;
+}
+
+.text-padding {
+  padding: 0rem 0.2rem;
 }
 
 </style>
