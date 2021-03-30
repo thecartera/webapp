@@ -14,6 +14,18 @@
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
+      <b-nav-item href="#/login/">
+        <b-button pill variant="outline-light"> Login </b-button>
+      </b-nav-item>
+    </b-navbar-nav>
+
+    <b-navbar-nav class="ml-auto">
+      <b-nav-item href="#/register/">
+        <b-button pill variant="outline-light"> Register </b-button>
+      </b-nav-item>
+    </b-navbar-nav>
+
+    <b-navbar-nav class="ml-auto">
       <b-nav-item>
         <b-button pill variant="outline-light">
           <b-icon icon="person-fill"></b-icon> Perfil
