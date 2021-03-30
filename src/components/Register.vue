@@ -2,13 +2,42 @@
   <div class="row justify-content-center">
     <b-card
       title="Criar conta"
-      tag="account"
+      sub-title="É rápido e fácil"
       style="max-width: 30rem;min-width: 30rem"
     >
+    <hr>
     <b-form @submit="onSubmit">
 
+      <!-- NAME -->
+      <b-form-group id="input-group-0">
+        <b-input-group>
+          <!-- FIRST NAME -->
+          <b-form-input
+            id="input-7"
+            v-model="form.firstname"
+            type="text"
+            oninvalid="this.setCustomValidity('Por favor digite seu nome')"
+            oninput="setCustomValidity('')"
+            placeholder="Nome"
+            required
+          ></b-form-input>
+          <!-- horizontal spacing -->
+          <span style="display:inline-block;width:0.4rem"></span>
+          <!-- LAST NAME -->
+          <b-form-input
+            id="input-8"
+            v-model="form.lastname"
+            type="text"
+            oninvalid="this.setCustomValidity('Por favor digite seu sobrenome')"
+            oninput="setCustomValidity('')"
+            placeholder="Sobrenome"
+            required
+          ></b-form-input>
+        </b-input-group>
+      </b-form-group>
+
       <!-- EMAIL -->
-      <b-form-group id="input-group-1" label="Email" label-for="input-1">
+      <b-form-group id="input-group-1">
         <b-input-group>
           <b-form-input
             id="input-1"
@@ -17,22 +46,19 @@
             oninvalid="this.setCustomValidity('Por favor digite um email válido')"
             oninput="setCustomValidity('')"
             @keypress="validEmail($event)"
-            placeholder="Digite seu email"
+            placeholder="Email"
             required
           ></b-form-input>
         </b-input-group>
       </b-form-group>
 
       <!-- USER -->
-      <b-form-group
-        id="input-group-2"
-        label="Usuário"
-        label-for="input-2">
+      <b-form-group id="input-group-2">
         <b-input-group prepend="@" class="mb-2 mr-sm-2 mb-sm-0">
         <b-form-input
           id="input-2"
           v-model="form.username"
-          placeholder="Registre seu user"
+          placeholder="usuário"
           oninvalid="this.setCustomValidity('Por favor digite um usuário válido')"
           oninput="setCustomValidity('')"
           @keypress="validUsernameKey($event)"
@@ -42,20 +68,8 @@
         </b-input-group>
       </b-form-group>
 
-      <!-- GENDER -->
-      <b-form-group id="input-group-3" label="Gênero:" label-for="input-3">
-        <b-form-select
-          oninvalid="this.setCustomValidity('Por favor selecione uma opção')"
-          oninput="setCustomValidity('')"
-          id="input-3"
-          v-model="form.gender"
-          :options="genders"
-          required
-        ></b-form-select>
-      </b-form-group>
-
       <!-- BIRTHDAY -->
-      <b-form-group id="input-group-1" label="Data de nascimento" label-for="input-1">
+      <b-form-group id="input-group-1" label="Data de nascimento" style="font-size:0.8rem" label-for="input-1">
         <b-input-group>
           <b-form-input
             id="input-1"
@@ -67,6 +81,18 @@
             required
           ></b-form-input>
         </b-input-group>
+      </b-form-group>
+
+      <!-- GENDER -->
+      <b-form-group id="input-group-3" label="Gênero" style="font-size:0.8rem" label-for="input-3">
+        <b-form-select
+          oninvalid="this.setCustomValidity('Por favor selecione uma opção')"
+          oninput="setCustomValidity('')"
+          id="input-3"
+          v-model="form.gender"
+          :options="genders"
+          required
+        ></b-form-select>
       </b-form-group>
 
       <!-- TERMS OF USE -->
@@ -84,8 +110,10 @@
       </b-form-group>
 
       <!-- SUBMIT -->
-      <div class="text-center">
-        <b-button type="submit" variant="info" pill>Criar conta</b-button>
+      <div class="row justify-content-center">
+        <div style="width: 50%">
+          <b-button block type="submit" variant="info" style="font-size:1.2rem">Criar conta</b-button>
+        </div>
       </div>
     </b-form>
     <!-- used to DEBUG
@@ -102,6 +130,8 @@ export default {
   data () {
     return {
       form: {
+        firstname: '',
+        lastname: '',
         email: '',
         username: '',
         gender: null,
@@ -128,7 +158,9 @@ export default {
     onSubmit (event) {
       if (this.allInputsAreValid()) {
         // event.preventDefault()
-        alert(JSON.stringify(this.form))
+        const strForm = JSON.stringify(this.form)
+        console.log(strForm)
+        alert(strForm)
       } else {
         event.preventDefault()
       }
@@ -174,7 +206,7 @@ export default {
         return false
       }
       // valid username?
-      if (!this.validUsername() && this.form.username.length >= 4) {
+      if (!this.validUsername() || this.form.username.length < 4) {
         console.log('error: invalid username')
         return false
       }
