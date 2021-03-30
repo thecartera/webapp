@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar />
+    <br>
     <Wallet :wallet="wallet" />
   </div>
 </template>

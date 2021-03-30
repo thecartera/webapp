@@ -1,5 +1,5 @@
 <template>
-  <b-card>
+  <b-card no-body style="border-color:white">
     <b-card-title>
       <b-row>
         <b-col>
@@ -23,7 +23,7 @@
       </b-row>
     </b-card-title>
 
-    <b-card-body>
+    <b-card-body class="container px-0">
       <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small>
         <template #cell(imageLink)="data">
           <b-avatar :src="getImageLink(data)" size="3.15em" icon="wallet2" variant="light" />
