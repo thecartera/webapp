@@ -3,7 +3,7 @@
     <b-row align-h="start">
       <b-col cols="auto">
         <!-- <b-avatar variant="success" size="8em"></b-avatar> -->
-        <b-avatar src="https://cdn.discordapp.com/attachments/750789539890462842/823663412906033172/1597514092736.png" size="10em"></b-avatar>
+        <b-avatar :src=userData.photoURL size="10em"></b-avatar>
         <p style="text-align:center">
           <b-icon style="text-align:center" scale="0.8" icon="cursor-fill" variant="info" aria-hidden="true"></b-icon>
           <span style="font-size:0.8rem;color:gray">{{ userData.location }}</span>
@@ -32,6 +32,7 @@ export default {
           name: '',
           title: '',
           description: '',
+          photoURL: '',
           location: ''
         }
       ),
