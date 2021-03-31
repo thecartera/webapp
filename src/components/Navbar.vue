@@ -15,7 +15,13 @@
 
     <b-navbar-nav class="ml-auto">
       <b-nav-item href="#/login/">
-        <b-button pill variant="outline-light"> Login </b-button>
+        <!-- Check that the SDK client is not currently loading before accessing is methods -->
+        <div v-if="!$auth.loading">
+          <!-- show login when not authenticated -->
+          <b-button pill variant="outline-light" v-if="!$auth.isAuthenticated" @click="login">Login</b-button>
+          <!-- show logout when authenticated -->
+          <b-button pill variant="outline-light" v-if="$auth.isAuthenticated" @click="logout">Logout</b-button>
+        </div>
       </b-nav-item>
     </b-navbar-nav>
 
@@ -37,6 +43,18 @@
 
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  methods: {
+    // Log the user in
+    login () {
+      this.$auth.loginWithRedirect()
+    },
+    // Log the user out
+    logout () {
+      this.$auth.logout({
+        returnTo: window.location.origin
+      })
+    }
+  }
 }
 </script>
