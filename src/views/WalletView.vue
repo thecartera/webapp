@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <br>
-    <UserAndDescription :userData=mockUserData />
+    <UserAndDescription :userData=userData />
     <br>
     <Wallet :wallet="wallet" />
   </div>
