@@ -6,6 +6,7 @@ import WalletCreate from '@/views/WalletCreate'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Profile from '@/views/Profile'
+import { authGuard } from '../auth/authGuard'
 
 Vue.use(VueRouter)
 
@@ -28,7 +29,8 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: Profile
+    component: Profile,
+    beforeEnter: authGuard
   },
   {
     path: '/wallets',
