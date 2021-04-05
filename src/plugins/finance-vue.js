@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
-const BASE = 'https://monneda.herokuapp.com'
-// const BASE = 'http://localhost:8080'
+// const BASE = 'https://monneda.herokuapp.com/'
+const BASE = 'http://localhost:8080/api'
 
 const buildUrl = (...paths) => [BASE, ...paths].join('/')
 
@@ -12,7 +12,6 @@ const request = (meth, path, opts = {}) => {
   const options = {
     method: meth,
     mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
     ...opts
   }
   console.log('opts:', options)
@@ -25,8 +24,11 @@ const fetchAsset = async ticker => {
   return request('GET', `assets/${ticker}`)
 }
 
-const postWallet = wallet => {
-  const options = { body: JSON.stringify(wallet) }
+const postWallet = (wallet, accessToken) => {
+  const options = {
+    body: JSON.stringify(wallet),
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` }
+  }
   return request('POST', 'wallets', options)
 }
 

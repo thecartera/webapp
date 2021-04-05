@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <br>
-    <Profile :userData="userData"/>
+    <Profile :userData="mockUserData"/>
   </div>
 </template>
 
