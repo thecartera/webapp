@@ -1,10 +1,10 @@
 <template>
   <b-form @keyup.enter.prevent="submit">
-    <b-row>
-      <b-col cols="4">
+    <b-form-row>
+      <b-col>
         <b-form-input v-model="ticker" placeholder="Código" />
       </b-col>
-      <b-col cols="4">
+      <b-col>
         <!-- <b-form-input @keypress="onlyNumber($event)" v-model.number="amount" placeholder="Quantidade" /> -->
         <b-form-input
           id="input-live"
@@ -12,14 +12,14 @@
           :state="nameState"
           @keypress="onlyNumber($event)"
           aria-describedby="input-live-help input-live-feedback"
-          placeholder="Quantidade"
+          placeholder="Qtd."
           trim
         ></b-form-input>
       </b-col>
       <b-col>
-        <b-button @click="submit"> Adicionar </b-button>
+        <b-button @click="submit">Adicionar</b-button>
       </b-col>
-    </b-row>
+    </b-form-row>
   </b-form>
 </template>
 

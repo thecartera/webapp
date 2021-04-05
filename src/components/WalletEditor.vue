@@ -1,47 +1,59 @@
 <template>
-  <b-card>
+  <b-card no-body style="border-color:white">
     <b-card-title>
       <b-row>
-        <b-col> Carteira </b-col>
-        <b-col class="text-right">
+        <b-col>
+          <h5 class="text-dark" style="padding: 0.4rem 0.4rem">
+            Carteira
+          </h5>
+        </b-col>
+        <b-col class="text-right" style="padding: 0.4rem 1.2rem">
           <b-button @click="saveWallet"> Salvar </b-button>
         </b-col>
       </b-row>
     </b-card-title>
 
-    <b-table :stacked="isStacked" responsive='lg' :fields="fields" hover :items="assets">
-      <template #cell(index)="data" >
-        <p></p>
-        <p style="font-family:'Courier New'"> {{ data.index + 1 }} </p>
-      </template>
+  <b-card-body class="container px-0" body-bg-variant="white">
+    <b-table :stacked="isStacked" responsive='lg' :fields="fields" hover :items="assets" small>
+      <!-- ASSET IMAGE -->
       <template #cell(image)="data">
-        <b-avatar :src="data.item.imageLink" size="3.2em" icon="wallet2" variant="info"></b-avatar>
+        <b-avatar :src="data.item.imageLink" size="3em" icon="wallet2" variant="light"></b-avatar>
       </template>
+
+      <!-- ASSET INDEX, NAME, TICKER -->
       <template #cell(nameticker)="data">
-        <span style="font-size:0.8rem;color:gray"> {{ data.item.name }} </span>
-        <p style="font-family:'Courier New';font-size:1.2rem"> {{ data.item.ticker.toUpperCase() }} </p>
+        <span class="cell-name"> {{ data.index + 1 }}. </span>
+        <span class="cell-name"> {{ data.item.name }} </span>
+        <p class="cell-value"> {{ data.item.ticker.toUpperCase() }} </p>
       </template>
+
+      <!-- ASSET QUANTITY -->
       <template #cell(amount)="data">
-        <span style="font-size:0.8rem;color:gray">Quantidade</span>
-        <p style="font-family:'Courier New';font-size:1.2rem;color:#0275B1"> {{ data.value }} </p>
+        <span class="cell-name">Qtd.</span>
+        <p class="light-blue cell-value"> {{ data.value }} </p>
       </template>
+
+      <!-- ASSET CURRENT PRICE -->
       <template #cell(formattedPrice)="data">
-        <span style="font-size:0.8rem;color:gray">Preço Atual</span>
-        <p style="font-family:'Courier New';font-size:1.2rem;color:#0275B1"> R$ {{ data.value }} </p>
+        <span class="cell-name">Preço</span>
+        <p class="light-blue cell-value"> R${{ data.value }} </p>
       </template>
+
+      <!-- ASSET RETURN -->
       <template #cell(formattedGain)="data">
-        <span style="font-size:0.8rem;color:gray">Retorno (30 dias)</span>
+        <span class="cell-name">Lucro</span>
         <p :class="positive(data.value)" style="font-family:'Courier New';font-size:1.2rem"> {{ round(data.value) }}% </p>
       </template>
+
+      <!-- ASSET REMOVE -->
       <template #cell(remove)="data">
         <p></p>
         <b-icon icon="x" scale="1.3" @click="deleteRow(data.index)" variant="dark"> {{ data }} </b-icon>
       </template>
     </b-table>
 
-    <b-card-footer>
-      <WalletAddTickerForm @submit="addTicker" />
-    </b-card-footer>
+    <WalletAddTickerForm @submit="addTicker" />
+  </b-card-body>
   </b-card>
 </template>
 
@@ -57,12 +69,11 @@ export default {
 
   data: () => ({
     fields: [
-      { key: 'index', label: '', class: 'text-left' },
-      { key: 'image', label: '', class: 'text-left' },
+      { key: 'image', label: '', class: 'text-center' },
       { key: 'nameticker', label: '', class: 'text-left' },
-      { key: 'amount', label: 'Quantidade', class: 'text-center', sortable: true },
-      { key: 'formattedPrice', label: 'Preço Atual', class: 'text-center', sortable: true },
-      { key: 'formattedGain', label: 'Rendimento', class: 'text-center', sortable: true },
+      { key: 'amount', label: 'Qtd.', class: 'text-center' },
+      { key: 'formattedPrice', label: 'Preço', class: 'text-center' },
+      { key: 'formattedGain', label: 'Lucro', class: 'text-center' },
       { key: 'remove', label: '', class: 'text-center' }
     ],
     assets: [],
@@ -110,3 +121,25 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.cell-value {
+  font-family: 'Courier New';
+  font-size: 1.05rem;
+}
+
+.cell-name {
+  font-size: 0.7rem;
+  color: gray;
+}
+
+.light-blue {
+  color: #0275B1;
+}
+
+.text-padding {
+  padding: 0rem 0.2rem;
+}
+
+</style>
