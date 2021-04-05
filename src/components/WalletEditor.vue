@@ -79,7 +79,8 @@ export default {
 
   methods: {
     async saveWallet (e) {
-      const wallet = await this.finance.postWallet(this.wallet)
+      const accessToken = await this.$auth.getTokenSilently()
+      const wallet = await this.finance.postWallet(this.wallet, accessToken)
       this.$router.push(`/wallets/${wallet.id}`)
     },
 

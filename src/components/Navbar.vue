@@ -32,7 +32,7 @@
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item>
+      <b-nav-item v-if="$auth.isAuthenticated" href="#/profile/">
         <b-button pill variant="outline-light">
           <b-icon icon="person-fill"></b-icon> Perfil
         </b-button>
