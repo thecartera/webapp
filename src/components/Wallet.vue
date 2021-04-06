@@ -27,7 +27,9 @@
       <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small>
         <!-- ASSET IMAGE -->
         <template #cell(imageLink)="data">
-          <b-avatar :src="getImageLink(data)" size="3.15em" icon="wallet2" variant="light" />
+          <div class="container px-0" style="padding: 0.5em 0em">
+          <b-avatar rounded :src="getImageLink(data)" size="2.2em" icon="wallet2" variant="light" />
+          </div>
         </template>
 
         <!-- ASSET INDEX, NAME, TICKER -->
@@ -47,14 +49,14 @@
 
         <!-- ASSET CURRENT PRICE -->
         <template #cell(price)="data">
-          <span class="cell-name"> Preço </span>
+          <span class="cell-name">Preço (R$)</span>
           <br>
-          <span class="light-blue cell-value"> R${{ data.value.toFixed(2) }} </span>
+          <span class="light-blue cell-value">{{ data.value.toFixed(2) }}</span>
         </template>
 
         <!-- ASSET RETURNS -->
         <template #cell(gain)="data">
-          <span class="cell-name"> Lucro (30d) </span>
+          <span class="cell-name"> Lucro 30d </span>
           <br>
           <span :class="positive(data.value)" class="cell-value"> {{ data.value.toFixed(2) }}% </span>
         </template>
@@ -115,7 +117,7 @@ export default {
 }
 
 .cell-name {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: gray;
 }
 
