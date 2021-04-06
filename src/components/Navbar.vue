@@ -8,7 +8,9 @@
     <b-navbar-nav>
       <b-nav-item href="#/wallets/">
         <b-button pill variant="outline-light">
-          <b-icon icon="wallet2"></b-icon> Nova Carteira
+          <b-icon icon="wallet2"></b-icon>
+          &nbsp;
+          <b-icon icon="plus"></b-icon>
         </b-button>
       </b-nav-item>
     </b-navbar-nav>
@@ -26,16 +28,8 @@
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item href="#/register/">
-        <b-button pill variant="outline-light"> Register </b-button>
-      </b-nav-item>
-    </b-navbar-nav>
-
-    <b-navbar-nav class="ml-auto">
       <b-nav-item v-if="$auth.isAuthenticated" href="#/profile/">
-        <b-button pill variant="outline-light">
-          <b-icon icon="person-fill"></b-icon> Perfil
-        </b-button>
+        <b-avatar :src=userData.picture></b-avatar>
       </b-nav-item>
     </b-navbar-nav>
   </b-navbar>
@@ -43,6 +37,22 @@
 
 <script>
 export default {
+  props: {
+    userData: {
+      default: () => (
+        {
+          user: '',
+          name: '',
+          title: '',
+          description: '',
+          photoURL: '',
+          location: ''
+        }
+      ),
+      type: Object
+    }
+  },
+
   name: 'Navbar',
   methods: {
     // Log the user in
