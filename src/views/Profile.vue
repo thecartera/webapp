@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar :userData="userData"/>
     <br>
     <Profile :userData="userData"/>
   </div>
