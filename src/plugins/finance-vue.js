@@ -20,26 +20,67 @@ const request = (meth, path, opts = {}) => {
     .then(r => r.json())
 }
 
-const fetchAsset = async ticker => {
-  return request('GET', `assets/${ticker}`)
+const fetchAsset = async (ticker, accessToken) => {
+  if (accessToken) {
+    const options = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+    return request('GET', `assets/${ticker}`, options)
+  }
+  return request('GET', `assets/${ticker}, buildheader()`)
 }
 
 const postWallet = (wallet, accessToken) => {
-  const options = {
-    body: JSON.stringify(wallet),
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` }
+  if (accessToken) {
+    const options = {
+      body: JSON.stringify(wallet),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      }
+    }
+    return request('POST', 'wallets', options)
   }
+  const options = { body: JSON.stringify(wallet) }
   return request('POST', 'wallets', options)
 }
 
-const fetchWallet = id => {
+const fetchWallet = (id, accessToken) => {
+  if (accessToken) {
+    const options = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+    return request('GET', `wallets/${id}`, options)
+  }
   return request('GET', `wallets/${id}`)
+}
+
+const fetchMyUser = accessToken => {
+  if (accessToken) {
+    const options = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+    return request('GET', 'users', options)
+  }
+  return request('GET', 'users')
+}
+
+const registerMyUser = accessToken => {
+  if (accessToken) {
+    const options = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+    return request('POST', 'users', options)
+  }
+  return request('POST', 'users')
 }
 
 const finance = {
   fetchAsset,
   postWallet,
-  fetchWallet
+  fetchWallet,
+  fetchMyUser,
+  registerMyUser
 }
 
 const plugin = {

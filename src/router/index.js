@@ -35,7 +35,8 @@ const routes = [
   {
     path: '/wallets',
     name: 'wallets',
-    component: WalletCreate
+    component: WalletCreate,
+    beforeEnter: authGuard
   },
   {
     path: '/wallets/:id',
