@@ -1,25 +1,23 @@
 <template>
   <b-form @keyup.enter.prevent="submit">
-    <b-form-row>
-      <b-col>
-        <b-form-input v-model="ticker" placeholder="Código" />
-      </b-col>
-      <b-col>
-        <!-- <b-form-input @keypress="onlyNumber($event)" v-model.number="amount" placeholder="Quantidade" /> -->
-        <b-form-input
-          id="input-live"
-          v-model="amount"
-          :state="nameState"
-          @keypress="onlyNumber($event)"
-          aria-describedby="input-live-help input-live-feedback"
-          placeholder="Qtd."
-          trim
-        ></b-form-input>
-      </b-col>
-      <b-col>
-        <b-button @click="submit">Adicionar</b-button>
-      </b-col>
-    </b-form-row>
+    <b-row style="justify-content:center">
+      <b-form-input v-model="ticker" placeholder="Código" style="width:10rem"/>
+    </b-row>
+    <b-row style="justify-content:center">
+      <b-form-input
+        id="input-live"
+        v-model="amount"
+        :state="nameState"
+        @keypress="onlyNumber($event)"
+        aria-describedby="input-live-help input-live-feedback"
+        placeholder="Qtd."
+        trim
+        style="width:10rem"
+      />
+    </b-row>
+    <b-row style="justify-content:center">
+      <b-button style="width:10rem" @click="submit">Adicionar</b-button>
+    </b-row>
   </b-form>
 </template>
 
