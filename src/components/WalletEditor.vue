@@ -17,32 +17,40 @@
     <b-table :stacked="isStacked" responsive='lg' :fields="fields" hover :items="assets" small>
       <!-- ASSET IMAGE -->
       <template #cell(image)="data">
-        <b-avatar :src="data.item.imageLink" size="3em" icon="wallet2" variant="light"></b-avatar>
+        <div class="container px-0">
+        <b-avatar :src="data.item.imageLink" size="3.15em" icon="wallet2" variant="light"></b-avatar>
+        </div>
       </template>
 
       <!-- ASSET INDEX, NAME, TICKER -->
       <template #cell(nameticker)="data">
+        <div class="container px-0">
         <span class="cell-name"> {{ data.index + 1 }}. </span>
         <span class="cell-name"> {{ data.item.name }} </span>
-        <p class="cell-value"> {{ data.item.ticker.toUpperCase() }} </p>
+        <br>
+        <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
+        </div>
       </template>
 
       <!-- ASSET QUANTITY -->
       <template #cell(amount)="data">
         <span class="cell-name">Qtd.</span>
-        <p class="light-blue cell-value"> {{ data.value }} </p>
+        <br>
+        <span class="light-blue cell-value"> {{ data.value }} </span>
       </template>
 
       <!-- ASSET CURRENT PRICE -->
       <template #cell(formattedPrice)="data">
         <span class="cell-name">Preço</span>
-        <p class="light-blue cell-value"> R${{ data.value }} </p>
+        <br>
+        <span class="light-blue cell-value"> R${{ data.value }} </span>
       </template>
 
       <!-- ASSET RETURN -->
       <template #cell(formattedGain)="data">
         <span class="cell-name">Lucro</span>
-        <p :class="positive(data.value)" style="font-family:'Courier New';font-size:1.2rem"> {{ round(data.value) }}% </p>
+        <br>
+        <span :class="positive(data.value)" class="cell-value"> {{ round(data.value) }}% </span>
       </template>
 
       <!-- ASSET REMOVE -->
@@ -50,9 +58,12 @@
         <p></p>
         <b-icon icon="x" scale="1.3" @click="deleteRow(data.index)" variant="dark"> {{ data }} </b-icon>
       </template>
-    </b-table>
 
+    </b-table>
+    <div>
+    <hr>
     <WalletAddTickerForm @submit="addTicker" />
+    </div>
   </b-card-body>
   </b-card>
 </template>
@@ -134,11 +145,11 @@ export default {
 
 .cell-value {
   font-family: 'Courier New';
-  font-size: 1.05rem;
+  font-size: 1.05em;
 }
 
 .cell-name {
-  font-size: 0.7rem;
+  font-size: 0.7em;
   color: gray;
 }
 
@@ -147,7 +158,7 @@ export default {
 }
 
 .text-padding {
-  padding: 0rem 0.2rem;
+  padding: 0em 0.2em;
 }
 
 </style>
