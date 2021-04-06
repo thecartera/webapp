@@ -3,19 +3,23 @@
     <b-card-body class="container px-0" body-bg-variant="light">
       <b-row>
         <b-col>
-          <h5 class="text-dark" style="padding: 0rem 0.4rem">
+          <div class="row justify-content-center">
+          <h3 class="text-dark" style="padding: 0rem 0rem">
             Nova carteira
-          </h5>
+          </h3>
+          </div>
         </b-col>
         <b-col>
-        <div class="row justify-content-center">
-          <b-button @click="saveWallet" variant="outline-secondary"> Salvar </b-button>
-        </div>
+          <div class="row justify-content-center">
+            <b-button @click="saveWallet" variant="outline-secondary"> Salvar </b-button>
+          </div>
         </b-col>
       </b-row>
-        <span style="padding: 0rem 0.4rem">
+      <div class="row justify-content-center">
+        <h5 style="padding: 1.5rem 0rem 0rem 0rem">
           Adicionar ativo
-        </span>
+        </h5>
+      </div>
         <WalletAddTickerForm @submit="addTicker" />
     </b-card-body>
 
@@ -23,8 +27,8 @@
       <b-table :stacked="isStacked" responsive='lg' :fields="fields" hover :items="assets" small>
         <!-- ASSET IMAGE -->
         <template #cell(image)="data">
-          <div class="container px-0">
-          <b-avatar :src="data.item.imageLink" size="3.15em" icon="wallet2" variant="light"></b-avatar>
+          <div class="container px-0" style="padding: 0.5em 0em">
+          <b-avatar rounded :src="data.item.imageLink" size="2.2em" icon="wallet2" variant="light"></b-avatar>
           </div>
         </template>
 
@@ -54,7 +58,7 @@
 
         <!-- ASSET RETURN -->
         <template #cell(formattedGain)="data">
-          <span class="cell-name">Lucro</span>
+          <span class="cell-name">Lucro 30d</span>
           <br>
           <span :class="positive(data.value)" class="cell-value"> {{ round(data.value) }}% </span>
         </template>
@@ -151,7 +155,7 @@ export default {
 }
 
 .cell-name {
-  font-size: 0.7em;
+  font-size: 0.65em;
   color: gray;
 }
 
