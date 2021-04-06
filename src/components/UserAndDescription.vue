@@ -3,14 +3,14 @@
     <b-row align-h="start">
       <b-col cols="auto">
         <!-- <b-avatar variant="success" size="8em"></b-avatar> -->
-        <b-avatar :src=userData.photoURL size="10em"></b-avatar>
+        <b-avatar :src=userData.picture size="10em"></b-avatar>
         <p style="text-align:center">
           <b-icon style="text-align:center" scale="0.8" icon="cursor-fill" variant="info" aria-hidden="true"></b-icon>
           <span style="font-size:0.8rem;color:gray">{{ userData.location }}</span>
         </p>
       </b-col>
       <b-col style="text-align:left" cols="0">
-        <span style="font-size:1.75rem"><strong>{{ userData.user }}<b-icon icon="patch-check-fill" scale="0.7" variant="info"></b-icon></strong></span>
+        <span style="font-size:1.75rem"><strong>@{{ userData.username }}<b-icon icon="patch-check-fill" scale="0.7" variant="info"></b-icon></strong></span>
         <p></p>
         <span style="font-size:1.25rem"><b>{{ userData.name }}</b></span>
         <br>

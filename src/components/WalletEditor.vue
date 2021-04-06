@@ -90,13 +90,20 @@ export default {
 
   methods: {
     async saveWallet (e) {
-      const accessToken = await this.$auth.getTokenSilently()
+      let accessToken
+      if (this.$auth.isAuthenticated) {
+        accessToken = await this.$auth.getTokenSilently()
+      }
       const wallet = await this.finance.postWallet(this.wallet, accessToken)
       this.$router.push(`/wallets/${wallet.id}`)
     },
 
     async addTicker ({ ticker, amount }) {
-      const { price, gain, name } = await this.finance.fetchAsset(ticker)
+      let accessToken
+      if (this.$auth.isAuthenticated) {
+        accessToken = await this.$auth.getTokenSilently()
+      }
+      const { price, gain, name } = await this.finance.fetchAsset(ticker, accessToken)
       const formattedPrice = this.round(price)
       const formattedGain = this.round(gain)
       const code = ticker.toUpperCase()
