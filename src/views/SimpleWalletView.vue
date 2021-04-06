@@ -29,7 +29,11 @@ export default {
   }),
 
   async created () {
-    this.wallet = await this.finance.fetchWallet(this.id)
+    let accessToken
+    if (this.$auth.isAuthenticated) {
+      accessToken = await this.$auth.getTokenSilently()
+    }
+    this.wallet = await this.finance.fetchWallet(this.id, accessToken)
   }
 }
 </script>
