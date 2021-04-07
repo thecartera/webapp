@@ -1,5 +1,5 @@
 <template>
-  <b-navbar sticky toggleable="lg" type="dark" variant="info">
+  <b-navbar class="navbarsize" sticky toggleable="lg" type="dark" variant="info">
     <b-navbar-brand to="home">
       <img src="../assets/logo.png" width="40px" alt="Monneda">
       <!-- <p>Monneda</p> -->
@@ -9,7 +9,6 @@
       <b-nav-item to="wallets">
         <b-button pill variant="outline-light">
           <b-icon icon="wallet2"></b-icon>
-          &nbsp;
           <b-icon icon="plus"></b-icon>
         </b-button>
       </b-nav-item>
@@ -29,7 +28,7 @@
 
     <b-navbar-nav class="ml-auto">
       <div v-if="!$auth.loading">
-        <b-nav-item v-if="$auth.isAuthenticated" to="profile">
+        <b-nav-item v-if="$auth.isAuthenticated" :to="{ path: '/profile' }">
           <b-avatar :src=userData.picture></b-avatar>
         </b-nav-item>
       </div>
@@ -70,3 +69,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.navbarsize {
+  min-height: 3.2rem;
+  max-height: 3.2rem;
+  padding: 0rem 0.5rem 0rem 0.5rem;
+}
+
+</style>

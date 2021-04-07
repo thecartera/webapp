@@ -1,7 +1,6 @@
 <template>
   <div>
     <Navbar :userData="userData"/>
-    <br>
     <Profile :userData="userData"/>
   </div>
 </template>
