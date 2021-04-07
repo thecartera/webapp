@@ -1,70 +1,76 @@
 <template>
   <b-card no-body style="border-color:white">
-    <b-card-title>
+    <b-card-body class="container px-0" body-bg-variant="light">
       <b-row>
         <b-col>
-          <h5 class="text-dark" style="padding: 0.4rem 0.4rem">
-            Carteira
-          </h5>
+          <div class="row justify-content-center">
+          <h3 class="text-dark" style="padding: 0rem 0rem">
+            Nova carteira
+          </h3>
+          </div>
         </b-col>
-        <b-col class="text-right" style="padding: 0.4rem 1.2rem">
-          <b-button @click="saveWallet"> Salvar </b-button>
+        <b-col>
+          <div class="row justify-content-center">
+            <b-button @click="saveWallet" variant="outline-secondary"> Salvar </b-button>
+          </div>
         </b-col>
       </b-row>
-    </b-card-title>
+      <div class="row justify-content-center">
+        <h5 style="padding: 1.5rem 0rem 0rem 0rem">
+          Adicionar ativo
+        </h5>
+      </div>
+        <WalletAddTickerForm @submit="addTicker" />
+    </b-card-body>
 
-  <b-card-body class="container px-0" body-bg-variant="white">
-    <b-table :stacked="isStacked" responsive='lg' :fields="fields" hover :items="assets" small>
-      <!-- ASSET IMAGE -->
-      <template #cell(image)="data">
-        <div class="container px-0">
-        <b-avatar :src="data.item.imageLink" size="3.15em" icon="wallet2" variant="light"></b-avatar>
-        </div>
-      </template>
+    <b-card-footer class="container px-0" footer-bg-variant="white">
+      <b-table :stacked="isStacked" responsive='lg' :fields="fields" hover :items="assets" small>
+        <!-- ASSET IMAGE -->
+        <template #cell(image)="data">
+          <div class="container px-0" style="padding: 0.5em 0em">
+          <b-avatar rounded :src="data.item.imageLink" size="2.2em" icon="wallet2" variant="light"></b-avatar>
+          </div>
+        </template>
 
-      <!-- ASSET INDEX, NAME, TICKER -->
-      <template #cell(nameticker)="data">
-        <div class="container px-0">
-        <span class="cell-name"> {{ data.index + 1 }}. </span>
-        <span class="cell-name"> {{ data.item.name }} </span>
-        <br>
-        <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
-        </div>
-      </template>
+        <!-- ASSET INDEX, NAME, TICKER -->
+        <template #cell(nameticker)="data">
+          <div class="container px-0">
+          <span class="cell-name"> {{ data.index + 1 }}. </span>
+          <span class="cell-name"> {{ data.item.name }} </span>
+          <br>
+          <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
+          </div>
+        </template>
 
-      <!-- ASSET QUANTITY -->
-      <template #cell(amount)="data">
-        <span class="cell-name">Qtd.</span>
-        <br>
-        <span class="light-blue cell-value"> {{ data.value }} </span>
-      </template>
+        <!-- ASSET QUANTITY -->
+        <template #cell(amount)="data">
+          <span class="cell-name">Qtd.</span>
+          <br>
+          <span class="light-blue cell-value"> {{ data.value }} </span>
+        </template>
 
-      <!-- ASSET CURRENT PRICE -->
-      <template #cell(formattedPrice)="data">
-        <span class="cell-name">Preço</span>
-        <br>
-        <span class="light-blue cell-value"> R${{ data.value }} </span>
-      </template>
+        <!-- ASSET CURRENT PRICE -->
+        <template #cell(formattedPrice)="data">
+          <span class="cell-name">Preço (R$)</span>
+          <br>
+          <span class="light-blue cell-value"> {{ data.value }} </span>
+        </template>
 
-      <!-- ASSET RETURN -->
-      <template #cell(formattedGain)="data">
-        <span class="cell-name">Lucro</span>
-        <br>
-        <span :class="positive(data.value)" class="cell-value"> {{ round(data.value) }}% </span>
-      </template>
+        <!-- ASSET RETURN -->
+        <template #cell(formattedGain)="data">
+          <span class="cell-name">Lucro 30d</span>
+          <br>
+          <span :class="positive(data.value)" class="cell-value"> {{ round(data.value) }}% </span>
+        </template>
 
-      <!-- ASSET REMOVE -->
-      <template #cell(remove)="data">
-        <p></p>
-        <b-icon icon="x" scale="1.3" @click="deleteRow(data.index)" variant="dark"> {{ data }} </b-icon>
-      </template>
+        <!-- ASSET REMOVE -->
+        <template #cell(remove)="data">
+          <p></p>
+          <b-icon icon="x" scale="1.3" @click="deleteRow(data.index)" variant="dark"> {{ data }} </b-icon>
+        </template>
 
-    </b-table>
-    <div>
-    <hr>
-    <WalletAddTickerForm @submit="addTicker" />
-    </div>
-  </b-card-body>
+      </b-table>
+    </b-card-footer>
   </b-card>
 </template>
 
@@ -149,7 +155,7 @@ export default {
 }
 
 .cell-name {
-  font-size: 0.7em;
+  font-size: 0.65em;
   color: gray;
 }
 

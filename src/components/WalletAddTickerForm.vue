@@ -1,22 +1,28 @@
 <template>
   <b-form @keyup.enter.prevent="submit">
     <b-row style="justify-content:center">
-      <b-form-input v-model="ticker" placeholder="Código" style="width:10rem"/>
-    </b-row>
-    <b-row style="justify-content:center">
+      <div style="padding: 0rem 0.4rem">
+      <b-form-input
+        v-model="ticker"
+        placeholder="Código"
+        style="width:7rem"
+        @keypress="only8chars($event)"
+      />
+      </div>
       <b-form-input
         id="input-live"
         v-model="amount"
-        :state="nameState"
         @keypress="onlyNumber($event)"
         aria-describedby="input-live-help input-live-feedback"
-        placeholder="Qtd."
+        placeholder="Quantidade"
         trim
-        style="width:10rem"
+        style="width:7rem"
       />
-    </b-row>
-    <b-row style="justify-content:center">
-      <b-button style="width:10rem" @click="submit">Adicionar</b-button>
+      <div style="padding: 0rem 0.4rem">
+        <b-button @click="submit" variant="secondary">
+          <b-icon icon="plus" variant="light"></b-icon>
+        </b-button>
+      </div>
     </b-row>
   </b-form>
 </template>
@@ -29,15 +35,6 @@ export default {
     ticker: '',
     amount: ''
   }),
-
-  computed: {
-    nameState () {
-      if (this.amount === '') {
-        return 'null'
-      }
-      return (this.amount.length < 10)
-    }
-  },
 
   methods: {
     submit () {
@@ -56,7 +53,15 @@ export default {
       // we only want integers.
       // using 'isNaN' lets unwanted chars like '-' and math numbers like 'e'
       const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-      if (evt.key in numbers && this.amount.length < 9) {
+      if (evt.key in numbers && this.amount.length < 8) {
+        return true
+      } else {
+        evt.preventDefault()
+      }
+    },
+
+    only8chars (evt) {
+      if (this.ticker.length < 8) {
         return true
       } else {
         evt.preventDefault()
