@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!$auth.loading">
+  <div>
     <Navbar :userData="userData"/>
     <br>
     <Profile :userData="userData"/>
@@ -51,6 +51,5 @@ export default {
     }
     this.wallet = await this.finance.fetchWallet(this.id)
   }
-
 }
 </script>
