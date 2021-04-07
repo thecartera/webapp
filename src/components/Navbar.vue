@@ -1,20 +1,21 @@
 <template>
-  <b-navbar sticky toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">
+  <b-navbar class="navbarsize" sticky toggleable="lg" type="dark" variant="info">
+    <b-navbar-brand to="home">
       <img src="../assets/logo.png" width="40px" alt="Monneda">
       <!-- <p>Monneda</p> -->
     </b-navbar-brand>
 
     <b-navbar-nav>
-      <b-nav-item href="#/wallets/">
+      <b-nav-item to="wallets">
         <b-button pill variant="outline-light">
-          <b-icon icon="wallet2"></b-icon> Nova Carteira
+          <b-icon icon="wallet2"></b-icon>
+          <b-icon icon="plus"></b-icon>
         </b-button>
       </b-nav-item>
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item href="#/login/">
+      <b-nav-item to="login">
         <!-- Check that the SDK client is not currently loading before accessing is methods -->
         <div v-if="!$auth.loading">
           <!-- show login when not authenticated -->
@@ -26,23 +27,33 @@
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item href="#/register/">
-        <b-button pill variant="outline-light"> Register </b-button>
-      </b-nav-item>
-    </b-navbar-nav>
-
-    <b-navbar-nav class="ml-auto">
-      <b-nav-item v-if="$auth.isAuthenticated" href="#/profile/">
-        <b-button pill variant="outline-light">
-          <b-icon icon="person-fill"></b-icon> Perfil
-        </b-button>
-      </b-nav-item>
+      <div v-if="!$auth.loading">
+        <b-nav-item v-if="$auth.isAuthenticated" :to="{ path: '/profile' }">
+          <b-avatar :src=userData.picture></b-avatar>
+        </b-nav-item>
+      </div>
     </b-navbar-nav>
   </b-navbar>
 </template>
 
 <script>
 export default {
+  props: {
+    userData: {
+      default: () => (
+        {
+          user: '',
+          name: '',
+          title: '',
+          description: '',
+          photoURL: '',
+          location: ''
+        }
+      ),
+      type: Object
+    }
+  },
+
   name: 'Navbar',
   methods: {
     // Log the user in
@@ -58,3 +69,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.navbarsize {
+  min-height: 3.2rem;
+  max-height: 3.2rem;
+  padding: 0rem 0.5rem 0rem 0.5rem;
+}
+
+</style>

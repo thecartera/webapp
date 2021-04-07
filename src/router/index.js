@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import WalletView from '@/views/WalletView'
+import Main from '@/views/Main'
 import WalletCreate from '@/views/WalletCreate'
-import Login from '@/views/Login'
-import Register from '@/views/Register'
 import Profile from '@/views/Profile'
 import { authGuard } from '../auth/authGuard'
 
@@ -15,16 +13,6 @@ const routes = [
     path: '/',
     name: 'home',
     redirect: '/wallets'
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: Register
   },
   {
     path: '/profile',
@@ -41,7 +29,7 @@ const routes = [
   {
     path: '/wallets/:id',
     name: 'wallet',
-    component: WalletView,
+    component: Main,
     props: true
   }
 ]

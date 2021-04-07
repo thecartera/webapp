@@ -1,14 +1,13 @@
 <template>
   <div>
-    <Navbar />
-    <br>
+    <Navbar :userData="userData"/>
     <Profile :userData="userData"/>
   </div>
 </template>
 
 <script>
-import Profile from '@/components/UserAndDescription'
 import Navbar from '@/components/Navbar'
+import Profile from '@/components/Profile'
 
 export default {
   name: 'ProfileView',
@@ -26,8 +25,9 @@ export default {
     let accessToken
     if (this.$auth.isAuthenticated) {
       accessToken = await this.$auth.getTokenSilently()
+      await this.finance.registerMyUser(accessToken)
+      this.userData = await this.finance.fetchMyUser(accessToken)
     }
-    this.userData = await this.finance.fetchMyUser(accessToken)
   }
 }
 </script>

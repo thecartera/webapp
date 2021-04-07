@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: 'WalletAddTickerForm',
+  name: 'WalletAddTicker',
 
   data: () => ({
     ticker: '',

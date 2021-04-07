@@ -1,20 +1,33 @@
 <template>
   <div>
-    <Navbar />
-    <WalletEditor />
+    <Navbar :userData="userData" />
+    <WalletCreate />
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
-import WalletEditor from '@/components/WalletEditor'
+import WalletCreate from '@/components/WalletCreate'
 
 export default {
-  name: 'WalletCreate',
+  name: 'WalletCreateView',
 
   components: {
     Navbar,
-    WalletEditor
+    WalletCreate
+  },
+
+  data: () => ({
+    userData: {}
+  }),
+
+  async created () {
+    let accessToken
+    if (this.$auth.isAuthenticated) {
+      accessToken = await this.$auth.getTokenSilently()
+      await this.finance.registerMyUser(accessToken)
+      this.userData = await this.finance.fetchMyUser(accessToken)
+    }
   }
 }
 </script>
