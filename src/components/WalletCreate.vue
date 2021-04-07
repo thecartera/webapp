@@ -20,7 +20,7 @@
           Adicionar ativo
         </h5>
       </div>
-        <WalletAddTickerForm @submit="addTicker" />
+        <WalletAddTicker @submit="addTicker" />
     </b-card-body>
 
     <b-card-footer class="container px-0" footer-bg-variant="white">
@@ -75,13 +75,13 @@
 </template>
 
 <script>
-import WalletAddTickerForm from '@/components/WalletAddTickerForm'
+import WalletAddTicker from '@/components/WalletAddTicker'
 
 export default {
-  name: 'WalletEditor',
+  name: 'WalletCreate',
 
   components: {
-    WalletAddTickerForm
+    WalletAddTicker
   },
 
   data: () => ({

@@ -1,25 +1,25 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar :userData="userData"/>
     <br>
-    <UserAndDescription :userData=userData />
+    <Profile :userData="userData"/>
     <br>
-    <Wallet :wallet="wallet" />
+    <Wallet :wallet="wallet"/>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
-import UserAndDescription from '@/components/UserAndDescription'
+import Profile from '@/components/Profile'
 import Wallet from '@/components/Wallet'
 
 export default {
-  name: 'WalletView',
+  name: 'Main',
 
   components: {
     Navbar,
-    Wallet,
-    UserAndDescription: UserAndDescription
+    Profile,
+    Wallet
   },
 
   props: {
@@ -41,12 +41,15 @@ export default {
 
   async created () {
     let accessToken
+    // while (this.$auth.loading) {}
+    console.log('HERE')
+    console.log(this.$auth.isAuthenticated)
     if (this.$auth.isAuthenticated) {
       accessToken = await this.$auth.getTokenSilently()
+      await this.finance.registerMyUser(accessToken)
+      this.userData = await this.finance.fetchMyUser(accessToken)
     }
-    this.wallet = await this.finance.fetchWallet(this.id, accessToken)
-    this.userData = await this.finance.fetchMyUser(accessToken)
+    this.wallet = await this.finance.fetchWallet(this.id)
   }
-
 }
 </script>
