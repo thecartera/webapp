@@ -1,12 +1,12 @@
 <template>
   <b-navbar sticky toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">
+    <b-navbar-brand to="home">
       <img src="../assets/logo.png" width="40px" alt="Monneda">
       <!-- <p>Monneda</p> -->
     </b-navbar-brand>
 
     <b-navbar-nav>
-      <b-nav-item href="#/wallets/">
+      <b-nav-item to="wallets">
         <b-button pill variant="outline-light">
           <b-icon icon="wallet2"></b-icon>
           &nbsp;
@@ -16,7 +16,7 @@
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item href="#/login/">
+      <b-nav-item to="login">
         <!-- Check that the SDK client is not currently loading before accessing is methods -->
         <div v-if="!$auth.loading">
           <!-- show login when not authenticated -->
@@ -28,9 +28,11 @@
     </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item v-if="$auth.isAuthenticated" href="#/profile/">
-        <b-avatar :src=userData.picture></b-avatar>
-      </b-nav-item>
+      <div v-if="!$auth.loading">
+        <b-nav-item v-if="$auth.isAuthenticated" to="profile">
+          <b-avatar :src=userData.picture></b-avatar>
+        </b-nav-item>
+      </div>
     </b-navbar-nav>
   </b-navbar>
 </template>
