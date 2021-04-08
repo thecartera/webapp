@@ -1,6 +1,6 @@
 <template>
   <b-navbar class="navbarsize" sticky toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand :to="{ path: '/home' }">
+    <b-navbar-brand :to="{ path: '/wallets'}">
       <img src="../assets/logo.png" width="40px" alt="Monneda">
       <!-- <p>Monneda</p> -->
     </b-navbar-brand>
@@ -28,7 +28,7 @@
 
     <b-navbar-nav class="ml-auto">
       <div v-if="!$auth.loading">
-        <b-nav-item v-if="$auth.isAuthenticated" :to="{ path: '/profile' }">
+        <b-nav-item v-if="$auth.isAuthenticated" :to="{ path: `/users/${this.userData.username}` }">
           <b-avatar :src=userData.picture></b-avatar>
         </b-nav-item>
       </div>
@@ -42,7 +42,7 @@ export default {
     userData: {
       default: () => (
         {
-          user: '',
+          username: '',
           name: '',
           title: '',
           description: '',

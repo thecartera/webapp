@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar :userData="userData"/>
-    <Profile :userData="userData"/>
+    <Profile v-bind="userData"/>
   </div>
 </template>
 
@@ -17,6 +17,13 @@ export default {
     Profile
   },
 
+  props: {
+    id: {
+      default: '',
+      type: String
+    }
+  },
+
   data: () => ({
     userData: {}
   }),
@@ -26,7 +33,7 @@ export default {
     if (this.$auth.isAuthenticated) {
       accessToken = await this.$auth.getTokenSilently()
       await this.finance.registerMyUser(accessToken)
-      this.userData = await this.finance.fetchMyUser(accessToken)
+      this.userData = await this.finance.fetchUser(this.id, accessToken)
     }
   }
 }

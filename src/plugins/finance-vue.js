@@ -27,7 +27,7 @@ const fetchAsset = async (ticker, accessToken) => {
     }
     return request('GET', `assets/${ticker}`, options)
   }
-  return request('GET', `assets/${ticker}, buildheader()`)
+  return request('GET', `assets/${ticker}`)
 }
 
 const postWallet = (wallet, accessToken) => {
@@ -65,6 +65,16 @@ const fetchMyUser = accessToken => {
   return request('GET', 'users')
 }
 
+const fetchUser = (id, accessToken) => {
+  if (accessToken) {
+    const options = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+    return request('GET', `users/${id}`, options)
+  }
+  return request('GET', `users/${id}`)
+}
+
 const registerMyUser = accessToken => {
   if (accessToken) {
     const options = {
@@ -80,6 +90,7 @@ const finance = {
   postWallet,
   fetchWallet,
   fetchMyUser,
+  fetchUser,
   registerMyUser
 }
 
