@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar :userData="userData"/>
+    <Navbar :userData="myData"/>
     <Profile v-bind="userData"/>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
   },
 
   data: () => ({
-    userData: {}
+    userData: {},
+    myData: {}
   }),
 
   async created () {
@@ -34,6 +35,8 @@ export default {
       accessToken = await this.$auth.getTokenSilently()
       await this.finance.registerMyUser(accessToken)
       this.userData = await this.finance.fetchUser(this.id, accessToken)
+      this.userData.wallets = await this.finance.fetchWalletsByUser(this.id, accessToken)
+      this.myData = await this.finance.fetchMyUser(accessToken)
     }
   }
 }
