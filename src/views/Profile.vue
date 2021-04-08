@@ -25,18 +25,37 @@ export default {
   },
 
   data: () => ({
+    // if we don't use userTempData, we can pass data without the wallets ids list
+    userTempData: {},
     userData: {},
     myData: {}
   }),
 
+  methods: {
+    async reloadPageWithNewId (newId) {
+      if (this.$auth.isAuthenticated) {
+        const accessToken = await this.$auth.getTokenSilently()
+        this.userTempData = await this.finance.fetchUser(newId, accessToken)
+        this.userTempData.wallets = await this.finance.fetchWalletsByUser(this.id, accessToken)
+        this.userData = this.userTempData
+      }
+    }
+  },
+
+  watch: {
+    id: function (newVal, oldVal) { // watch if opening another user profile
+      this.reloadPageWithNewId(newVal)
+    }
+  },
+
   async created () {
-    let accessToken
     if (this.$auth.isAuthenticated) {
-      accessToken = await this.$auth.getTokenSilently()
+      const accessToken = await this.$auth.getTokenSilently()
       await this.finance.registerMyUser(accessToken)
-      this.userData = await this.finance.fetchUser(this.id, accessToken)
-      this.userData.wallets = await this.finance.fetchWalletsByUser(this.id, accessToken)
       this.myData = await this.finance.fetchMyUser(accessToken)
+      this.userTempData = await this.finance.fetchUser(this.id, accessToken)
+      this.userTempData.wallets = await this.finance.fetchWalletsByUser(this.id, accessToken)
+      this.userData = this.userTempData
     }
   }
 }
