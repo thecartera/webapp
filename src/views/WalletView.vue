@@ -1,24 +1,19 @@
 <template>
   <div>
     <Navbar :userData="userData"/>
-    <br>
-    <Profile :userData="userData"/>
-    <br>
     <Wallet :wallet="wallet"/>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
-import Profile from '@/components/Profile'
 import Wallet from '@/components/Wallet'
 
 export default {
-  name: 'Main',
+  name: 'WalletView',
 
   components: {
     Navbar,
-    Profile,
     Wallet
   },
 
@@ -40,6 +35,7 @@ export default {
   }),
 
   async created () {
+    // ONLY USED TO GET THE PROFILE IMAGE
     let accessToken
     // while (this.$auth.loading) {}
     console.log('HERE')
@@ -49,6 +45,7 @@ export default {
       await this.finance.registerMyUser(accessToken)
       this.userData = await this.finance.fetchMyUser(accessToken)
     }
+    // USED TO GET WALLET ASSETS
     this.wallet = await this.finance.fetchWallet(this.id)
   }
 }

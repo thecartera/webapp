@@ -1,30 +1,34 @@
 <template>
   <b-card no-body style="border-color:white">
-    <b-card-title>
+    <b-card-title style="padding: 1rem 0rem 0rem 2rem">
+
       <b-row>
-        <b-col>
-          <h5 class="text-dark" style="padding: 0rem 0.2rem">
-            Rendimento da carteira (30d):
+          <h3 class="text-dark">
+            Informações da carteira
+          </h3>
+      </b-row>
+
+      <b-row>
+          <h6 class="text-dark"> Criador:
+            <a :href="`/#/users/${wallet.username}`" class="light-blue">
+            @{{ wallet.username }}
+            </a>
+          </h6>
+      </b-row>
+
+      <b-row>
+          <h6 class="text-dark">
+            Retorno (30d):
             <span :class="gainColor"> {{ wallet.gain.toFixed(2) }}% </span>
-          </h5>
-        </b-col>
+          </h6>
       </b-row>
 
       <b-row>
-        <b-col>
-          <h6 class="text-secondary" style="padding: 0rem 0.2rem"> ID desta carteira: {{ wallet.id }} </h6>
-        </b-col>
-      </b-row>
-      <b-row>
-
-        <b-col>
-          <h6 class="text-secondary" style="padding: 0rem 0.2rem"> Criada em: {{ created }} </h6>
-        </b-col>
+          <span class="text-dark" style="font-size: 1rem"> Criada em: {{ createdDate }} </span>
       </b-row>
     </b-card-title>
-
     <b-card-body class="container px-0">
-      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small>
+      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small borderless>
         <!-- ASSET IMAGE -->
         <template #cell(imageLink)="data">
           <div class="container px-0" style="padding: 0.5em 0em">
@@ -56,7 +60,7 @@
 
         <!-- ASSET RETURNS -->
         <template #cell(gain)="data">
-          <span class="cell-name"> Lucro 30d </span>
+          <span class="cell-name"> Ganho 30d </span>
           <br>
           <span :class="positive(data.value)" class="cell-value"> {{ data.value.toFixed(2) }}% </span>
         </template>
@@ -82,12 +86,12 @@ export default {
       { key: 'nameticker', label: '', class: 'text-left' },
       { key: 'weight', label: 'Peso', class: 'text-center', sortable: true },
       { key: 'price', label: 'Preço', class: 'text-center', sortable: true },
-      { key: 'gain', label: 'Lucro', class: 'text-center', sortable: true }
+      { key: 'gain', label: 'Ganho', class: 'text-center', sortable: true }
     ]
   }),
 
   computed: {
-    created () {
+    createdDate () {
       const unhandledDate = new Date(this.wallet.createdAt)
       return unhandledDate.toLocaleString('pt-BR').split(' ')[0]
     },

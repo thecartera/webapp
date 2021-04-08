@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Main from '@/views/Main'
+import WalletView from '@/views/WalletView'
 import WalletCreate from '@/views/WalletCreate'
 import Profile from '@/views/Profile'
 import { authGuard } from '../auth/authGuard'
@@ -29,8 +29,15 @@ const routes = [
   {
     path: '/wallets/:id',
     name: 'wallet',
-    component: Main,
+    component: WalletView,
     props: true
+  },
+  {
+    path: '/users/:id',
+    name: 'user',
+    component: Profile,
+    props: true,
+    beforeEnter: authGuard
   }
 ]
 
