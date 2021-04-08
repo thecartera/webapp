@@ -10,7 +10,7 @@
 
       <b-row>
           <h6 class="text-dark"> Criador:
-            <a :href="`/#/users/${wallet.username}`" class="light-blue">
+            <a :href="`/#/users/${wallet.username}`" class="monneda-blue">
             @{{ wallet.username }}
             </a>
           </h6>
@@ -48,14 +48,14 @@
         <template #cell(weight)="data">
           <span class="cell-name"> Peso </span>
           <br>
-          <span class="light-blue cell-value"> {{ data.value.toFixed(1) }}% </span>
+          <span class="monneda-blue cell-value"> {{ data.value.toFixed(1) }}% </span>
         </template>
 
         <!-- ASSET CURRENT PRICE -->
         <template #cell(price)="data">
           <span class="cell-name">Preço (R$)</span>
           <br>
-          <span class="light-blue cell-value">{{ data.value.toFixed(2) }}</span>
+          <span class="monneda-blue cell-value">{{ data.value.toFixed(2) }}</span>
         </template>
 
         <!-- ASSET RETURNS -->
@@ -125,7 +125,7 @@ export default {
   color: gray;
 }
 
-.light-blue {
+.monneda-blue {
   color: #0275B1;
 }
 
