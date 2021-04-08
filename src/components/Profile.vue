@@ -52,13 +52,6 @@ export default {
     wallets: Array
   },
 
-  data: () => ({
-    fields: [
-      { key: 'id', label: '', class: 'text-center' },
-      { key: 'id', label: '', class: 'text-center' }
-    ]
-  }),
-
   computed: {
     normalizedLocation () {
       return this.location === null ? 'Brasil' : this.location
