@@ -10,8 +10,8 @@
 
       <b-row>
           <h6 class="text-dark"> Criador:
-            <a :href="`/#/users/${wallet.username}`" class="monneda-blue">
-            @{{ wallet.username }}
+            <a :href="`/#/users/${username}`" class="monneda-blue">
+            @{{ username }}
             </a>
           </h6>
       </b-row>
@@ -19,7 +19,7 @@
       <b-row>
           <h6 class="text-dark">
             Retorno (30d):
-            <span :class="gainColor"> {{ wallet.gain.toFixed(2) }}% </span>
+            <span :class="gainColor"> {{ normalizedGain }}% </span>
           </h6>
       </b-row>
 
@@ -28,7 +28,7 @@
       </b-row>
     </b-card-title>
     <b-card-body class="container px-0">
-      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small borderless>
+      <b-table responsive='lg' hover :fields="fields" :items="assets" small borderless>
         <!-- ASSET IMAGE -->
         <template #cell(imageLink)="data">
           <div class="container px-0" style="padding: 0.5em 0em">
@@ -74,10 +74,11 @@ export default {
   name: 'Wallet',
 
   props: {
-    wallet: {
-      default: () => ({ assets: [] }),
-      type: Object
-    }
+    assets: Array,
+    createdAt: String,
+    gain: Number,
+    id: String,
+    username: String
   },
 
   data: () => ({
@@ -92,12 +93,17 @@ export default {
 
   computed: {
     createdDate () {
-      const unhandledDate = new Date(this.wallet.createdAt)
+      const unhandledDate = new Date(this.createdAt)
       return unhandledDate.toLocaleString('pt-BR').split(' ')[0]
     },
 
+    normalizedGain () {
+      if (this.gain === undefined || this.gain === null) { return '' }
+      return this.gain.toFixed(2)
+    },
+
     gainColor () {
-      return this.positive(this.wallet.gain)
+      return this.positive(this.normalizedGain)
     }
   },
 
