@@ -60,9 +60,9 @@ const fetchMyUser = accessToken => {
     const options = {
       headers: { Authorization: `Bearer ${accessToken}` }
     }
-    return request('GET', 'users', options)
+    return request('GET', 'profile', options)
   }
-  return request('GET', 'users')
+  return request('GET', 'profile')
 }
 
 const fetchUser = (id, accessToken) => {
@@ -75,14 +75,24 @@ const fetchUser = (id, accessToken) => {
   return request('GET', `users/${id}`)
 }
 
+const fetchWalletsByUser = (id, accessToken) => {
+  if (accessToken) {
+    const options = {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    }
+    return request('GET', `users/${id}/wallets`, options)
+  }
+  return request('GET', `users/${id}/wallets`)
+}
+
 const registerMyUser = accessToken => {
   if (accessToken) {
     const options = {
       headers: { Authorization: `Bearer ${accessToken}` }
     }
-    return request('POST', 'users', options)
+    return request('POST', 'profile', options)
   }
-  return request('POST', 'users')
+  return request('POST', 'profile')
 }
 
 const finance = {
@@ -91,6 +101,7 @@ const finance = {
   fetchWallet,
   fetchMyUser,
   fetchUser,
+  fetchWalletsByUser,
   registerMyUser
 }
 
