@@ -67,7 +67,7 @@ export default {
     },
     normalizedUsername () {
       const username = this.username
-      return username === undefined ? 'error' : '@' + username.substring(0, 16)
+      return username === undefined ? 'loading' : '@' + username.substring(0, 16)
     },
     normalizedTitle () {
       const title = this.title
