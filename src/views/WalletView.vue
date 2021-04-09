@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- without v-if the image/link could be undefined for a very short period -->
-    <Navbar v-if=!isAuthLoading :userData="userData"/>
+    <!-- but with the v-if, the navbar takes tooooo long to load -->
+    <!-- v-if=!isAuthLoading  -->
+    <Navbar :userData="userData"/>
     <Wallet v-bind="wallet"/>
   </div>
 </template>
