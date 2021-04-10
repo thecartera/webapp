@@ -120,7 +120,16 @@ export default {
       if (this.$auth.isAuthenticated) {
         accessToken = await this.$auth.getTokenSilently()
       }
-      const { price, gain, name } = await this.finance.fetchAsset(ticker, accessToken)
+
+      let response
+      try {
+        response = await this.finance.fetchAsset(ticker, accessToken)
+      } catch (e) {
+        alert(`Código "${ticker}" não encontrado!`)
+        return
+      }
+      const { price, gain, name } = response
+
       const formattedPrice = this.round(price)
       const formattedGain = this.round(gain)
       const code = ticker.toUpperCase()
