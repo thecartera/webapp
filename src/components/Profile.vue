@@ -74,17 +74,10 @@ export default {
       return title !== undefined ? title.substring(0, 15) : ''
     },
     normalizedWallets () {
-      // we want wallets to be a list of dicts, not just list of strings
       if (this.wallets !== undefined) {
-        var wallets = []
-        const len = this.wallets.length
-        var i
-        for (i = 0; i < len; i++) {
-          wallets.push({ name: this.wallets[i] })
-        }
-        return wallets
+        return this.wallets.map(w => ({ name: w }))
       }
-      return ''
+      return []
     }
   },
 
