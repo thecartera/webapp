@@ -75,8 +75,8 @@ export default {
     },
     normalizedWallets () {
       if (this.wallets !== undefined) {
-        const gen = (function * () { yield * ['A', 'B', 'C', 'D', 'E'] })()
-        return this.wallets.map(w => ({ id: w, name: `Carteira ${gen.next().value}` }))
+        let i = 1
+        return this.wallets.map(w => ({ id: w, name: `Carteira ${i++}` }))
       }
       return []
     }
