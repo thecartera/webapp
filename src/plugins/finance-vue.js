@@ -5,7 +5,7 @@ const BASE = 'http://localhost:8080/api'
 
 const buildUrl = (...paths) => [BASE, ...paths].join('/')
 
-const request = (meth, path, opts = {}) => {
+const request = async (meth, path, opts = {}) => {
   const url = buildUrl(path)
   console.log(`${meth}: ${url}`)
 
@@ -16,8 +16,13 @@ const request = (meth, path, opts = {}) => {
   }
   console.log('opts:', options)
 
-  return fetch(url, options)
-    .then(r => r.json())
+  const response = await fetch(url, options)
+
+  if (!response.ok) {
+    throw response
+  }
+
+  return await response.json()
 }
 
 const fetchAsset = async (ticker, accessToken) => {

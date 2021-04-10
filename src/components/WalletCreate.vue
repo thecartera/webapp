@@ -20,7 +20,18 @@
           Adicionar ativo
         </h5>
       </div>
-        <WalletAddTicker @submit="addTicker" />
+      <WalletAddTicker @submit="addTicker" />
+      <div style="padding: 0.5rem">
+        <b-alert
+          variant="danger"
+          dismissible
+          fade
+          :show="showNonexistentTickerAlert"
+          @dismissed="showNonexistentTickerAlert=false"
+        >
+          Código "{{ nonExistentTicker }}" não encontrado.
+        </b-alert>
+      </div>
     </b-card-body>
 
     <b-card-footer class="container px-0" footer-bg-variant="white">
@@ -94,7 +105,9 @@ export default {
       { key: 'remove', label: '', class: 'text-center' }
     ],
     assets: [],
-    isStacked: true
+    isStacked: true,
+    showNonexistentTickerAlert: true,
+    nonexistentTicker: ''
   }),
 
   computed: {
@@ -120,7 +133,17 @@ export default {
       if (this.$auth.isAuthenticated) {
         accessToken = await this.$auth.getTokenSilently()
       }
-      const { price, gain, name } = await this.finance.fetchAsset(ticker, accessToken)
+
+      let response
+      try {
+        response = await this.finance.fetchAsset(ticker, accessToken)
+      } catch (e) {
+        this.nonExistentTicker = ticker
+        this.showNonexistentTickerAlert = true
+        return
+      }
+      const { price, gain, name } = response
+
       const formattedPrice = this.round(price)
       const formattedGain = this.round(gain)
       const code = ticker.toUpperCase()
