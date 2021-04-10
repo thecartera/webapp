@@ -29,8 +29,8 @@
       <b-card :border-variant="debugBorders()" align="left">
       <b-card-title> Carteiras: </b-card-title>
       <ul id="example-1">
-        <li v-for="item in normalizedWallets" :key="item.name">
-          <a class="monneda-blue" :href="`/#/wallets/${item.name}`"> {{ item.name }} </a>
+        <li v-for="item in normalizedWallets" :key="item.id">
+          <a class="monneda-blue" :href="`/#/wallets/${item.id}`"> {{ item.name }} </a>
         </li>
       </ul>
       </b-card>
@@ -74,17 +74,11 @@ export default {
       return title !== undefined ? title.substring(0, 15) : ''
     },
     normalizedWallets () {
-      // we want wallets to be a list of dicts, not just list of strings
       if (this.wallets !== undefined) {
-        var wallets = []
-        const len = this.wallets.length
-        var i
-        for (i = 0; i < len; i++) {
-          wallets.push({ name: this.wallets[i] })
-        }
-        return wallets
+        let i = 1
+        return this.wallets.map(w => ({ id: w, name: `Carteira ${i++}` }))
       }
-      return ''
+      return []
     }
   },
 
