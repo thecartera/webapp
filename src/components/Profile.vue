@@ -29,8 +29,8 @@
       <b-card :border-variant="debugBorders()" align="left">
       <b-card-title> Carteiras: </b-card-title>
       <ul id="example-1">
-        <li v-for="item in normalizedWallets" :key="item.name">
-          <a class="monneda-blue" :href="`/#/wallets/${item.name}`"> {{ item.name }} </a>
+        <li v-for="item in normalizedWallets" :key="item.id">
+          <a class="monneda-blue" :href="`/#/wallets/${item.id}`"> {{ item.name }} </a>
         </li>
       </ul>
       </b-card>
@@ -75,7 +75,8 @@ export default {
     },
     normalizedWallets () {
       if (this.wallets !== undefined) {
-        return this.wallets.map(w => ({ name: w }))
+        const gen = (function * () { yield * ['A', 'B', 'C', 'D', 'E'] })()
+        return this.wallets.map(w => ({ id: w, name: `Carteira ${gen.next().value}` }))
       }
       return []
     }
