@@ -105,6 +105,10 @@ export const useAuth0 = ({
           // handle the redirect and retrieve tokens
           const { appState } = await this.auth0Client.handleRedirectCallback()
 
+          // Adapted from here
+          //    https://github.com/auth0/auth0-spa-js/issues/384#issuecomment-602586642
+          window.history.replaceState({}, document.title, window.location.pathname)
+
           this.error = null
 
           // Notify subscribers that the redirect callback has happened, passing the appState
