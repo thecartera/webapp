@@ -106,7 +106,7 @@ export default {
     ],
     assets: [],
     isStacked: true,
-    showNonexistentTickerAlert: true,
+    showNonexistentTickerAlert: false,
     nonexistentTicker: ''
   }),
 
