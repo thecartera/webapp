@@ -30,7 +30,7 @@
       <b-card-title> Carteiras: </b-card-title>
       <ul id="example-1">
         <li v-for="item in normalizedWallets" :key="item.id">
-          <a class="monneda-blue" :href="`/#/wallets/${item.id}`"> {{ item.name }} </a>
+          <b-link class="monneda-blue" :to="{ path: `/wallets/${item.id}`}"> {{ item.name }} </b-link>
         </li>
       </ul>
       </b-card>
