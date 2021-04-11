@@ -10,9 +10,9 @@
 
       <b-row>
           <h6 class="text-dark"> Criador:
-            <a :href="`/#/users/${username}`" class="monneda-blue">
+            <b-link :to="{ path: `/users/${username}`}" class="monneda-blue">
             @{{ username }}
-            </a>
+            </b-link>
           </h6>
       </b-row>
 
