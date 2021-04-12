@@ -3,16 +3,16 @@
     <b-card-title style="padding: 1rem 0rem 0rem 2rem">
 
       <b-row>
-          <h3 class="text-dark">
-            Informações da carteira
-          </h3>
+        <h3 class="text-dark">
+          Informações da carteira
+        </h3>
       </b-row>
 
       <b-row>
           <h6 class="text-dark"> Criador:
-            <a :href="`/#/users/${username}`" class="monneda-blue">
+            <b-link :to="{ path: `/users/${username}`}" class="monneda-blue">
             @{{ username }}
-            </a>
+            </b-link>
           </h6>
       </b-row>
 
@@ -26,7 +26,18 @@
       <b-row>
           <span class="text-dark" style="font-size: 1rem"> Criada em: {{ createdDate }} </span>
       </b-row>
+
+      <b-row style="padding: 0.5rem 0rem">
+        <b-button size="sm" variant='outline-info' v-if="!buttonPressed" @click="pressButton"> Ver gráfico da composição </b-button>
+        <b-button size="sm" variant='outline-info' v-if="buttonPressed" @click="pressButton"> Fechar gráfico </b-button>
+      </b-row>
+
+      <b-row>
+        <WalletChart style="max-width: 22rem" v-if="buttonPressed" :chartData="createGraph"/>
+      </b-row>
+
     </b-card-title>
+
     <b-card-body class="container px-0">
       <b-table responsive='lg' hover :fields="fields" :items="assets" small borderless>
         <!-- ASSET IMAGE -->
@@ -70,8 +81,14 @@
 </template>
 
 <script>
+import WalletChart from '@/components/WalletChart'
+
 export default {
   name: 'Wallet',
+
+  components: {
+    WalletChart
+  },
 
   props: {
     assets: Array,
@@ -88,7 +105,9 @@ export default {
       { key: 'weight', label: 'Peso', class: 'text-center', sortable: true },
       { key: 'price', label: 'Preço', class: 'text-center', sortable: true },
       { key: 'gain', label: 'Ganho', class: 'text-center', sortable: true }
-    ]
+    ],
+    chartData: {},
+    buttonPressed: false
   }),
 
   computed: {
@@ -104,6 +123,94 @@ export default {
 
     gainColor () {
       return this.positive(this.normalizedGain)
+    },
+
+    createGraph () {
+      // IF CANT GENERATE
+      if (this.gain === undefined || this.gain === null) {
+        return {
+          labels: ['d', 'e'],
+          datasets: [{
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+          }]
+        }
+      }
+
+      // LOGIC TO GENERATE CHART/GRAPH
+      // we don't want to display too many colors in the graph, so
+      // we get all the assets tickers and weights and sort them, then
+      // we only take into consideration the first 15 of them, and
+      // we label the rest as 'outros ativos' (other assets)
+
+      const ticketsAndWeights = {}
+      let i
+      for (i = 0; i < this.assets.length; i++) {
+        const asset = this.assets[i]
+        ticketsAndWeights[asset.ticker] = asset.weight.toFixed(2)
+      }
+
+      const keyValues = []
+      for (const key in ticketsAndWeights) {
+        keyValues.push([key, ticketsAndWeights[key]])
+      }
+
+      const items = keyValues.sort(function compare (kv1, kv2) {
+        // This comparison function has 3 return cases:
+        // - Negative number: kv1 should be placed AFTER kv2
+        // - Positive number: kv1 should be placed BEFORE kv2
+        // - Zero: they are equal, any order is ok between these 2 items
+        return kv2[1] - kv1[1]
+      })
+
+      let lw = items
+      if (items.length > 15) {
+        lw = items.slice(0, 15)
+      }
+
+      const labels = []
+      const weights = []
+      let missingWeight = 100.0
+      for (i = 0; i < lw.length; i++) {
+        const assetName = lw[i][0]
+        const assetWeight = lw[i][1]
+        labels.push(assetName)
+        weights.push(assetWeight)
+        missingWeight -= assetWeight
+      }
+
+      labels.push('Outros ativos')
+      weights.push(missingWeight.toFixed(2))
+
+      return {
+        labels: labels,
+        datasets: [{
+          label: 'Carteira',
+          data: weights,
+          borderColor: 'rgb(255, 255, 255)',
+          borderWidth: 1,
+          backgroundColor: [
+            'rgb(70,125,105)',
+            'rgb(155,190,135)',
+            'rgb(115,195,150)',
+            'rgb(140,140,110)',
+            'rgb(230,190,130)',
+            'rgb(235,215,140)',
+            'rgb(225,150,95)',
+            'rgb(225,100,80)',
+            'rgb(200,75,80)',
+            'rgb(155,55,100)',
+            'rgb(80,35,115)',
+            'rgb(145,100,180)',
+            'rgb(225,120,165)',
+            'rgb(225,90,140)',
+            'rgb(85,150,195)'
+          ]
+        }]
+      }
     }
   },
 
@@ -115,6 +222,10 @@ export default {
     getImageLink (data) {
       const code = data.item.ticker.toUpperCase()
       return `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${code}.png`
+    },
+
+    pressButton () {
+      this.buttonPressed = !this.buttonPressed
     }
   }
 }
