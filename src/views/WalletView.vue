@@ -49,12 +49,18 @@ export default {
         const accessToken = await this.$auth.getTokenSilently()
         this.userData = await this.finance.fetchMyUser(accessToken)
       }
+    },
+    async reloadPageWithNewId (newId) {
+      this.wallet = await this.finance.fetchWallet(newId)
     }
   },
 
   watch: {
     isAuthLoading: function (newVal, oldVal) { // watch if auth finished loading
       this.reloadNavbarWithUserImage()
+    },
+    id: function (newVal, oldVal) { // watch if opening another user profile
+      this.reloadPageWithNewId(newVal)
     }
   },
 
