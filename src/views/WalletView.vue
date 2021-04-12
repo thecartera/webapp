@@ -59,7 +59,7 @@ export default {
     isAuthLoading: function (newVal, oldVal) { // watch if auth finished loading
       this.reloadNavbarWithUserImage()
     },
-    id: function (newVal, oldVal) { // watch if opening another user profile
+    id: function (newVal, oldVal) { // watch if opening another wallet
       this.reloadPageWithNewId(newVal)
     }
   },
