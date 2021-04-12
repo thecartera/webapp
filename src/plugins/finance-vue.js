@@ -7,14 +7,12 @@ const buildUrl = (...paths) => [BASE, ...paths].join('/')
 
 const request = async (meth, path, opts = {}) => {
   const url = buildUrl(path)
-  console.log(`${meth}: ${url}`)
 
   const options = {
     method: meth,
     mode: 'cors',
     ...opts
   }
-  console.log('opts:', options)
 
   const response = await fetch(url, options)
 
