@@ -36,8 +36,7 @@ const routes = [
     path: '/users/:id',
     name: 'user',
     component: Profile,
-    props: true,
-    beforeEnter: authGuard
+    props: true
   }
 ]
 
