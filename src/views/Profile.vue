@@ -51,7 +51,6 @@ export default {
   async created () {
     if (this.$auth.isAuthenticated) {
       const accessToken = await this.$auth.getTokenSilently()
-      await this.finance.registerMyUser(accessToken)
       this.myData = await this.finance.fetchMyUser(accessToken)
       this.userTempData = await this.finance.fetchUser(this.id, accessToken)
       this.userTempData.wallets = await this.finance.fetchWalletsByUser(this.id, accessToken)
