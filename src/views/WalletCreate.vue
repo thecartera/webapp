@@ -25,7 +25,6 @@ export default {
     let accessToken
     if (this.$auth.isAuthenticated) {
       accessToken = await this.$auth.getTokenSilently()
-      await this.finance.registerMyUser(accessToken)
       this.userData = await this.finance.fetchMyUser(accessToken)
     }
   }
