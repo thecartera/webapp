@@ -167,8 +167,9 @@ export default {
       })
 
       let lw = items
-      if (items.length > 15) {
-        lw = items.slice(0, 15)
+      const nColors = 17
+      if (items.length > nColors) {
+        lw = items.slice(0, nColors)
       }
 
       const labels = []
@@ -182,8 +183,10 @@ export default {
         missingWeight -= assetWeight
       }
 
-      labels.push('Outros ativos')
-      weights.push(missingWeight.toFixed(2))
+      if (items.length > nColors) {
+        labels.push('Outros ativos')
+        weights.push(missingWeight.toFixed(2))
+      }
 
       return {
         labels: labels,
@@ -196,7 +199,6 @@ export default {
             'rgb(70,125,105)',
             'rgb(155,190,135)',
             'rgb(115,195,150)',
-            'rgb(140,140,110)',
             'rgb(230,190,130)',
             'rgb(235,215,140)',
             'rgb(225,150,95)',
@@ -207,7 +209,11 @@ export default {
             'rgb(145,100,180)',
             'rgb(225,120,165)',
             'rgb(225,90,140)',
-            'rgb(85,150,195)'
+            'rgb(85,150,195)',
+            'rgb(100,100,200)',
+            'rgb(96,96,96)',
+            'rgb(169,169,169)',
+            'rgb(232,232,232)'
           ]
         }]
       }
