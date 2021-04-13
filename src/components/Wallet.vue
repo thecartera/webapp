@@ -182,8 +182,10 @@ export default {
         missingWeight -= assetWeight
       }
 
-      labels.push('Outros ativos')
-      weights.push(missingWeight.toFixed(2))
+      if (items.length > 15) {
+        labels.push('Outros ativos')
+        weights.push(missingWeight.toFixed(2))
+      }
 
       return {
         labels: labels,
