@@ -33,12 +33,13 @@ export default {
 
   methods: {
     async reloadPageWithNewId (newId) {
+      let accessToken
       if (this.$auth.isAuthenticated) {
-        const accessToken = await this.$auth.getTokenSilently()
-        this.userTempData = await this.finance.fetchUser(newId, accessToken)
-        this.userTempData.wallets = await this.finance.fetchWalletsByUser(this.id, accessToken)
-        this.userData = this.userTempData
+        accessToken = await this.$auth.getTokenSilently()
       }
+      this.userTempData = await this.finance.fetchUser(newId, accessToken)
+      this.userTempData.wallets = await this.finance.fetchWalletsByUser(this.id, accessToken)
+      this.userData = this.userTempData
     }
   },
 
@@ -49,13 +50,14 @@ export default {
   },
 
   async created () {
+    let accessToken
     if (this.$auth.isAuthenticated) {
-      const accessToken = await this.$auth.getTokenSilently()
+      accessToken = await this.$auth.getTokenSilently()
       this.myData = await this.finance.fetchMyUser(accessToken)
-      this.userTempData = await this.finance.fetchUser(this.id, accessToken)
-      this.userTempData.wallets = await this.finance.fetchWalletsByUser(this.id, accessToken)
-      this.userData = this.userTempData
     }
+    this.userTempData = await this.finance.fetchUser(this.id, accessToken)
+    this.userTempData.wallets = await this.finance.fetchWalletsByUser(this.id, accessToken)
+    this.userData = this.userTempData
   }
 }
 </script>

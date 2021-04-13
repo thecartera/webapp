@@ -65,14 +65,15 @@ export default {
   },
 
   async created () {
+    let accessToken
     const auth = this.$auth.isAuthenticated
     if (auth) {
       // ONLY USED TO GET THE PROFILE IMAGE
-      const accessToken = await this.$auth.getTokenSilently()
+      accessToken = await this.$auth.getTokenSilently()
       this.userData = await this.finance.fetchMyUser(accessToken)
     }
     // USED TO GET WALLET ASSETS
-    this.wallet = await this.finance.fetchWallet(this.id)
+    this.wallet = await this.finance.fetchWallet(this.id, accessToken)
   }
 }
 </script>
