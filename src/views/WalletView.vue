@@ -69,7 +69,6 @@ export default {
     if (auth) {
       // ONLY USED TO GET THE PROFILE IMAGE
       const accessToken = await this.$auth.getTokenSilently()
-      await this.finance.registerMyUser(accessToken)
       this.userData = await this.finance.fetchMyUser(accessToken)
     }
     // USED TO GET WALLET ASSETS
