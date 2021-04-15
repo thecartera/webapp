@@ -6,6 +6,8 @@ import App from './App.vue'
 
 import './plugins/finance-vue'
 import './plugins/bootstrap-vue'
+
+import store from './store'
 import router from './router'
 
 // Import the Auth0 configuration
@@ -31,6 +33,7 @@ Vue.use(Auth0Plugin, {
 Vue.config.productionTip = false
 
 new Vue({
+  store,
   router,
   render: h => h(App)
 }).$mount('#app')
