@@ -29,17 +29,16 @@
 
     <!-- Search bar -->
     <b-navbar-nav small class="ml-auto">
-      <b-nav-form @keyup.enter.prevent="search">
-        <b-input-group size="sm">
+      <b-input-group size="sm">
         <b-form-input
           size="sm"
           class="mr-sm-2"
           style="width:10rem"
           placeholder="@user"
+          @keypress.enter.prevent="search"
           v-model="searchBarValue">
         </b-form-input>
-        </b-input-group>
-      </b-nav-form>
+      </b-input-group>
      </b-navbar-nav>
 
     <!-- Profile button -->

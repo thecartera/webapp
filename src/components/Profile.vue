@@ -16,7 +16,7 @@
       <!-- User information -->
       <b-col style="text-align:left" cols="0">
         <span style="font-size:1.1rem">
-          <strong> {{ profile.nickname }} </strong>
+          <strong> {{ profile.username }} </strong>
           <b-icon icon="patch-check-fill" scale="0.7" variant="info" />
         </span>
         <br>
@@ -35,7 +35,7 @@
     <b-row>
       <b-card border-variant="white" align="left">
       <b-card-title> Carteiras: </b-card-title>
-      <ul id="example-1">
+      <ul>
         <li v-for="item in normalizedWallets" :key="item.id">
           <b-link class="monneda-blue" :to="`/wallets/${item.id}`">
             {{ item.name }}
@@ -62,7 +62,8 @@ export default {
   },
 
   data: () => ({
-    profile: {}
+    profile: {},
+    wallets: []
   }),
 
   computed: {
@@ -79,7 +80,7 @@ export default {
       return name !== undefined ? name.substring(0, 25) : ''
     },
     normalizedUsername () {
-      const username = this.profile.username
+      const { username } = this.profile
       return username === undefined ? 'loading' : '@' + username.substring(0, 16)
     },
     normalizedTitle () {
@@ -87,18 +88,13 @@ export default {
       return title !== undefined ? title.substring(0, 15) : ''
     },
     normalizedWallets () {
-      if (this.profile.wallets !== undefined) {
-        let i = 1
-        return this.profile.wallets.map(w => ({ id: w, name: `Carteira ${i++}` }))
-      }
-      return []
+      return this.wallets.map((w, i) => ({ id: w, name: `Carteira ${i + 1}` }))
     }
   },
 
   async created () {
-    const profile = await client.users.fetchByUsername(this.id)
-    profile.wallets = await client.wallets.fetchByOwner(this.id)
-    this.profile = profile // Silly
+    this.profile = await client.users.fetchByUsername(this.id)
+    this.wallets = await client.wallets.fetchByOwner(this.id)
   }
 }
 </script>
