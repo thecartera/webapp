@@ -44,8 +44,7 @@ const routes = [
     path: '/users/:id',
     name: 'user',
     component: ProfileView,
-    props: true,
-    beforeEnter: AuthGuard
+    props: true
   }
 ]
 
