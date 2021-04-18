@@ -7,6 +7,7 @@ import Vue from 'vue'
 
 // Plugins
 import './plugins/bootstrap'
+import 'chartjs-plugin-colorschemes'
 
 // App itself
 import App from './App.vue'
