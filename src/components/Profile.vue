@@ -1,36 +1,45 @@
 <template>
 <div class="row justify-content-center">
-  <b-card class="userDataCardSize" :border-variant="debugBorders()" align="center">
+  <b-card class="userDataCardSize" border-variant="white" align="center">
     <b-row>
-      <!-- USER IMAGE AND LOCATION -->
+      <!-- User image and location -->
       <b-col cols="auto">
-        <b-avatar :src=picture size="6.8rem"></b-avatar>
+        <b-avatar :src="profile.picture" size="6.8rem" />
         <p style="text-align:center">
-          <b-icon style="text-align:center" scale="0.8" icon="cursor-fill" variant="info" aria-hidden="true"></b-icon>
-          <span style="font-size:0.65rem;color:gray">{{ normalizedLocation }}</span>
+          <b-icon style="text-align:center" scale="0.8" icon="cursor-fill" variant="info" aria-hidden="true" />
+          <span style="font-size:0.65rem;color:gray">
+            {{ profile.location }}
+          </span>
         </p>
       </b-col>
-      <!-- USER INFO, LIKE USERNAME, NAME, DESCRIPTION -->
+
+      <!-- User information -->
       <b-col style="text-align:left" cols="0">
         <span style="font-size:1.1rem">
-          <strong>{{ normalizedUsername }} </strong>
-          <b-icon icon="patch-check-fill" scale="0.7" variant="info"></b-icon>
+          <strong> {{ profile.nickname }} </strong>
+          <b-icon icon="patch-check-fill" scale="0.7" variant="info" />
         </span>
         <br>
         <span style="font-size:0.75rem">
-          <b>{{ normalizedName }}</b>
+          <b> {{ profile.name }} </b>
         </span>
-        <b-card class="descriptionCardSize" no-body :border-variant="debugBorders()" align="left">
-          <span style="white-space: pre;font-family:Arial;font-size:0.85rem">{{ normalizedDescription }}</span>
+        <b-card class="descriptionCardSize" border-variant="white" no-body align="left">
+          <span style="white-space: pre;font-family:Arial;font-size:0.85rem">
+            {{ normalizedDescription }}
+          </span>
         </b-card>
       </b-col>
     </b-row>
+
+    <!-- Wallet list -->
     <b-row>
-      <b-card :border-variant="debugBorders()" align="left">
+      <b-card border-variant="white" align="left">
       <b-card-title> Carteiras: </b-card-title>
       <ul id="example-1">
         <li v-for="item in normalizedWallets" :key="item.id">
-          <b-link class="monneda-blue" :to="{ path: `/wallets/${item.id}`}"> {{ item.name }} </b-link>
+          <b-link class="monneda-blue" :to="`/wallets/${item.id}`">
+            {{ item.name }}
+          </b-link>
         </li>
       </ul>
       </b-card>
@@ -40,53 +49,56 @@
 </template>
 
 <script>
+import client from '@/commons/client.api'
+
 export default {
   name: 'Profile',
+
   props: {
-    username: String,
-    description: String,
-    location: String,
-    name: String,
-    title: String,
-    picture: String,
-    wallets: Array
+    id: {
+      type: String,
+      required: true
+    }
   },
+
+  data: () => ({
+    profile: {}
+  }),
 
   computed: {
     normalizedLocation () {
-      return this.location === null ? 'Brasil' : this.location
+      return this.profile.location === null ? 'Brasil' : this.profile.location
     },
     normalizedDescription () {
-      const descr = this.description
+      const descr = this.profile.description
       if (descr === undefined || descr === null) { return '' }
       return descr.substring(0, 99)
     },
     normalizedName () {
-      const name = this.name
+      const name = this.profile.name
       return name !== undefined ? name.substring(0, 25) : ''
     },
     normalizedUsername () {
-      const username = this.username
+      const username = this.profile.username
       return username === undefined ? 'loading' : '@' + username.substring(0, 16)
     },
     normalizedTitle () {
-      const title = this.title
+      const title = this.profile.title
       return title !== undefined ? title.substring(0, 15) : ''
     },
     normalizedWallets () {
-      if (this.wallets !== undefined) {
+      if (this.profile.wallets !== undefined) {
         let i = 1
-        return this.wallets.map(w => ({ id: w, name: `Carteira ${i++}` }))
+        return this.profile.wallets.map(w => ({ id: w, name: `Carteira ${i++}` }))
       }
       return []
     }
   },
 
-  methods: {
-    debugBorders () {
-      const debug = false
-      return debug ? 'danger' : 'white'
-    }
+  async created () {
+    const profile = await client.users.fetchByUsername(this.id)
+    profile.wallets = await client.wallets.fetchByOwner(this.id)
+    this.profile = profile // Silly
   }
 }
 </script>
