@@ -3,11 +3,11 @@ import VueRouter from 'vue-router'
 
 import WalletView from '@/views/WalletView'
 import ProfileView from '@/views/ProfileView'
-import CallbackView from '@/views/CallbackView'
 import WalletCreateView from '@/views/WalletCreateView'
 
 import AuthGuard from './auth.guard'
 import CheckGuard from './check.guard'
+import CallbackGuard from './callback.guard'
 
 Vue.use(VueRouter)
 
@@ -20,7 +20,7 @@ const routes = [
   {
     path: '/callback',
     name: 'Callback',
-    component: CallbackView
+    beforeEnter: CallbackGuard
   },
   {
     path: '/profile',
