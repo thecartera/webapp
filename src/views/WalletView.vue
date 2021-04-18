@@ -1,10 +1,7 @@
 <template>
   <div>
-    <!-- without v-if the image/link could be undefined for a very short period -->
-    <!-- but with the v-if, the navbar takes tooooo long to load -->
-    <!-- v-if=!isAuthLoading  -->
-    <Navbar :userData="userData"/>
-    <Wallet v-bind="wallet"/>
+    <Navbar />
+    <Wallet :id="id" />
   </div>
 </template>
 
@@ -22,58 +19,9 @@ export default {
 
   props: {
     id: {
-      default: '',
-      type: String
-    },
-
-    userId: {
-      default: '',
-      type: String
+      type: String,
+      required: true
     }
-  },
-
-  data: () => ({
-    wallet: {},
-    userData: {}
-  }),
-
-  computed: {
-    isAuthLoading () {
-      return this.$auth === undefined ? true : this.$auth.loading
-    }
-  },
-
-  methods: {
-    async reloadNavbarWithUserImage () {
-      if (this.$auth.isAuthenticated) {
-        const accessToken = await this.$auth.getTokenSilently()
-        this.userData = await this.finance.fetchMyUser(accessToken)
-      }
-    },
-    async reloadPageWithNewId (newId) {
-      this.wallet = await this.finance.fetchWallet(newId)
-    }
-  },
-
-  watch: {
-    isAuthLoading: function (newVal, oldVal) { // watch if auth finished loading
-      this.reloadNavbarWithUserImage()
-    },
-    id: function (newVal, oldVal) { // watch if opening another wallet
-      this.reloadPageWithNewId(newVal)
-    }
-  },
-
-  async created () {
-    let accessToken
-    const auth = this.$auth.isAuthenticated
-    if (auth) {
-      // ONLY USED TO GET THE PROFILE IMAGE
-      accessToken = await this.$auth.getTokenSilently()
-      this.userData = await this.finance.fetchMyUser(accessToken)
-    }
-    // USED TO GET WALLET ASSETS
-    this.wallet = await this.finance.fetchWallet(this.id, accessToken)
   }
 }
 </script>

@@ -1,45 +1,54 @@
 <template>
   <b-card no-body style="border-color:white">
     <b-card-title style="padding: 1rem 0rem 0rem 2rem">
-
+      <!-- Title -->
       <b-row>
-        <h3 class="text-dark">
-          Informações da carteira
-        </h3>
+        <h3 class="text-dark"> Informações da carteira </h3>
       </b-row>
 
+      <!-- Creator -->
       <b-row>
-          <h6 class="text-dark"> Criador:
-            <b-link :to="{ path: `/users/${username}`}" class="monneda-blue">
-            @{{ username }}
-            </b-link>
-          </h6>
+        <h6 class="text-dark"> Criador:
+          <b-link :to="`/users/${user.nickname}`" class="monneda-blue">
+          @{{ user.nickname }}
+          </b-link>
+        </h6>
       </b-row>
 
+      <!-- Profit -->
       <b-row>
-          <h6 class="text-dark">
-            Retorno (30d):
-            <span :class="gainColor"> {{ normalizedGain }}% </span>
-          </h6>
+        <h6 class="text-dark">
+          Retorno (30d):
+          <span :class="gainColor"> {{ normalizedGain }}% </span>
+        </h6>
       </b-row>
 
+      <!-- Creation date -->
       <b-row>
-          <span class="text-dark" style="font-size: 1rem"> Criada em: {{ createdDate }} </span>
+        <span class="text-dark" style="font-size: 1rem">
+          Criada em: {{ createdDate }}
+        </span>
       </b-row>
 
+      <!-- Graph -->
       <b-row style="padding: 0.5rem 0rem">
-        <b-button size="sm" variant='outline-info' v-if="!buttonPressed" @click="pressButton"> Ver gráfico da composição </b-button>
-        <b-button size="sm" variant='outline-info' v-if="buttonPressed" @click="pressButton"> Fechar gráfico </b-button>
+        <b-button size="sm" variant='outline-info' v-if="buttonPressed" @click="pressButton">
+          Fechar gráfico
+        </b-button>
+        <b-button size="sm" variant='outline-info' v-else @click="pressButton">
+          Ver gráfico da composição
+        </b-button>
       </b-row>
 
+      <!-- Chart -->
       <b-row>
         <WalletChart style="max-width: 22rem" v-if="buttonPressed" :chartData="createGraph"/>
       </b-row>
-
     </b-card-title>
 
+    <!-- Table -->
     <b-card-body class="container px-0">
-      <b-table responsive='lg' hover :fields="fields" :items="assets" small borderless>
+      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small borderless>
         <!-- ASSET IMAGE -->
         <template #cell(imageLink)="data">
           <div class="container px-0" style="padding: 0.5em 0em">
@@ -81,6 +90,8 @@
 </template>
 
 <script>
+import client from '@/commons/client.api'
+
 import WalletChart from '@/components/WalletChart'
 
 export default {
@@ -91,11 +102,10 @@ export default {
   },
 
   props: {
-    assets: Array,
-    createdAt: String,
-    gain: Number,
-    id: String,
-    username: String
+    id: {
+      type: String,
+      required: true
+    }
   },
 
   data: () => ({
@@ -106,19 +116,24 @@ export default {
       { key: 'price', label: 'Preço', class: 'text-center', sortable: true },
       { key: 'gain', label: 'Ganho', class: 'text-center', sortable: true }
     ],
+    wallet: {},
     chartData: {},
     buttonPressed: false
   }),
 
   computed: {
+    user () {
+      return this.$store.state.auth.user
+    },
+
     createdDate () {
-      const unhandledDate = new Date(this.createdAt)
+      const unhandledDate = new Date(this.wallet.createdAt)
       return unhandledDate.toLocaleString('pt-BR').split(' ')[0]
     },
 
     normalizedGain () {
-      if (this.gain === undefined || this.gain === null) { return '' }
-      return this.gain.toFixed(2)
+      if (this.wallet.gain === undefined || this.wallet.gain === null) { return '' }
+      return this.wallet.gain.toFixed(2)
     },
 
     gainColor () {
@@ -127,7 +142,7 @@ export default {
 
     createGraph () {
       // IF CANT GENERATE
-      if (this.gain === undefined || this.gain === null) {
+      if (this.wallet.gain === undefined || this.wallet.gain === null) {
         return {
           labels: ['d', 'e'],
           datasets: [{
@@ -139,25 +154,21 @@ export default {
           }]
         }
       }
-
       // LOGIC TO GENERATE CHART/GRAPH
       // we don't want to display too many colors in the graph, so
       // we get all the assets tickers and weights and sort them, then
       // we only take into consideration the first 15 of them, and
       // we label the rest as 'outros ativos' (other assets)
-
       const ticketsAndWeights = {}
       let i
-      for (i = 0; i < this.assets.length; i++) {
-        const asset = this.assets[i]
+      for (i = 0; i < this.wallet.assets.length; i++) {
+        const asset = this.wallet.assets[i]
         ticketsAndWeights[asset.ticker] = asset.weight.toFixed(2)
       }
-
       const keyValues = []
       for (const key in ticketsAndWeights) {
         keyValues.push([key, ticketsAndWeights[key]])
       }
-
       const items = keyValues.sort(function compare (kv1, kv2) {
         // This comparison function has 3 return cases:
         // - Negative number: kv1 should be placed AFTER kv2
@@ -165,13 +176,11 @@ export default {
         // - Zero: they are equal, any order is ok between these 2 items
         return kv2[1] - kv1[1]
       })
-
       let lw = items
       const nColors = 17
       if (items.length > nColors) {
         lw = items.slice(0, nColors)
       }
-
       const labels = []
       const weights = []
       let missingWeight = 100.0
@@ -182,12 +191,10 @@ export default {
         weights.push(assetWeight)
         missingWeight -= assetWeight
       }
-
       if (items.length > nColors) {
         labels.push('Outros ativos')
         weights.push(missingWeight.toFixed(2))
       }
-
       return {
         labels: labels,
         datasets: [{
@@ -233,6 +240,10 @@ export default {
     pressButton () {
       this.buttonPressed = !this.buttonPressed
     }
+  },
+
+  async created () {
+    this.wallet = await client.wallets.fetchById(this.id)
   }
 }
 </script>
