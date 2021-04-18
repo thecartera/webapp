@@ -6,7 +6,7 @@ import 'mutationobserver-shim'
 import Vue from 'vue'
 
 // Plugins
-import './plugins/bootstrap-vue'
+import './plugins/bootstrap'
 
 // App itself
 import App from './App.vue'
