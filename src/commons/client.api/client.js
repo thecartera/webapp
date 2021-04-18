@@ -1,6 +1,6 @@
 
-// const BASE = 'https://monneda.herokuapp.com/'
-const BASE = 'http://localhost:8080/api'
+const BASE = 'https://monneda.herokuapp.com/api'
+// const BASE = 'http://localhost:8080/api'
 
 export default class {
   constructor (token) {
