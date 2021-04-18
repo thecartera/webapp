@@ -9,7 +9,7 @@
       <!-- Creator -->
       <b-row>
         <h6 class="text-dark"> Criador:
-          <b-link :to="`/users/${wallet.nickname}`" class="monneda-blue">
+          <b-link :to="`/users/${wallet.username}`" class="monneda-blue">
           @{{ wallet.username }}
           </b-link>
         </h6>
@@ -29,62 +29,56 @@
           Criada em: {{ createdDate }}
         </span>
       </b-row>
-
-      <!-- Graph -->
-      <b-row style="padding: 0.5rem 0rem">
-        <b-button size="sm" variant='outline-info' v-if="buttonPressed" @click="pressButton">
-          Fechar gráfico
-        </b-button>
-        <b-button size="sm" variant='outline-info' v-else @click="pressButton">
-          Ver gráfico da composição
-        </b-button>
-      </b-row>
-
-      <!-- Chart -->
-      <b-row>
-        <WalletChart style="max-width: 22rem" v-if="buttonPressed" :assets="wallet.assets"/>
-      </b-row>
     </b-card-title>
 
-    <!-- Table -->
     <b-card-body class="container px-0">
-      <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small borderless>
-        <!-- ASSET IMAGE -->
-        <template #cell(imageLink)="data">
-          <div class="container px-0" style="padding: 0.5em 0em">
-          <b-avatar rounded :src="getImageLink(data)" size="2.2em" icon="wallet2" variant="light" />
-          </div>
-        </template>
+      <b-tabs>
+        <!-- Table -->
+        <b-tab title="Tabela">
+          <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small borderless>
+            <!-- ASSET IMAGE -->
+            <template #cell(imageLink)="data">
+              <div class="container px-0" style="padding: 0.5em 0em">
+              <b-avatar rounded :src="getImageLink(data)" size="2.2em" icon="wallet2" variant="light" />
+              </div>
+            </template>
 
-        <!-- ASSET INDEX, NAME, TICKER -->
-        <template #cell(nameticker)="data">
-          <span class="cell-name"> {{ data.index + 1 }}. </span>
-          <span class="cell-name"> {{ data.item.name }} </span>
-          <br>
-          <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
-        </template>
+            <!-- ASSET INDEX, NAME, TICKER -->
+            <template #cell(nameticker)="data">
+              <span class="cell-name"> {{ data.index + 1 }}. </span>
+              <span class="cell-name"> {{ data.item.name }} </span>
+              <br>
+              <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
+            </template>
 
-        <!-- ASSET WEIGHT IN PORTFOLIO -->
-        <template #cell(weight)="data">
-          <span class="cell-name"> Peso </span>
-          <br>
-          <span class="monneda-blue cell-value"> {{ data.value.toFixed(1) }}% </span>
-        </template>
+            <!-- ASSET WEIGHT IN PORTFOLIO -->
+            <template #cell(weight)="data">
+              <span class="cell-name"> Peso </span>
+              <br>
+              <span class="monneda-blue cell-value"> {{ data.value.toFixed(1) }}% </span>
+            </template>
 
-        <!-- ASSET CURRENT PRICE -->
-        <template #cell(price)="data">
-          <span class="cell-name">Preço (R$)</span>
-          <br>
-          <span class="monneda-blue cell-value">{{ data.value.toFixed(2) }}</span>
-        </template>
+            <!-- ASSET CURRENT PRICE -->
+            <template #cell(price)="data">
+              <span class="cell-name">Preço (R$)</span>
+              <br>
+              <span class="monneda-blue cell-value">{{ data.value.toFixed(2) }}</span>
+            </template>
 
-        <!-- ASSET RETURNS -->
-        <template #cell(gain)="data">
-          <span class="cell-name"> Ganho 30d </span>
-          <br>
-          <span :class="positive(data.value)" class="cell-value"> {{ data.value.toFixed(2) }}% </span>
-        </template>
-      </b-table>
+            <!-- ASSET RETURNS -->
+            <template #cell(gain)="data">
+              <span class="cell-name"> Ganho 30d </span>
+              <br>
+              <span :class="positive(data.value)" class="cell-value"> {{ data.value.toFixed(2) }}% </span>
+            </template>
+          </b-table>
+        </b-tab>
+
+        <!-- Chart -->
+        <b-tab title="Gráfico" lazy>
+          <WalletChart style="max-width: 22rem" :assets="wallet.assets"/>
+        </b-tab>
+      </b-tabs>
     </b-card-body>
   </b-card>
 </template>
@@ -116,8 +110,7 @@ export default {
       { key: 'price', label: 'Preço', class: 'text-center', sortable: true },
       { key: 'gain', label: 'Ganho', class: 'text-center', sortable: true }
     ],
-    wallet: {},
-    buttonPressed: false
+    wallet: {}
   }),
 
   computed: {
@@ -144,10 +137,6 @@ export default {
     getImageLink (data) {
       const code = data.item.ticker.toUpperCase()
       return `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${code}.png`
-    },
-
-    pressButton () {
-      this.buttonPressed = !this.buttonPressed
     }
   },
 
@@ -156,8 +145,8 @@ export default {
   }
 }
 </script>
-<style scoped>
 
+<style scoped>
 .cell-value {
   font-family: 'Courier New';
   font-size: 1.05rem;
@@ -175,5 +164,4 @@ export default {
 .text-padding {
   padding: 0rem 0.2rem;
 }
-
 </style>
