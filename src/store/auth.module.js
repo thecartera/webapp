@@ -1,4 +1,5 @@
 import auth0 from '@/commons/auth.api'
+import client from '@/commons/client.api'
 
 import { LOGIN, CHECK_AUTH } from './actions.type'
 import { SET_USER, SET_AUTH, SET_ERROR } from './mutations.type'
@@ -25,13 +26,17 @@ const actions = {
   async [CHECK_AUTH] (ctx) {
     try {
       // Try logging in
-      await auth0.getTokenSilently()
-      const user = await auth0.getUser()
+      const token = await auth0.getTokenSilently()
+      client.setToken(token)
+      const user = await client.users.fetchMyUser()
+
+      // Update state
       ctx.commit(SET_ERROR, {})
       ctx.commit(SET_USER, user)
       ctx.commit(SET_AUTH, true)
     } catch (e) {
       ctx.commit(SET_ERROR, e)
+      ctx.commit(SET_USER, {})
       ctx.commit(SET_AUTH, false)
     }
   },
