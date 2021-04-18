@@ -1,10 +1,11 @@
 <template>
   <b-navbar class="navbarsize" sticky toggleable="lg" type="dark" variant="info">
-
+    <!-- Homme button -->
     <b-navbar-brand to="/wallets">
       <img src="@/assets/logo.png" style="widht: 2rem; height: 2rem" alt="Monneda">
     </b-navbar-brand>
 
+    <!-- Create wallet button -->
     <b-navbar-nav small>
       <b-nav-item to="/wallets">
         <b-button pill size="sm" variant="info">
@@ -16,8 +17,9 @@
       </b-nav-item>
     </b-navbar-nav>
 
+    <!-- Login/logout buttons -->
     <b-navbar-nav small class="ml-auto">
-      <b-nav-item to="/login">
+      <b-nav-item>
         <!-- show logout when authenticated -->
         <b-button pill size="sm" variant="outline-light" v-if="auth" @click="logout"> Sair </b-button>
         <!-- show login when not authenticated -->
@@ -25,6 +27,7 @@
       </b-nav-item>
     </b-navbar-nav>
 
+    <!-- Search bar -->
     <b-navbar-nav small class="ml-auto">
       <b-nav-form @keyup.enter.prevent="search">
         <b-input-group size="sm">
@@ -39,12 +42,12 @@
       </b-nav-form>
      </b-navbar-nav>
 
+    <!-- Profile button -->
     <b-navbar-nav small class="ml-auto">
       <b-nav-item v-if="auth" :to="`/users/${this.user.nickname}`">
-        <b-avatar :src=user.picture style="width: 2rem; height: 2rem"></b-avatar>
+        <b-avatar :src="user.picture" style="width: 2rem; height: 2rem"></b-avatar>
       </b-nav-item>
     </b-navbar-nav>
-
   </b-navbar>
 </template>
 

@@ -1,8 +1,8 @@
 import auth0 from '@/commons/auth.api'
 import client from '@/commons/client.api'
 
-import { LOGIN, CHECK_AUTH } from './actions.type'
-import { SET_USER, SET_AUTH, SET_ERROR } from './mutations.type'
+import { LOGIN, CHECK_AUTH, LOGOUT } from './actions.type'
+import { SET_USER, SET_AUTH, SET_ERROR, PURGE_AUTH } from './mutations.type'
 
 const state = {
   user: {},
@@ -19,6 +19,11 @@ const mutations = {
   },
   [SET_ERROR] (state, error) {
     state.error = error
+  },
+  [PURGE_AUTH] (state) {
+    state.user = {}
+    state.error = {}
+    state.auth = false
   }
 }
 
@@ -42,6 +47,11 @@ const actions = {
   },
   async [LOGIN] (ctx, state = {}) {
     await auth0.loginWithRedirect({ appState: state })
+  },
+  async [LOGOUT] (ctx) {
+    console.log('LOGOUT STORE')
+    ctx.commit(PURGE_AUTH)
+    await auth0.logout()
   }
 }
 
