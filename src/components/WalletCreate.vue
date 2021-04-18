@@ -28,19 +28,6 @@
         </h5>
       </div>
       <WalletAddTicker @submit="addTicker" />
-
-      <!-- Alert -->
-      <div style="padding: 0.5rem">
-        <b-alert
-          variant="danger"
-          dismissible
-          fade
-          :show="showNonexistentTickerAlert"
-          @dismissed="showNonexistentTickerAlert=false"
-        >
-          Código "{{ nonExistentTicker }}" não encontrado.
-        </b-alert>
-      </div>
     </b-card-body>
 
     <!-- Table -->

@@ -2,9 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import WalletView from '@/views/WalletView'
-import WalletCreate from '@/views/WalletCreate'
-import Profile from '@/views/Profile'
-import { authGuard } from '../auth/authGuard'
+import ProfileView from '@/views/ProfileView'
+import CallbackView from '@/views/CallbackView'
+import WalletCreateView from '@/views/WalletCreateView'
+
+import AuthGuard from './auth.guard'
+import CheckGuard from './check.guard'
 
 Vue.use(VueRouter)
 
@@ -15,16 +18,21 @@ const routes = [
     redirect: '/wallets'
   },
   {
+    path: '/callback',
+    name: 'Callback',
+    component: CallbackView
+  },
+  {
     path: '/profile',
     name: 'profile',
-    component: Profile,
-    beforeEnter: authGuard
+    component: ProfileView,
+    beforeEnter: AuthGuard
   },
   {
     path: '/wallets',
     name: 'wallets',
-    component: WalletCreate,
-    beforeEnter: authGuard
+    component: WalletCreateView,
+    beforeEnter: AuthGuard
   },
   {
     path: '/wallets/:id',
@@ -35,13 +43,16 @@ const routes = [
   {
     path: '/users/:id',
     name: 'user',
-    component: Profile,
-    props: true
+    component: ProfileView,
+    props: true,
+    beforeEnter: AuthGuard
   }
 ]
 
 const router = new VueRouter({
   routes
 })
+
+router.beforeEach(CheckGuard)
 
 export default router
