@@ -2,6 +2,7 @@
   <b-card no-body style="border-color:white">
     <b-card-body class="container px-0" body-bg-variant="light">
       <b-row>
+        <!-- New wallet text -->
         <b-col>
           <div class="row justify-content-center">
           <h3 class="text-dark" style="padding: 0rem 0rem">
@@ -9,18 +10,26 @@
           </h3>
           </div>
         </b-col>
+
+        <!-- Save button -->
         <b-col>
           <div class="row justify-content-center">
-            <b-button @click="saveWallet" variant="outline-secondary"> Salvar </b-button>
+            <b-button @click="saveWallet" variant="outline-secondary">
+              Salvar
+            </b-button>
           </div>
         </b-col>
       </b-row>
+
+      <!-- Add asset -->
       <div class="row justify-content-center">
         <h5 style="padding: 1.5rem 0rem 0rem 0rem">
           Adicionar ativo
         </h5>
       </div>
       <WalletAddTicker @submit="addTicker" />
+
+      <!-- Alert -->
       <div style="padding: 0.5rem">
         <b-alert
           variant="danger"
@@ -34,12 +43,25 @@
       </div>
     </b-card-body>
 
+    <!-- Table -->
     <b-card-footer class="container px-0" footer-bg-variant="white">
-      <b-table :stacked="isStacked" responsive='lg' :fields="fields" hover :items="assets" small>
+      <b-table
+        :fields="fields"
+        :items="assets"
+        responsive='lg'
+        hover
+        small
+      >
         <!-- ASSET IMAGE -->
         <template #cell(image)="data">
           <div class="container px-0" style="padding: 0.5em 0em">
-          <b-avatar rounded :src="data.item.imageLink" size="2.2em" icon="wallet2" variant="light"></b-avatar>
+          <b-avatar
+            rounded
+            :src="data.item.imageLink"
+            size="2.2em"
+            icon="wallet2"
+            variant="light"
+          />
           </div>
         </template>
 
@@ -55,37 +77,42 @@
 
         <!-- ASSET QUANTITY -->
         <template #cell(amount)="data">
-          <span class="cell-name">Qtd.</span>
+          <span class="cell-name"> Qtd. </span>
           <br>
           <span class="light-blue cell-value"> {{ data.value }} </span>
         </template>
 
         <!-- ASSET CURRENT PRICE -->
         <template #cell(formattedPrice)="data">
-          <span class="cell-name">Preço (R$)</span>
+          <span class="cell-name"> Preço (R$) </span>
           <br>
           <span class="light-blue cell-value"> {{ data.value }} </span>
         </template>
 
         <!-- ASSET RETURN -->
         <template #cell(formattedGain)="data">
-          <span class="cell-name">Lucro 30d</span>
+          <span class="cell-name"> Lucro 30d </span>
           <br>
-          <span :class="positive(data.value)" class="cell-value"> {{ round(data.value) }}% </span>
+          <span :class="positive(data.value)" class="cell-value">
+            {{ round(data.value) }}%
+          </span>
         </template>
 
         <!-- ASSET REMOVE -->
         <template #cell(remove)="data">
           <p></p>
-          <b-icon icon="x" scale="1.3" @click="deleteRow(data.index)" variant="dark"> {{ data }} </b-icon>
+          <b-icon icon="x" scale="1.3" @click="deleteRow(data.index)" variant="dark">
+            {{ data }}
+          </b-icon>
         </template>
-
       </b-table>
     </b-card-footer>
   </b-card>
 </template>
 
 <script>
+import client from '@/commons/client.api'
+
 import WalletAddTicker from '@/components/WalletAddTicker'
 
 export default {
@@ -104,10 +131,7 @@ export default {
       { key: 'formattedGain', label: 'Lucro', class: 'text-center' },
       { key: 'remove', label: '', class: 'text-center' }
     ],
-    assets: [],
-    isStacked: true,
-    showNonexistentTickerAlert: false,
-    nonexistentTicker: ''
+    assets: []
   }),
 
   computed: {
@@ -119,38 +143,27 @@ export default {
   },
 
   methods: {
-    async saveWallet (e) {
-      let accessToken
-      if (this.$auth.isAuthenticated) {
-        accessToken = await this.$auth.getTokenSilently()
-      }
-      const wallet = await this.finance.postWallet(this.wallet, accessToken)
+    async saveWallet () {
+      const wallet = await client.wallets.postNewWallet(this.wallet)
       this.$router.push(`/wallets/${wallet.id}`)
     },
 
     async addTicker ({ ticker, amount }) {
-      let accessToken
-      if (this.$auth.isAuthenticated) {
-        accessToken = await this.$auth.getTokenSilently()
+      const data = await client.assets.fetchByTicker(ticker)
+
+      const code = data.ticker.toUpperCase()
+      const url = `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${code}.png`
+
+      const asset = {
+        ticker: data.ticker,
+        name: data.name,
+        amount: amount,
+        formattedPrice: this.round(data.price),
+        formattedGain: this.round(data.gain),
+        imageLink: url
       }
 
-      let response
-      try {
-        response = await this.finance.fetchAsset(ticker, accessToken)
-      } catch (e) {
-        this.nonExistentTicker = ticker
-        this.showNonexistentTickerAlert = true
-        return
-      }
-      const { price, gain, name } = response
-
-      const formattedPrice = this.round(price)
-      const formattedGain = this.round(gain)
-      const code = ticker.toUpperCase()
-      const imageLink = `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${code}.png`
-      this.assets.push({ ticker, name, formattedPrice, formattedGain, amount, imageLink })
-      // workaround to make header not show when no asset added yet.
-      this.isStacked = false
+      this.assets.push(asset)
     },
 
     deleteRow (i) {
@@ -160,7 +173,7 @@ export default {
     round (val, places = 2) {
       const decimals = Math.pow(10, places)
       const rounded = Math.round(val * decimals) / decimals
-      return rounded.toFixed(2)
+      return rounded.toFixed(places)
     },
 
     positive (value) {
