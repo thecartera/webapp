@@ -71,7 +71,8 @@ export default {
 
   methods: {
     login () {
-      this.$store.dispatch(LOGIN)
+      const state = { to: this.$router.currentRoute.path }
+      this.$store.dispatch(LOGIN, state)
     },
     logout () {
       this.$store.dispatch(LOGOUT)
