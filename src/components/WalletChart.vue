@@ -8,8 +8,7 @@ export default {
     assets: {
       type: Array,
       default: () => []
-    },
-    norm: Array
+    }
   },
 
   data: () => ({
