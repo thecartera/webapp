@@ -140,6 +140,12 @@ export default {
     }
   },
 
+  watch: {
+    id: async function (newVal) { // watch if opening another wallet
+      this.wallet = await client.wallets.fetchById(newVal)
+    }
+  },
+
   async created () {
     this.wallet = await client.wallets.fetchById(this.id)
   }
