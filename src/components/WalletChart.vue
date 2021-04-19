@@ -95,7 +95,10 @@ export default {
       })
       const tickers = []
       const weights = []
-      const maxAssets = 20
+      var maxAssets = 20
+      if (myAssets.length < 20) {
+        maxAssets = myAssets.length
+      }
       var totalWeight = 0.0
       for (i = 0; i < maxAssets; i++) {
         const ticker = myAssets[i][0]
