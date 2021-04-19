@@ -92,9 +92,21 @@ export default {
     }
   },
 
+  methods: {
+    async fetchProfileById (id) {
+      this.profile = await client.users.fetchByUsername(id)
+      this.wallets = await client.wallets.fetchByOwner(id)
+    }
+  },
+
+  watch: {
+    id: async function (newVal) { // watch if opening another user profile
+      await this.fetchProfileById(newVal)
+    }
+  },
+
   async created () {
-    this.profile = await client.users.fetchByUsername(this.id)
-    this.wallets = await client.wallets.fetchByOwner(this.id)
+    await this.fetchProfileById(this.id)
   }
 }
 </script>
