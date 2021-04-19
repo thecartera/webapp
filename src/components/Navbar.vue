@@ -1,52 +1,51 @@
 <template>
   <b-navbar class="navbarsize" sticky toggleable="lg" type="dark" variant="info">
     <!-- Homme button -->
-    <b-navbar-brand to="/wallets">
-      <img src="@/assets/logo.png" style="widht: 2rem; height: 2rem" alt="Monneda">
+    <b-navbar-brand to="/">
+      <img src="@/assets/logo40x40.png" alt="Monneda">
     </b-navbar-brand>
 
-    <!-- Create wallet button -->
-    <b-navbar-nav small>
-      <b-nav-item to="/wallets">
-        <b-button pill size="sm" variant="info">
-          <b-iconstack>
-            <b-icon variant="light" icon="wallet2" shift-h="-2" shift-v="2" />
-            <b-icon variant="light" icon="plus" shift-v="1" shift-h="-2" />
-          </b-iconstack>
-        </b-button>
-      </b-nav-item>
-    </b-navbar-nav>
+    <b-navbar-toggle target="collapse" />
+    <b-collapse id="collpase" is-nav>
+      <!-- Search bar -->
+      <b-navbar-nav>
+        <b-input-group prepend="@">
+          <b-form-input
+            class="mr-sm-2"
+            placeholder="Username"
+            @keypress.enter.prevent="search"
+            v-model="searchBarValue">
+          </b-form-input>
+        </b-input-group>
+      </b-navbar-nav>
 
-    <!-- Login/logout buttons -->
-    <b-navbar-nav small class="ml-auto">
-      <b-nav-item>
-        <!-- show logout when authenticated -->
-        <b-button pill size="sm" variant="outline-light" v-if="auth" @click="logout"> Sair </b-button>
-        <!-- show login when not authenticated -->
-        <b-button pill size="sm" variant="outline-light" v-else @click="login"> Entrar </b-button>
-      </b-nav-item>
-    </b-navbar-nav>
+      <b-navbar-nav class="ml-auto">
+        <!-- Create wallet button -->
+        <b-nav-item to="/wallets">
+          <b-button pill size="sm" variant="info">
+            <b-iconstack>
+              <b-icon variant="light" icon="wallet2" shift-h="-2" shift-v="2" />
+              <b-icon variant="light" icon="plus" shift-v="1" shift-h="-2" />
+            </b-iconstack>
+          </b-button>
+        </b-nav-item>
 
-    <!-- Search bar -->
-    <b-navbar-nav small class="ml-auto">
-      <b-input-group size="sm">
-        <b-form-input
-          size="sm"
-          class="mr-sm-2"
-          style="width:10rem"
-          placeholder="@user"
-          @keypress.enter.prevent="search"
-          v-model="searchBarValue">
-        </b-form-input>
-      </b-input-group>
-     </b-navbar-nav>
+        <!-- Login/logout buttons -->
+        <b-nav-item>
+          <b-button pill size="sm" variant="outline-light" v-if="auth" @click="logout">
+            Sair
+          </b-button>
+          <b-button pill size="sm" variant="outline-light" v-else @click="login">
+            Entrar
+          </b-button>
+        </b-nav-item>
 
-    <!-- Profile button -->
-    <b-navbar-nav small class="ml-auto">
-      <b-nav-item v-if="auth" :to="`/users/${this.user.nickname}`">
-        <b-avatar :src="user.picture" style="width: 2rem; height: 2rem"></b-avatar>
-      </b-nav-item>
-    </b-navbar-nav>
+        <!-- Profile button -->
+        <b-nav-item v-if="auth" :to="`/users/${this.user.nickname}`">
+          <b-avatar :src="user.picture" style="width: 2rem; height: 2rem"></b-avatar>
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
   </b-navbar>
 </template>
 
@@ -83,13 +82,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-.navbarsize {
-  min-height: 2.6rem;
-  max-height: 2.6rem;
-  padding: 0rem 0.25rem 0.2rem 0.25rem;
-}
-
-</style>
