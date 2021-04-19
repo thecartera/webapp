@@ -76,7 +76,7 @@
 
         <!-- Chart -->
         <b-tab title="Gráfico" lazy>
-          <WalletChart style="max-width: 22rem" :assets="wallet.assets"/>
+          <WalletChart style="margin-left: auto; margin-right: auto; max-width: 30rem" :assets="wallet.assets"/>
         </b-tab>
       </b-tabs>
     </b-card-body>
