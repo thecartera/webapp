@@ -196,8 +196,3 @@ npm-debug.log
 yarn-error.log
 
 # End of https://www.toptal.com/developers/gitignore/api/node,vue,vuejs,git,linux,macos
-
-### Auth0 ###
-# This configuration file contains non-sensitive values relating to your Auth0 app.
-# However, we recommend not committing this file into source control.
-auth_config.json

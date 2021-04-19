@@ -83,7 +83,7 @@ export default {
 
     sortData () {
       const myAssets = []
-      for (var i = 0; i < this.assets.length; i++) {
+      for (let i = 0; i < this.assets.length; i++) {
         myAssets.push([this.assets[i].ticker, this.assets[i].weight])
       }
       myAssets.sort(function compare (kv1, kv2) {
@@ -95,12 +95,12 @@ export default {
       })
       const tickers = []
       const weights = []
-      var maxAssets = 20
+      let maxAssets = 20
       if (myAssets.length < 20) {
         maxAssets = myAssets.length
       }
-      var totalWeight = 0.0
-      for (i = 0; i < maxAssets; i++) {
+      let totalWeight = 0.0
+      for (let i = 0; i < maxAssets; i++) {
         const ticker = myAssets[i][0]
         tickers.push(ticker)
         const weight = myAssets[i][1]
