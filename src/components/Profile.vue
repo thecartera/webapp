@@ -34,9 +34,10 @@
     <!-- Wallet list -->
     <b-row>
       <b-card border-variant="white" align="left">
-      <b-card-title> Carteiras: </b-card-title>
+      <b-card-title id="popover-button-sync"> Carteiras: </b-card-title>
       <ul>
         <li v-for="item in normalizedWallets" :key="item.id">
+          <div>
           <b-link class="monneda-blue" :to="`/wallets/${item.id}`">
             {{ item.name }}
           </b-link>
@@ -45,10 +46,18 @@
             scale="1.3"
             variant="dark"
             v-if="id === user.username"
-            @click="deleteWallet(item.id)"
+            @click="showPopup(item.id, item.name)"
           >
           </b-icon>
+          </div>
         </li>
+        <b-popover placement="rightbottom" :show.sync="show" target="popover-button-sync" title="Excluir carteira">
+          Você deseja excluir: <strong>{{ selectedWalletName }}</strong>? <br><br>
+          <div class="row justify-content-around">
+            <b-button style="width:40%" variant="danger" class="px-1" @click="deleteWallet(selectedWalletId)">Excluir</b-button>
+            <b-button style="width:40%" variant="secondary" class="px-1" @click="show = false">Cancelar</b-button>
+          </div>
+        </b-popover>
       </ul>
       </b-card>
     </b-row>
@@ -72,7 +81,9 @@ export default {
   data: () => ({
     profile: {},
     wallets: [],
-    showNonexistentTickerAlert: true
+    show: false,
+    selectedWalletId: '',
+    selectedWalletName: ''
   }),
 
   computed: {
@@ -113,6 +124,7 @@ export default {
       this.wallets = await client.wallets.fetchByOwner(id)
     },
     async deleteWallet (id) {
+      this.show = false
       try {
         const index = this.wallets.indexOf(id)
         this.wallets.splice(index, 1)
@@ -120,6 +132,11 @@ export default {
       } catch (e) {
         // TODO: alert that it did not work
       }
+    },
+    showPopup (id, name) {
+      this.show = true
+      this.selectedWalletId = id
+      this.selectedWalletName = name
     }
   },
 
