@@ -5,21 +5,21 @@
       <img src="@/assets/logo40x40.png" alt="Monneda">
     </b-navbar-brand>
 
+    <!-- Search bar -->
+    <b-navbar-nav>
+      <b-input-group>
+        <b-form-input
+          class="mr-sm-2"
+          placeholder="Username"
+          @keypress.enter.prevent="search"
+          v-model="searchBarValue"
+          size="sm">
+        </b-form-input>
+      </b-input-group>
+    </b-navbar-nav>
+
     <b-navbar-toggle target="collapse" />
     <b-collapse id="collapse" is-nav>
-
-      <!-- Search bar -->
-      <b-navbar-nav>
-        <b-input-group>
-          <b-form-input
-            class="mr-sm-2"
-            placeholder="Username"
-            @keypress.enter.prevent="search"
-            v-model="searchBarValue"
-            size="sm">
-          </b-form-input>
-        </b-input-group>
-      </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
         <!-- Create wallet button -->
