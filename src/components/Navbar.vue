@@ -7,7 +7,7 @@
 
     <!-- Search bar -->
     <b-navbar-nav>
-      <b-input-group>
+      <b-input-group size="sm" prepend="@">
         <b-form-input
           class="mr-sm-2"
           placeholder="Username"
