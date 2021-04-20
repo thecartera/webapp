@@ -40,6 +40,14 @@
           <b-link class="monneda-blue" :to="`/wallets/${item.id}`">
             {{ item.name }}
           </b-link>
+          <b-icon
+            icon="x"
+            scale="1.3"
+            variant="dark"
+            v-if="id === user.username"
+            @click="deleteWallet(item.id)"
+          >
+          </b-icon>
         </li>
       </ul>
       </b-card>
@@ -63,7 +71,8 @@ export default {
 
   data: () => ({
     profile: {},
-    wallets: []
+    wallets: [],
+    showNonexistentTickerAlert: true
   }),
 
   computed: {
@@ -89,6 +98,12 @@ export default {
     },
     normalizedWallets () {
       return this.wallets.map((w, i) => ({ id: w, name: `Carteira ${i + 1}` }))
+    },
+    user () {
+      return this.$store.state.auth.user
+    },
+    auth () {
+      return this.$store.state.auth.auth
     }
   },
 
@@ -96,6 +111,15 @@ export default {
     async fetchProfileById (id) {
       this.profile = await client.users.fetchByUsername(id)
       this.wallets = await client.wallets.fetchByOwner(id)
+    },
+    async deleteWallet (id) {
+      try {
+        const index = this.wallets.indexOf(id)
+        this.wallets.splice(index, 1)
+        await client.wallets.deleteById(id)
+      } catch (e) {
+        // TODO: alert that it did not work
+      }
     }
   },
 
