@@ -31,11 +31,11 @@ export default {
         }
       },
       plugins: {
-        colorSchemes: {
+        colorschemes: {
           // Choose one from:
           //    https://nagix.github.io/chartjs-plugin-colorschemes/colorchart.html
           // also comment the line 'backgroundColor: this.customColors,' on this.data.datasets
-          scheme: 'tableau.HueCircle19'
+          scheme: 'tableau.Tableau20'
         }
       }
     }
@@ -48,7 +48,7 @@ export default {
         labels: myData[0],
         datasets: [{
           data: myData[1],
-          backgroundColor: this.customColors,
+          // backgroundColor: this.customColors,
           borderWidth: 1
         }]
       }
@@ -95,8 +95,8 @@ export default {
       })
       const tickers = []
       const weights = []
-      let maxAssets = 20
-      if (myAssets.length < 20) {
+      let maxAssets = 50
+      if (myAssets.length < maxAssets) {
         maxAssets = myAssets.length
       }
       let totalWeight = 0.0
@@ -107,7 +107,7 @@ export default {
         weights.push(weight.toFixed(2))
         totalWeight += weight
       }
-      if (myAssets.length > 20) {
+      if (myAssets.length > maxAssets) {
         tickers.push('Outros')
         const missingWeight = 100.0 - totalWeight
         weights.push(missingWeight.toFixed(2))
