@@ -16,4 +16,8 @@ export default class extends Client {
     }
     return this.request('POST', 'wallets', options)
   }
+
+  deleteById (id) {
+    return this.request('DELETE', `wallets/${id}`)
+  }
 }
