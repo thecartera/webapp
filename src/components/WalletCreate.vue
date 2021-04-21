@@ -1,33 +1,35 @@
 <template>
   <b-card no-body style="border-color:white">
     <b-card-body class="container px-0" body-bg-variant="light">
-      <b-row>
-        <!-- New wallet text -->
-        <b-col>
-          <div class="row justify-content-center">
-          <h3 class="text-dark" style="padding: 0rem 0rem">
-            Nova carteira
-          </h3>
-          </div>
-        </b-col>
+      <b-container>
+        <b-row style="padding: 0 0 1rem">
+          <!-- New wallet text -->
+          <b-col cols="7">
+            <b-form-input
+              v-model="walletName"
+              :state="walletNameState"
+              placeholder="Nome da carteira"
+            />
+          </b-col>
 
-        <!-- Save button -->
-        <b-col>
-          <div class="row justify-content-center">
+          <!-- Save button -->
+          <b-col cols="5" style="text-align: center">
             <b-button @click="saveWallet" variant="outline-secondary">
               Salvar
             </b-button>
-          </div>
-        </b-col>
-      </b-row>
+          </b-col>
+        </b-row>
+      </b-container>
 
-      <!-- Add asset -->
-      <div class="row justify-content-center">
-        <h5 style="padding: 1.5rem 0rem 0rem 0rem">
-          Adicionar ativo
-        </h5>
-      </div>
-      <WalletAddTicker @submit="addTicker" />
+      <b-tabs>
+        <b-tab title="Composição">
+          <!-- Add asset -->
+          <WalletAddTicker @submit="addTicker" />
+        </b-tab>
+        <b-tab title="Descrição">
+          <WalletAddDescription @update="addDescription($event)" />
+        </b-tab>
+      </b-tabs>
     </b-card-body>
 
     <!-- Table -->
@@ -101,12 +103,14 @@
 import client from '@/commons/client.api'
 
 import WalletAddTicker from '@/components/WalletAddTicker'
+import WalletAddDescription from '@/components/WalletAddDescription'
 
 export default {
   name: 'WalletCreate',
 
   components: {
-    WalletAddTicker
+    WalletAddTicker,
+    WalletAddDescription
   },
 
   data: () => ({
@@ -118,14 +122,22 @@ export default {
       { key: 'formattedGain', label: 'Lucro', class: 'text-center' },
       { key: 'remove', label: '', class: 'text-center' }
     ],
-    assets: []
+    assets: [],
+    walletName: '',
+    walletDescription: ''
   }),
 
   computed: {
     wallet () {
       return {
+        name: this.walletName,
+        description: this.walletDescription,
         assets: this.assets.map(({ ticker, amount }) => ({ ticker, amount }))
       }
+    },
+
+    walletNameState () {
+      return this.walletName.length > 2 && this.walletName.length < 41
     }
   },
 
@@ -162,6 +174,10 @@ export default {
         autoHideDelay: 3000,
         variant: 'danger'
       })
+    },
+
+    async addDescription (evt) {
+      this.walletDescription = evt
     },
 
     deleteRow (i) {
