@@ -34,9 +34,9 @@
     <!-- Wallet list -->
     <b-row>
       <b-card border-variant="white" align="left">
-      <b-card-title id="popover-button-sync"> Carteiras: </b-card-title>
+      <b-card-title> Carteiras: </b-card-title>
       <ul>
-        <li v-for="item in normalizedWallets" :key="item.id">
+        <li v-for="item in normalizedWallets" id="popover-button-sync" :key="item.id">
           <div>
           <b-link class="monneda-blue" :to="`/wallets/${item.id}`">
             {{ item.name }}
@@ -108,7 +108,7 @@ export default {
       return title !== undefined ? title.substring(0, 15) : ''
     },
     normalizedWallets () {
-      return this.wallets.map((w, i) => ({ id: w, name: `Carteira ${i + 1}` }))
+      return this.wallets.map((w, i) => ({ id: w.id, name: w.name }))
     },
     user () {
       return this.$store.state.auth.user

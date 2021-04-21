@@ -6,6 +6,12 @@
         <h3 class="text-dark"> Informações da carteira </h3>
       </b-row>
 
+      <!-- Name -->
+      <b-row>
+        <h5 class="text-dark"> {{wallet.name}}
+        </h5>
+      </b-row>
+
       <!-- Creator -->
       <b-row>
         <h6 class="text-dark"> Criador:
@@ -41,6 +47,16 @@
         <!-- Chart -->
         <b-tab title="Gráfico" lazy>
           <WalletChart style="margin-left: auto; margin-right: auto; max-width: 30rem" :assets="wallet.assets"/>
+        </b-tab>
+
+        <!-- Description -->
+        <b-tab v-if="wallet.description" title="Descrição">
+          <b-container>
+            <b-form-textarea
+              id="textarea-plaintext"
+              plaintext :value="wallet.description"
+            />
+          </b-container>
         </b-tab>
       </b-tabs>
     </b-card-body>

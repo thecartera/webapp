@@ -1,30 +1,39 @@
 <template>
-  <b-form @keyup.enter.prevent="submit">
-    <b-row style="justify-content:center">
-      <div style="padding: 0rem 0.4rem">
-      <b-form-input
-        v-model="ticker"
-        placeholder="Código"
-        style="width:7rem"
-        @keypress="only8chars($event)"
-      />
-      </div>
-      <b-form-input
-        id="input-live"
-        v-model="amount"
-        @keypress="onlyNumber($event)"
-        aria-describedby="input-live-help input-live-feedback"
-        placeholder="Quantidade"
-        trim
-        style="width:7rem"
-      />
-      <div style="padding: 0rem 0.4rem">
-        <b-button @click="submit" variant="secondary">
-          <b-icon icon="plus" variant="light"></b-icon>
-        </b-button>
-      </div>
-    </b-row>
-  </b-form>
+  <!-- Add asset -->
+  <div>
+    <div class="row justify-content-center">
+      <h5 style="padding: 1.5rem 0rem 0rem 0rem">
+        Adicionar ativo
+      </h5>
+    </div>
+    <b-form @keyup.enter.prevent="submit">
+      <b-row style="justify-content:center">
+        <div style="padding: 0rem 0.4rem">
+          <b-form-input
+            v-model="ticker"
+            placeholder="Código"
+            style="width:7rem"
+            @keypress="only8chars($event)"
+          />
+        </div>
+        <b-form-input
+          id="input-live"
+          v-model="amount"
+          @keypress="onlyNumber($event)"
+          aria-describedby="input-live-help input-live-feedback"
+          placeholder="Quantidade"
+          trim
+          style="width:7rem"
+        />
+        <div style="padding: 0rem 0.4rem">
+          <b-button @click="submit" variant="secondary">
+            <b-icon icon="plus" variant="light"></b-icon>
+          </b-button>
+        </div>
+      </b-row>
+    </b-form>
+  </div>
+
 </template>
 
 <script>
