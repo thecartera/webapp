@@ -35,43 +35,7 @@
       <b-tabs>
         <!-- Table -->
         <b-tab title="Tabela">
-          <b-table responsive='lg' hover :fields="fields" :items="wallet.assets" small borderless>
-            <!-- ASSET IMAGE -->
-            <template #cell(imageLink)="data">
-              <div class="container px-0" style="padding: 0.5em 0em">
-              <b-avatar rounded :src="getImageLink(data)" size="2.2em" icon="wallet2" variant="light" />
-              </div>
-            </template>
-
-            <!-- ASSET INDEX, NAME, TICKER -->
-            <template #cell(nameticker)="data">
-              <span class="cell-name"> {{ data.index + 1 }}. </span>
-              <span class="cell-name"> {{ data.item.name }} </span>
-              <br>
-              <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
-            </template>
-
-            <!-- ASSET WEIGHT IN PORTFOLIO -->
-            <template #cell(weight)="data">
-              <span class="cell-name"> Peso </span>
-              <br>
-              <span class="monneda-blue cell-value"> {{ data.value.toFixed(1) }}% </span>
-            </template>
-
-            <!-- ASSET CURRENT PRICE -->
-            <template #cell(price)="data">
-              <span class="cell-name">Preço (R$)</span>
-              <br>
-              <span class="monneda-blue cell-value">{{ data.value.toFixed(2) }}</span>
-            </template>
-
-            <!-- ASSET RETURNS -->
-            <template #cell(gain)="data">
-              <span class="cell-name"> Ganho 30d </span>
-              <br>
-              <span :class="positive(data.value)" class="cell-value"> {{ data.value.toFixed(2) }}% </span>
-            </template>
-          </b-table>
+          <AssetTable :assets="wallet.assets" />
         </b-tab>
 
         <!-- Chart -->
@@ -86,12 +50,14 @@
 <script>
 import client from '@/commons/client.api'
 
+import AssetTable from '@/components/AssetTable'
 import WalletChart from '@/components/WalletChart'
 
 export default {
   name: 'Wallet',
 
   components: {
+    AssetTable,
     WalletChart
   },
 

@@ -1,5 +1,5 @@
 
-const thumbUrl = async ticker => {
+const thumbUrl = ticker => {
   return `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${ticker}.png`
 }
 
