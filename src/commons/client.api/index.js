@@ -2,6 +2,7 @@ import Client from './client'
 import Users from './users'
 import Assets from './assets'
 import Wallets from './wallets'
+import Utils from './utils'
 
 class MyClient extends Client {
   constructor (token) {
@@ -9,6 +10,7 @@ class MyClient extends Client {
     this.users = new Users(token)
     this.assets = new Assets(token)
     this.wallets = new Wallets(token)
+    this.utils = Utils
   }
 
   setToken (token) {

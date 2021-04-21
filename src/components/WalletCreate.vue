@@ -136,10 +136,13 @@ export default {
     },
 
     async addTicker ({ ticker, amount }) {
-      const data = await client.assets.fetchByTicker(ticker)
-
-      const code = data.ticker.toUpperCase()
-      const url = `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${code}.png`
+      let data
+      try {
+        data = await client.assets.fetchByTicker(ticker)
+      } catch (error) {
+        this.showErrorToast('Ticker error', `Invalid ticker: ${ticker}`)
+        return
+      }
 
       const asset = {
         ticker: data.ticker,
@@ -147,10 +150,18 @@ export default {
         amount: amount,
         formattedPrice: this.round(data.price),
         formattedGain: this.round(data.gain),
-        imageLink: url
+        imageLink: await client.utils.thumbUrl(data.ticker)
       }
 
       this.assets.push(asset)
+    },
+
+    showErrorToast (title, message) {
+      this.$bvToast.toast(message, {
+        title: title,
+        autoHideDelay: 3000,
+        variant: 'danger'
+      })
     },
 
     deleteRow (i) {
