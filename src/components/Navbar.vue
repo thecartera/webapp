@@ -1,5 +1,5 @@
 <template>
-  <b-navbar sticky toggleable="sm" variant="info" type="light">
+  <b-navbar sticky toggleable="sm" variant="info" type="dark">
     <!-- Homme button -->
     <b-navbar-brand to="/">
       <img width="32" src="@/assets/logo40x40.png" alt="Monneda" />
