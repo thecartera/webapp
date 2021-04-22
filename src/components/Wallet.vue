@@ -1,11 +1,11 @@
 <template>
-<b-container>
+<b-container class="container px-0">
   <WalletInfo class="border-white" :wallet="wallet" />
   <b-card no-body class="border-white">
     <b-tabs>
       <!-- Table -->
       <b-tab title="Tabela">
-        <AssetTable class="m-3" :assets="wallet.assets" />
+        <AssetTable class="m-0" :assets="wallet.assets"/>
       </b-tab>
 
       <!-- Chart -->
