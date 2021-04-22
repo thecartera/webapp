@@ -1,6 +1,6 @@
 <template>
-<b-card no-body :title="wallet.name">
-  <b-card-body title="Sua carteira">
+<b-card title="Carteira">
+  <b-card-body :title="wallet.name">
     <b-row>
       <!-- Wallet info -->
       <b-col>
@@ -22,8 +22,9 @@
 
       <!-- Share buttons -->
       <b-col align-self="end" class="text-right">
-        <vue-goodshare-twitter has_icon/>
+        <vue-goodshare-twitter has_icon />
         <vue-goodshare-facebook has_icon />
+        <vue-goodshare-linked-in has_icon />
       </b-col>
     </b-row>
   </b-card-body>
@@ -33,13 +34,15 @@
 <script>
 import VueGoodshareTwitter from 'vue-goodshare/src/providers/Twitter'
 import VueGoodshareFacebook from 'vue-goodshare/src/providers/Facebook'
+import VueGoodshareLinkedIn from 'vue-goodshare/src/providers/LinkedIn'
 
 export default {
   name: 'WalletInfo',
 
   components: {
     VueGoodshareTwitter,
-    VueGoodshareFacebook
+    VueGoodshareFacebook,
+    VueGoodshareLinkedIn
   },
 
   props: {
