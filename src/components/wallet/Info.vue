@@ -28,7 +28,7 @@
     <b-col cols="3" style="padding: 1rem 0rem 0rem 0rem">
       <b-dropdown right variant="outline-info" no-caret size="sm">
         <template #button-content>
-          <b-icon variant="primary" icon="share-fill"></b-icon>
+          <b-icon variant="info" icon="share-fill"></b-icon>
         </template>
         <!-- Share buttons -->
         <b-dropdown-item-button>
