@@ -1,5 +1,5 @@
 <template>
-  <b-navbar style="height: 3.2rem" sticky toggleable="sm" variant="info" type="dark">
+  <b-navbar sticky toggleable="sm" variant="info" type="light">
     <!-- Homme button -->
     <b-navbar-brand to="/">
       <img width="32" src="@/assets/logo40x40.png" alt="Monneda" />
@@ -26,11 +26,8 @@
       <b-navbar-nav class="ml-auto">
         <!-- Create wallet button -->
         <b-nav-item style="margin-left: 0.5rem" class="row justify-content-around" to="/wallets">
-          <b-button variant="info">
-            <b-iconstack variant="light">
-              <b-icon icon="wallet2" shift-h="-2" shift-v="2" />
-              <b-icon icon="plus" scale="0.7" shift-v="1" shift-h="-2" />
-            </b-iconstack>
+          <b-button variant="outline-light">
+            Nova carteira
           </b-button>
         </b-nav-item>
 
