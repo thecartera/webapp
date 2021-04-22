@@ -10,7 +10,7 @@
 
       <!-- Chart -->
       <b-tab title="Gráfico" lazy>
-        <WalletChart class="mx-auto w-50" :assets="wallet.assets" />
+        <WalletChart :assets="wallet.assets" />
       </b-tab>
 
       <!-- Description -->
