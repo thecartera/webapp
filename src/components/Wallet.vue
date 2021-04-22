@@ -1,66 +1,30 @@
 <template>
-  <b-card no-body style="border-color:white">
-    <b-card-title style="padding: 1rem 0rem 0rem 2rem">
-      <!-- Title -->
-      <b-row>
-        <h3 class="text-dark"> Informações da carteira </h3>
-      </b-row>
+<b-container>
+  <WalletInfo :wallet="wallet" />
+  <b-card no-body>
+    <b-tabs>
+      <!-- Table -->
+      <b-tab title="Tabela">
+        <AssetTable :assets="wallet.assets" />
+      </b-tab>
 
-      <!-- Name -->
-      <b-row>
-        <h5 class="text-dark"> {{wallet.name}}
-        </h5>
-      </b-row>
+      <!-- Chart -->
+      <b-tab title="Gráfico" lazy>
+        <WalletChart style="margin-left: auto; margin-right: auto; max-width: 30rem" :assets="wallet.assets"/>
+      </b-tab>
 
-      <!-- Creator -->
-      <b-row>
-        <h6 class="text-dark"> Criador:
-          <b-link :to="`/users/${wallet.username}`" class="monneda-blue">
-          @{{ wallet.username }}
-          </b-link>
-        </h6>
-      </b-row>
-
-      <!-- Profit -->
-      <b-row>
-        <h6 class="text-dark">
-          Retorno (30d):
-          <span :class="gainColor"> {{ normalizedGain }}% </span>
-        </h6>
-      </b-row>
-
-      <!-- Creation date -->
-      <b-row>
-        <span class="text-dark" style="font-size: 1rem">
-          Criada em: {{ createdDate }}
-        </span>
-      </b-row>
-    </b-card-title>
-
-    <b-card-body class="container px-0">
-      <b-tabs>
-        <!-- Table -->
-        <b-tab title="Tabela">
-          <AssetTable :assets="wallet.assets" />
-        </b-tab>
-
-        <!-- Chart -->
-        <b-tab title="Gráfico" lazy>
-          <WalletChart style="margin-left: auto; margin-right: auto; max-width: 30rem" :assets="wallet.assets"/>
-        </b-tab>
-
-        <!-- Description -->
-        <b-tab v-if="wallet.description" title="Descrição">
-          <b-container>
-            <b-form-textarea
-              id="textarea-plaintext"
-              plaintext :value="wallet.description"
-            />
-          </b-container>
-        </b-tab>
-      </b-tabs>
-    </b-card-body>
+      <!-- Description -->
+      <b-tab v-if="wallet.description" title="Descrição">
+        <b-container>
+          <b-form-textarea
+            id="textarea-plaintext"
+            plaintext :value="wallet.description"
+          />
+        </b-container>
+      </b-tab>
+    </b-tabs>
   </b-card>
+</b-container>
 </template>
 
 <script>
@@ -68,13 +32,15 @@ import client from '@/commons/client.api'
 
 import AssetTable from '@/components/AssetTable'
 import WalletChart from '@/components/WalletChart'
+import WalletInfo from '@/components/wallet/Info'
 
 export default {
   name: 'Wallet',
 
   components: {
     AssetTable,
-    WalletChart
+    WalletChart,
+    WalletInfo
   },
 
   props: {
