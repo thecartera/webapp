@@ -1,8 +1,8 @@
-<template>
-  <b-table responsive='lg' hover :fields="fields" :items="assets" small borderless>
+<template style="margin-left: 10rem">
+  <b-table style="margin-left: 10rem" responsive='lg' hover :fields="fields" :items="assets" small borderless>
     <!-- Thumbnail -->
     <template #cell(imageLink)="data">
-      <span style="padding: 0.5em 0em">
+      <span style="padding: 0.2rem 0rem">
         <b-avatar
           rounded
           icon="wallet2"
