@@ -1,14 +1,15 @@
 <template>
-  <b-navbar sticky toggleable="sm" variant="info">
+  <b-navbar sticky toggleable="sm" variant="info" type="dark">
     <!-- Homme button -->
     <b-navbar-brand to="/">
-      <img src="@/assets/logo40x40.png" alt="Monneda" />
+      <img width="32" src="@/assets/logo40x40.png" alt="Monneda" />
     </b-navbar-brand>
 
     <!-- Search bar -->
     <b-navbar-nav>
-      <b-input-group prepend="@">
+      <b-input-group size="sm" prepend="@">
         <b-form-input
+          size="sm"
           placeholder="Username"
           @keypress.enter.prevent="search"
           v-model="searchBarValue"
@@ -24,17 +25,17 @@
     <b-collapse id="collapse" is-nav>
       <b-navbar-nav class="ml-auto">
         <!-- Create wallet button -->
-        <b-nav-item to="/wallets">
+        <b-nav-item style="margin-left: 0.5rem" class="row justify-content-around" to="/wallets">
           <b-button variant="info">
             <b-iconstack variant="light">
               <b-icon icon="wallet2" shift-h="-2" shift-v="2" />
-              <b-icon icon="plus" shift-v="1" shift-h="-2" />
+              <b-icon icon="plus" scale="0.7" shift-v="1" shift-h="-2" />
             </b-iconstack>
           </b-button>
         </b-nav-item>
 
         <!-- Login/logout buttons -->
-        <b-nav-item>
+        <b-nav-item style="margin-left: 0.5rem" class="row justify-content-around">
           <b-button variant="info" v-if="auth" @click="logout">
             Sair
           </b-button>
@@ -44,7 +45,7 @@
         </b-nav-item>
 
         <!-- Profile button -->
-        <b-nav-item v-if="auth" :to="this.userUrl">
+        <b-nav-item style="margin-left: 0.5rem" class="row justify-content-around" v-if="auth" :to="this.userUrl">
           <b-avatar :src="user.picture" />
         </b-nav-item>
       </b-navbar-nav>
