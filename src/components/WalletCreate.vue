@@ -143,6 +143,10 @@ export default {
 
   methods: {
     async saveWallet () {
+      if (this.assets.length === 0) {
+        this.showErrorToast('Erro', 'Adicione algum ativo à sua carteira')
+        return
+      }
       const wallet = await client.wallets.postNewWallet(this.wallet)
       this.$router.push(`/wallets/${wallet.id}`)
     },
@@ -152,7 +156,7 @@ export default {
       try {
         data = await client.assets.fetchByTicker(ticker)
       } catch (error) {
-        this.showErrorToast('Ticker error', `Invalid ticker: ${ticker}`)
+        this.showErrorToast('Erro', `Código não encontrado: ${ticker}`)
         return
       }
 
