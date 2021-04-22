@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: '/wallets'
+    redirect: '/wallets/6073e39242cb2b06e78c1cb1'
   },
   {
     path: '/callback',
