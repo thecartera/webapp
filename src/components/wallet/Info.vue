@@ -18,7 +18,7 @@
               <dd> {{ wallet.gain ? wallet.gain.toFixed(2) : 0.0 }}% </dd>
 
               <dt> Criada em: </dt>
-              <dd> {{ wallet.createdAt }} </dd>
+              <dd> {{ new Date(wallet.createdAt).toLocaleString('pt-BR').split(' ')[0] }} </dd>
             </dl>
           </b-col>
 
@@ -26,9 +26,9 @@
       </b-card-body>
     </b-col>
     <b-col cols="3" style="padding: 1rem 0rem 0rem 0rem">
-      <b-dropdown right variant="info" no-caret size="sm">
+      <b-dropdown right variant="outline-info" no-caret size="sm">
         <template #button-content>
-          <b-icon variant="white" icon="share-fill"></b-icon>
+          <b-icon variant="primary" icon="share-fill"></b-icon>
         </template>
         <!-- Share buttons -->
         <b-dropdown-item-button>
