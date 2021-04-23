@@ -26,7 +26,11 @@ export default {
       },
       legend: {
         position: 'right',
+        display: true,
         labels: {
+          boxWidth: 12,
+          padding: 5,
+          usePointStyle: false,
           fontFamily: 'Courier New'
         }
       },
