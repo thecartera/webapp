@@ -1,7 +1,7 @@
 <template>
   <b-navbar class="container px-2" sticky toggleable="sm" variant="info" type="dark">
     <!-- Homme button -->
-    <b-navbar-brand style="background-color:red; margin-left: 0rem" to="/">
+    <b-navbar-brand to="/">
       <img width="30" src="@/assets/logo40x40.png" alt="Monneda" />
     </b-navbar-brand>
 
