@@ -7,7 +7,7 @@
           <b-col cols="7">
             <b-form-input
               v-model="walletName"
-              :state="walletNameState"
+              :state="walletNameValid"
               placeholder="Nome da carteira"
             />
           </b-col>
@@ -136,7 +136,7 @@ export default {
       }
     },
 
-    walletNameState () {
+    walletNameValid () {
       return this.walletName.length > 2 && this.walletName.length < 41
     }
   },
@@ -144,7 +144,11 @@ export default {
   methods: {
     async saveWallet () {
       if (this.assets.length === 0) {
-        this.showErrorToast('Erro', 'Adicione algum ativo à sua carteira')
+        this.showErrorToast('Ops!', 'Adicione algum ativo à sua carteira')
+        return
+      }
+      if (!this.walletNameValid) {
+        this.showErrorToast('Ops!', 'Dê um nome à sua carteira')
         return
       }
       const wallet = await client.wallets.postNewWallet(this.wallet)
