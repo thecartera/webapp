@@ -7,7 +7,7 @@ export default class {
     this.token = token
   }
 
-  async request (meth, path, opts = {}) {
+  async request (meth, path, opts = {}, json = true) {
     const url = [BASE, path].join('/')
 
     if (!opts.headers) {
@@ -30,6 +30,10 @@ export default class {
       throw response
     }
 
-    return await response.json()
+    if (json) {
+      return await response.json()
+    } else {
+      return response
+    }
   }
 }
