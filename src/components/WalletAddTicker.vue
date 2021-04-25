@@ -1,39 +1,42 @@
 <template>
-  <!-- Add asset -->
-  <div>
-    <div class="row justify-content-center">
-      <h5 style="padding: 1.5rem 0rem 0rem 0rem">
-        Adicionar ativo
-      </h5>
-    </div>
+<b-container>
+  <b-row align-h="center">
+    <h5> Adicionar ativo </h5>
+  </b-row>
+
+  <b-row align-h="center">
     <b-form @keyup.enter.prevent="submit">
-      <b-row style="justify-content:center">
-        <div style="padding: 0rem 0.4rem">
+      <b-row>
+        <!-- Ticker -->
+        <b-col>
           <b-form-input
             v-model="ticker"
             placeholder="Código"
-            style="width:7rem"
             @keypress="only8chars($event)"
           />
-        </div>
-        <b-form-input
-          id="input-live"
-          v-model="amount"
-          @keypress="onlyNumber($event)"
-          aria-describedby="input-live-help input-live-feedback"
-          placeholder="Quantidade"
-          trim
-          style="width:7rem"
-        />
-        <div style="padding: 0rem 0.4rem">
+        </b-col>
+
+        <!-- Amount -->
+        <b-col>
+          <b-form-input
+            v-model="amount"
+            @keypress="onlyNumber($event)"
+            aria-describedby="input-live-help input-live-feedback"
+            placeholder="Quantidade"
+            trim
+          />
+        </b-col>
+
+        <!-- Submit button -->
+        <b-col>
           <b-button @click="submit" variant="secondary">
-            <b-icon icon="plus" variant="light"></b-icon>
+            <b-icon icon="plus" variant="light" />
           </b-button>
-        </div>
+        </b-col>
       </b-row>
     </b-form>
-  </div>
-
+  </b-row>
+</b-container>
 </template>
 
 <script>
@@ -48,7 +51,10 @@ export default {
   methods: {
     submit () {
       if (this.ticker.length > 0 && this.amount.length > 0) {
-        const data = { ticker: this.ticker.toUpperCase(), amount: this.amount }
+        const data = {
+          ticker: this.ticker.toUpperCase(),
+          amount: this.amount
+        }
 
         this.$emit('submit', data)
 
@@ -58,7 +64,6 @@ export default {
     },
 
     onlyNumber (evt) {
-      // console.log(evt)
       // we only want integers.
       // using 'isNaN' lets unwanted chars like '-' and math numbers like 'e'
       const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]

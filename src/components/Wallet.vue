@@ -5,19 +5,21 @@
     <b-tabs>
       <!-- Table -->
       <b-tab title="Tabela">
-        <AssetTable class="m-0" :assets="wallet.assets"/>
+        <AssetTable :assets="wallet.assets"/>
       </b-tab>
 
       <!-- Chart -->
       <b-tab title="Gráfico" lazy>
-        <WalletChart class="mx-auto" style="max-width: 23rem" :assets="wallet.assets" />
+        <WalletChart
+          class="mx-auto"
+          style="max-width: 23rem"
+          :assets="wallet.assets"
+        />
       </b-tab>
 
       <!-- Description -->
-      <b-tab v-if="wallet.description" title="Descrição">
-        <b-container class="m-3">
-          {{ wallet.description }}
-        </b-container>
+      <b-tab v-if="wallet.description" title="Descrição" class="m-3">
+        {{ wallet.description }}
       </b-tab>
     </b-tabs>
   </b-card>

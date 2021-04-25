@@ -18,6 +18,6 @@ export default class extends Client {
   }
 
   deleteById (id) {
-    return this.request('DELETE', `wallets/${id}`)
+    return this.request('DELETE', `wallets/${id}`, {}, false)
   }
 }

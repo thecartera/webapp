@@ -1,68 +1,72 @@
 <template>
-<div class="row justify-content-center">
-  <b-card class="userDataCardSize" border-variant="white" align="center">
+
+<b-container>
+  <!-- User -->
+  <b-card align="center" border-variant="white">
     <b-row>
-      <!-- User image and location -->
-      <b-col cols="auto">
+      <!-- Image and location -->
+      <b-col>
         <b-avatar :src="profile.picture" size="6.8rem" />
-        <p style="text-align:center">
-          <b-icon style="text-align:center" scale="0.8" icon="cursor-fill" variant="info" aria-hidden="true" />
-          <span style="font-size:0.65rem;color:gray">
-            {{ profile.location }}
-          </span>
-        </p>
+        <br>
+        <small class="text-secondary">
+          <b-icon icon="cursor-fill" variant="info" aria-hidden="true" />
+          {{ profile.location }}
+        </small>
       </b-col>
 
       <!-- User information -->
-      <b-col style="text-align:left" cols="0">
-        <span style="font-size:1.1rem">
-          <strong> {{ profile.username }} </strong>
-          <b-icon icon="patch-check-fill" scale="0.7" variant="info" />
+      <b-col class="text-left">
+        <!-- Username -->
+        <span>
+          <strong> @{{ profile.username }} </strong>
+          <b-icon icon="patch-check-fill" variant="info" />
         </span>
+
         <br>
-        <span style="font-size:0.75rem">
-          <b> {{ profile.name }} </b>
-        </span>
-        <b-card class="descriptionCardSize" border-variant="white" no-body align="left">
-          <span style="white-space: pre;font-family:Arial;font-size:0.85rem">
-            {{ normalizedDescription }}
-          </span>
-        </b-card>
+
+        <!-- Name -->
+        <small>
+          <strong> {{ profile.name }} </strong>
+        </small>
+
+        <br>
+
+        <!-- Description -->
+        {{ normalizedDescription }}
       </b-col>
     </b-row>
-
-    <!-- Wallet list -->
-    <b-row>
-      <b-card border-variant="white" align="left">
-      <b-card-title> Carteiras: </b-card-title>
-      <ul>
-        <li v-for="item in normalizedWallets" id="popover-button-sync" :key="item.id">
-          <div>
-          <b-link class="monneda-blue" :to="`/wallets/${item.id}`">
-            {{ item.name }}
-          </b-link>
-          <b-icon
-            icon="x"
-            scale="1.3"
-            variant="dark"
-            v-if="id === user.username"
-            @click="showPopup(item.id, item.name)"
-          >
-          </b-icon>
-          </div>
-        </li>
-        <b-popover placement="rightbottom" :show.sync="show" target="popover-button-sync" title="Excluir carteira">
-          Você deseja excluir: <strong>{{ selectedWalletName }}</strong>? <br><br>
-          <div class="row justify-content-around">
-            <b-button style="width:40%" variant="danger" class="px-1" @click="deleteWallet(selectedWalletId)">Excluir</b-button>
-            <b-button style="width:40%" variant="secondary" class="px-1" @click="show = false">Cancelar</b-button>
-          </div>
-        </b-popover>
-      </ul>
-      </b-card>
-    </b-row>
   </b-card>
-</div>
+
+  <!-- Wallets -->
+  <b-card border-variant="white" title="Carteiras">
+    <ul>
+      <li v-for="item in normalizedWallets" :key="item.id">
+        <b-link class="text-primary" :to="`/wallets/${item.id}`">
+          {{ item.name }}
+        </b-link>
+        <b-icon
+          icon="x"
+          variant="dark"
+          id="wallet-delete-icon"
+          v-if="id === user.username"
+          @click="showPopup(item.id, item.name)"
+        />
+      </li>
+
+      <!-- Delete popover -->
+      <b-popover placement="right" :show.sync="show" target="wallet-delete-icon" title="Excluir carteira">
+        <p>
+          Você deseja excluir:
+          <strong> {{ selected.name }} </strong>
+        </p>
+        <div class="row justify-content-around">
+          <b-button variant="danger" @click="deleteWallet"> Excluir </b-button>
+          <b-button variant="secondary" @click="closePopup"> Cancelar </b-button>
+        </div>
+      </b-popover>
+    </ul>
+  </b-card>
+</b-container>
 </template>
 
 <script>
@@ -82,8 +86,7 @@ export default {
     profile: {},
     wallets: [],
     show: false,
-    selectedWalletId: '',
-    selectedWalletName: ''
+    selected: {}
   }),
 
   computed: {
@@ -123,25 +126,31 @@ export default {
       this.profile = await client.users.fetchByUsername(id)
       this.wallets = await client.wallets.fetchByOwner(id)
     },
-    async deleteWallet (id) {
-      this.show = false
+    async deleteWallet () {
       try {
-        const index = this.wallets.indexOf(id)
+        await client.wallets.deleteById(this.selected.id)
+        const index = this.wallets.map(i => i.id).indexOf(this.selected.id)
         this.wallets.splice(index, 1)
-        await client.wallets.deleteById(id)
       } catch (e) {
+        console.error(e)
         // TODO: alert that it did not work
+      } finally {
+        this.closePopup()
       }
     },
     showPopup (id, name) {
       this.show = true
-      this.selectedWalletId = id
-      this.selectedWalletName = name
+      this.selected.id = id
+      this.selected.name = name
+    },
+    closePopup () {
+      this.show = false
+      this.selected = {}
     }
   },
 
   watch: {
-    id: async function (newVal) { // watch if opening another user profile
+    async id (newVal) { // watch if opening another user profile
       await this.fetchProfileById(newVal)
     }
   },
@@ -151,25 +160,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-.descriptionCardSize {
-  min-width: 11rem;
-  max-width: 11rem;
-  min-height: 5rem;
-  max-height: 5rem;
-  margin: auto;
-}
-
-.userDataCardSize {
-  min-height: 9.5rem;
-  max-height: 9.5rem;
-  margin: auto;
-}
-
-.monneda-blue {
-  color: #0275B1;
-}
-
-</style>

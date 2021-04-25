@@ -1,102 +1,99 @@
 <template>
-  <b-card no-body style="border-color:white">
-    <b-card-body class="container px-0" body-bg-variant="light">
-      <b-container>
-        <b-row style="padding: 0 0 1rem">
-          <!-- New wallet text -->
-          <b-col cols="7">
-            <b-form-input
-              v-model="walletName"
-              :state="walletNameValid"
-              placeholder="Nome da carteira"
-            />
-          </b-col>
+<b-card no-body border-variant="white">
+  <!-- Name input -->
+  <b-card-header>
+    <b-row>
+      <!-- Wallet name input -->
+      <b-col cols="7">
+        <b-form-input
+          v-model="walletName"
+          :state="walletNameValid"
+          placeholder="Nome da carteira"
+        />
+      </b-col>
 
-          <!-- Save button -->
-          <b-col cols="5" style="text-align: center">
-            <b-button @click="saveWallet" variant="outline-secondary">
-              Salvar
-            </b-button>
-          </b-col>
-        </b-row>
-      </b-container>
+      <!-- Save button -->
+      <b-col class="text-center">
+        <b-button @click="saveWallet" variant="outline-secondary">
+          Salvar
+        </b-button>
+      </b-col>
+    </b-row>
+  </b-card-header>
 
-      <b-tabs>
-        <b-tab title="Composição">
-          <!-- Add asset -->
-          <WalletAddTicker @submit="addTicker" />
-        </b-tab>
-        <b-tab title="Descrição">
-          <WalletAddDescription @update="addDescription($event)" />
-        </b-tab>
-      </b-tabs>
-    </b-card-body>
+  <!-- Inputs -->
+  <b-card-body body-bg-variant="light">
+    <b-tabs>
+      <b-tab title="Composição">
+        <WalletAddTicker class="mt-2" @submit="addTicker" />
+      </b-tab>
+      <b-tab class="mt-2" title="Descrição">
+        <WalletAddDescription @update="addDescription" />
+      </b-tab>
+    </b-tabs>
+  </b-card-body>
 
-    <!-- Table -->
-    <b-card-footer class="container px-0" footer-bg-variant="white">
-      <b-table
-        :fields="fields"
-        :items="assets"
-        responsive='lg'
-        hover
-        small
-      >
-        <!-- ASSET IMAGE -->
-        <template #cell(image)="data">
-          <div class="container px-0" style="padding: 0.5em 0em">
-          <b-avatar
-            rounded
-            :src="data.item.imageLink"
-            size="2.2em"
-            icon="wallet2"
-            variant="light"
-          />
-          </div>
-        </template>
+  <!-- Table -->
+  <b-card-footer class="px-0" footer-bg-variant="white">
+    <b-table
+      :fields="fields"
+      :items="assets"
+      responsive='lg'
+      hover
+      small
+      borderless
+    >
+      <!-- ASSET IMAGE -->
+      <template #cell(image)="data">
+        <b-avatar
+          rounded
+          class="mt-1"
+          icon="wallet2"
+          variant="light"
+          :src="data.item.imageLink"
+        />
+      </template>
 
-        <!-- ASSET INDEX, NAME, TICKER -->
-        <template #cell(nameticker)="data">
-          <div class="container px-0">
-          <span class="cell-name"> {{ data.index + 1 }}. </span>
-          <span class="cell-name"> {{ data.item.name }} </span>
-          <br>
-          <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
-          </div>
-        </template>
+      <!-- ASSET INDEX, NAME, TICKER -->
+      <template #cell(nameticker)="data">
+        <span class="cell-name"> {{ data.index + 1 }}. {{ data.item.name }} </span>
+        <br>
+        <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
+      </template>
 
-        <!-- ASSET QUANTITY -->
-        <template #cell(amount)="data">
-          <span class="cell-name"> Qtd. </span>
-          <br>
-          <span class="light-blue cell-value"> {{ data.value }} </span>
-        </template>
+      <!-- ASSET QUANTITY -->
+      <template #cell(amount)="data">
+        <span class="cell-name"> Qtd. </span>
+        <br>
+        <span class="cell-value"> {{ data.value }} </span>
+      </template>
 
-        <!-- ASSET CURRENT PRICE -->
-        <template #cell(formattedPrice)="data">
-          <span class="cell-name"> Preço (R$) </span>
-          <br>
-          <span class="light-blue cell-value"> {{ data.value }} </span>
-        </template>
+      <!-- ASSET CURRENT PRICE -->
+      <template #cell(formattedPrice)="data">
+        <span class="cell-name"> Preço (R$) </span>
+        <br>
+        <span class="text-primary cell-value"> {{ data.value }} </span>
+      </template>
 
-        <!-- ASSET RETURN -->
-        <template #cell(formattedGain)="data">
-          <span class="cell-name"> Lucro 30d </span>
-          <br>
-          <span :class="positive(data.value)" class="cell-value">
-            {{ round(data.value) }}%
-          </span>
-        </template>
+      <!-- ASSET RETURN -->
+      <template #cell(formattedGain)="data">
+        <span class="cell-name"> Lucro 30d </span>
+        <br>
+        <span :class="positive(data.value)" class="cell-value">
+          {{ round(data.value) }}%
+        </span>
+      </template>
 
-        <!-- ASSET REMOVE -->
-        <template #cell(remove)="data">
-          <p></p>
-          <b-icon icon="x" scale="1.3" @click="deleteRow(data.index)" variant="dark">
-            {{ data }}
-          </b-icon>
-        </template>
-      </b-table>
-    </b-card-footer>
-  </b-card>
+      <!-- ASSET REMOVE -->
+      <template #cell(remove)="data">
+        <br>
+        <b-icon icon="x" @click="deleteRow(data.index)" variant="dark">
+          {{ data }}
+        </b-icon>
+      </template>
+    </b-table>
+  </b-card-footer>
+</b-card>
 </template>
 
 <script>
@@ -184,7 +181,7 @@ export default {
       })
     },
 
-    async addDescription (evt) {
+    addDescription (evt) {
       this.walletDescription = evt
     },
 
@@ -206,7 +203,6 @@ export default {
 </script>
 
 <style scoped>
-
 .cell-value {
   font-family: 'Courier New';
   font-size: 1.05em;
@@ -216,13 +212,4 @@ export default {
   font-size: 0.65em;
   color: gray;
 }
-
-.light-blue {
-  color: #0275B1;
-}
-
-.text-padding {
-  padding: 0em 0.2em;
-}
-
 </style>

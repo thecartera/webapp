@@ -47,42 +47,14 @@ export default {
 
   computed: {
     data () {
-      const myData = this.sortData // returns [tickers, weights]
+      const [tickers, weights] = this.sortData
       return {
-        labels: myData[0],
+        labels: tickers,
         datasets: [{
-          data: myData[1],
-          // backgroundColor: this.customColors,
+          data: weights,
           borderWidth: 1
         }]
       }
-    },
-
-    customColors () {
-      const colors = [
-        'rgb(0,135,90)',
-        'rgb(70,125,105)',
-        'rgb(155,190,135)',
-        'rgb(115,195,150)',
-        'rgb(235,215,140)',
-        'rgb(230,190,130)',
-        'rgb(225,150,95)',
-        'rgb(225,100,80)',
-        'rgb(200,75,80)',
-        'rgb(170, 100, 50)',
-        'rgb(96,96,96)',
-        'rgb(169,169,169)',
-        'rgb(155,55,100)',
-        'rgb(80,35,115)',
-        'rgb(145,100,180)',
-        'rgb(225,120,165)',
-        'rgb(225,90,140)',
-        'rgb(100,100,200)',
-        'rgb(85,150,195)',
-        'rgb(200, 235, 220)',
-        'rgb(232,232,232)'
-      ]
-      return colors
     },
 
     sortData () {
