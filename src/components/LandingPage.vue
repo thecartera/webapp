@@ -240,7 +240,7 @@ export default {
   #content-1 {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     background-color: #fcfcfc;
     background-image: url(../assets/bg-intro-mobile.svg);
     background-size: 100%;
