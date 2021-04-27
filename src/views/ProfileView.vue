@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background-color: #F3F2EF">
     <Navbar />
     <Profile :id="id" />
   </div>

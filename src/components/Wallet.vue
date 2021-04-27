@@ -1,7 +1,7 @@
 <template>
-<b-container class="container px-0">
-  <WalletInfo class="border-white" :wallet="wallet" />
-  <b-card no-body class="border-white">
+<b-container style="margin-top: 1rem" class="container px-0">
+  <WalletInfo style="border-color: #DBDAD7" :wallet="wallet" />
+  <b-card no-body style="border-color: #DBDAD7; margin-top: 1rem">
     <b-tabs>
       <!-- Table -->
       <b-tab title="Tabela">
