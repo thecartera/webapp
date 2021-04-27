@@ -12,8 +12,8 @@
             class="img-mockups"
             src="@/assets/landing-mockup.png"
             alt="..."
-            width="400"
-            height="240"
+            width="360"
+            height="247"
           />
         </div>
         <div class="col-12 col-md-6 px-md-5">
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="col-12 col-md-6 d-none d-md-flex">
-          <img class="img-mockups" src="@/assets/landing-mockup.png" height="400" alt="..." />
+          <img class="img-mockups" src="@/assets/landing-mockup.png" width="600" height="411" alt="..." />
         </div>
       </div>
     </div>
