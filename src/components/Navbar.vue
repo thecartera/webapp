@@ -2,7 +2,7 @@
   <b-navbar sticky toggleable="sm" style="background-color: #4e79a7" type="dark">
     <!-- Homme button -->
     <b-navbar-brand to="/">
-      <img src="@/assets/logo40x40.png" alt="Monneda" />
+      <img src="@/assets/new-logo-clean.png" width="40" alt="Monneda" />
     </b-navbar-brand>
 
     <!-- Search bar -->
