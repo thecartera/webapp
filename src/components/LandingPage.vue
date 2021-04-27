@@ -12,8 +12,8 @@
             class="img-mockups"
             src="@/assets/monneda_mock.png"
             alt="..."
-            width="330"
-            height="195"
+            width="400"
+            height="240"
           />
         </div>
         <div class="col-12 col-md-6 px-md-5">
@@ -241,7 +241,7 @@ export default {
   #content-1 {
     margin: 0;
     padding: 0;
-    /* min-height: 100vh; */
+    min-height: 100vh;
     background-color: #fcfcfc;
     background-image: url(../assets/bg-intro-mobile.svg);
     background-size: 100%;
