@@ -10,7 +10,7 @@
         >
           <img
             class="img-mockups"
-            src="@/assets/monneda_mock.png"
+            src="@/assets/landing-mockup.png"
             alt="..."
             width="400"
             height="240"
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="col-12 col-md-6 d-none d-md-flex">
-          <img class="img-mockups" src="@/assets/monneda_mock.png" height="400" alt="..." />
+          <img class="img-mockups" src="@/assets/landing-mockup.png" height="400" alt="..." />
         </div>
       </div>
     </div>
