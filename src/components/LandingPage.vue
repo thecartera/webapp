@@ -12,7 +12,8 @@
             class="img-mockups"
             src="@/assets/monneda_mock.png"
             alt="..."
-            width="350"
+            width="330"
+            height="195"
           />
         </div>
         <div class="col-12 col-md-6 px-md-5">
