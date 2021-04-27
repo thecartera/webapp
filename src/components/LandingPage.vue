@@ -98,7 +98,7 @@
           <div class="row">
             <div class="col-12 col-md-4 mb-4 mb-md-0 text-center text-md-left">
               <div class="mb-4 mb-md-5">
-                <img src="@/assets/logo40x40.png" alt="..." />
+                <img src="@/assets/new-logo-clean.png" width="50" alt="..." />
               </div>
             </div>
             <div class="col-12 col-md-2 text-center text-md-left">
