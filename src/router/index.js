@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import WalletView from '@/views/WalletView'
 import ProfileView from '@/views/ProfileView'
 import WalletCreateView from '@/views/WalletCreateView'
+import LandingPage from '@/views/LandingPageView'
 
 import AuthGuard from './auth.guard'
 import CheckGuard from './check.guard'
@@ -15,7 +16,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: '/wallets/6073e39242cb2b06e78c1cb1'
+    redirect: '/landing'
   },
   {
     path: '/callback',
@@ -39,6 +40,11 @@ const routes = [
     name: 'wallet',
     component: WalletView,
     props: true
+  },
+  {
+    path: '/landing',
+    name: 'landing',
+    component: LandingPage
   },
   {
     path: '/users/:id',
