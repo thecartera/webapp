@@ -10,7 +10,7 @@
         >
           <img
             class="img-mockups"
-            src="@/static/monneda_mock.png"
+            src="@/assets/monneda_mock.png"
             alt="..."
             width="400"
           />
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="col-12 col-md-6 d-none d-md-flex">
-          <img class="img-mockups" src="@/static/monneda_mock.png" height="400" alt="..." />
+          <img class="img-mockups" src="@/assets/monneda_mock.png" height="400" alt="..." />
         </div>
       </div>
     </div>
@@ -98,7 +98,7 @@
           <div class="row">
             <div class="col-12 col-md-4 mb-4 mb-md-0 text-center text-md-left">
               <div class="mb-4 mb-md-5">
-                <img src="@/static/logo40x40.png" alt="..." />
+                <img src="@/assets/logo40x40.png" alt="..." />
               </div>
             </div>
             <div class="col-12 col-md-2 text-center text-md-left">
@@ -242,7 +242,7 @@ export default {
     padding: 0;
     min-height: 100vh;
     background-color: #fcfcfc;
-    background-image: url(../static/bg-intro-mobile.svg);
+    background-image: url(../assets/bg-intro-mobile.svg);
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center top;
@@ -261,7 +261,7 @@ export default {
     padding: 0;
     min-height: 60vh;
     background-color: #fcfcfc;
-    background-image: url(../static/bg-intro-desktop.svg);
+    background-image: url(../assets/bg-intro-desktop.svg);
     background-size: 92%;
     background-repeat: no-repeat;
     background-position: 550% 50%;
@@ -290,7 +290,7 @@ export default {
     padding: 0;
     min-height: 60vh;
     background-color: #fcfcfc;
-    background-image: url(../static/bg-intro-desktop.svg);
+    background-image: url(../assets/bg-intro-desktop.svg);
     background-size: 93%;
     background-repeat: no-repeat;
     background-position: 550% 50%;
@@ -319,7 +319,7 @@ export default {
     padding: 0;
     min-height: 90vh;
     background-color: #fcfcfc;
-    background-image: url(../static/bg-intro-desktop.svg);
+    background-image: url(../assets/bg-intro-desktop.svg);
     background-size: 90%;
     background-repeat: no-repeat;
     background-position: 400% 50%;
@@ -347,7 +347,7 @@ export default {
     padding: 0;
     min-height: 95vh;
     background-color: #fcfcfc;
-    background-image: url(../static/bg-intro-desktop.svg);
+    background-image: url(../assets/bg-intro-desktop.svg);
     background-size: 91%;
     background-repeat: no-repeat;
     background-position: 450% 50%;
