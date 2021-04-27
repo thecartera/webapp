@@ -1,5 +1,5 @@
 <template>
-  <b-navbar sticky toggleable="sm" variant="info" type="dark">
+  <b-navbar sticky toggleable="sm" style="background-color: #4e79a7" type="dark">
     <!-- Homme button -->
     <b-navbar-brand to="/">
       <img src="@/assets/logo40x40.png" alt="Monneda" />
@@ -7,7 +7,7 @@
 
     <!-- Search bar -->
     <b-navbar-nav style="max-width: 12rem">
-      <b-input-group size="sm" prepend="@">
+      <b-input-group size="sm">
         <b-form-input
           size="sm"
           placeholder="Username"
@@ -33,10 +33,10 @@
 
         <!-- Login/logout buttons -->
         <b-nav-item>
-          <b-button variant="info" v-if="auth" @click="logout">
+          <b-button variant="outline-light" v-if="auth" @click="logout">
             Sair
           </b-button>
-          <b-button variant="info" v-else @click="login">
+          <b-button variant="outline-light" v-else @click="login">
             Entrar
           </b-button>
         </b-nav-item>

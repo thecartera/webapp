@@ -2,7 +2,7 @@
 
 <b-container>
   <!-- User -->
-  <b-card align="center" border-variant="white">
+  <b-card align="center" style="border-color: #DBDAD7; margin-top: 1rem">
     <b-row>
       <!-- Image and location -->
       <b-col>
@@ -38,7 +38,7 @@
   </b-card>
 
   <!-- Wallets -->
-  <b-card border-variant="white" title="Carteiras">
+  <b-card style="border-color: #DBDAD7; margin-top: 1rem" title="Carteiras">
     <ul>
       <li v-for="item in normalizedWallets" :key="item.id">
         <b-link class="text-primary" :to="`/wallets/${item.id}`">

@@ -8,6 +8,7 @@
       <b-col class="text-right">
         <b-dropdown right variant="outline-info" no-caret>
           <template #button-content>
+            Compartilhar
             <b-icon variant="info" icon="share-fill" />
           </template>
           <b-dropdown-item-button>
@@ -21,7 +22,7 @@
     </b-row>
   </b-card-title>
 
-  <b-card-body>
+  <b-card-body style="padding: 0rem 0rem 0rem 0rem">
     <!-- Wallet info -->
     <dl>
       <dt> Criador: </dt>
