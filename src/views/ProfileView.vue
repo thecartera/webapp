@@ -1,7 +1,7 @@
 <template>
   <div style="background-color: #F3F2EF">
     <Navbar />
-    <Profile :id="id" />
+    <Profile :id="id" style="min-height: 35rem"/>
   </div>
 </template>
 
