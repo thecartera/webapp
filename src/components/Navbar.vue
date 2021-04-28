@@ -81,7 +81,11 @@ export default {
       this.$store.dispatch(LOGOUT)
     },
     search () {
-      this.$router.push(`/users/${this.searchBarValue}`)
+      let searchString = this.searchBarValue.toLowerCase()
+      if (searchString[0] === '@') {
+        searchString = searchString.substring(1)
+      }
+      this.$router.push(`/users/${searchString}`)
     }
   }
 }
