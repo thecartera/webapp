@@ -7,15 +7,32 @@
 
     <!-- Search bar -->
     <b-navbar-nav style="max-width: 12rem">
-      <b-input-group size="sm">
-        <b-form-input
-          size="sm"
-          placeholder="Username"
-          @keypress.enter.prevent="search"
-          v-model="searchBarValue"
-        >
-        </b-form-input>
-      </b-input-group>
+        <ais-instant-search :search-client="searchClient" index-name="users">
+          <ais-configure :hits-per-page.camel="4"/>
+          <ais-search-box v-model="searchBarValue">
+            <b-input-group size="sm">
+              <b-form-input
+                size="sm"
+                placeholder="Encontre seus amigos"
+                @keypress.enter.prevent="search"
+                v-model="searchBarValue"
+              >
+              </b-form-input>
+            </b-input-group>
+          </ais-search-box>
+          <ais-hits>
+            <template slot-scope="{ items }">
+              <b-dropdown-group v-show="searchBarValue" style="z-index: 99999; position: absolute">
+                <b-dropdown-item-button v-for="item in items" :key="item.username" variant="info">
+                  <b-avatar :src="item.picture" />
+                  <span class="name"> {{ item.name }} </span>
+                  <br>
+                  <span class="username"> @{{ item.username }} </span>
+                </b-dropdown-item-button>
+              </b-dropdown-group>
+            </template>
+          </ais-hits>
+        </ais-instant-search>
     </b-navbar-nav>
 
     <!-- Toggle navbar button -->
@@ -51,13 +68,18 @@
 </template>
 
 <script>
+import { instantMeiliSearch } from '@meilisearch/instant-meilisearch'
 import { LOGIN, LOGOUT } from '@/store/actions.type'
 
 export default {
   name: 'Navbar',
 
   data: () => ({
-    searchBarValue: ''
+    searchBarValue: '',
+    searchClient: instantMeiliSearch(
+      'https://meili-router-g93ldnbwwqkk4n6o-gtw.qovery.io/',
+      '9625a71bb5d6a90cee15060ed621a91f2f7fcb9e68c12a3e55918bd3c6029b24'
+    )
   }),
 
   computed: {
