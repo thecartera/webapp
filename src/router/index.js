@@ -16,7 +16,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: '/landing'
+    component: LandingPage
   },
   {
     path: '/callback',
