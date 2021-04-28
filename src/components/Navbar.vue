@@ -21,13 +21,26 @@
             </b-input-group>
           </ais-search-box>
           <ais-hits>
-            <template slot-scope="{ items }">
-              <b-dropdown-group v-show="searchBarValue" style="z-index: 99999; position: absolute">
-                <b-dropdown-item-button v-for="item in items" :key="item.username" variant="info">
-                  <b-avatar :src="item.picture" />
-                  <span class="name"> {{ item.name }} </span>
-                  <br>
-                  <span class="username"> @{{ item.username }} </span>
+            <template slot-scope="{ items }" style="margin-top 10rem">
+              <b-dropdown-group v-show="searchBarValue" style="position: absolute; background-color: #ddd; border-radius: 0.5rem">
+                <b-dropdown-item-button v-for="item in items" :key="item.username" @click="searchFromButton(item.username)">
+                  <b-row>
+                    <b-col cols="auto" style="padding: 0rem 0.5rem 0rem 0rem">
+                      <b-avatar :src="item.picture" />
+                    </b-col>
+                    <b-col>
+                      <b-row>
+                        <span style="font-size: 0.9rem; font-weight: bold" class="username"> @{{ item.username }} </span>
+                      </b-row>
+                      <b-row>
+                        <span
+                          style="font-size: 0.8rem"
+                          class="name">
+                            {{ item.name.length > 25 ? item.name.substring(0, 22) + '...' : item.name }}
+                        </span>
+                      </b-row>
+                    </b-col>
+                  </b-row>
                 </b-dropdown-item-button>
               </b-dropdown-group>
             </template>
@@ -108,6 +121,10 @@ export default {
         searchString = searchString.substring(1)
       }
       this.$router.push(`/users/${searchString}`)
+    },
+    searchFromButton (username) {
+      this.searchBarValue = ''
+      this.$router.push(`/users/${username}`)
     }
   }
 }
