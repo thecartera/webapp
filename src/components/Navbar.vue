@@ -1,8 +1,8 @@
 <template>
-  <b-navbar sticky toggleable="sm" style="background-color: #4e79a7" type="dark">
+  <b-navbar sticky toggleable="sm" id="navbarStyle" type="dark">
     <!-- Homme button -->
     <b-navbar-brand to="/">
-      <img src="@/assets/new-logo-clean.png" width="40" alt="Monneda" />
+      <img src="@/assets/new-logo-clean.png" width="32" alt="Monneda" />
     </b-navbar-brand>
 
     <!-- Search bar -->
@@ -26,24 +26,24 @@
       <b-navbar-nav class="ml-auto">
         <!-- Create wallet button -->
         <b-nav-item to="/wallets">
-          <b-button variant="outline-light">
+          <b-button size="sm" variant="outline-light">
             Nova carteira
           </b-button>
         </b-nav-item>
 
         <!-- Login/logout buttons -->
         <b-nav-item>
-          <b-button variant="outline-light" v-if="auth" @click="logout">
+          <b-button size="sm" variant="outline-light" v-if="auth" @click="logout">
             Sair
           </b-button>
-          <b-button variant="outline-light" v-else @click="login">
+          <b-button size="sm" variant="outline-light" v-else @click="login">
             Entrar
           </b-button>
         </b-nav-item>
 
         <!-- Profile button -->
         <b-nav-item v-if="auth" :to="this.userUrl">
-          <b-avatar :src="user.picture" />
+          <b-avatar style="height: 2rem; width: 2rem" :src="user.picture" />
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -90,3 +90,23 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+/* Small devices (mobile & Tablet, 575px and below) */
+@media only screen and (max-width: 575px) {
+  #navbarStyle {
+    height: auto;
+    background-color: #4e79a7;
+  }
+}
+
+/* Medium devices (desktops, 576px and up) */
+@media only screen and (min-width: 576px) {
+  #navbarStyle {
+    height: 45px;
+    background-color: #4e79a7;
+  }
+}
+
+</style>
