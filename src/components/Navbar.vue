@@ -7,15 +7,45 @@
 
     <!-- Search bar -->
     <b-navbar-nav style="max-width: 12rem">
-      <b-input-group size="sm">
-        <b-form-input
-          size="sm"
-          placeholder="Username"
-          @keypress.enter.prevent="search"
-          v-model="searchBarValue"
-        >
-        </b-form-input>
-      </b-input-group>
+        <ais-instant-search :search-client="searchClient" index-name="users">
+          <ais-configure :hits-per-page.camel="4"/>
+          <ais-search-box v-model="searchBarValue">
+            <b-input-group size="sm">
+              <b-form-input
+                size="sm"
+                placeholder="Encontre seus amigos"
+                @keypress.enter.prevent="search"
+                v-model="searchBarValue"
+              >
+              </b-form-input>
+            </b-input-group>
+          </ais-search-box>
+          <ais-hits>
+            <template slot-scope="{ items }" style="margin-top 10rem">
+              <b-dropdown-group v-show="searchBarValue" style="position: absolute; background-color: #ddd; border-radius: 0.5rem">
+                <b-dropdown-item-button v-for="item in items" :key="item.username" @click="searchFromButton(item.username)">
+                  <b-row>
+                    <b-col cols="auto" style="padding: 0rem 0.5rem 0rem 0rem">
+                      <b-avatar :src="item.picture" />
+                    </b-col>
+                    <b-col>
+                      <b-row>
+                        <span style="font-size: 0.9rem; font-weight: bold" class="username"> @{{ item.username }} </span>
+                      </b-row>
+                      <b-row>
+                        <span
+                          style="font-size: 0.8rem"
+                          class="name">
+                            {{ item.name.length > 25 ? item.name.substring(0, 22) + '...' : item.name }}
+                        </span>
+                      </b-row>
+                    </b-col>
+                  </b-row>
+                </b-dropdown-item-button>
+              </b-dropdown-group>
+            </template>
+          </ais-hits>
+        </ais-instant-search>
     </b-navbar-nav>
 
     <!-- Toggle navbar button -->
@@ -51,13 +81,18 @@
 </template>
 
 <script>
+import { instantMeiliSearch } from '@meilisearch/instant-meilisearch'
 import { LOGIN, LOGOUT } from '@/store/actions.type'
 
 export default {
   name: 'Navbar',
 
   data: () => ({
-    searchBarValue: ''
+    searchBarValue: '',
+    searchClient: instantMeiliSearch(
+      'https://meili-router-g93ldnbwwqkk4n6o-gtw.qovery.io/',
+      '9625a71bb5d6a90cee15060ed621a91f2f7fcb9e68c12a3e55918bd3c6029b24'
+    )
   }),
 
   computed: {
@@ -86,6 +121,10 @@ export default {
         searchString = searchString.substring(1)
       }
       this.$router.push(`/users/${searchString}`)
+    },
+    searchFromButton (username) {
+      this.searchBarValue = ''
+      this.$router.push(`/users/${username}`)
     }
   }
 }
