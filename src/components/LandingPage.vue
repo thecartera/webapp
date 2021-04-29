@@ -93,46 +93,6 @@
         </div>
       </div>
     </div>
-    <footer
-      class="p-0 custom-footer d-flex align-items-center justify-content-center"
-    >
-      <div class="p-3 py-5 px-md-5 mx-auto container-md">
-        <div class="px-2 px-md-0 my-4">
-          <div class="row">
-            <div class="col-12 col-md-4 mb-4 mb-md-0 text-center text-md-left">
-              <div class="mb-4 mb-md-5">
-                <img src="@/assets/new-logo-clean.png" width="50" alt="..." />
-              </div>
-            </div>
-            <div class="col-12 col-md-2 text-center text-md-left">
-              <div
-                class="d-block mb-2"
-                v-for="link in Llinks"
-                :key="link.name"
-              >
-                <a class="link-style" :href="link.href"> {{ link.name }} </a>
-              </div>
-            </div>
-            <div class="col-12 col-md-2 text-center text-md-left">
-              <div
-                class="d-block mb-2"
-                v-for="link in Rlinks"
-                :key="link.name"
-              >
-                <a class="link-style" :href="link.href"> {{ link.name }} </a>
-              </div>
-            </div>
-            <div class="col-12 col-md-4 mt-4 mt-md-0 text-center">
-              <div class="mb-4">
-                <b-button class="custom-btn px-4" size="lg">
-                  monnedanetwork@gmail.com
-                </b-button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 
@@ -198,23 +158,6 @@ export default {
 
 .overflow {
   overflow-x: hidden;
-}
-
-.custom-footer {
-  background-color: #2c2f4b;
-  padding: 1rem 2rem;
-  min-height: 2vh;
-}
-
-.link-style {
-  color: white;
-  font-weight: 400;
-  text-decoration: none;
-}
-.link-style:hover {
-  color: white;
-  font-weight: 500;
-  text-decoration: none;
 }
 
 .custom-btn {
