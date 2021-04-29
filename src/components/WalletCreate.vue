@@ -153,11 +153,20 @@ export default {
     },
 
     async addTicker ({ ticker, amount }) {
+      // checks if ticker already exists in the current wallet
+      for (const [, value] of Object.entries(this.wallet.assets)) {
+        if (value.ticker === ticker) {
+          this.showErrorToast('Ops!', `Você já adicionou ${ticker} à sua carteira.`)
+          return
+        }
+      }
+
+      // fetches the ticker data from the dabase and alerts user if data not found
       let data
       try {
         data = await client.assets.fetchByTicker(ticker)
       } catch (error) {
-        this.showErrorToast('Erro', `Código não encontrado: ${ticker}`)
+        this.showErrorToast('Ops!', `Código não existente: ${ticker}`)
         return
       }
 
