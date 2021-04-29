@@ -36,7 +36,7 @@
             </p>
           </div>
           <div class="sub-btn text-center text-md-left">
-            <b-button class="custom-btn px-4" size="lg">
+            <b-button class="custom-btn px-4" size="lg" @click="startUsing">
               Começar a usar
             </b-button>
           </div>
@@ -74,8 +74,7 @@
             :key="item.title"
           >
             <div class="icon mb-4 text-center text-md-left row justify-content-center">
-              <b-avatar class="custom-btn" style="width: 3rem; height: 3rem">
-                <b-icon :icon="item.icon" scale="2"> </b-icon>
+              <b-avatar class="custom-avatar" style="width: 3rem; height: 3rem" :icon="item.icon">
               </b-avatar>
             </div>
             <div class="title mb-4">
@@ -97,6 +96,8 @@
 </template>
 
 <script>
+import { LOGIN } from '@/store/actions.type'
+
 export default {
   data () {
     return {
@@ -125,27 +126,18 @@ export default {
           subtitle:
             'Apenas você pode ver o valor da sua carteira. Seus amigos só veem a composição em %.'
         }
-      ],
-      Llinks: [
-        {
-          name: 'Sobre',
-          href: '#'
-        },
-        {
-          name: 'Contato',
-          href: '#'
-        }
-      ],
-      Rlinks: [
-        {
-          name: 'Vagas',
-          href: '#'
-        },
-        {
-          name: 'Termos de uso',
-          href: '#'
-        }
       ]
+    }
+  },
+
+  methods: {
+    startUsing () {
+      if (!this.$store.state.auth.auth) {
+        const state = { to: this.$router.currentRoute.path }
+        this.$store.dispatch(LOGIN, state)
+      } else {
+        this.$router.push(`/users/${this.$store.state.auth.user.username}`)
+      }
     }
   }
 }
@@ -172,6 +164,15 @@ export default {
 .custom-btn:hover {
   background-image: linear-gradient(to right, #27a84a, #2089a3);
   border-radius: 50px;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.custom-avatar {
+  background-image: linear-gradient(to right, #31d35c, #2bb7da);
+  border-radius: 2rem;
   border: none;
   color: white;
   font-size: 1rem;

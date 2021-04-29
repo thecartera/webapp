@@ -29,9 +29,10 @@
             </div>
             <div class="col-12 col-md-4 mt-4 mt-md-0 text-center">
               <div class="mb-4">
-                <b-button class="custom-btn px-4" size="lg">
-                  monnedanetwork@gmail.com
-                </b-button>
+                <b-icon icon="envelope-fill" variant="light" />
+                <a href="mailto:monnedanetwork@gmail.com" class="link-style">
+                  Enviar email
+                </a>
               </div>
             </div>
           </div>
@@ -45,51 +46,25 @@
 export default {
   data () {
     return {
-      content: [
-        {
-          icon: 'people-fill',
-          title: 'Interaja',
-          subtitle:
-            'Saiba que um amigo mudou sua posição e comente, curta ou indique "bear" ou "bull".'
-        },
-        {
-          icon: 'chat-dots-fill',
-          title: 'Fique por dentro',
-          subtitle:
-            'Veja as carteiras mais rentáveis do mês e as notícias impactantes do mercado. '
-        },
-        {
-          icon: 'cash-stack',
-          title: 'Invista melhor',
-          subtitle:
-            'Agora que você sabe no que outros estão investindo e como estão performando.'
-        },
-        {
-          icon: 'shield-fill-check',
-          title: 'Não se preocupe',
-          subtitle:
-            'Apenas você pode ver o valor da sua carteira. Seus amigos só veem a composição em %.'
-        }
-      ],
       Llinks: [
-        {
-          name: 'Sobre',
-          href: '#'
-        },
-        {
-          name: 'Contato',
-          href: '#'
-        }
+        // {
+        //   name: 'Sobre',
+        //   href: '#'
+        // },
+        // {
+        //   name: 'Contato',
+        //   href: '#'
+        // }
       ],
       Rlinks: [
-        {
-          name: 'Vagas',
-          href: '#'
-        },
-        {
-          name: 'Termos de uso',
-          href: '#'
-        }
+        // {
+        //   name: 'Vagas',
+        //   href: '#'
+        // },
+        // {
+        //   name: 'Termos de uso',
+        //   href: '#'
+        // }
       ]
     }
   }
@@ -97,9 +72,6 @@ export default {
 </script>
 
 <style scoped>
-.text-grey {
-  color: grey;
-}
 
 .overflow {
   overflow-x: hidden;
@@ -108,7 +80,7 @@ export default {
 .custom-footer {
   background-color: #2c2f4b;
   padding: 1rem 2rem;
-  min-height: 2vh;
+  min-height: 10rem;
 }
 
 .link-style {
@@ -118,8 +90,9 @@ export default {
 }
 .link-style:hover {
   color: white;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
+  text-decoration: underline;
 }
 
 .custom-btn {
