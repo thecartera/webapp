@@ -31,13 +31,14 @@
           </div>
           <div class="sub-title mb-4 pr-md-5 text-grey">
             <p class="lead text-center text-md-left">
-              Monneda é uma rede social para interações entre investidores, seus portfolios e notícias.
+              Monneda é uma rede social para interações entre
+              investidores, seus portfolios e notícias.
             </p>
           </div>
           <div class="sub-btn text-center text-md-left">
-            <b-button class="custom-btn px-4" size="lg"
-              >Começar a usar</b-button
-            >
+            <b-button class="custom-btn px-4" size="lg">
+              Começar a usar
+            </b-button>
           </div>
         </div>
         <div class="col-12 col-md-6 d-none d-md-flex">
@@ -60,7 +61,8 @@
             </div>
             <div class="sub-title text-grey">
               <p class="lead text-center text-md-left">
-                Assim você está sempre por dentro do que seus amigos estão investindo e podem discutir os melhores ativos do momento.
+                Assim você está sempre por dentro do que seus amigos estão
+                investindo e podem discutir os melhores ativos do momento.
               </p>
             </div>
           </div>
@@ -91,7 +93,7 @@
         </div>
       </div>
     </div>
-        <footer
+    <footer
       class="p-0 custom-footer d-flex align-items-center justify-content-center"
     >
       <div class="p-3 py-5 px-md-5 mx-auto container-md">
@@ -103,13 +105,21 @@
               </div>
             </div>
             <div class="col-12 col-md-2 text-center text-md-left">
-              <div class="d-block mb-2" v-for="link in Llinks" :key="link">
-                <a class="link-style" :href="link.href">{{ link.name }}</a>
+              <div
+                class="d-block mb-2"
+                v-for="link in Llinks"
+                :key="link.name"
+              >
+                <a class="link-style" :href="link.href"> {{ link.name }} </a>
               </div>
             </div>
             <div class="col-12 col-md-2 text-center text-md-left">
-              <div class="d-block mb-2" v-for="link in Rlinks" :key="link">
-                <a class="link-style" :href="link.href">{{ link.name }}</a>
+              <div
+                class="d-block mb-2"
+                v-for="link in Rlinks"
+                :key="link.name"
+              >
+                <a class="link-style" :href="link.href"> {{ link.name }} </a>
               </div>
             </div>
             <div class="col-12 col-md-4 mt-4 mt-md-0 text-center">
@@ -124,21 +134,10 @@
       </div>
     </footer>
   </div>
-
 </template>
 
 <script>
 export default {
-  head: {
-    title: 'easybank - mockup',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Home page description'
-      }
-    ]
-  },
   data () {
     return {
       content: [
