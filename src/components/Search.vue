@@ -21,6 +21,7 @@
             v-for="item in items"
             :key="item.username"
             :to="`/users/${item.username}`"
+            @click="clear"
           >
             <b-row>
               <!-- Picture -->
@@ -79,7 +80,10 @@ export default {
       return name.substring(0, 22) + '...'
     },
     search () {
+      this.clear()
       this.$router.push(`/users/${this.input}`)
+    },
+    clear () {
       this.input = ''
     }
   }
