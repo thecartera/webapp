@@ -1,20 +1,20 @@
 <template>
   <div style="background-color: #F3F2EF">
     <Navbar />
-    <Wallet :id="id" style="min-height: 35rem"/>
+    <WalletEditor :id="id" />
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
-import Wallet from '@/components/Wallet'
+import WalletEditor from '@/components/WalletEditor'
 
 export default {
-  name: 'WalletView',
+  name: 'WalletEditorView',
 
   components: {
     Navbar,
-    Wallet
+    WalletEditor
   },
 
   props: {
