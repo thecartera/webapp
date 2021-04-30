@@ -5,6 +5,7 @@ import WalletView from '@/views/WalletView'
 import ProfileView from '@/views/ProfileView'
 import WalletCreateView from '@/views/WalletCreateView'
 import LandingPage from '@/views/LandingPageView'
+import WalletEditorView from '@/views/WalletEditorView'
 
 import AuthGuard from './auth.guard'
 import CheckGuard from './check.guard'
@@ -39,6 +40,12 @@ const routes = [
     path: '/wallets/:id',
     name: 'wallet',
     component: WalletView,
+    props: true
+  },
+  {
+    path: '/wallets/:id/edit',
+    name: 'editwallet',
+    component: WalletEditorView,
     props: true
   },
   {

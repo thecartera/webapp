@@ -18,9 +18,7 @@
       </b-tab>
 
       <!-- Description -->
-      <b-tab v-if="wallet.description" title="Descrição" class="m-3">
-        {{ wallet.description }}
-      </b-tab>
+      <b-tab v-if="wallet.description" title="Descrição" class="m-3" style="white-space: pre-wrap">{{ wallet.description }}</b-tab>
     </b-tabs>
   </b-card>
 </b-container>

@@ -5,6 +5,10 @@ export default class extends Client {
     return this.request('GET', `wallets/${id}`)
   }
 
+  fetchMyById (id) {
+    return this.request('GET', `wallets/${id}?type=raw`)
+  }
+
   fetchByOwner (owner) {
     return this.request('GET', `users/${owner}/wallets`)
   }
@@ -15,6 +19,14 @@ export default class extends Client {
       headers: { 'Content-Type': 'application/json' }
     }
     return this.request('POST', 'wallets', options)
+  }
+
+  updateWallet (wallet, id) {
+    const options = {
+      body: JSON.stringify(wallet),
+      headers: { 'Content-Type': 'application/json' }
+    }
+    return this.request('PUT', `wallets/${id}`, options)
   }
 
   deleteById (id) {
