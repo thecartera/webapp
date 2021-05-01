@@ -12,26 +12,22 @@
             class="img-mockups"
             src="@/assets/landing-mockup.png"
             alt="..."
-            width="360"
-            height="247"
+            width="240"
+            height="145"
           />
         </div>
         <div class="col-12 col-md-6 px-md-5">
           <div class="title mb-4">
-            <p
-              class="h1 font-weight-normal text-center text-md-left d-flex d-md-none"
-            >
-              Veja e acompanhe as carteiras de ações dos seus amigos
+            <p class="cartera-title">
+              Cartera
             </p>
-            <p
-              class="display-4 font-weight-normal text-center text-md-left d-none d-md-flex"
-            >
-              Veja e acompanhe as carteiras de ações dos seus amigos
+            <p class="font-weight-normal text-center text-md-left d-flex cartera-subtitle">
+              Acompanhe as carteiras de ações dos seus amigos
             </p>
           </div>
           <div class="sub-title mb-4 pr-md-5 text-grey">
             <p class="lead text-center text-md-left">
-              Monneda é uma rede social para interações entre
+              <span class="cartera"> Cartera </span> é uma rede social para interações entre
               investidores, seus portfolios e notícias.
             </p>
           </div>
@@ -56,7 +52,7 @@
           <div class="col-12 col-md-6">
             <div class="title mb-4">
               <p class="h1 font-weight-normal text-center text-md-left">
-                Por que entrar na Monneda?
+                Por que entrar na <span class="cartera">Cartera</span>?
               </p>
             </div>
             <div class="sub-title text-grey">
@@ -196,6 +192,25 @@ export default {
     min-height: 100vh;
     background-color: #f4f5f6;
   }
+
+  .cartera {
+    font-family: 'Helvetica';
+    color: #33d260;
+    font-weight: bold;
+  }
+
+  .cartera-title {
+    text-align: center;
+    font-family: 'Helvetica';
+    font-size: 3.5rem;
+    color: #33d260;
+    font-weight: bold;
+  }
+
+  .cartera-subtitle {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
 }
 
 /* Medium devices (desktops, 769px and up) */
@@ -225,6 +240,25 @@ export default {
     left: 0%;
     bottom: 40%;
   }
+
+  .cartera {
+    font-family: 'Helvetica';
+    color: #33d260;
+    font-weight: bold;
+  }
+
+  .cartera-title {
+    font-family: 'Helvetica';
+    font-size: 4.5rem;
+    color: #33d260;
+    font-weight: bold;
+  }
+
+  .cartera-subtitle {
+    font-size: 3rem;
+    line-height: 3rem;
+  }
+
 }
 
 /* Large devices (desktops, 769px and up) */
