@@ -18,7 +18,7 @@
       <b-navbar-nav class="ml-auto">
         <!-- Create wallet button -->
         <b-nav-item to="/wallets">
-          <b-button size="sm" variant="outline-light">
+          <b-button size="sm" class="cartera-blue-button">
             Nova carteira
           </b-button>
         </b-nav-item>
@@ -26,12 +26,12 @@
         <!-- Login/logout buttons -->
         <b-nav-item>
           <!-- Login -->
-          <b-button size="sm" variant="outline-light" v-if="auth" @click="logout">
+          <b-button size="sm" class="cartera-blue-button" variant="outline-light" v-if="auth" @click="logout">
             Sair
           </b-button>
 
           <!-- Logout -->
-          <b-button size="sm" variant="outline-light" v-else @click="login">
+          <b-button size="sm" class="cartera-blue-button" variant="outline-light" v-else @click="login">
             Entrar
           </b-button>
         </b-nav-item>

@@ -1,0 +1,22 @@
+.cartera-blue-color {
+    color: #4e79a7;
+}
+
+.cartera-blue-background-color {
+    background-color: #4e79a7;
+}
+
+.cartera-blue-button {
+    color: white;
+    background-color: #4e79a7;
+    border-color: #4e79a7;
+}
+
+.cartera-blue-button:hover {
+    color: #4e79a7;
+    background-color: white;
+}
+
+.cartera-background-color {
+    background-color: #F3F2EF;
+}
