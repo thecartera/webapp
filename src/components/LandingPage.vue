@@ -11,9 +11,7 @@
           <img
             class="img-mockups"
             src="@/assets/landing-mockup.png"
-            alt="..."
-            width="240"
-            height="145"
+            alt="dark blue and light green background"
           />
         </div>
         <div class="col-12 col-md-6 px-md-5">
@@ -175,12 +173,12 @@ export default {
   font-weight: 500;
 }
 
-/* Small devices (mobile & Tablet, 768px and below) */
-@media only screen and (max-width: 768px) {
+/* Small devices (mobile & Tablet, 767px and below) */
+@media only screen and (max-width: 767px) {
   #content-1 {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    /* min-height: 80vh; */
     background-color: #fcfcfc;
     background-image: url(../assets/bg-intro-mobile.svg);
     background-size: 100%;
@@ -194,8 +192,11 @@ export default {
   }
 
   .img-mockups {
-    width: 240px;
-    height: 145px;
+    position: relative;
+    width: 285px;
+    height: 170px;
+    /* bottom: 0%; */
+    margin-bottom: 10%;
   }
 
   .cartera {
@@ -218,8 +219,8 @@ export default {
   }
 }
 
-/* Medium devices (desktops, 769px and up) */
-@media only screen and (min-width: 769px) {
+/* Medium devices (desktops, 768px and up) */
+@media only screen and (min-width: 768px) {
   #content-1 {
     margin: 0;
     padding: 0;
