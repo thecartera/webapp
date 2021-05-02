@@ -58,7 +58,7 @@
             <div class="sub-title text-grey">
               <p class="lead text-center text-md-left">
                 Assim você está sempre por dentro do que seus amigos estão
-                investindo e podem discutir os melhores ativos do momento.
+                investindo e pode discutir os melhores ativos do momento.
               </p>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default {
           icon: 'cash-stack',
           title: 'Invista melhor',
           subtitle:
-            'Agora que você sabe no que outros estão investindo e como estão performando.'
+            'Agora você pode saber no que outros estão investindo e como estão performando.'
         },
         {
           icon: 'shield-fill-check',
