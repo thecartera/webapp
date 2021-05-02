@@ -193,6 +193,11 @@ export default {
     background-color: #f4f5f6;
   }
 
+  .img-mockups {
+    width: 240px;
+    height: 145px;
+  }
+
   .cartera {
     font-family: 'Helvetica';
     color: #33d260;
