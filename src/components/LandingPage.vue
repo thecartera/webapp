@@ -347,7 +347,7 @@ export default {
   .img-mockups {
     position: absolute;
     left: 5%;
-    bottom: -105%;
+    bottom: 5%;
   }
 }
 </style>
