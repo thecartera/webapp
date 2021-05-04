@@ -6,6 +6,8 @@ import ProfileView from '@/views/ProfileView'
 import WalletCreateView from '@/views/WalletCreateView'
 import LandingPage from '@/views/LandingPageView'
 import WalletEditorView from '@/views/WalletEditorView'
+import TermsOfService from '@/views/TermsOfService'
+import PrivacyPolicy from '@/views/PrivacyPolicy'
 
 import AuthGuard from './auth.guard'
 import CheckGuard from './check.guard'
@@ -58,6 +60,16 @@ const routes = [
     name: 'user',
     component: ProfileView,
     props: true
+  },
+  {
+    path: '/terms_of_service',
+    name: 'termsOfService',
+    component: TermsOfService
+  },
+  {
+    path: '/privacy_policy',
+    name: 'PrivacyPolicy',
+    component: PrivacyPolicy
   }
 ]
 
