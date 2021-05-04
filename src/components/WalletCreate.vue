@@ -25,7 +25,7 @@
   <b-card-body body-bg-variant="light">
     <b-tabs>
       <b-tab title="Composição">
-        <WalletAddTicker class="mt-2" @submit="addTicker" />
+        <WalletAddTicker index="assets" :hits="4" class="mt-2" @submit="addTicker" />
       </b-tab>
       <b-tab class="mt-2" title="Descrição">
         <WalletAddDescription @update="addDescription" />

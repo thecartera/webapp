@@ -1,52 +1,97 @@
 <template>
-<b-container>
-  <b-row align-h="center">
-    <h5> Adicionar ativo </h5>
-  </b-row>
+  <ais-instant-search :search-client="$meili" :index-name="index">
+    <b-row align-h="center">
+      <h5> Adicionar ativo </h5>
+    </b-row>
+    <b-row align-h="center">
+      <b-form @keyup.enter.prevent="submit">
+        <b-row>
+          <!-- Ticker -->
+          <b-col>
+            <!-- Conf -->
+            <ais-configure :hits-per-page.camel="hits" />
+            <ais-search-box v-model="ticker">
+              <b-form-input
+                v-model="ticker"
+                placeholder="Código"
+                @update="activeDropdown"
+              />
+            </ais-search-box>
+            <ais-hits>
+              <template slot-scope="{ items }">
+                <b-dropdown-group v-show="showDropdown" class="dropdown">
+                  <b-dropdown-item
+                    v-for="item in items"
+                    :key="item.codneg"
+                    @click="onClick(item.codneg)"
+                  >
+                    <b-row>
+                      <!-- Info -->
+                      <b-col cols="auto">
+                        <span class="cell-name">
+                          {{ item.nomres }}
+                        </span>
+                        <br>
+                        <span class="cell-value">
+                          {{ item.codneg }}
+                        </span>
+                      </b-col>
+                    </b-row>
+                  </b-dropdown-item>
+                </b-dropdown-group>
+              </template>
+            </ais-hits>
+          </b-col>
 
-  <b-row align-h="center">
-    <b-form @keyup.enter.prevent="submit">
-      <b-row>
-        <!-- Ticker -->
-        <b-col>
-          <b-form-input
-            v-model="ticker"
-            placeholder="Código"
-            @keypress="only8chars($event)"
-          />
-        </b-col>
+          <!-- Amount -->
+          <b-col>
+            <b-form-input
+              v-model="amount"
+              @keypress="onlyNumber($event)"
+              aria-describedby="input-live-help input-live-feedback"
+              placeholder="Quantidade"
+              trim
+            />
+          </b-col>
 
-        <!-- Amount -->
-        <b-col>
-          <b-form-input
-            v-model="amount"
-            @keypress="onlyNumber($event)"
-            aria-describedby="input-live-help input-live-feedback"
-            placeholder="Quantidade"
-            trim
-          />
-        </b-col>
-
-        <!-- Submit button -->
-        <b-col>
-          <b-button @click="submit" variant="secondary">
-            <b-icon icon="plus" variant="light" />
-          </b-button>
-        </b-col>
-      </b-row>
-    </b-form>
-  </b-row>
-</b-container>
+          <!-- Submit button -->
+          <b-col>
+            <b-button @click="submit" variant="secondary">
+              <b-icon icon="plus" variant="light" />
+            </b-button>
+          </b-col>
+        </b-row>
+      </b-form>
+    </b-row>
+  </ais-instant-search>
 </template>
 
 <script>
 export default {
   name: 'WalletAddTicker',
 
+  props: {
+    index: {
+      type: String,
+      required: true
+    },
+    hits: {
+      type: Number,
+      required: true
+    }
+  },
+
   data: () => ({
     ticker: '',
-    amount: ''
+    amount: '',
+    clicked: false
   }),
+
+  computed: {
+    showDropdown () {
+      return this.ticker.length && !this.clicked
+    }
+  },
 
   methods: {
     submit () {
@@ -61,6 +106,15 @@ export default {
         this.ticker = ''
         this.amount = ''
       }
+    },
+
+    activeDropdown () {
+      this.clicked = false
+    },
+
+    onClick (event) {
+      this.ticker = event
+      this.clicked = true
     },
 
     onlyNumber (evt) {
@@ -84,3 +138,22 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.dropdown {
+  position: absolute;
+  background-color: #dddd;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.cell-value {
+  font-family: 'Courier New';
+  font-size: 1.05em;
+}
+
+.cell-name {
+  font-size: 0.65em;
+  color: gray;
+}
+</style>
