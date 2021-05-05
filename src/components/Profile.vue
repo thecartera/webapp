@@ -15,23 +15,65 @@
 
         <!-- User information -->
         <b-col class="text-left">
-          <!-- Username -->
-          <span>
-            <strong> @{{ profile.username }} </strong>
-            <b-icon icon="patch-check-fill" class="cartera-blue-color" />
-          </span>
+          <b-row>
+            <!-- Username -->
+            <b-col style="padding: 0rem 0rem 0rem 0rem" >
+              <span>
+                <strong> @{{ profile.username }} </strong>
+                <b-icon icon="patch-check-fill" class="cartera-blue-color" />
+              </span>
+            </b-col>
 
-          <br>
+            <!-- Edit profile -->
+            <b-col>
+              <!-- Edit profile off -->
+              <b-row v-if="id === user.username && !editMode" align-h="end" style="margin-right: 0">
+                <b-button size="sm" variant="outline-secondary" @click="editMode = true">
+                  <b-icon icon="pencil-fill"/>
+                </b-button>
+              </b-row>
+              <!-- Edit profile on -->
+              <b-row v-if="id === user.username && editMode">
+                <b-col>
+                  <b-button
+                    size="sm" variant="warning"
+                    @click="editMode = false">
+                      Cancelar
+                  </b-button>
+                </b-col>
+                <b-col>
+                  <b-button
+                    size="sm" variant="success"
+                    @click="updateProfile">
+                      Salvar <b-icon icon="check"/>
+                  </b-button>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
 
           <!-- Name -->
-          <small>
-            <strong> {{ profile.name }} </strong>
-          </small>
-
-          <br>
+          <b-row>
+            <small>
+              <strong> {{ profile.name }} </strong>
+            </small>
+          </b-row>
 
           <!-- Description -->
-          {{ normalizedDescription }}
+          <b-row style="white-space: pre-wrap">
+            <b-container v-if="!editMode" style="padding: 0rem 0rem 0rem 0rem" >{{ normalizedDescription }}</b-container>
+            <b-container v-else style="padding: 0rem 0rem 0rem 0rem" >
+              <b-form-textarea
+                :value="normalizedDescription"
+                @update="onUpdate"
+                placeholder="Adicione uma descrição"
+                no-resize
+                rows="3"
+                max-rows="3"
+              >
+              </b-form-textarea>
+            </b-container>
+          </b-row>
         </b-col>
       </b-row>
     </b-card>
@@ -85,7 +127,9 @@ export default {
     profile: {},
     wallets: [],
     show: false,
-    selected: {}
+    selected: {},
+    editMode: false,
+    newDescription: ''
   }),
 
   computed: {
@@ -94,7 +138,7 @@ export default {
     },
     normalizedDescription () {
       const descr = this.profile.description
-      return descr ? descr.substring(0, 99) : ''
+      return descr ? descr.substring(0, 140) : ''
     },
     normalizedName () {
       return this.profile.name ? this.profile.name.substring(0, 25) : ''
@@ -142,6 +186,21 @@ export default {
     closePopup () {
       this.show = false
       this.selected = {}
+    },
+    async updateProfile () {
+      try {
+        const descr = [{ op: 'replace', path: '/description', value: this.newDescription }]
+        const res = await client.users.updateMyUser(descr)
+        this.profile.description = this.newDescription
+        console.log(res)
+        this.editMode = false
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    onUpdate (event) {
+      console.log(event)
+      this.newDescription = event
     }
   },
 
