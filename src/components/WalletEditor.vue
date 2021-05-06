@@ -166,7 +166,7 @@ export default {
     },
 
     cancelEdit () {
-      this.$router.push(`/wallets/${this.wallet.id}`)
+      this.$router.push(`/wallets/${this.walleta.id}`)
     },
 
     async addTicker ({ ticker, amount }) {
