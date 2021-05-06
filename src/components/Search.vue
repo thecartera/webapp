@@ -16,7 +16,7 @@
     <!-- Hits -->
     <ais-hits>
       <template slot-scope="{ items }">
-        <b-dropdown-group v-show="input" class="dropdown">
+        <b-dropdown-group v-show="input" class="dropdown" style="background-color: #ddd">
           <b-dropdown-item
             v-for="item in items"
             :key="item.username"

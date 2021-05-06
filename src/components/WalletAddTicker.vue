@@ -19,13 +19,13 @@
             </ais-search-box>
             <ais-hits>
               <template slot-scope="{ items }">
-                <b-dropdown-group v-show="showDropdown && items.length>0" class="dropdown">
+                <b-dropdown-group v-show="showDropdown && items.length>0" class="dropdown" style="background-color: #ddd">
                   <b-dropdown-item
                     v-for="item in items"
                     :key="item.codneg"
                     @click="onClick(item.codneg)"
                   >
-                  <b-row>
+                  <b-row align-v="center">
                     <!-- Info -->
                     <b-avatar
                       rounded
