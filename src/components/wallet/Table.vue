@@ -56,7 +56,7 @@ export default {
       { key: 'nameticker', label: '', class: 'text-left' },
       { key: 'weight', label: 'Peso', class: 'text-center', sortable: true },
       { key: 'price', label: 'Preço', class: 'text-center', sortable: true },
-      { key: 'gain', label: 'Ganho', class: 'text-center', sortable: true }
+      { key: 'gain', label: 'Lucro', class: 'text-center', sortable: true }
     ]
   }),
 

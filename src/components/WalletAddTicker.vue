@@ -19,24 +19,30 @@
             </ais-search-box>
             <ais-hits>
               <template slot-scope="{ items }">
-                <b-dropdown-group v-show="showDropdown" class="dropdown">
+                <b-dropdown-group v-show="showDropdown && items.length>0" class="dropdown">
                   <b-dropdown-item
                     v-for="item in items"
                     :key="item.codneg"
                     @click="onClick(item.codneg)"
                   >
-                    <b-row>
-                      <!-- Info -->
-                      <b-col cols="auto">
-                        <span class="cell-name">
-                          {{ item.nomres }}
-                        </span>
-                        <br>
-                        <span class="cell-value">
-                          {{ item.codneg }}
-                        </span>
-                      </b-col>
-                    </b-row>
+                  <b-row>
+                    <!-- Info -->
+                    <b-avatar
+                      rounded
+                      icon="wallet2"
+                      variant="light"
+                      :src="thumb(item.codneg)"
+                    />
+                    <b-col cols="auto">
+                      <span class="cell-name">
+                        {{ item.nomres }}
+                      </span>
+                      <br>
+                      <span class="cell-value">
+                        {{ item.codneg }}
+                      </span>
+                    </b-col>
+                  </b-row>
                   </b-dropdown-item>
                 </b-dropdown-group>
               </template>
@@ -67,6 +73,8 @@
 </template>
 
 <script>
+import client from '@/commons/client.api'
+
 export default {
   name: 'WalletAddTicker',
 
@@ -133,6 +141,14 @@ export default {
         return true
       } else {
         evt.preventDefault()
+      }
+    },
+
+    thumb (ticker) {
+      try {
+        return client.utils.thumbUrl(ticker)
+      } catch {
+        return ''
       }
     }
   }
