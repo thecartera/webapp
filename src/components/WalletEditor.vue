@@ -2,21 +2,25 @@
 <b-card no-body border-variant="white">
   <!-- Name input -->
   <b-card-header>
+    <b-row align-h="around" style="margin-bottom:1rem">
+      <!-- Cancel button -->
+      <b-button @click="cancelEdit" variant="outline-secondary">
+        Cancelar
+      </b-button>
+      <!-- Save button -->
+      <b-button @click="saveWallet" variant="success">
+        Salvar
+      </b-button>
+    </b-row>
+
+    <!-- Wallet name input -->
     <b-row>
-      <!-- Wallet name input -->
-      <b-col cols="7">
+      <b-col>
         <b-form-input
           v-model="walletName"
           :state="walletNameValid"
           placeholder="Dê um nome para sua carteira"
         />
-      </b-col>
-
-      <!-- Save button -->
-      <b-col class="text-center">
-        <b-button @click="saveWallet" variant="outline-secondary">
-          Salvar
-        </b-button>
       </b-col>
     </b-row>
   </b-card-header>
@@ -87,7 +91,7 @@
       <!-- ASSET REMOVE -->
       <template #cell(remove)="data">
         <br>
-        <b-icon icon="x" @click="deleteRow(data.index)" variant="dark">
+        <b-icon icon="x" @click="deleteRow(data.index)" scale="1.5" variant="dark">
           {{ data }}
         </b-icon>
       </template>
@@ -159,6 +163,10 @@ export default {
       console.log(this.wallet)
       const wallet = await client.wallets.updateWallet(this.wallet, this.walleta.id)
       this.$router.push(`/wallets/${wallet.id}`)
+    },
+
+    cancelEdit () {
+      this.$router.push(`/wallets/${this.wallet.id}`)
     },
 
     async addTicker ({ ticker, amount }) {
