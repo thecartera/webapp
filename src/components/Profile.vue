@@ -5,7 +5,7 @@
       <b-row>
         <!-- Image and location -->
         <b-col cols="auto">
-          <b-avatar :src="profile.picture" size="5rem" />
+          <b-avatar rounded :src="profile.picture" size="5rem" />
           <br>
           <small class="text-secondary">
             <b-icon icon="cursor-fill" class="cartera-blue-color" aria-hidden="true" />
