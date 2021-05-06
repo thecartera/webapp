@@ -30,7 +30,7 @@
           <!-- Image and location -->
           <b-row align-h="start">
             <b-col cols="auto">
-              <b-avatar :src="ownerImage" size="3rem" />
+              <b-avatar rounded :src="ownerImage" size="3rem" />
             </b-col>
             <b-col cols="ce" align-self="center">
               <b-link :to="`/users/${wallet.username}`">
