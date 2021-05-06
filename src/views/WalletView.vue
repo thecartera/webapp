@@ -1,7 +1,7 @@
 <template>
   <div style="background-color: #F3F2EF">
     <Navbar />
-    <Wallet :id="id" style="min-height: 35rem"/>
+    <Wallet :id="id" style="min-height: 60rem"/>
   </div>
 </template>
 
