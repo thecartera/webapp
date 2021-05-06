@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <TermsOfService />
+    <TermsOfService style="min-height: 50rem"/>
     <Footer />
   </div>
 </template>

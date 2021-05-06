@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <PrivacyPolicy />
+    <PrivacyPolicy style="min-height: 50rem"/>
     <Footer />
   </div>
 </template>
