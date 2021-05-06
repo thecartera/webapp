@@ -1,5 +1,5 @@
 <template>
-<b-card>
+<b-card no-body style="padding: 0.4rem 0.4rem 0rem 0.4rem">
   <b-card-title>
     <b-row>
       <!-- LEFT COLUMN -->
@@ -9,10 +9,9 @@
 
       <!-- RIGHT COLUMN -->
       <!-- Edit button -->
-      <b-col>
-        <b-row align-h="end" style="margin-right: 1rem">
+      <b-col cols="auto">
+        <b-row align-h="end" style="margin-right: auto">
           <b-button v-if="wallet.username === user.username" variant="outline-secondary" @click="gotoWalletEditor">
-            Editar
             <b-icon icon="pencil"/>
           </b-button>
         </b-row>
@@ -40,12 +39,12 @@
           </b-row>
 
           <br>
-          <dt> Retorno (30d)
+          <b-row style="margin-left: auto"> Retorno (30d)
             <b-icon icon="question-circle-fill"
               scale="0.7"
               variant="secondary"
-              shift-h="-6"
-              shift-v="6"
+              shift-h="-4"
+              shift-v="5"
               id="return-tooltip"
             >
             </b-icon>
@@ -55,22 +54,22 @@
             placement="topright">
               Em relação aos preços de fechamento de ontem e 30 dias antes
             </b-tooltip>
-          </dt>
-          <dd :class="positive(wallet.gain)">
+          </b-row>
+          <b-row align-h="start" :class="positive(wallet.gain)" style="margin-left: 1.5rem">
             {{ wallet.gain ? wallet.gain.toFixed(2) : 0.0 }}%
             <b-icon v-if="wallet.gain<0" icon="arrow-down"/>
             <b-icon v-else icon="arrow-up"/>
-          </dd>
+          </b-row>
         </dl>
       </b-col>
 
       <!-- Share buttons -->
-      <b-col align-self="end">
-        <b-row align-h="end" style="margin-bottom: 2rem; margin-right: 1rem">
+      <b-col align-self="end" cols="auto">
+        <b-row style="margin-bottom: 2rem; margin-right: auto">
           <b-dropdown right variant="outline-info" no-caret>
             <template #button-content>
               Compartilhar
-              <b-icon variant="info" icon="share-fill" />
+              <!-- <b-icon variant="info" icon="share-fill" /> -->
             </template>
             <b-dropdown-item-button>
               <vue-goodshare-whats-app has_icon />

@@ -2,20 +2,20 @@
   <b-table responsive='lg' hover :fields="fields" :items="assets" small borderless>
     <!-- Thumbnail -->
     <template #cell(imageLink)="data">
-      <span>
-        <b-avatar
-          rounded
-          icon="wallet2"
-          variant="light"
-          :src="thumb(data.item.ticker)"
-        />
-      </span>
+      <b-avatar
+        rounded
+        icon="wallet2"
+        variant="light"
+        class="image-size"
+        :src="thumb(data.item.ticker)"
+      />
     </template>
 
     <!-- Name and ticker -->
     <template #cell(nameticker)="data">
-      <span class="cell-name"> {{ data.index + 1 }}. {{ data.item.name }} </span>
+      <span class="cell-name"> {{ data.item.name }} </span>
       <br>
+      <span class="cell-name"> {{ data.index + 1 }}. </span>
       <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
     </template>
 
@@ -23,14 +23,14 @@
     <template #cell(weight)="data">
       <span class="cell-name"> Peso </span>
       <br>
-      <span class="monneda-blue cell-value"> {{ data.value.toFixed(1) }}% </span>
+      <span class="cartera-blue cell-value"> {{ data.value.toFixed(1) }}% </span>
     </template>
 
     <!-- Price -->
     <template #cell(price)="data">
       <span class="cell-name"> Preço (R$) </span>
       <br>
-      <span class="monneda-blue cell-value">{{ data.value.toFixed(2) }}</span>
+      <span class="cartera-blue cell-value">{{ data.value.toFixed(2) }}</span>
     </template>
 
     <!-- Profit -->
@@ -80,17 +80,43 @@ export default {
 </script>
 
 <style scoped>
-.cell-value {
-  font-family: 'Courier New';
-  font-size: 1.05rem;
-}
 
-.cell-name {
-  font-size: 0.65rem;
-  color: gray;
-}
-
-.monneda-blue {
+.cartera-blue {
   color: #0275B1;
 }
+
+@media only screen and (max-width: 767px) {
+  .cell-value {
+    font-family: 'Courier New';
+    font-size: 0.95rem;
+  }
+
+  .cell-name {
+    font-size: 0.75rem;
+    color: gray;
+  }
+
+  .image-size {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+@media only screen and (min-width: 767px) {
+  .cell-value {
+    font-family: 'Courier New';
+    font-size: 1.1rem;
+  }
+
+  .cell-name {
+    font-size: 0.7rem;
+    color: gray;
+  }
+
+  .image-size {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
 </style>
