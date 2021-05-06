@@ -37,25 +37,23 @@
                   <b-icon icon="pencil-fill"/>
                 </b-button>
               </b-row>
-              <!-- Edit profile on -->
-              <b-row v-if="id === user.username && editMode">
-                <b-col>
-                  <b-button
-                    size="sm" variant="warning"
-                    @click="editMode = false">
-                      Cancelar
-                  </b-button>
-                </b-col>
-                <b-col>
-                  <b-button
-                    size="sm"
-                    variant="success"
-                    @click="updateProfile">
-                      Salvar <b-icon icon="check"/>
-                  </b-button>
-                </b-col>
-              </b-row>
             </b-col>
+          </b-row>
+
+          <!-- Edit profile on -->
+          <b-row v-if="id === user.username && editMode" align-h="around">
+              <b-button
+                size="sm"
+                variant="outline-secondary"
+                @click="editMode = false">
+                Cancelar
+              </b-button>
+              <b-button
+                size="sm"
+                variant="success"
+                @click="updateProfile">
+                  Salvar
+              </b-button>
           </b-row>
 
           <!-- Description -->
@@ -71,7 +69,7 @@
                 placeholder="Adicione uma descrição"
                 no-resize
                 rows="3"
-                max-rows="3"
+                max-rows="6"
               >
               </b-form-textarea>
             </b-container>
@@ -166,6 +164,7 @@ export default {
   methods: {
     async fetchProfileById (id) {
       this.profile = await client.users.fetchByUsername(id)
+      this.newDescription = this.profile.description.substring(0, 140)
       this.wallets = await client.wallets.fetchByOwner(id)
     },
     async deleteWallet () {
