@@ -23,22 +23,22 @@
             :to="`/users/${item.username}`"
             @click="clear"
           >
-            <b-row>
-              <!-- Picture -->
-              <b-col cols="auto" class="p-0 m-0">
-                <b-avatar :src="item.picture" />
-              </b-col>
+          <b-row>
+            <!-- Picture -->
+            <b-col cols="auto" class="p-0 m-0">
+              <b-avatar :src="item.picture" />
+            </b-col>
 
-              <!-- Info -->
-              <b-col>
-                <p class="m-0 p-0 text-sm font-weight-bold">
-                  @{{ item.username }}
-                </p>
-                <p class="m-0 p-0 text-sm">
-                  {{ truncate(item.name) }}
-                </p>
-              </b-col>
-            </b-row>
+            <!-- Info -->
+            <b-col>
+              <p class="m-0 p-0 text-sm font-weight-bold">
+                @{{ item.username }}
+              </p>
+              <p class="m-0 p-0 text-sm">
+                {{ truncate(item.name) }}
+              </p>
+            </b-col>
+          </b-row>
           </b-dropdown-item>
         </b-dropdown-group>
       </template>
@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import client from '@/commons/client.api'
+
 export default {
   name: 'Search',
 
@@ -66,12 +68,6 @@ export default {
     items: []
   }),
 
-  computed: {
-    show () {
-      return this.input.length > 0
-    }
-  },
-
   methods: {
     truncate (name) {
       if (name.length <= 25) {
@@ -79,9 +75,21 @@ export default {
       }
       return name.substring(0, 22) + '...'
     },
-    search () {
-      this.clear()
-      this.$router.push(`/users/${this.input}`)
+    async search () {
+      try {
+        this.profile = await client.users.fetchByUsername(this.inpu)
+        this.clear()
+        this.$router.push(`/users/${this.input}`)
+      } catch {
+        this.showErrorToast('Ops!', `Usuário "${this.input}" não existe`)
+      }
+    },
+    showErrorToast (title, message) {
+      this.$bvToast.toast(message, {
+        title: title,
+        autoHideDelay: 3000,
+        variant: 'danger'
+      })
     },
     clear () {
       this.input = ''
