@@ -46,7 +46,15 @@
               variant="secondary"
               shift-h="-6"
               shift-v="6"
-              v-b-tooltip.hover title="Em relação aos preços de fechamento de ontem e 30 dias antes"/>
+              id="return-tooltip"
+            >
+            </b-icon>
+            <b-tooltip
+            target="return-tooltip"
+            triggers="click"
+            placement="topright">
+              Em relação aos preços de fechamento de ontem e 30 dias antes
+            </b-tooltip>
           </dt>
           <dd :class="positive(wallet.gain)">
             {{ wallet.gain ? wallet.gain.toFixed(2) : 0.0 }}%
