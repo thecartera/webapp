@@ -45,7 +45,7 @@
               <b-button
                 size="sm"
                 variant="outline-secondary"
-                @click="editMode = false">
+                @click="cancelEdit">
                 Cancelar
               </b-button>
               <b-button
@@ -202,6 +202,10 @@ export default {
     onUpdate (event) {
       console.log(event)
       this.newDescription = event
+    },
+    cancelEdit () {
+      this.editMode = false
+      this.newDescription = this.normalizedDescription
     }
   },
 
