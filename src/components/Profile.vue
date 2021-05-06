@@ -17,17 +17,22 @@
         <b-col class="text-left">
           <b-row>
             <!-- Username -->
-            <b-col style="padding: 0rem 0rem 0rem 0rem" >
-              <span>
+            <b-col style="padding: 0rem 0rem 0rem 0.8rem" align-self="center">
+              <b-row>
                 <strong> @{{ profile.username }} </strong>
-                <b-icon icon="patch-check-fill" class="cartera-blue-color" />
-              </span>
+                <!-- <b-icon icon="patch-check-fill" class="cartera-blue-color" /> -->
+                </b-row>
+              <b-row>
+                <span style="font-size: 0.9rem; font-weight: 600"> {{ profile.name }} </span>
+              </b-row>
             </b-col>
 
             <!-- Edit profile -->
             <b-col>
               <!-- Edit profile off -->
-              <b-row v-if="id === user.username && !editMode" align-h="end" style="margin-right: 0">
+              <b-row v-if="id === user.username && !editMode"
+                align-h="end"
+                style="margin-right: 0">
                 <b-button size="sm" variant="outline-secondary" @click="editMode = true">
                   <b-icon icon="pencil-fill"/>
                 </b-button>
@@ -43,7 +48,8 @@
                 </b-col>
                 <b-col>
                   <b-button
-                    size="sm" variant="success"
+                    size="sm"
+                    variant="success"
                     @click="updateProfile">
                       Salvar <b-icon icon="check"/>
                   </b-button>
@@ -52,16 +58,12 @@
             </b-col>
           </b-row>
 
-          <!-- Name -->
-          <b-row>
-            <small>
-              <strong> {{ profile.name }} </strong>
-            </small>
-          </b-row>
-
           <!-- Description -->
-          <b-row style="white-space: pre-wrap">
-            <b-container v-if="!editMode" style="padding: 0rem 0rem 0rem 0rem" >{{ normalizedDescription }}</b-container>
+          <b-row style="white-space: pre-wrap; margin-top: 0.5rem">
+            <b-container
+              v-if="!editMode"
+              style="padding: 0rem 0rem 0rem 0rem; font-size: 0.9rem">{{ normalizedDescription }}
+            </b-container>
             <b-container v-else style="padding: 0rem 0rem 0rem 0rem" >
               <b-form-textarea
                 :value="normalizedDescription"
