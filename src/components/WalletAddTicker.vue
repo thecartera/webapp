@@ -19,7 +19,7 @@
             </ais-search-box>
             <ais-hits>
               <template slot-scope="{ items }">
-                <b-dropdown-group v-show="showDropdown && items.length>0" class="dropdown" style="background-color: #ddd">
+                <b-dropdown-group v-show="showDropdown && items.length>0" class="dropdown" style="list-style: none; background-color: #ddd; z-index:1; width:12rem">
                   <b-dropdown-item
                     v-for="item in items"
                     :key="item.codneg"
