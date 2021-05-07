@@ -164,7 +164,10 @@ export default {
   methods: {
     async fetchProfileById (id) {
       this.profile = await client.users.fetchByUsername(id)
-      this.newDescription = this.profile.description.substring(0, 140)
+      // Quick bug fix. It was not fetching some wallets because description was null
+      if (this.profile.description) {
+        this.newDescription = this.profile.description.substring(0, 140)
+      }
       this.wallets = await client.wallets.fetchByOwner(id)
     },
     async deleteWallet () {
