@@ -1,3 +1,5 @@
+/* BASIC COLORS */
+
 .cartera-blue-color {
     color: #4e79a7;
 }
@@ -6,6 +8,16 @@
     background-color: #4e79a7;
 }
 
+.cartera-background-color {
+    background-color: #F3F2EF;
+}
+
+.cartera-green-color {
+    color: #33d260;
+}
+
+/* BUTTONS */
+
 .cartera-blue-button {
     color: white;
     background-color: #4e79a7;
@@ -13,14 +25,25 @@
 }
 
 .cartera-blue-button:hover {
-    color: #4e79a7;
-    background-color: white;
+    color: white;
+    background-color: #3f638a;
+    border-color: #3f638a;
 }
 
-.cartera-background-color {
-    background-color: #F3F2EF;
+.cartera-green-button {
+    color: white;
+    background-color: #33d260;
+    border-color: #33d260;
 }
 
-.cartera-green-color {
-    color: #33d260;
+.cartera-green-button:hover {
+    color: white;
+    background-color: #28a54b;
+    border-color: #28a54b;
+}
+
+.cartera-green-button:focus {
+    color: white;
+    background-color: #28a54b;
+    border-color: #28a54b;
 }

@@ -1,42 +1,79 @@
 <template>
-  <b-container id="screenSize">
+  <b-container id="screenSize" class="card-padding">
     <!-- User -->
-    <b-card align="center" style="border-color: #DBDAD7; margin-top: 1rem">
+    <b-card class="card-padding border-color" no-body>
       <b-row>
-        <!-- Image and location -->
+        <!-- Image -->
         <b-col cols="auto">
-          <b-avatar rounded :src="profile.picture" size="5rem" />
-          <br>
-          <small class="text-secondary">
-            <b-icon icon="cursor-fill" class="cartera-blue-color" aria-hidden="true" />
-            {{ normalizedLocation }}
-          </small>
+          <b-avatar rounded :src="profile.picture" size="4rem" />
         </b-col>
 
         <!-- User information -->
-        <b-col class="text-left">
+        <b-col>
           <b-row>
             <!-- Username -->
-            <b-col style="padding: 0rem 0rem 0rem 0.8rem" align-self="center">
+            <b-col cols="9" align-self="center">
               <b-row>
                 <strong> @{{ profile.username }} </strong>
                 <!-- <b-icon icon="patch-check-fill" class="cartera-blue-color" /> -->
                 </b-row>
-              <b-row>
-                <span style="font-size: 0.9rem; font-weight: 600"> {{ profile.name }} </span>
-              </b-row>
             </b-col>
 
             <!-- Edit profile -->
-            <b-col>
+            <b-col cols="3">
               <!-- Edit profile off -->
               <b-row v-if="id === user.username && !editMode"
-                align-h="end"
-                style="margin-right: 0">
+                align-h="center">
                 <b-button size="sm" variant="outline-secondary" @click="editMode = true">
                   <b-icon icon="pencil-fill"/>
                 </b-button>
               </b-row>
+            </b-col>
+          </b-row>
+
+          <!-- Followers and Follows -->
+          <b-row style="line-height: 0.8rem; text-align: center; margin-top: 0.5rem">
+            <b-col cols="4">
+              <span style="font-size: 0.8rem"> {{ followersCount }} </span>
+              <br>
+              <span style="font-size: 0.65rem; color: grey"> seguidores </span>
+            </b-col>
+            <b-col cols="4">
+              <span style="font-size: 0.8rem"> {{ profile.followingCount }} </span>
+              <br>
+              <span style="font-size: 0.65rem; color: grey"> seguindo </span>
+            </b-col>
+            <b-col cols="x">
+              <b-button
+                v-if="!profile.following && id !== user.username"
+                @click="follow"
+                size="sm"
+                class="cartera-green-button"
+                >
+                Seguir
+              </b-button>
+              <b-button
+                v-if="profile.following && id !== user.username"
+                @click="showUnfollow = true"
+                size="sm"
+                id="unfollow-confirmation"
+                >
+                seguindo
+              </b-button>
+                <b-popover
+                  placement="left"
+                  :show.sync="showUnfollow"
+                  title="Parar de seguir"
+                  target="unfollow-confirmation">
+                <p>
+                  Você deseja parar de seguir
+                  <strong> @{{ id }} </strong>?
+                </p>
+                <div class="row justify-content-around">
+                  <b-button variant="danger" @click="unfollow"> Parar de seguir </b-button>
+                  <b-button variant="secondary" @click="showUnfollow=false"> Cancelar </b-button>
+                </div>
+              </b-popover>
             </b-col>
           </b-row>
 
@@ -55,31 +92,36 @@
                   Salvar
               </b-button>
           </b-row>
-
-          <!-- Description -->
-          <b-row style="white-space: pre-wrap; margin-top: 0.5rem">
-            <b-container
-              v-if="!editMode"
-              style="padding: 0rem 0rem 0rem 0rem; font-size: 0.9rem">{{ normalizedDescription }}
-            </b-container>
-            <b-container v-else style="padding: 0rem 0rem 0rem 0rem" >
-              <b-form-textarea
-                :value="normalizedDescription"
-                @update="onUpdate"
-                placeholder="Adicione uma descrição"
-                no-resize
-                rows="3"
-                max-rows="6"
-              >
-              </b-form-textarea>
-            </b-container>
-          </b-row>
         </b-col>
+      </b-row>
+
+      <!-- Full Name -->
+      <b-row style="margin-top: 0.5rem; padding: 0rem 0rem 0rem 1rem">
+        <span style="font-size: 0.8rem; font-weight: 600"> {{ profile.name }} </span>
+      </b-row>
+
+      <!-- Description -->
+      <b-row style="white-space: pre-wrap; padding: 0rem 0rem 0rem 0.5rem">
+        <span
+          class="card-padding"
+          v-if="!editMode"
+          style="font-size: 0.9rem">{{ normalizedDescription }}
+        </span>
+          <b-form-textarea
+            v-else
+            :value="normalizedDescription"
+            @update="onUpdate"
+            placeholder="Adicione uma descrição"
+            no-resize
+            rows="3"
+            max-rows="6"
+          >
+          </b-form-textarea>
       </b-row>
     </b-card>
 
     <!-- Wallets -->
-    <b-card style="border-color: #DBDAD7; margin-top: 1rem" title="Carteiras">
+    <b-card style="border-color: #DBDAD7; margin-top: 0.5rem" title="Carteiras">
       <ul>
         <li v-for="item in normalizedWallets" :key="item.id">
           <b-link class="text-primary" :to="`/wallets/${item.id}`">
@@ -127,6 +169,7 @@ export default {
     profile: {},
     wallets: [],
     show: false,
+    showUnfollow: false,
     selected: {},
     editMode: false,
     newDescription: ''
@@ -158,6 +201,9 @@ export default {
     },
     auth () {
       return this.$store.state.auth.auth
+    },
+    followersCount () {
+      return this.profile.followersCount
     }
   },
 
@@ -209,6 +255,25 @@ export default {
     cancelEdit () {
       this.editMode = false
       this.newDescription = this.normalizedDescription
+    },
+    async follow () {
+      try {
+        this.profile.following = true
+        this.profile.followersCount += 1
+        await client.users.follow(this.id)
+      } catch (e) {
+        console.log('falha ao seguir usuário. erro: ' + e)
+      }
+    },
+    async unfollow () {
+      try {
+        this.profile.following = false
+        this.showUnfollow = false
+        this.profile.followersCount -= 1
+        await client.users.unfollow(this.id)
+      } catch (e) {
+        console.log('falha ao parar de seguir usuário. erro: ' + e)
+      }
     }
   },
 
@@ -225,6 +290,14 @@ export default {
 </script>
 
 <style scoped>
+.card-padding {
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.border-color {
+  border-color: #DBDAD7
+}
+
 /* Small devices (mobile & Tablet, 768px and below) */
 @media only screen and (max-width: 768px) {
   #screenSize {
