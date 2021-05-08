@@ -154,6 +154,7 @@
 
 <script>
 import client from '@/commons/client.api'
+import { LOGIN } from '@/store/actions.type'
 
 export default {
   name: 'Profile',
@@ -257,12 +258,17 @@ export default {
       this.newDescription = this.normalizedDescription
     },
     async follow () {
-      try {
-        this.profile.following = true
-        this.profile.followersCount += 1
-        await client.users.follow(this.id)
-      } catch (e) {
-        console.log('falha ao seguir usuário. erro: ' + e)
+      if (!this.$store.state.auth.auth) {
+        const state = { to: this.$router.currentRoute.path }
+        this.$store.dispatch(LOGIN, state)
+      } else {
+        try {
+          this.profile.following = true
+          this.profile.followersCount += 1
+          await client.users.follow(this.id)
+        } catch (e) {
+          console.log('falha ao seguir usuário. erro: ' + e)
+        }
       }
     },
     async unfollow () {
