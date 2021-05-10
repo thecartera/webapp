@@ -14,11 +14,11 @@ export default class extends Client {
   }
 
   follow (username) {
-    return this.request('POST', `users/${username}/follow`)
+    return this.request('POST', `users/${username}/follow`, {}, false)
   }
 
   unfollow (username) {
-    return this.request('POST', `users/${username}/unfollow`)
+    return this.request('POST', `users/${username}/unfollow`, {}, false)
   }
 
   following (username) {
