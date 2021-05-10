@@ -21,6 +21,14 @@ export default class extends Client {
     return this.request('POST', `users/${username}/unfollow`)
   }
 
+  following (username) {
+    return this.request('GET', `users/${username}/following`)
+  }
+
+  followers (username) {
+    return this.request('GET', `users/${username}/followers`)
+  }
+
   updateMyUser (data) {
     const options = {
       body: JSON.stringify(data),
