@@ -33,16 +33,108 @@
 
           <!-- Followers and Follows -->
           <b-row style="line-height: 0.8rem; text-align: center; margin-top: 0.5rem">
-            <b-col cols="4">
-              <span style="font-size: 0.8rem"> {{ followersCount }} </span>
+            <!-- Followers and Follows count -->
+            <b-col cols="4" @click="getFollowers">
+              <span id="followers-list" style="font-size: 0.8rem"> {{ followersCount }} </span>
               <br>
               <span style="font-size: 0.65rem; color: grey"> seguidores </span>
             </b-col>
-            <b-col cols="4">
-              <span style="font-size: 0.8rem"> {{ profile.followingCount }} </span>
+            <b-col cols="4" @click="getFollowing">
+              <span id="following-list" style="font-size: 0.8rem"> {{ profile.followingCount }} </span>
               <br>
               <span style="font-size: 0.65rem; color: grey"> seguindo </span>
             </b-col>
+            <!-- SHOW FOLLOWING LIST -->
+            <b-popover
+              placement="left"
+              :show.sync="showFollowingList"
+              target="following-list">
+              <b-container>
+                <b-row align-v="center">
+                  <b-col>
+                    <b-row align-h="start">
+                      <span style="font-size: 1.2rem; font-weight: 500"> Seguindo </span>
+                    </b-row>
+                  </b-col>
+                  <b-col>
+                    <b-row align-h="end">
+                      <b-icon icon="x" scale="2.5" @click="showFollowingList=false"/>
+                    </b-row>
+                  </b-col>
+                </b-row>
+              </b-container>
+              <b-dropdown-group class="dropdown" style="list-style: none; min-width: 13rem">
+                <b-dropdown-item
+                  v-for="following in normalizedFollowingList"
+                  :key="following.username"
+                  @click="showFollowingList = false"
+                  :to="`/users/${following.username}`"
+                >
+                <b-row>
+                  <!-- Picture -->
+                  <b-col cols="auto" class="p-0 m-0">
+                    <b-avatar size="sm" rounded :src="following.picture" />
+                  </b-col>
+
+                  <!-- Info -->
+                  <b-col>
+                    <p class="m-0 p-0 text-sm font-weight-bold">
+                      @{{ following.username }}
+                    </p>
+                    <p class="m-0 p-0 text-sm">
+                      {{ truncate(following.name) }}
+                    </p>
+                  </b-col>
+                </b-row>
+                </b-dropdown-item>
+              </b-dropdown-group>
+            </b-popover>
+            <!-- SHOW FOLLOWERS LIST -->
+            <b-popover
+              placement="left"
+              :show.sync="showFollowersList"
+              target="followers-list">
+              <b-container>
+                <b-row align-v="center">
+                  <b-col>
+                    <b-row align-h="start">
+                      <span style="font-size: 1.2rem; font-weight: 500"> Seguidores </span>
+                    </b-row>
+                  </b-col>
+                  <b-col>
+                    <b-row align-h="end">
+                      <b-icon icon="x" scale="2.5" @click="showFollowersList=false"/>
+                    </b-row>
+                  </b-col>
+                </b-row>
+              </b-container>
+              <b-dropdown-group class="dropdown" style="list-style: none; min-width: 13rem">
+                <b-dropdown-item
+                  v-for="follower in normalizedFollowersList"
+                  :key="follower.username"
+                  @click="showFollowersList = false"
+                  :to="`/users/${follower.username}`"
+                >
+                <b-row>
+                  <!-- Picture -->
+                  <b-col cols="auto" class="p-0 m-0">
+                    <b-avatar size="sm" rounded :src="follower.picture" />
+                  </b-col>
+
+                  <!-- Info -->
+                  <b-col>
+                    <p class="m-0 p-0 text-sm font-weight-bold">
+                      @{{ follower.username }}
+                    </p>
+                    <p class="m-0 p-0 text-sm">
+                      {{ truncate(follower.name) }}
+                    </p>
+                  </b-col>
+                </b-row>
+                </b-dropdown-item>
+              </b-dropdown-group>
+            </b-popover>
+            <!-- Follow and Stop following button -->
             <b-col cols="x">
               <b-button
                 v-if="!profile.following && id !== user.username"
@@ -55,6 +147,7 @@
               <b-button
                 v-if="profile.following && id !== user.username"
                 @click="showUnfollow = true"
+                @
                 size="sm"
                 id="unfollow-confirmation"
                 >
@@ -173,7 +266,11 @@ export default {
     showUnfollow: false,
     selected: {},
     editMode: false,
-    newDescription: ''
+    newDescription: '',
+    showFollowingList: false,
+    followingList: Array,
+    showFollowersList: false,
+    followersList: Array
   }),
 
   computed: {
@@ -205,6 +302,12 @@ export default {
     },
     followersCount () {
       return this.profile.followersCount
+    },
+    normalizedFollowingList () {
+      return this.followingList
+    },
+    normalizedFollowersList () {
+      return this.followingList
     }
   },
 
@@ -280,6 +383,32 @@ export default {
       } catch (e) {
         console.log('falha ao parar de seguir usuário. erro: ' + e)
       }
+    },
+    async getFollowing () {
+      try {
+        this.showFollowersList = false
+        this.followingList = await client.users.following(this.id)
+        this.showFollowingList = true
+        console.log(this.followingList)
+      } catch (e) {
+        console.log('falha ao buscar lista de seguindo. erro: ' + e)
+      }
+    },
+    async getFollowers () {
+      try {
+        this.showFollowingList = false
+        this.followingList = await client.users.followers(this.id)
+        this.showFollowersList = true
+        console.log(this.followingList)
+      } catch (e) {
+        console.log('falha ao buscar lista de seguidores. erro: ' + e)
+      }
+    },
+    truncate (name) {
+      if (name.length <= 25) {
+        return name
+      }
+      return name.substring(0, 22) + '...'
     }
   },
 
