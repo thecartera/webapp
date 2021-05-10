@@ -389,7 +389,6 @@ export default {
         this.showFollowersList = false
         this.followingList = await client.users.following(this.id)
         this.showFollowingList = true
-        console.log(this.followingList)
       } catch (e) {
         console.log('falha ao buscar lista de seguindo. erro: ' + e)
       }
@@ -399,7 +398,6 @@ export default {
         this.showFollowingList = false
         this.followingList = await client.users.followers(this.id)
         this.showFollowersList = true
-        console.log(this.followingList)
       } catch (e) {
         console.log('falha ao buscar lista de seguidores. erro: ' + e)
       }
