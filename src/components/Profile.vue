@@ -170,27 +170,32 @@
             </b-col>
           </b-row>
 
-          <!-- Edit profile on -->
-          <b-row v-if="id === user.username && editMode" align-h="around">
-              <b-button
-                size="sm"
-                variant="outline-secondary"
-                @click="cancelEdit">
-                Cancelar
-              </b-button>
-              <b-button
-                size="sm"
-                variant="success"
-                @click="updateProfile">
-                  Salvar
-              </b-button>
-          </b-row>
         </b-col>
       </b-row>
 
       <!-- Full Name -->
-      <b-row style="margin-top: 0.5rem; padding: 0rem 0rem 0rem 1rem">
-        <span style="font-size: 0.8rem; font-weight: 600"> {{ profile.name }} </span>
+      <b-row>
+        <b-col align-self="end">
+          <span style="font-size: 0.8rem; font-weight: 600"> {{ profile.name }} </span>
+        </b-col>
+        <!-- Edit profile on -->
+        <b-col v-if="id === user.username && editMode">
+          <b-row align-h="end" style="margin-right:auto">
+            <b-button
+              style="margin-right: 1rem"
+              size="sm"
+              variant="outline-secondary"
+              @click="cancelEdit">
+              Cancelar
+            </b-button>
+            <b-button
+              size="sm"
+              variant="success"
+              @click="updateProfile">
+                Salvar
+            </b-button>
+          </b-row>
+        </b-col>
       </b-row>
 
       <!-- Description -->
@@ -207,7 +212,7 @@
             placeholder="Adicione uma descrição"
             no-resize
             rows="3"
-            max-rows="6"
+            size="sm"
           >
           </b-form-textarea>
       </b-row>
@@ -344,16 +349,14 @@ export default {
     async updateProfile () {
       try {
         const descr = [{ op: 'replace', path: '/description', value: this.newDescription }]
-        const res = await client.users.updateMyUser(descr)
+        await client.users.updateMyUser(descr)
         this.profile.description = this.newDescription
-        console.log(res)
         this.editMode = false
       } catch (e) {
         console.error(e)
       }
     },
     onUpdate (event) {
-      console.log(event)
       this.newDescription = event
     },
     cancelEdit () {
