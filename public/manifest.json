@@ -1,11 +1,12 @@
 {
     "name": "Cartera",
     "short_name": "Cartera",
-    "theme_color": "#2c8645",
+    "theme_color": "#4e79a7",
     "background_color": "#4e79a7",
     "display": "standalone",
-    "scope": "/index.html",
-    "start_url": "/",
+    "scope": "www.cartera.com.br",
+    "start_url": "www.cartera.com.br",
+    "lang": "pt",
     "icons": [
         {
           "src": "images/icon-192x192.png",
