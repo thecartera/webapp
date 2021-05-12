@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Cartera">
+    <meta name="msapplication-TileImage" content="./src/assets/logo512x512">
+    <meta name="msapplication-TileColor" content="#000">
+    <link rel="apple-touch-icon" href="./src/assets/logo512x512">
+    <link rel="canonical" href="cartera.com.br">
+    <meta name="theme-color" content="#FFFFFF" />
+    <!-- END PWA -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="src/assets/logo512x512.png">
+    <link rel="icon" href="./src/assets/logo512x512.png">
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    <!-- PWA -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+      }
+    </script>
+    <!-- END PWA -->
     <noscript>
       <strong>A rede social de investidores para você ver e acompanhar as carteiras de ações dos seus amigos. </strong>
     </noscript>

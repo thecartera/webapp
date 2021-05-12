@@ -1,0 +1,21 @@
+{
+    "name": "Cartera",
+    "short_name": "Cartera",
+    "theme_color": "#2c8645",
+    "background_color": "#4e79a7",
+    "display": "standalone",
+    "scope": "/index.html",
+    "start_url": "/",
+    "icons": [
+        {
+          "src": "images/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
+          "src": "images/icon-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+    ]
+}
