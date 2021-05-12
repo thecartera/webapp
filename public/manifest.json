@@ -6,7 +6,7 @@
     "display": "standalone",
     "scope": "www.cartera.com.br",
     "start_url": "www.cartera.com.br",
-    "lang": "PT-BR",
+    "lang": "pt",
     "icons": [
         {
           "src": "images/icon-192x192.png",
