@@ -2,15 +2,24 @@
 <html lang="">
   <head>
     <!-- PWA -->
+      <!-- APPLE -->
+      <!-- https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+        <!-- Hiding Safari User Interface Components -->
     <link rel="manifest" href="/manifest.json"/>
     <meta name="apple-mobile-web-app-capable" content="yes">
+        <!-- Changing the Status Bar Appearance -->
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <!-- Adding a Launch Icon Title -->
     <meta name="apple-mobile-web-app-title" content="Cartera">
-    <meta name="msapplication-TileImage" content="./src/assets/logo512x512">
-    <meta name="msapplication-TileColor" content="#000">
-    <link rel="apple-touch-icon" href="./src/assets/logo512x512">
+        <!-- Specifying a Webpage Icon  -->
+    <link rel="apple-touch-icon" href="images/icon-512x512.png">
+        <!-- Specifying a Launch Screen Image -->
+    <link rel="apple-touch-startup-image" href="images/icon-512x512.png">
+      <!-- END APPLE -->
+    <meta name="msapplication-TileImage" content="images/icon-512x512.png">
+    <meta name="msapplication-TileColor" content="#4e79a7">
     <link rel="canonical" href="cartera.com.br">
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="theme-color" content="#4e79a7" />
     <!-- END PWA -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
