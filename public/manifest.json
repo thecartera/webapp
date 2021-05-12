@@ -5,7 +5,7 @@
     "background_color": "#4e79a7",
     "display": "standalone",
     "scope": "www.cartera.com.br",
-    "start_url": "www.cartera.com.br",
+    "start_url": "/",
     "lang": "pt",
     "icons": [
         {
