@@ -32,4 +32,8 @@ export default class extends Client {
   deleteById (id) {
     return this.request('DELETE', `wallets/${id}`, {}, false)
   }
+
+  getHistory (id) {
+    return this.request('GET', `wallets/${id}/history`)
+  }
 }
