@@ -17,12 +17,12 @@
         />
       </b-tab>
 
-      <!-- Description -->
-      <b-tab v-if="wallet.description" title="Descrição" class="m-3" style="white-space: pre-wrap">{{ wallet.description }}</b-tab>
+      <!-- Thesis -->
+      <b-tab v-if="wallet.thesis" title="Tese" class="m-3" style="white-space: pre-wrap">{{ wallet.thesis }}</b-tab>
 
-      <!-- Portfolio Timeline -->
-      <b-tab title="Movimentação" class="m-3">
-        <PortfolioTimeline :id="id"/>
+      <!-- Portfolio History -->
+      <b-tab title="Histórico">
+        <PortfolioHistory :id="id"/>
       </b-tab>
     </b-tabs>
   </b-card>
@@ -35,7 +35,7 @@ import client from '@/commons/client.api'
 import AssetTable from '@/components/wallet/Table'
 import WalletChart from '@/components/wallet/Chart'
 import WalletInfo from '@/components/wallet/Info'
-import PortfolioTimeline from '@/components/wallet/PortfolioTimeline'
+import PortfolioHistory from '@/components/wallet/PortfolioHistory'
 
 export default {
   name: 'Wallet',
@@ -44,7 +44,7 @@ export default {
     AssetTable,
     WalletChart,
     WalletInfo,
-    PortfolioTimeline
+    PortfolioHistory
   },
 
   props: {

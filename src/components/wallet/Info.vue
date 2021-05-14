@@ -1,14 +1,39 @@
 <template>
-<b-card no-body style="padding: 0.4rem 0.4rem 0rem 0.4rem">
+<b-card no-body style="padding: 1rem 0.7rem 0rem 0.7rem">
   <b-card-title>
     <b-row>
-      <!-- LEFT COLUMN -->
+      <!-- title Cartera -->
+      <b-col style="line-height: 1.3rem">
+        <span class="cartera-title"> Cartera </span>
+        <br>
+        <b-link class="h6" :to="`/users/${wallet.username}`">
+          @{{ wallet.username }}
+        </b-link>
+      </b-col>
+      <!-- Image and location -->
+      <b-col>
+        <b-row align-h="end">
+          <b-col cols="auto">
+            <b-avatar
+              rounded
+              :src="ownerImage"
+              size="3.5rem"
+              :to="`/users/${wallet.username}`"
+              />
+          </b-col>
+        </b-row>
+      </b-col>
+    </b-row>
+  </b-card-title>
+
+  <b-card-body style="padding: 0rem 0rem 0rem 0rem">
+    <!-- PORTFOLIO NAME AND EDIT BUTTON -->
+    <b-row>
+      <!-- LEFT COLUMN: Portfolio name -->
       <b-col class="h3">
         {{ wallet.name }}
       </b-col>
-
-      <!-- RIGHT COLUMN -->
-      <!-- Edit button -->
+      <!-- RIGHT COLUMN: Edit button -->
       <b-col cols="auto">
         <b-row align-h="end" style="margin-right: auto">
           <b-button v-if="wallet.username === user.username" variant="outline-secondary" @click="gotoWalletEditor">
@@ -16,29 +41,20 @@
           </b-button>
         </b-row>
       </b-col>
-
     </b-row>
-  </b-card-title>
 
-  <b-card-body style="padding: 0rem 0rem 0rem 0rem">
+    <!-- DESCRIPTION -->
+    <b-row style="white-space: pre-wrap; padding: 0rem 0rem 0rem 0.5rem">
+      <span
+      class="portfolio-description"
+      style="font-size: 0.9rem">{{ wallet.description }}
+      </span>
+    </b-row>
+
     <b-row>
-
     <!-- Wallet info -->
-      <b-col class="h5">
+      <b-col class="h5" style="margin-top: 1rem">
         <dl>
-          <!-- Image and location -->
-          <b-row align-h="start">
-            <b-col cols="auto">
-              <b-avatar rounded :src="ownerImage" size="3rem" />
-            </b-col>
-            <b-col cols="ce" align-self="center">
-              <b-link :to="`/users/${wallet.username}`">
-                @{{ wallet.username }}
-              </b-link>
-            </b-col>
-          </b-row>
-
-          <br>
           <b-row style="margin-left: auto"> Retorno (30d)
             <b-icon icon="question-circle-fill"
               scale="0.7"
@@ -145,5 +161,17 @@ export default {
 <style scoped>
 .infoo {
   font-size: 1.5rem;
+}
+
+.portfolio-description {
+  padding-left: 0.5rem;
+  font-size: 0.9rem
+}
+
+.cartera-title {
+  font-family: 'Helvetica';
+  font-size: 2rem;
+  color: #33d260;
+  font-weight: bold;
 }
 </style>
