@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="cards-l-r-margins">
     <ul class="list-unstyled">
       <li v-for="(item, i) in visibleEvents" :key="i" class="my-2">
         <b-card no-body style="background-color: #F3F2EF">
@@ -157,5 +157,12 @@ export default {
 .black {
   color: black;
   font-weight: 700;
+}
+
+/* Small devices (mobile) won't have padding for the cards, to gain the extra space */
+@media only screen and (max-width: 767px) {
+  .cards-l-r-margins {
+    padding: 0rem 0rem 0rem 0rem;
+  }
 }
 </style>
