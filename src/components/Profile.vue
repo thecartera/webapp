@@ -373,7 +373,7 @@ export default {
           this.profile.followersCount += 1
           await client.users.follow(this.id)
         } catch (e) {
-          console.log('falha ao seguir usuário. erro: ' + e)
+          console.error('falha ao seguir usuário. erro: ' + e)
         }
       }
     },
@@ -384,7 +384,7 @@ export default {
         this.profile.followersCount -= 1
         await client.users.unfollow(this.id)
       } catch (e) {
-        console.log('falha ao parar de seguir usuário. erro: ' + e)
+        console.error('falha ao parar de seguir usuário. erro: ' + e)
       }
     },
     async getFollowing () {
@@ -393,7 +393,7 @@ export default {
         this.followingList = await client.users.following(this.id)
         this.showFollowingList = true
       } catch (e) {
-        console.log('falha ao buscar lista de seguindo. erro: ' + e)
+        console.error('falha ao buscar lista de seguindo. erro: ' + e)
       }
     },
     async getFollowers () {
@@ -402,7 +402,7 @@ export default {
         this.followingList = await client.users.followers(this.id)
         this.showFollowersList = true
       } catch (e) {
-        console.log('falha ao buscar lista de seguidores. erro: ' + e)
+        console.error('falha ao buscar lista de seguidores. erro: ' + e)
       }
     },
     truncate (name) {

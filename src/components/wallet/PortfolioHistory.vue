@@ -75,11 +75,11 @@ export default {
     },
     parseEvent (newEvent) {
       const descrs = []
-      if (newEvent.type === 'CREATION') {
+      if (newEvent.data.type === 'CREATION') {
         descrs.push(['', 'Criou esta carteira', 'CREATION', 'bueno_no_icon_for_walletcreation'])
       }
-      for (let i = 0; i < newEvent.data.length; i++) {
-        const subevent = newEvent.data[i]
+      for (let i = 0; i < newEvent.data.changes.length; i++) {
+        const subevent = newEvent.data.changes[i]
         const str = ` sua posição em ${subevent.ticker}`
         let prestr = '- '
         switch (subevent.change) {
