@@ -2,6 +2,7 @@ import Client from './client'
 import Users from './users'
 import Assets from './assets'
 import Wallets from './wallets'
+import Feed from './feed'
 import Utils from './utils'
 
 class MyClient extends Client {
@@ -10,6 +11,7 @@ class MyClient extends Client {
     this.users = new Users(token)
     this.assets = new Assets(token)
     this.wallets = new Wallets(token)
+    this.feed = new Feed(token)
     this.utils = Utils
   }
 
@@ -18,6 +20,7 @@ class MyClient extends Client {
     this.users.token = token
     this.assets.token = token
     this.wallets.token = token
+    this.feed.token = token
   }
 }
 
