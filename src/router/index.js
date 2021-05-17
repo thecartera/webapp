@@ -8,6 +8,7 @@ import LandingPage from '@/views/LandingPageView'
 import WalletEditorView from '@/views/WalletEditorView'
 import TermsOfService from '@/views/TermsOfService'
 import PrivacyPolicy from '@/views/PrivacyPolicy'
+import Feed from '@/views/Feed'
 
 import AuthGuard from './auth.guard'
 import CheckGuard from './check.guard'
@@ -54,6 +55,11 @@ const routes = [
     path: '/landing',
     name: 'landing',
     component: LandingPage
+  },
+  {
+    path: '/feed',
+    name: 'feed',
+    component: Feed
   },
   {
     path: '/users/:id',
