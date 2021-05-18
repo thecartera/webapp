@@ -1,53 +1,17 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
-    <!-- PWA -->
-    <!-- APPLE -->
-    <!-- https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
-    <!-- Hiding Safari User Interface Components -->
-    <link rel="manifest" href="/manifest.json"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- Changing the Status Bar Appearance -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <!-- Adding a Launch Icon Title -->
-    <meta name="apple-mobile-web-app-title" content="Cartera">
-    <!-- Specifying a Webpage Icon  -->
-    <link rel="apple-touch-icon" href="images/icon-192x192.png">
-    <!-- Specifying a SPLASH/LOADING/LAUNCH Screen Image -->
-    <link rel="apple-touch-startup-image" href="images/icon-192x192.png">
-    <!-- SPLASH/LOADING/LAUNCH SCREEN FOR APPLE -->
-    <link href="images/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="images/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="images/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
-    <link href="images/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <link href="images/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
-    <!-- END APPLE -->
-    <meta name="msapplication-TileImage" content="images/icon-512x512.png">
-    <meta name="msapplication-TileColor" content="#4e79a7">
-    <link rel="canonical" href="https://cartera.com.br">
-    <meta name="theme-color" content="#4e79a7" />
-    <!-- END PWA -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="images/icon-512x512.png">
+    <link rel="icon" href="src/assets/logo512x512.png">
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <!-- PWA -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js');
-      }
-    </script>
-    <!-- END PWA -->
     <noscript>
-      <strong>A rede social de investidores para você ver e acompanhar as carteiras de ações dos seus amigos. </strong>
+      <strong>
+        A rede social de investidores para você ver e acompanhar as carteiras de ações dos seus amigos.
+      </strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
