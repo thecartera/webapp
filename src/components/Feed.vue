@@ -94,16 +94,14 @@ import client from '@/commons/client.api'
 export default {
   name: 'PortfolioTimeline',
 
-  data () {
-    return {
-      events: [],
-      show: 5,
-      loading: false
-    }
-  },
+  data: () => ({
+    events: [],
+    show: 6,
+    loading: false,
+    pageSize: 10
+  }),
   computed: {
     visibleEvents () {
-      console.log(this.events[3])
       return this.events.slice(0, this.show)
     },
     user () {
@@ -114,8 +112,10 @@ export default {
     loadEvents () {
       if (!this.loading && this.show < this.events.length) {
         this.loading = true
-        this.show += 5
-        // TODO make paginated request
+        this.show += this.pageSize
+        const beforeId = this.events[this.events.length - 1].id
+        const newEvents = client.feed.getFeed(this.pageSize, beforeId)
+        this.events.push.apply(this.events, newEvents)
         this.loading = false
       }
     },
@@ -138,7 +138,7 @@ export default {
   },
 
   async created () {
-    this.events = await client.feed.getFeed()
+    this.events = await client.feed.getFeed(this.pageSize * 2)
   }
 }
 </script>
