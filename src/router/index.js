@@ -77,7 +77,7 @@ const routes = [
   },
   {
     path: '/users/:id/following',
-    name: 'followers',
+    name: 'following',
     component: FollowingView,
     props: true
   },
