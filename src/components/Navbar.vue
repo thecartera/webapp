@@ -37,7 +37,7 @@
         </b-nav-item>
 
         <!-- Profile button -->
-        <b-nav-item v-if="auth" :to="`/users/${user.nickname}`">
+        <b-nav-item v-if="auth" :to="`/users/${user.username}`">
           <b-avatar rounded size="2rem" :src="user.picture" />
         </b-nav-item>
       </b-navbar-nav>
