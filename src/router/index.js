@@ -5,6 +5,7 @@ import WalletView from '@/views/WalletView'
 import ProfileView from '@/views/ProfileView'
 import WalletCreateView from '@/views/WalletCreateView'
 import FollowersView from '@/views/FollowersView'
+import FollowingView from '@/views/FollowingView'
 import LandingPage from '@/views/LandingPageView'
 import WalletEditorView from '@/views/WalletEditorView'
 import TermsOfService from '@/views/TermsOfService'
@@ -72,6 +73,12 @@ const routes = [
     path: '/users/:id/followers',
     name: 'followers',
     component: FollowersView,
+    props: true
+  },
+  {
+    path: '/users/:id/following',
+    name: 'followers',
+    component: FollowingView,
     props: true
   },
   {
