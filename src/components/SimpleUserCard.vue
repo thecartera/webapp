@@ -12,7 +12,7 @@
       </b-col>
 
       <!-- Info -->
-      <b-col v-if="$store.state.auth.auth">
+      <b-col>
         <b-row>
           <b-link :to="`/users/${user.username}`">
             @{{ user.username }}
@@ -22,7 +22,7 @@
       </b-col>
 
       <!-- Buttons -->
-      <b-col cols="2">
+      <b-col cols="2" v-if="$store.state.auth.auth">
         <!-- Unfollow -->
         <b-button v-if="user.following" variant="secondary" @click="unfollow">
           Unfollow
