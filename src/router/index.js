@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import WalletView from '@/views/WalletView'
 import ProfileView from '@/views/ProfileView'
 import WalletCreateView from '@/views/WalletCreateView'
+import FollowersView from '@/views/FollowersView'
 import LandingPage from '@/views/LandingPageView'
 import WalletEditorView from '@/views/WalletEditorView'
 import TermsOfService from '@/views/TermsOfService'
@@ -65,6 +66,12 @@ const routes = [
     path: '/users/:id',
     name: 'user',
     component: ProfileView,
+    props: true
+  },
+  {
+    path: '/users/:id/followers',
+    name: 'followers',
+    component: FollowersView,
     props: true
   },
   {
