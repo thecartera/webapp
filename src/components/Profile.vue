@@ -14,7 +14,7 @@
             <!-- Username -->
             <b-col cols="9" align-self="center">
               <b-row>
-                <strong> @{{ profile.username }} </strong>
+                <strong> {{ profile.username }} </strong>
               </b-row>
             </b-col>
 
@@ -36,51 +36,48 @@
             </b-col>
           </b-row>
 
-          <!-- Followers/Follows -->
           <b-row style="line-height: 0.8rem; text-align: center; margin-top: 0.5rem">
-            <!-- Followers count -->
-            <b-col cols="4">
-              <span id="followers-list" style="font-size: 0.8rem">
-                <b-link :to="`/users/${id}/followers`">
-                  {{ followersCount }}
-                </b-link>
-              </span>
-              <br>
-              <span style="font-size: 0.65rem; color: grey"> seguidores </span>
+            <!-- Followers/Follows -->
+            <b-col cols="auto">
+              <b-row align-h="center">
+                <!-- Followers count -->
+                <b-col cols="auto" class="follow-list-clickable" @click="gotoFollowers(id)">
+                  <span id="followers-list" style="font-size: 0.8rem">
+                    {{ followersCount }}
+                  </span>
+                  <br>
+                  <span style="font-size: 0.65rem; color: grey"> seguidores </span>
+                </b-col>
+
+                <b-col/>
+
+                <!-- Following count -->
+                <b-col cols="auto" class="follow-list-clickable" @click="gotoFollowing(id)">
+                  <span id="following-list" style="font-size: 0.8rem">
+                    {{ profile.followingCount }}
+                  </span>
+                  <br>
+                  <span style="font-size: 0.65rem; color: grey"> seguindo </span>
+                </b-col>
+              </b-row>
             </b-col>
 
-            <!-- Following count -->
-            <b-col cols="4">
-              <span id="following-list" style="font-size: 0.8rem">
-                <b-link :to="`/users/${id}/following`">
-                  {{ profile.followingCount }}
-                </b-link>
-              </span>
-              <br>
-              <span style="font-size: 0.65rem; color: grey"> seguindo </span>
-            </b-col>
-
-            <!-- Buttons-->
-            <b-col v-if="id !== user.username">
-              <!-- Unfollow -->
-              <b-button
-                size="sm"
-                id="unfollow-confirmation"
-                v-if="profile.following"
-                @click="unfollow"
-              >
-                Unfollow
-              </b-button>
-
-              <!-- Follow -->
-              <b-button
-                size="sm"
-                class="cartera-green-button"
-                v-else
-                @click="follow"
-              >
-                Follow
-              </b-button>
+            <!-- Unfollow Button-->
+            <b-col>
+              <b-row>
+                <b-col v-if="id !== user.username">
+                  <!-- Unfollow -->
+                  <b-button
+                    size="sm"
+                    id="unfollow-confirmation"
+                    v-if="profile.following"
+                    @click="unfollow"
+                    variant="outline-secondary"
+                  >
+                    <b-icon icon="person-check-fill" variant="dark"/>
+                  </b-button>
+                </b-col>
+              </b-row>
             </b-col>
           </b-row>
 
@@ -116,7 +113,7 @@
       </b-row>
 
       <!-- Description -->
-      <b-row style="white-space: pre-wrap; padding: 0rem 0rem 0rem 0.5rem">
+      <b-row style="white-space: pre-wrap; padding-left: 0.5rem">
         <span
           class="card-padding"
           v-if="!editMode"
@@ -132,6 +129,19 @@
             size="sm"
           >
           </b-form-textarea>
+      </b-row>
+
+      <!-- Follow -->
+      <b-row style="padding-left: 1rem; padding-right: 1rem">
+        <b-button
+        style="height:1.2rem; line-height: 0rem"
+          block
+          size="sm"
+          class="cartera-green-button"
+          v-if="id !== user.username && !profile.following"
+          @click="follow">
+          <b> Seguir </b>
+        </b-button>
       </b-row>
     </b-card>
 
@@ -309,6 +319,12 @@ export default {
         return name
       }
       return name.substring(0, 22) + '...'
+    },
+    gotoFollowers (id) {
+      this.$router.push(`/users/${id}/followers`)
+    },
+    gotoFollowing (id) {
+      this.$router.push(`/users/${id}/following`)
     }
   },
 
@@ -331,6 +347,10 @@ export default {
 
 .border-color {
   border-color: #DBDAD7
+}
+
+.follow-list-clickable {
+  cursor: pointer;
 }
 
 /* Small devices (mobile & Tablet, 768px and below) */
