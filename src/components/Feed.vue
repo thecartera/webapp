@@ -4,7 +4,7 @@
       <b-col cols="0" md="0" lg="3" />
       <b-col cols="12" md="8" lg="6" >
         <li style="list-style: none" v-for="(item, i) in visibleEvents" :key="i" class="my-2">
-          <b-card no-body style="background-color: #F3F2EF">
+          <b-card no-body>
             <b-card-header header-class="header"> {{ getTitleByType(item.type) }} </b-card-header>
             <b-card-body style="padding-top: 0.5rem; padding-left: 0.5rem; padding-bottom: 0.5rem">
               <b-row>
@@ -52,7 +52,7 @@
         <li v-if="loading" class="text-center mt-5"><b-spinner /></li>
       </b-col>
       <b-col cols="0" md="4" lg="3" style="padding: 0.5rem">
-        <b-card style="background-color: #F3F2EF">
+        <b-card>
           <b-row align-h="center">
             <b-col cols="auto">
               <b-avatar

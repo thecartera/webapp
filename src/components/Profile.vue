@@ -137,7 +137,7 @@
         style="height:1.2rem; line-height: 0rem"
           block
           size="sm"
-          class="cartera-green-button"
+          variant="success"
           v-if="id !== user.username && !profile.following"
           @click="follow">
           <b> Seguir </b>

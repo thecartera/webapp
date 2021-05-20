@@ -5,7 +5,7 @@ import Vue from 'vue'
 import './plugins/meili'
 import './plugins/bootstrap'
 import 'chartjs-plugin-colorschemes'
-import '@/assets/css/main.css'
+import './scss/custom.scss'
 
 // App
 import App from './App.vue'

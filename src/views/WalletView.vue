@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #F3F2EF">
+  <div>
     <Navbar />
     <Wallet :id="id" style="min-height: 60rem"/>
   </div>

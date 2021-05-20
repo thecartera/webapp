@@ -1,0 +1,18 @@
+// Your variable overrides
+$body-bg: #F3F2EF;
+
+$theme-colors: (
+  primary: #4e79a7,
+  secondary: #6c757d,
+  success: #28a745,
+  danger: #c81919,
+  warning: #ffa800,
+  info: #8975af,
+  light: #f8f9fa,
+  dark: #302f33
+);
+
+// Bootstrap and its default variables
+@import '../../node_modules/bootstrap/scss/bootstrap';
+// BootstrapVue and its default variables
+@import '../../node_modules/bootstrap-vue/src/index.scss';

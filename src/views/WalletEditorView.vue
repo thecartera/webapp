@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: #F3F2EF">
+  <div>
     <Navbar />
     <WalletEditor :id="id" />
   </div>
