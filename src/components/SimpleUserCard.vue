@@ -25,12 +25,22 @@
       <!-- Buttons -->
       <b-col class="follow-buttons-padding" cols="auto" v-if="$store.state.auth.auth">
         <!-- Unfollow -->
-        <b-button v-if="user.following" variant="outline-dark" @click="unfollow" size="sm">
+        <b-button
+        v-if="user.following"
+        variant="outline-dark"
+        @click="unfollow"
+        size="sm"
+        style="width: 5rem">
           Seguindo
         </b-button>
 
         <!-- Follow -->
-        <b-button v-else variant="success" @click="follow"  size="sm">
+        <b-button
+          v-if="!user.following && logged_user.username !== user.username"
+          variant="success"
+          @click="follow"
+          size="sm"
+          style="width: 5rem">
           <b> Seguir </b>
         </b-button>
       </b-col>
@@ -53,6 +63,9 @@ export default {
     name () {
       const name = this.user.name
       return name.length > 20 ? name.substring(0, 17) + '...' : name
+    },
+    logged_user () {
+      return this.$store.state.auth.user
     }
   },
 
