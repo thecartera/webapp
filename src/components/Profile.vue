@@ -14,159 +14,70 @@
             <!-- Username -->
             <b-col cols="9" align-self="center">
               <b-row>
-                <strong> @{{ profile.username }} </strong>
-                <!-- <b-icon icon="patch-check-fill" class="cartera-blue-color" /> -->
-                </b-row>
+                <strong> {{ profile.username }} </strong>
+              </b-row>
             </b-col>
 
             <!-- Edit profile -->
             <b-col cols="3">
               <!-- Edit profile off -->
-              <b-row v-if="id === user.username && !editMode"
-                align-h="center">
-                <b-button size="sm" variant="outline-secondary" @click="editMode = true">
-                  <b-icon icon="pencil-fill"/>
+              <b-row
+                v-if="id === user.username && !editMode"
+                align-h="center"
+              >
+                <b-button
+                  size="sm"
+                  variant="outline-secondary"
+                  @click="editMode = true"
+                >
+                  <b-icon icon="pencil-fill" />
                 </b-button>
               </b-row>
             </b-col>
           </b-row>
 
-          <!-- Followers and Follows -->
           <b-row style="line-height: 0.8rem; text-align: center; margin-top: 0.5rem">
-            <!-- Followers and Follows count -->
-            <b-col cols="4" @click="getFollowers">
-              <span id="followers-list" style="font-size: 0.8rem"> {{ followersCount }} </span>
-              <br>
-              <span style="font-size: 0.65rem; color: grey"> seguidores </span>
-            </b-col>
-            <b-col cols="4" @click="getFollowing">
-              <span id="following-list" style="font-size: 0.8rem"> {{ profile.followingCount }} </span>
-              <br>
-              <span style="font-size: 0.65rem; color: grey"> seguindo </span>
-            </b-col>
-            <!-- SHOW FOLLOWING LIST -->
-            <b-popover
-              placement="left"
-              :show.sync="showFollowingList"
-              target="following-list">
-              <b-container>
-                <b-row align-v="center">
-                  <b-col>
-                    <b-row align-h="start">
-                      <span style="font-size: 1.2rem; font-weight: 500"> Seguindo </span>
-                    </b-row>
-                  </b-col>
-                  <b-col>
-                    <b-row align-h="end">
-                      <b-icon icon="x" scale="2.5" @click="showFollowingList=false"/>
-                    </b-row>
-                  </b-col>
-                </b-row>
-              </b-container>
-              <b-dropdown-group class="dropdown" style="list-style: none; min-width: 13rem">
-                <b-dropdown-item
-                  v-for="following in normalizedFollowingList"
-                  :key="following.username"
-                  @click="showFollowingList = false"
-                  :to="`/users/${following.username}`"
-                >
-                <b-row>
-                  <!-- Picture -->
-                  <b-col cols="auto" class="p-0 m-0">
-                    <b-avatar size="sm" rounded :src="following.picture" />
-                  </b-col>
+            <!-- Followers/Follows -->
+            <b-col cols="auto">
+              <b-row align-h="center">
+                <!-- Followers count -->
+                <b-col cols="auto" class="follow-list-clickable" @click="gotoFollowers(id)">
+                  <span id="followers-list" style="font-size: 0.8rem">
+                    {{ followersCount }}
+                  </span>
+                  <br>
+                  <span style="font-size: 0.65rem; color: grey"> seguidores </span>
+                </b-col>
 
-                  <!-- Info -->
-                  <b-col>
-                    <p class="m-0 p-0 text-sm font-weight-bold">
-                      @{{ following.username }}
-                    </p>
-                    <p class="m-0 p-0 text-sm">
-                      {{ truncate(following.name) }}
-                    </p>
-                  </b-col>
-                </b-row>
-                </b-dropdown-item>
-              </b-dropdown-group>
-            </b-popover>
-            <!-- SHOW FOLLOWERS LIST -->
-            <b-popover
-              placement="left"
-              :show.sync="showFollowersList"
-              target="followers-list">
-              <b-container>
-                <b-row align-v="center">
-                  <b-col>
-                    <b-row align-h="start">
-                      <span style="font-size: 1.2rem; font-weight: 500"> Seguidores </span>
-                    </b-row>
-                  </b-col>
-                  <b-col>
-                    <b-row align-h="end">
-                      <b-icon icon="x" scale="2.5" @click="showFollowersList=false"/>
-                    </b-row>
-                  </b-col>
-                </b-row>
-              </b-container>
-              <b-dropdown-group class="dropdown" style="list-style: none; min-width: 13rem">
-                <b-dropdown-item
-                  v-for="follower in normalizedFollowersList"
-                  :key="follower.username"
-                  @click="showFollowersList = false"
-                  :to="`/users/${follower.username}`"
-                >
-                <b-row>
-                  <!-- Picture -->
-                  <b-col cols="auto" class="p-0 m-0">
-                    <b-avatar size="sm" rounded :src="follower.picture" />
-                  </b-col>
+                <b-col/>
 
-                  <!-- Info -->
-                  <b-col>
-                    <p class="m-0 p-0 text-sm font-weight-bold">
-                      @{{ follower.username }}
-                    </p>
-                    <p class="m-0 p-0 text-sm">
-                      {{ truncate(follower.name) }}
-                    </p>
-                  </b-col>
-                </b-row>
-                </b-dropdown-item>
-              </b-dropdown-group>
-            </b-popover>
-            <!-- Follow and Stop following button -->
-            <b-col cols="x">
-              <b-button
-                v-if="!profile.following && id !== user.username"
-                @click="follow"
-                size="sm"
-                class="cartera-green-button"
-                >
-                Seguir
-              </b-button>
-              <b-button
-                v-if="profile.following && id !== user.username"
-                @click="showUnfollow = true"
-                @
-                size="sm"
-                id="unfollow-confirmation"
-                >
-                seguindo
-              </b-button>
-                <b-popover
-                  placement="left"
-                  :show.sync="showUnfollow"
-                  title="Parar de seguir"
-                  target="unfollow-confirmation">
-                <p>
-                  Você deseja parar de seguir
-                  <strong> @{{ id }} </strong>?
-                </p>
-                <div class="row justify-content-around">
-                  <b-button variant="danger" @click="unfollow"> Parar de seguir </b-button>
-                  <b-button variant="secondary" @click="showUnfollow=false"> Cancelar </b-button>
-                </div>
-              </b-popover>
+                <!-- Following count -->
+                <b-col cols="auto" class="follow-list-clickable" @click="gotoFollowing(id)">
+                  <span id="following-list" style="font-size: 0.8rem">
+                    {{ profile.followingCount }}
+                  </span>
+                  <br>
+                  <span style="font-size: 0.65rem; color: grey"> seguindo </span>
+                </b-col>
+              </b-row>
+            </b-col>
+
+            <!-- Unfollow Button-->
+            <b-col>
+              <b-row>
+                <b-col v-if="id !== user.username">
+                  <!-- Unfollow -->
+                  <b-button
+                    size="sm"
+                    id="unfollow-confirmation"
+                    v-if="profile.following"
+                    @click="unfollow"
+                    variant="outline-secondary"
+                  >
+                    <b-icon icon="person-check-fill" variant="dark"/>
+                  </b-button>
+                </b-col>
+              </b-row>
             </b-col>
           </b-row>
 
@@ -176,8 +87,11 @@
       <!-- Full Name -->
       <b-row>
         <b-col align-self="end">
-          <span style="font-size: 0.8rem; font-weight: 600"> {{ profile.name }} </span>
+          <span style="font-size: 0.8rem; font-weight: 600">
+            {{ profile.name }}
+          </span>
         </b-col>
+
         <!-- Edit profile on -->
         <b-col v-if="id === user.username && editMode">
           <b-row align-h="end" style="margin-right:auto">
@@ -199,7 +113,7 @@
       </b-row>
 
       <!-- Description -->
-      <b-row style="white-space: pre-wrap; padding: 0rem 0rem 0rem 0.5rem">
+      <b-row style="white-space: pre-wrap; padding-left: 0.5rem">
         <span
           class="card-padding"
           v-if="!editMode"
@@ -215,6 +129,19 @@
             size="sm"
           >
           </b-form-textarea>
+      </b-row>
+
+      <!-- Follow -->
+      <b-row style="padding-left: 1rem; padding-right: 1rem">
+        <b-button
+        style="height:1.2rem; line-height: 0rem"
+          block
+          size="sm"
+          class="cartera-green-button"
+          v-if="id !== user.username && !profile.following"
+          @click="follow">
+          <b> Seguir </b>
+        </b-button>
       </b-row>
     </b-card>
 
@@ -387,29 +314,17 @@ export default {
         console.error('falha ao parar de seguir usuário. erro: ' + e)
       }
     },
-    async getFollowing () {
-      try {
-        this.showFollowersList = false
-        this.followingList = await client.users.following(this.id)
-        this.showFollowingList = true
-      } catch (e) {
-        console.error('falha ao buscar lista de seguindo. erro: ' + e)
-      }
-    },
-    async getFollowers () {
-      try {
-        this.showFollowingList = false
-        this.followingList = await client.users.followers(this.id)
-        this.showFollowersList = true
-      } catch (e) {
-        console.error('falha ao buscar lista de seguidores. erro: ' + e)
-      }
-    },
     truncate (name) {
       if (name.length <= 25) {
         return name
       }
       return name.substring(0, 22) + '...'
+    },
+    gotoFollowers (id) {
+      this.$router.push(`/users/${id}/followers`)
+    },
+    gotoFollowing (id) {
+      this.$router.push(`/users/${id}/following`)
     }
   },
 
@@ -432,6 +347,10 @@ export default {
 
 .border-color {
   border-color: #DBDAD7
+}
+
+.follow-list-clickable {
+  cursor: pointer;
 }
 
 /* Small devices (mobile & Tablet, 768px and below) */
