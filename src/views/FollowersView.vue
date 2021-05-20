@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="cartera-background-color">
     <Navbar />
 
-    <b-container>
+    <b-container class="container px-0" style="min-height: 60rem">
       <b-row v-for="f of followers" :key="f.username">
         <b-col>
           <SimpleUserCard

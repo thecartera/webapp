@@ -1,36 +1,37 @@
 <template>
-  <b-card>
+  <b-card no-body class="user-card">
     <b-row>
       <!-- Image -->
-      <b-col cols="2">
+      <b-col cols="auto">
         <b-avatar
           rounded
-          size="4rem"
+          size="3rem"
           :src="user.picture"
           :to="`/users/${user.username}`"
         />
       </b-col>
 
-      <!-- Info -->
-      <b-col>
+      <!-- User Info -->
+      <b-col class="user-info-padding user-info-text">
         <b-row>
-          <b-link :to="`/users/${user.username}`">
-            @{{ user.username }}
+          <b-link class="username" :to="`/users/${user.username}`">
+            <b> {{ user.username }} </b>
           </b-link>
         </b-row>
-        <b-row> {{ user.name }} </b-row>
+        <b-row> {{ name }} </b-row>
+        <b-row class="usertitle"> {{ user.title }} </b-row>
       </b-col>
 
       <!-- Buttons -->
-      <b-col cols="2" v-if="$store.state.auth.auth">
+      <b-col class="follow-buttons-padding" cols="auto" v-if="$store.state.auth.auth">
         <!-- Unfollow -->
-        <b-button v-if="user.following" variant="secondary" @click="unfollow">
-          Unfollow
+        <b-button v-if="user.following" variant="outline-dark" @click="unfollow" size="sm">
+          Seguindo
         </b-button>
 
         <!-- Follow -->
-        <b-button v-else variant="success" @click="follow">
-          Follow
+        <b-button v-else variant="success" @click="follow"  size="sm">
+          <b> Seguir </b>
         </b-button>
       </b-col>
     </b-row>
@@ -48,6 +49,13 @@ export default {
     }
   },
 
+  computed: {
+    name () {
+      const name = this.user.name
+      return name.length > 20 ? name.substring(0, 17) + '...' : name
+    }
+  },
+
   methods: {
     async follow () {
       this.$emit('follow', this.user)
@@ -58,3 +66,36 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.follow-buttons-padding {
+  padding-top: 0.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.user-card {
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border-color: lightgray;
+}
+
+.user-info-padding {
+  padding-left: 0.5rem;
+}
+
+.user-info-text {
+  font-size: 0.9rem;
+  line-height: 1rem;
+}
+
+.username {
+  color: black;
+}
+
+.usertitle {
+  color: gray;
+}
+
+</style>
