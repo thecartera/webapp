@@ -1,5 +1,5 @@
 <template>
-  <div class="cartera-background-color">
+  <div>
     <Navbar />
 
     <b-container class="container px-0" style="min-height: 60rem">

@@ -23,14 +23,14 @@
     <template #cell(weight)="data">
       <span class="cell-name"> Peso </span>
       <br>
-      <span class="cartera-blue cell-value"> {{ data.value.toFixed(1) }}% </span>
+      <span class="primary cell-value"> {{ data.value.toFixed(1) }}% </span>
     </template>
 
     <!-- Price -->
     <template #cell(price)="data">
       <span class="cell-name"> Preço (R$) </span>
       <br>
-      <span class="cartera-blue cell-value">{{ data.value.toFixed(2) }}</span>
+      <span class="primary cell-value">{{ data.value.toFixed(2) }}</span>
     </template>
 
     <!-- Profit -->
@@ -80,10 +80,6 @@ export default {
 </script>
 
 <style scoped>
-
-.cartera-blue {
-  color: #0275B1;
-}
 
 @media only screen and (max-width: 767px) {
   .cell-value {

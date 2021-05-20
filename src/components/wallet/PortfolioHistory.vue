@@ -2,7 +2,7 @@
   <b-container class="cards-l-r-margins">
     <ul class="list-unstyled">
       <li v-for="(item, i) in visibleEvents" :key="i" class="my-2">
-        <b-card no-body style="background-color: #F3F2EF">
+        <b-card no-body>
           <b-card-body>
             <b-row>
               <b-col>

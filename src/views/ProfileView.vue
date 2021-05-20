@@ -1,5 +1,5 @@
 <template>
-  <div class="cartera-background-color">
+  <div>
     <Navbar />
     <Profile :id="id" style="min-height: 60rem"/>
   </div>
