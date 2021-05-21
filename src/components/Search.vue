@@ -18,6 +18,7 @@
       <template slot-scope="{ items }">
         <b-dropdown-group v-show="input" class="dropdown" style="background-color: #ddd">
           <b-dropdown-item
+            dropleft
             v-for="item in items"
             :key="item.username"
             :to="`/users/${item.username}`"
@@ -30,9 +31,9 @@
             </b-col>
 
             <!-- Info -->
-            <b-col>
+            <b-col class="pl-1 pr-1" style="line-height: 1.3rem">
               <p class="m-0 p-0 text-sm font-weight-bold">
-                @{{ item.username }}
+                {{ item.username }}
               </p>
               <p class="m-0 p-0 text-sm">
                 {{ truncate(item.name) }}
