@@ -2,7 +2,7 @@
   <b-container id="screenSize">
     <!-- User -->
     <b-card class="p-2 mt-2 border-color" no-body>
-      <b-row style="background-color: #2c2f4b">
+      <b-row>
         <!-- Image -->
         <b-col cols="auto">
           <b-avatar rounded :src="profile.picture" size="5rem" />
@@ -19,29 +19,25 @@
             </b-col>
 
             <!-- Edit profile -->
-            <b-col cols="3">
+            <b-col cols="3" class="pt-1 ptr-1">
               <!-- Edit profile off -->
-              <b-row align-h="end" class="pr-3"
+              <b-row align-h="end" class="pr-4"
                 v-if="id === user.username"
               >
-                <b-button
-                  size="sm"
-                  variant="outline-light"
-                  @click="showModal"
-                >
-                  <b-icon icon="pencil-square" variant="secondary"/>
-                </b-button>
-                <EditProfile ref="editProfileModal"/>
+
+              <b-icon @click="showModal" style="cursor: pointer" scale="1.3" icon="pencil-square" variant="secondary"/>
+
+              <EditProfile ref="editProfileModal"/>
               </b-row>
             </b-col>
           </b-row>
 
-          <b-row class="mr-2" style="background-color: blue; line-height: 0.8rem; text-align: center; margin-top: 0.5rem" >
+          <b-row style="line-height: 0.8rem; text-align: center; margin-top: 0.5rem" >
             <!-- Followers/Follows -->
-            <b-col cols="auto" md="6" style="background-color: red">
-              <b-row align-h="center" style="background-color: black" >
+            <b-col sm="0">
+              <b-row align-h="center" >
                 <!-- Followers count -->
-                <b-col cols="auto" style="background-color: pink" class="follow-list-clickable" @click="gotoFollowers(id)">
+                <b-col class="follow-list-clickable" @click="gotoFollowers(id)">
                   <span id="followers-list" style="font-size: 0.8rem">
                     {{ followersCount }}
                   </span>
@@ -49,10 +45,8 @@
                   <span style="font-size: 0.65rem; color: grey"> seguidores </span>
                 </b-col>
 
-                <b-col cols="0"/>
-
                 <!-- Following count -->
-                <b-col cols="auto" style="background-color: purple" class="follow-list-clickable" @click="gotoFollowing(id)">
+                <b-col class="ml-2 follow-list-clickable" @click="gotoFollowing(id)">
                   <span id="following-list" style="font-size: 0.8rem">
                     {{ profile.followingCount }}
                   </span>
@@ -63,7 +57,7 @@
             </b-col>
 
             <!-- Unfollow Button-->
-            <b-col cols="auto" md="6" v-if="id !== user.username" style="background-color: yellow; width: 3rem">
+            <b-col v-if="id !== user.username">
               <!-- Unfollow -->
               <b-button
                 size="sm"
@@ -93,6 +87,13 @@
           <span style="font-size: 0.8rem; font-weight: 600">
             {{ profile.name }}
           </span>
+        </b-col>
+      </b-row>
+
+      <!-- Description -->
+      <b-row>
+        <b-col style="line-height: 1rem">
+          <span style="font-size: 0.8rem; white-space: pre-wrap">{{ normalizedDescription }}</span>
         </b-col>
       </b-row>
     </b-card>
