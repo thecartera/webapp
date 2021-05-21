@@ -19,7 +19,7 @@
                 <b-col style="line-height:1rem">
                   <b-row>
                     <b-link
-                      :to="`/users/${item.owner.name}`"
+                      :to="`/users/${item.owner.username}`"
                       style="font-weight: bold; font-size: 0.9rem; color: black"> {{ item.owner.name }}
                     </b-link>
                   </b-row>

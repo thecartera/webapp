@@ -18,7 +18,7 @@
       <b-navbar-nav class="ml-auto">
         <!-- Create wallet button -->
         <b-nav-item to="/wallets">
-          <b-button size="sm" variant="primary">
+          <b-button v-if="auth" size="sm" variant="primary">
             Nova carteira
           </b-button>
         </b-nav-item>
