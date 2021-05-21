@@ -1,15 +1,15 @@
 <template>
-  <b-container id="screenSize" class="card-padding">
+  <b-container id="screenSize">
     <!-- User -->
-    <b-card class="card-padding border-color" no-body>
-      <b-row>
+    <b-card class="p-2 mt-2 border-color" no-body>
+      <b-row style="background-color: #2c2f4b">
         <!-- Image -->
         <b-col cols="auto">
-          <b-avatar rounded :src="profile.picture" size="4rem" />
+          <b-avatar rounded :src="profile.picture" size="5rem" />
         </b-col>
 
         <!-- User information -->
-        <b-col>
+        <b-col class="pl-2">
           <b-row>
             <!-- Username -->
             <b-col cols="9" align-self="center">
@@ -21,27 +21,27 @@
             <!-- Edit profile -->
             <b-col cols="3">
               <!-- Edit profile off -->
-              <b-row
-                v-if="id === user.username && !editMode"
-                align-h="center"
+              <b-row align-h="end" class="pr-3"
+                v-if="id === user.username"
               >
                 <b-button
                   size="sm"
-                  variant="outline-secondary"
-                  @click="editMode = true"
+                  variant="outline-light"
+                  @click="showModal"
                 >
-                  <b-icon icon="pencil-fill" />
+                  <b-icon icon="pencil-square" variant="secondary"/>
                 </b-button>
+                <EditProfile ref="editProfileModal"/>
               </b-row>
             </b-col>
           </b-row>
 
-          <b-row style="line-height: 0.8rem; text-align: center; margin-top: 0.5rem">
+          <b-row class="mr-2" style="background-color: blue; line-height: 0.8rem; text-align: center; margin-top: 0.5rem" >
             <!-- Followers/Follows -->
-            <b-col cols="auto">
-              <b-row align-h="center">
+            <b-col cols="auto" md="6" style="background-color: red">
+              <b-row align-h="center" style="background-color: black" >
                 <!-- Followers count -->
-                <b-col cols="auto" class="follow-list-clickable" @click="gotoFollowers(id)">
+                <b-col cols="auto" style="background-color: pink" class="follow-list-clickable" @click="gotoFollowers(id)">
                   <span id="followers-list" style="font-size: 0.8rem">
                     {{ followersCount }}
                   </span>
@@ -49,10 +49,10 @@
                   <span style="font-size: 0.65rem; color: grey"> seguidores </span>
                 </b-col>
 
-                <b-col/>
+                <b-col cols="0"/>
 
                 <!-- Following count -->
-                <b-col cols="auto" class="follow-list-clickable" @click="gotoFollowing(id)">
+                <b-col cols="auto" style="background-color: purple" class="follow-list-clickable" @click="gotoFollowing(id)">
                   <span id="following-list" style="font-size: 0.8rem">
                     {{ profile.followingCount }}
                   </span>
@@ -63,21 +63,24 @@
             </b-col>
 
             <!-- Unfollow Button-->
-            <b-col>
-              <b-row>
-                <b-col v-if="id !== user.username">
-                  <!-- Unfollow -->
-                  <b-button
-                    size="sm"
-                    id="unfollow-confirmation"
-                    v-if="profile.following"
-                    @click="unfollow"
-                    variant="outline-secondary"
-                  >
-                    <b-icon icon="person-check-fill" variant="dark"/>
-                  </b-button>
-                </b-col>
-              </b-row>
+            <b-col cols="auto" md="6" v-if="id !== user.username" style="background-color: yellow; width: 3rem">
+              <!-- Unfollow -->
+              <b-button
+                size="sm"
+                id="unfollow-confirmation"
+                v-if="profile.following"
+                @click="unfollow"
+                variant="outline-secondary"
+              >
+                Seguindo
+              </b-button>
+              <b-button
+                size="sm"
+                variant="success"
+                v-else
+                @click="follow">
+                <b> Seguir </b>
+              </b-button>
             </b-col>
           </b-row>
 
@@ -91,57 +94,6 @@
             {{ profile.name }}
           </span>
         </b-col>
-
-        <!-- Edit profile on -->
-        <b-col v-if="id === user.username && editMode">
-          <b-row align-h="end" style="margin-right:auto">
-            <b-button
-              style="margin-right: 1rem"
-              size="sm"
-              variant="outline-secondary"
-              @click="cancelEdit">
-              Cancelar
-            </b-button>
-            <b-button
-              size="sm"
-              variant="success"
-              @click="updateProfile">
-                Salvar
-            </b-button>
-          </b-row>
-        </b-col>
-      </b-row>
-
-      <!-- Description -->
-      <b-row style="white-space: pre-wrap; padding-left: 0.5rem">
-        <span
-          class="card-padding"
-          v-if="!editMode"
-          style="font-size: 0.9rem">{{ normalizedDescription }}
-        </span>
-          <b-form-textarea
-            v-else
-            :value="normalizedDescription"
-            @update="onUpdate"
-            placeholder="Adicione uma descrição"
-            no-resize
-            rows="3"
-            size="sm"
-          >
-          </b-form-textarea>
-      </b-row>
-
-      <!-- Follow -->
-      <b-row style="padding-left: 1rem; padding-right: 1rem">
-        <b-button
-        style="height:1.2rem; line-height: 0rem"
-          block
-          size="sm"
-          variant="success"
-          v-if="id !== user.username && !profile.following"
-          @click="follow">
-          <b> Seguir </b>
-        </b-button>
       </b-row>
     </b-card>
 
@@ -179,10 +131,15 @@
 
 <script>
 import client from '@/commons/client.api'
+import EditProfile from '@/components/EditProfile'
 import { LOGIN } from '@/store/actions.type'
 
 export default {
   name: 'Profile',
+
+  components: {
+    EditProfile
+  },
 
   props: {
     id: {
@@ -197,12 +154,11 @@ export default {
     show: false,
     showUnfollow: false,
     selected: {},
-    editMode: false,
-    newDescription: '',
     showFollowingList: false,
     followingList: Array,
     showFollowersList: false,
-    followersList: Array
+    followersList: Array,
+    modalShow: true
   }),
 
   computed: {
@@ -239,17 +195,13 @@ export default {
       return this.followingList
     },
     normalizedFollowersList () {
-      return this.followingList
+      return this.followersList
     }
   },
 
   methods: {
     async fetchProfileById (id) {
       this.profile = await client.users.fetchByUsername(id)
-      // Quick bug fix. It was not fetching some wallets because description was null
-      if (this.profile.description) {
-        this.newDescription = this.profile.description.substring(0, 140)
-      }
       this.wallets = await client.wallets.fetchByOwner(id)
     },
     async deleteWallet () {
@@ -273,27 +225,10 @@ export default {
       this.show = false
       this.selected = {}
     },
-    async updateProfile () {
-      try {
-        const descr = [{ op: 'replace', path: '/description', value: this.newDescription }]
-        await client.users.updateMyUser(descr)
-        this.profile.description = this.newDescription
-        this.editMode = false
-      } catch (e) {
-        console.error(e)
-      }
-    },
-    onUpdate (event) {
-      this.newDescription = event
-    },
-    cancelEdit () {
-      this.editMode = false
-      this.newDescription = this.normalizedDescription
-    },
     async follow () {
       if (!this.$store.state.auth.auth) {
         const state = { to: this.$router.currentRoute.path }
-        this.$store.dispatch(LOGIN, state)
+        await this.$store.dispatch(LOGIN, state)
       } else {
         try {
           this.profile.following = true
@@ -325,6 +260,9 @@ export default {
     },
     gotoFollowing (id) {
       this.$router.push(`/users/${id}/following`)
+    },
+    showModal () {
+      this.$refs.editProfileModal.show()
     }
   },
 
@@ -341,10 +279,6 @@ export default {
 </script>
 
 <style scoped>
-.card-padding {
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-}
-
 .border-color {
   border-color: #DBDAD7
 }
