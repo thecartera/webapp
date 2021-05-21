@@ -3,14 +3,21 @@
     <Navbar />
 
     <b-container class="container px-0" style="min-height: 60rem">
-      <b-row v-for="f of followers" :key="f.username">
+      <b-row>
         <b-col cols="0" md="2" lg="3"/>
         <b-col cols="12" md="8" lg="6">
-          <SimpleUserCard
-            :user="f"
-            @follow="follow"
-            @unfollow="unfollow"
-          />
+          <b-button class="mt-2 ml-2" variant="primary" @click="$router.push(`/users/${id}`)">
+            <b-icon icon="arrow-left"/>
+          </b-button>
+          <b-row v-for="f of followers" :key="f.username">
+            <b-col>
+              <SimpleUserCard
+                :user="f"
+                @follow="follow"
+                @unfollow="unfollow"
+              />
+            </b-col>
+          </b-row>
         </b-col>
         <b-col cols="0" md="2" lg="3"/>
       </b-row>
