@@ -7,6 +7,7 @@
     ok-title="Salvar"
     @ok="handleOk"
     @hidden="resetModal"
+    @show="resetModal"
   >
     <b-form-group
       id="fieldName"
@@ -77,28 +78,29 @@ export default {
       this.$nextTick(() => this.$bvModal.hide('editProfile'))
     },
 
-    resetModal () {
+    async resetModal () {
       this.name = this.user.name
       this.title = this.user.title
       this.description = this.user.description
     },
-
-    commitChanges () {
+    async commitChanges () {
       try {
         const changes = []
-        changes.push({ op: 'replace', path: '/name', value: this.name })
-        changes.push({ op: 'replace', path: '/title', value: this.title })
-        changes.push({ op: 'replace', path: '/description', value: this.description })
+        if (this.name !== this.user.name) {
+          changes.push({ op: 'replace', path: '/name', value: this.name })
+        }
+        if (this.title !== this.user.title) {
+          changes.push({ op: 'replace', path: '/title', value: this.title })
+        }
+        if (this.description !== this.user.description) {
+          changes.push({ op: 'replace', path: '/description', value: this.description })
+        }
         if (changes.length) {
-          const user = client.users.updateMyUser(changes)
+          const user = await client.users.updateMyUser(changes)
+          this.$store.commit(SET_USER, user)
           this.$emit('profileUpdate', user)
-          this.$store.dispatch(SET_USER, user)
-          this.name = this.user.name
-          this.title = this.user.title
-          this.description = this.user.description
         }
       } catch (e) {
-        console.log(e)
       }
     }
   },

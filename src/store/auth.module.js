@@ -49,7 +49,6 @@ const actions = {
     await auth0.loginWithRedirect({ appState: state })
   },
   async [LOGOUT] (ctx) {
-    console.log('LOGOUT STORE')
     ctx.commit(PURGE_AUTH)
     await auth0.logout()
   }

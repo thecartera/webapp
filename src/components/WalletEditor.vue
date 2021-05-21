@@ -160,7 +160,6 @@ export default {
         this.showErrorToast('Ops!', 'Dê um nome à sua carteira')
         return
       }
-      console.log(this.wallet)
       const wallet = await client.wallets.updateWallet(this.wallet, this.walleta.id)
       this.$router.push(`/wallets/${wallet.id}`)
     },
