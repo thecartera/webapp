@@ -1,7 +1,7 @@
 <template>
-  <b-container id="screenSize">
+  <b-container class="p-2" id="screenSize">
     <!-- User -->
-    <b-card class="p-2 mt-2 border-color" no-body>
+    <b-card class="p-2 border-color" no-body>
       <b-row>
         <!-- Image -->
         <b-col cols="auto">
@@ -33,20 +33,21 @@
           </b-row>
 
           <!-- Title -->
-          <b-row style="line-height: 1.1rem" class="" align-v="start">
-            <b-col cols="9" align-self="center">
+          <b-row style="line-height: 1.1rem" class="mr-0" align-v="start">
+            <b-col>
               <b-row>
                 <span style="font-size:0.9rem; color: gray"> {{ normProfile.title }} </span>
               </b-row>
             </b-col>
           </b-row>
 
-          <b-row style="line-height: 0.9rem; text-align: center; margin-top: 0.5rem" >
+          <b-row class="mt-2" style="line-height: 0.9rem; text-align: center">
             <!-- Followers/Follows -->
-            <b-col sm="0">
-              <b-row align-h="center" >
+            <b-col cols="auto" class="pl-0 ml-2 pr-0 mr-0">
+              <b-row align-h="start">
+
                 <!-- Followers count -->
-                <b-col class="follow-list-clickable" @click="gotoFollowers(id)">
+                <b-col class="follow-list-clickable pl-0 ml-2 mr-0 pr-0" @click="gotoFollowers(id)">
                   <span id="followers-list" style="font-size: 0.9rem">
                     {{ followersCount }}
                   </span>
@@ -55,18 +56,19 @@
                 </b-col>
 
                 <!-- Following count -->
-                <b-col class="ml-2 follow-list-clickable" @click="gotoFollowing(id)">
+                <b-col class="follow-list-clickable pl-0 ml-2 mr-0 pr-0" @click="gotoFollowing(id)">
                   <span id="following-list" style="font-size: 0.9rem">
                     {{ normProfile.followingCount }}
                   </span>
                   <br>
                   <span style="font-size: 0.75rem; color: grey"> seguindo </span>
                 </b-col>
+
               </b-row>
             </b-col>
 
             <!-- (Un)follow Buttons-->
-            <b-col v-if="id !== user.username">
+            <b-col class="pl-0 mr-0 pr-0 mr-2" v-if="id !== user.username">
               <!-- Unfollow -->
               <b-button
                 size="sm"
@@ -74,6 +76,7 @@
                 v-if="normProfile.following"
                 @click="unfollow"
                 variant="outline-secondary"
+                style="font-size: 0.8rem"
               >
                 Seguindo
               </b-button>
@@ -109,9 +112,28 @@
     </b-card>
 
     <!-- Wallets -->
-    <b-card style="border-color: #DBDAD7; margin-top: 0.5rem" title="Carteiras">
-      <ul>
-        <li v-for="item in normalizedWallets" :key="item.id">
+    <b-card style="border-color: #DBDAD7" class="mt-2 p-2" no-body>
+      <b-row>
+        <b-col>
+        <h3> Carteiras </h3>
+        </b-col>
+      </b-row>
+      <b-row v-for="item in normalizedWallets" :key="item.id" class="mt-2 ml-2 mr-1">
+
+        <b-col cols="auto" class="pl-2 ml-2 mt-2">
+          <b-row style="width: 6rem" align-v="center">
+              <b-iconstack shift-v="3">
+                <b-icon scale="1.8" stacked icon="circle" :variant="item.gain < 0? 'danger' : 'success'"/>
+                <b-icon v-if="item.gain < 0" stacked icon="arrow-down" variant="danger"/>
+                <b-icon v-else stacked icon="arrow-up" variant="success"/>
+              </b-iconstack>
+              <span class="pl-3 mr-2" style="font-size: 1rem">
+                {{ item.gain.toFixed(2) }}%
+              </span>
+          </b-row>
+        </b-col>
+
+        <b-col cols="auto" align-self="end">
           <b-link class="text-primary" :to="`/wallets/${item.id}`">
             {{ item.name }}
           </b-link>
@@ -122,20 +144,20 @@
             v-if="id === user.username"
             @click="showPopup(item.id, item.name)"
           />
-        </li>
+        </b-col>
+      </b-row>
 
-        <!-- Delete popover -->
-        <b-popover placement="right" :show.sync="show" target="wallet-delete-icon" title="Excluir carteira">
-          <p>
-            Você deseja excluir:
-            <strong> {{ selected.name }} </strong>
-          </p>
-          <div class="row justify-content-around">
-            <b-button variant="danger" @click="deleteWallet"> Excluir </b-button>
-            <b-button variant="secondary" @click="closePopup"> Cancelar </b-button>
-          </div>
-        </b-popover>
-      </ul>
+      <!-- Delete popover -->
+      <b-popover placement="right" :show.sync="show" target="wallet-delete-icon" title="Excluir carteira">
+        <p>
+          Você deseja excluir:
+          <strong> {{ selected.name }} </strong>
+        </p>
+        <div class="row justify-content-around">
+          <b-button variant="danger" @click="deleteWallet"> Excluir </b-button>
+          <b-button variant="secondary" @click="closePopup"> Cancelar </b-button>
+        </div>
+      </b-popover>
     </b-card>
   </b-container>
 </template>
@@ -174,7 +196,7 @@ export default {
 
   computed: {
     normalizedWallets () {
-      return this.wallets.map((w, i) => ({ id: w.id, name: w.name }))
+      return this.wallets.map((w, i) => ({ id: w.id, name: w.name, gain: w.gain }))
     },
     user () {
       return this.$store.state.auth.user
@@ -199,7 +221,11 @@ export default {
   methods: {
     async fetchProfileById (id) {
       this.profile = await client.users.fetchByUsername(id)
-      this.wallets = await client.wallets.fetchByOwner(id)
+      const wallets = await client.wallets.fetchByOwner(id)
+      for (let ii = 0; ii < wallets.length; ii++) {
+        const temp = await client.wallets.fetchById(wallets[ii].id)
+        this.wallets.push(temp)
+      }
     },
     async deleteWallet () {
       try {
@@ -265,6 +291,7 @@ export default {
 
   watch: {
     async id (newVal) { // watch if opening another user profile
+      this.wallets = []
       await this.fetchProfileById(newVal)
     }
   },
