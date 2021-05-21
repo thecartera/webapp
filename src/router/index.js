@@ -13,6 +13,7 @@ import PrivacyPolicy from '@/views/PrivacyPolicy'
 import Feed from '@/views/Feed'
 
 import AuthGuard from './auth.guard'
+import FeedGuard from './feed.guard'
 import CheckGuard from './check.guard'
 import CallbackGuard from './callback.guard'
 
@@ -22,7 +23,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: LandingPage
+    component: LandingPage,
+    beforeEnter: FeedGuard
   },
   {
     path: '/callback',
