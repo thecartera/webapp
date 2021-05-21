@@ -10,64 +10,74 @@
 
         <!-- User information -->
         <b-col class="pl-2">
-          <b-row>
+          <b-row style="line-height: 1.5rem">
             <!-- Username -->
             <b-col cols="9" align-self="center">
               <b-row>
-                <strong> {{ profile.username }} </strong>
+                <strong style="font-size:1.1rem"> {{ normProfile.username }} </strong>
               </b-row>
             </b-col>
 
             <!-- Edit profile -->
-            <b-col cols="3" class="pt-1 ptr-1">
+            <b-col cols="3" class="pt-1 pr-2">
               <!-- Edit profile off -->
               <b-row align-h="end" class="pr-4"
                 v-if="id === user.username"
               >
 
-              <b-icon @click="showModal" style="cursor: pointer" scale="1.3" icon="pencil-square" variant="secondary"/>
+              <b-icon @click="showModal" style="cursor: pointer" scale="1.4" icon="pencil-square" variant="secondary"/>
 
-              <EditProfile ref="editProfileModal"/>
+              <EditProfile @profileUpdate=fetchProfileById(user.username) ref="editProfileModal"/>
               </b-row>
             </b-col>
           </b-row>
 
-          <b-row style="line-height: 0.8rem; text-align: center; margin-top: 0.5rem" >
+          <!-- Title -->
+          <b-row style="line-height: 1.1rem" class="" align-v="start">
+            <b-col cols="9" align-self="center">
+              <b-row>
+                <span style="font-size:0.9rem; color: gray"> {{ normProfile.title }} </span>
+              </b-row>
+            </b-col>
+          </b-row>
+
+          <b-row style="line-height: 0.9rem; text-align: center; margin-top: 0.5rem" >
             <!-- Followers/Follows -->
             <b-col sm="0">
               <b-row align-h="center" >
                 <!-- Followers count -->
                 <b-col class="follow-list-clickable" @click="gotoFollowers(id)">
-                  <span id="followers-list" style="font-size: 0.8rem">
+                  <span id="followers-list" style="font-size: 0.9rem">
                     {{ followersCount }}
                   </span>
                   <br>
-                  <span style="font-size: 0.65rem; color: grey"> seguidores </span>
+                  <span style="font-size: 0.75rem; color: grey"> seguidores </span>
                 </b-col>
 
                 <!-- Following count -->
                 <b-col class="ml-2 follow-list-clickable" @click="gotoFollowing(id)">
-                  <span id="following-list" style="font-size: 0.8rem">
-                    {{ profile.followingCount }}
+                  <span id="following-list" style="font-size: 0.9rem">
+                    {{ normProfile.followingCount }}
                   </span>
                   <br>
-                  <span style="font-size: 0.65rem; color: grey"> seguindo </span>
+                  <span style="font-size: 0.75rem; color: grey"> seguindo </span>
                 </b-col>
               </b-row>
             </b-col>
 
-            <!-- Unfollow Button-->
+            <!-- (Un)follow Buttons-->
             <b-col v-if="id !== user.username">
               <!-- Unfollow -->
               <b-button
                 size="sm"
                 id="unfollow-confirmation"
-                v-if="profile.following"
+                v-if="normProfile.following"
                 @click="unfollow"
                 variant="outline-secondary"
               >
                 Seguindo
               </b-button>
+              <!-- Follow -->
               <b-button
                 size="sm"
                 variant="success"
@@ -82,18 +92,18 @@
       </b-row>
 
       <!-- Full Name -->
-      <b-row>
+      <b-row class="mt-2">
         <b-col align-self="end">
-          <span style="font-size: 0.8rem; font-weight: 600">
-            {{ profile.name }}
-          </span>
+          <strong style="font-size: 1em">
+            {{ normProfile.name }}
+          </strong>
         </b-col>
       </b-row>
 
       <!-- Description -->
       <b-row>
-        <b-col style="line-height: 1rem">
-          <span style="font-size: 0.8rem; white-space: pre-wrap">{{ normalizedDescription }}</span>
+        <b-col style="line-height: 1.4rem">
+          <span style="font-size: 1rem; white-space: pre-wrap">{{ normProfile.description }}</span>
         </b-col>
       </b-row>
     </b-card>
@@ -163,23 +173,6 @@ export default {
   }),
 
   computed: {
-    normalizedLocation () {
-      return this.profile.location ? this.profile.location : 'Brasil'
-    },
-    normalizedDescription () {
-      const descr = this.profile.description
-      return descr ? descr.substring(0, 140) : ''
-    },
-    normalizedName () {
-      return this.profile.name ? this.profile.name.substring(0, 25) : ''
-    },
-    normalizedUsername () {
-      const username = this.profile.username
-      return username ? '@' + username.substring(0, 16) : 'undefined'
-    },
-    normalizedTitle () {
-      return this.profile.title ? this.profile.title.substring(0, 15) : ''
-    },
     normalizedWallets () {
       return this.wallets.map((w, i) => ({ id: w.id, name: w.name }))
     },
@@ -190,13 +183,16 @@ export default {
       return this.$store.state.auth.auth
     },
     followersCount () {
-      return this.profile.followersCount
+      return this.normProfile.followersCount
     },
     normalizedFollowingList () {
       return this.followingList
     },
     normalizedFollowersList () {
       return this.followersList
+    },
+    normProfile () {
+      return this.profile
     }
   },
 

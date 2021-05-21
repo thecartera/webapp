@@ -67,6 +67,7 @@ export default {
     show () {
       this.$refs.editProfileModal.show()
     },
+
     handleOk (evt) {
       evt.preventDefault()
       if (!this.nameState || !this.descriptionState) {
@@ -75,26 +76,26 @@ export default {
       this.commitChanges()
       this.$nextTick(() => this.$bvModal.hide('editProfile'))
     },
+
     resetModal () {
       this.name = this.user.name
       this.title = this.user.title
       this.description = this.user.description
     },
+
     commitChanges () {
       try {
         const changes = []
-        if (this.name !== this.user.name) {
-          changes.push({ op: 'replace', path: '/name', value: this.name })
-        }
-        if (this.title !== this.user.title) {
-          changes.push({ op: 'replace', path: '/title', value: this.title })
-        }
-        if (this.description !== this.user.description) {
-          changes.push({ op: 'replace', path: '/description', value: this.description })
-        }
+        changes.push({ op: 'replace', path: '/name', value: this.name })
+        changes.push({ op: 'replace', path: '/title', value: this.title })
+        changes.push({ op: 'replace', path: '/description', value: this.description })
         if (changes.length) {
           const user = client.users.updateMyUser(changes)
+          this.$emit('profileUpdate', user)
           this.$store.dispatch(SET_USER, user)
+          this.name = this.user.name
+          this.title = this.user.title
+          this.description = this.user.description
         }
       } catch (e) {
         console.log(e)
@@ -120,6 +121,15 @@ export default {
     },
     normalizedDescription () {
       return `(${this.description.length}/140)`
+    },
+    normName () {
+      return this.name
+    },
+    normTitle () {
+      return this.title
+    },
+    normDescription () {
+      return this.description
     }
   },
 
