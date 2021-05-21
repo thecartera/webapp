@@ -220,6 +220,7 @@ export default {
 
   methods: {
     async fetchProfileById (id) {
+      this.wallets = []
       this.profile = await client.users.fetchByUsername(id)
       const wallets = await client.wallets.fetchByOwner(id)
       for (let ii = 0; ii < wallets.length; ii++) {
@@ -291,7 +292,6 @@ export default {
 
   watch: {
     async id (newVal) { // watch if opening another user profile
-      this.wallets = []
       await this.fetchProfileById(newVal)
     }
   },
