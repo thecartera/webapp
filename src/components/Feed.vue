@@ -25,7 +25,7 @@
                   </b-row>
                   <b-row>
                     <b-card-text style="font-size: 0.7rem; color: dimray">
-                      {{ item.owner.title? item.owner.title : '(titulo)' }}
+                      {{ item.owner.title? item.owner.title : '' }}
                     </b-card-text>
                   </b-row>
                   <b-row>
