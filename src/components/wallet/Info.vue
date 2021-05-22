@@ -133,6 +133,48 @@
       </b-col>
 
     </b-row>
+
+    <b-row class="pl-3">
+      Enviar no
+      <ShareNetwork
+        class="pl-2"
+        network="facebook"
+        :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
+        title="this is title"
+        description="this is description"
+        quote="Olha essa carteira! 🤑"
+      >
+        Facebook
+    </ShareNetwork>
+      <ShareNetwork
+        class="pl-2"
+        network="whatsapp"
+        title="What's App"
+        :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
+        description="What's App"
+      >
+        Whatsapp
+    </ShareNetwork>
+      <ShareNetwork
+        class="pl-2"
+        network="twitter"
+        :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
+        title="Olha essa carteira! 🤑"
+        hashtags="Cartera"
+        quote="Essa é minha carteira!"
+      >
+        Twitter
+    </ShareNetwork>
+      <ShareNetwork
+        class="pl-2"
+        network="telegram"
+        title="💲 Cartera"
+        :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
+        description="Olha essa carteira 🤑"
+      >
+        Telegram
+    </ShareNetwork>
+    </b-row>
   </b-card-body>
 </b-card>
 </template>
