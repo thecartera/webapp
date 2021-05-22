@@ -104,12 +104,11 @@
         </b-col>
 
         <!-- Share buttons -->
-        <b-col align-self="center" cols="auto">
+        <b-col align-self="center" cols="auto" class="pr-4">
           <b-row>
-            <b-dropdown right variant="outline-light" no-caret>
+            <b-dropdown right no-caret variant="light">
               <template #button-content>
-                <b-img width="24rem" height="24rem" src="../../assets/share.svg"/>
-                <!-- <b-icon variant="info" icon="share-fill" /> -->
+                <font-awesome-icon :icon="['fas', 'share']" style="color: black; width: 1.5rem; height: 1.5rem"/>
               </template>
               <Socials v-if="wallet.id" :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"/>
             </b-dropdown>
