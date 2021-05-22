@@ -43,48 +43,7 @@
                   style="cursor: pointer"
                 /> Editar carteira
               </b-dropdown-item-button>
-              <b-dropdown-item-button>
-                <ShareNetwork
-                  class="pl-2"
-                  network="whatsapp"
-                  title="What's App"
-                  :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
-                  description="What's App"
-                > Enviar no Whatsapp
-                </ShareNetwork>
-              </b-dropdown-item-button>
-              <b-dropdown-item-button>
-                <ShareNetwork
-                  class="pl-2"
-                  network="telegram"
-                  title="💲 Cartera"
-                  :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
-                  description="Olha essa carteira 🤑"
-                > Enviar no Telegram
-                </ShareNetwork>
-              </b-dropdown-item-button>
-              <b-dropdown-item-button>
-                <ShareNetwork
-                  class="pl-2"
-                  network="twitter"
-                  :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
-                  title="Olha essa carteira! 🤑"
-                  hashtags="Cartera"
-                  quote="Essa é minha carteira!"
-                > Enviar no Twitter
-                </ShareNetwork>
-              </b-dropdown-item-button>
-              <b-dropdown-item-button>
-                <ShareNetwork
-                  class="pl-2"
-                  network="facebook"
-                  :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
-                  title="this is title"
-                  description="this is description"
-                  quote="Olha essa carteira! 🤑"
-                > Enviar no Facebook
-                </ShareNetwork>
-              </b-dropdown-item-button>
+              <Socials :id="`wallet.id ? wallet.id : 0`"/>
             </b-dropdown>
           </b-row>
         </b-col>
@@ -145,69 +104,33 @@
         </b-col>
 
         <!-- Share buttons -->
-        <b-col align-self="end" cols="auto">
-          <b-row style="margin-bottom: 2rem; margin-right: auto">
+        <b-col align-self="center" cols="auto">
+          <b-row>
             <b-dropdown right variant="outline-light" no-caret>
               <template #button-content>
-                <b-img class="mt-3" width="24rem" height="24rem" src="../../assets/share.svg"/>
+                <b-img width="24rem" height="24rem" src="../../assets/share.svg"/>
                 <!-- <b-icon variant="info" icon="share-fill" /> -->
               </template>
-              <b-dropdown-item-button>
-                <ShareNetwork
-                  class="pl-2"
-                  network="whatsapp"
-                  title="What's App"
-                  :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
-                  description="What's App"
-                > Enviar no Whatsapp
-                </ShareNetwork>
-              </b-dropdown-item-button>
-              <b-dropdown-item-button>
-                <ShareNetwork
-                  class="pl-2"
-                  network="telegram"
-                  title="💲 Cartera"
-                  :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
-                  description="Olha essa carteira 🤑"
-                > Enviar no Telegram
-                </ShareNetwork>
-              </b-dropdown-item-button>
-              <b-dropdown-item-button>
-                <ShareNetwork
-                  class="pl-2"
-                  network="twitter"
-                  :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
-                  title="Olha essa carteira! 🤑"
-                  hashtags="Cartera"
-                  quote="Essa é minha carteira!"
-                > Enviar no Twitter
-                </ShareNetwork>
-              </b-dropdown-item-button>
-              <b-dropdown-item-button>
-                <ShareNetwork
-                  class="pl-2"
-                  network="facebook"
-                  :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"
-                  title="this is title"
-                  description="this is description"
-                  quote="Olha essa carteira! 🤑"
-                > Enviar no Facebook
-                </ShareNetwork>
-              </b-dropdown-item-button>
+              <Socials :id="`wallet.id ? wallet.id : 0`"/>
             </b-dropdown>
           </b-row>
         </b-col>
-
       </b-row>
+
     </b-card-body>
   </b-card>
 </template>
 
 <script>
 import client from '@/commons/client.api'
+import Socials from '@/components/Socials'
 
 export default {
   name: 'WalletInfo',
+
+  components: {
+    Socials
+  },
 
   props: {
     wallet: {
