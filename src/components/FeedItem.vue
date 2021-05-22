@@ -1,32 +1,31 @@
 <template>
-  <b-card>
+  <b-card no-body class="p-2">
     <!-- User -->
-    <b-row>
+    <b-row class="m-0" >
       <!-- Picture -->
-      <b-col cols="3" md="2" lg="1">
-        <b-avatar rounded :src="item.owner.picture" :to="`/users/${item.owner.username}`"/>
+      <b-col cols="auto" class="p-0">
+        <b-avatar rounded size="3rem" :src="item.owner.picture" :to="`/users/${item.owner.username}`"/>
       </b-col>
 
       <!-- Names -->
-      <b-col class="text-truncate">
-        <strong> {{ item.owner.name }} </strong>
-        <span class="ml-1 text-secondary"> @{{ item.owner.username }} </span>
-        <br v-if="item.owner.title">
-        {{ item.owner.title }}
-      </b-col>
-    </b-row>
-
-    <!-- Timestamp -->
-    <b-row class="mt-1">
-      <b-col class="text-secondary text-truncate">
-        {{ timestamp }}
+      <b-col style="line-height: 1.1rem" class="text-truncate pl-4">
+        <b-row>
+          <strong> {{ item.owner.username }} </strong>
+        </b-row>
+        <b-row>
+          <span v-if="item.owner.title" class="text-secondary" style="font-size: 0.85rem"> {{ item.owner.title }} </span>
+        </b-row>
+        <!-- Timestamp -->
+        <b-row class="text-secondary text-truncate" style="font-size: 0.75rem">
+          {{ timestamp }}
+        </b-row>
       </b-col>
     </b-row>
 
     <!-- Event -->
-    <b-row>
+    <b-row class="pt-2">
       <b-col class="text-truncate">
-        <b-link :to="`/users/${item.owner.username}`"> @{{ item.owner.username }} </b-link>
+        <b-link :to="`/users/${item.owner.username}`"> {{ item.owner.name }} </b-link>
         {{ text }}
         <b-link :to="`/walllets/${item.data.walletId}`"> cartera </b-link>
       </b-col>
@@ -55,7 +54,7 @@ export default {
       }
     },
     timestamp () {
-      return new Date(this.item.timestamp).toLocaleString('pt-BR')
+      return new Date(this.item.timestamp).toLocaleString('pt-BR').substring(0, 16)
     }
   }
 }
