@@ -27,7 +27,7 @@
       <b-col class="text-truncate">
         <b-link :to="`/users/${item.owner.username}`"> {{ item.owner.name }} </b-link>
         {{ text }}
-        <b-link :to="`/walllets/${item.data.walletId}`"> cartera </b-link>
+        <b-link :to="`/wallets/${item.data.walletId}`"> cartera </b-link>
       </b-col>
     </b-row>
   </b-card>
