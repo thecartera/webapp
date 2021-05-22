@@ -5,7 +5,7 @@
       <b-col cols="12" md="8" lg="6" >
         <li style="list-style: none" v-for="(item, i) in visibleEvents" :key="i" class="my-2">
           <b-card no-body>
-            <b-card-header header-class="header"> {{ getTitleByType(item.type) }} </b-card-header>
+            <b-card-header header-class="header"> </b-card-header>
             <b-card-body style="padding-top: 0.5rem; padding-left: 0.5rem; padding-bottom: 0.5rem">
               <b-row>
                 <b-col cols="auto">
@@ -20,7 +20,7 @@
                   <b-row>
                     <b-link
                       :to="`/users/${item.owner.username}`"
-                      style="font-weight: bold; font-size: 0.9rem; color: black"> {{ item.owner.name }}
+                      style="font-weight: bold; font-size: 0.9rem; color: black"> {{ item.owner.username }}
                     </b-link>
                   </b-row>
                   <b-row>
@@ -38,7 +38,7 @@
               <b-row>
                 <b-col>
                 <b-link :to="`/users/${item.owner.username}`">
-                  @{{ item.owner.username }}
+                  {{ item.owner.name }}
                 </b-link>
                 <span> {{ getMessageByType(item.type) }} </span>
                 <b-link :to="`/wallets/${item.data.walletId}`">
