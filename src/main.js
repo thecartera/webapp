@@ -4,6 +4,7 @@ import Vue from 'vue'
 // Plugins
 import './plugins/meili'
 import './plugins/bootstrap'
+import './plugins/social-share'
 import 'chartjs-plugin-colorschemes'
 import './scss/custom.scss'
 
