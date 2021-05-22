@@ -10,7 +10,7 @@ import LandingPage from '@/views/LandingPageView'
 import WalletEditorView from '@/views/WalletEditorView'
 import TermsOfService from '@/views/TermsOfService'
 import PrivacyPolicy from '@/views/PrivacyPolicy'
-import Feed from '@/views/Feed'
+import FeedView from '@/views/FeedView'
 
 import AuthGuard from './auth.guard'
 import FeedGuard from './feed.guard'
@@ -63,7 +63,7 @@ const routes = [
   {
     path: '/feed',
     name: 'feed',
-    component: Feed
+    component: FeedView
   },
   {
     path: '/users/:id',
