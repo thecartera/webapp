@@ -43,7 +43,7 @@
                   style="cursor: pointer"
                 /> Editar carteira
               </b-dropdown-item-button>
-              <Socials :id="`wallet.id ? wallet.id : 0`"/>
+              <Socials v-if="wallet.id" :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"/>
             </b-dropdown>
           </b-row>
         </b-col>
@@ -111,7 +111,7 @@
                 <b-img width="24rem" height="24rem" src="../../assets/share.svg"/>
                 <!-- <b-icon variant="info" icon="share-fill" /> -->
               </template>
-              <Socials :id="`wallet.id ? wallet.id : 0`"/>
+              <Socials v-if="wallet.id" :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"/>
             </b-dropdown>
           </b-row>
         </b-col>

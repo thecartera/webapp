@@ -4,7 +4,7 @@
       <ShareNetwork
         network="whatsapp"
         title="What's App"
-        :url="`https://cartera.com.br/#/wallets/${id}/`"
+        :url="url"
         description="What's App"
       >
         <font-awesome-icon :icon="['fab', 'whatsapp']" class="size whatsapp-color"/>
@@ -16,7 +16,7 @@
       <ShareNetwork
         network="telegram"
         title="💲 Cartera"
-        :url="`https://cartera.com.br/#/wallets/${id}/`"
+        :url="url"
         description="Olha essa carteira 🤑"
       >
         <font-awesome-icon :icon="['fab', 'telegram']" class="size telegram-color"/>
@@ -27,7 +27,7 @@
     <b-dropdown-item-button>
       <ShareNetwork
         network="twitter"
-        :url="`https://cartera.com.br/#/wallets/${id}/`"
+        :url="url"
         title="Olha essa carteira! 🤑"
         hashtags="Cartera"
         quote="Essa é minha carteira!"
@@ -40,7 +40,7 @@
     <b-dropdown-item-button>
       <ShareNetwork
         network="facebook"
-        :url="`https://cartera.com.br/#/wallets/${id}/`"
+        :url="url"
         title="this is title"
         description="this is description"
         quote="Olha essa carteira! 🤑"
@@ -58,7 +58,7 @@ export default {
   name: 'Socials',
 
   props: {
-    id: {
+    url: {
       type: String,
       required: true
     }
