@@ -3,12 +3,40 @@
     id="editProfile"
     ref="editProfileModal"
     title="Editar perfil"
-    ok-only
     ok-title="Salvar"
+    ok-variant="success"
+    cancel-title="Cancelar"
     @ok="handleOk"
     @hidden="resetModal"
     @show="resetModal"
   >
+
+    <!-- PICTURE -->
+    <b-row class="mb-2" align-h="center">
+      <b-col cols="auto" class="mx-2">
+        <b-avatar size="lg" :src="picURL"/>
+      </b-col>
+      <b-col class="pl-0">
+        <b-form-group
+          id="fieldPicture"
+          label="URL da imagem:"
+          description="só serão aceitas URLs do LinkedIn, Facebook, Google e Discord."
+          label-for="picURLInput"
+          style="white-space: pre-wrap"
+          :invalid-feedback="invalidPicUrlFeedback"
+          :state="picUrlState"
+        >
+        </b-form-group>
+      </b-col>
+      <b-form-input
+        style="max-width: 93%; font-size: 0.8rem"
+        id="picURLInput"
+        v-model="picURL"
+        :state="picUrlState"
+        trim/>
+    </b-row>
+
+    <!-- NAME -->
     <b-form-group
       id="fieldName"
       label="Nome:"
@@ -18,6 +46,8 @@
     >
       <b-form-input id="nameInput" v-model="name" :state="nameState" trim/>
     </b-form-group>
+
+    <!-- TITLE -->
     <b-form-group
       id="fieldTitle"
       label="Título:"
@@ -30,6 +60,8 @@
         trim
       />
     </b-form-group>
+
+    <!-- DESCRIPTION -->
     <b-form-group
       id="fieldTitle"
       label="Descrição:"
@@ -48,6 +80,7 @@
       >
       </b-form-textarea>
     </b-form-group>
+
   </b-modal>
 </template>
 
@@ -61,7 +94,8 @@ export default {
   data: () => ({
     name: '',
     title: '',
-    description: ''
+    description: '',
+    picURL: ''
   }),
 
   methods: {
@@ -82,6 +116,7 @@ export default {
       this.name = this.user.name
       this.title = this.user.title
       this.description = this.user.description
+      this.picURL = this.user.picture
     },
     async commitChanges () {
       try {
@@ -94,6 +129,9 @@ export default {
         }
         if (this.description !== this.user.description) {
           changes.push({ op: 'replace', path: '/description', value: this.description })
+        }
+        if (this.picURL !== this.user.picture) {
+          changes.push({ op: 'replace', path: '/picture', value: this.picURL })
         }
         if (changes.length) {
           const user = await client.users.updateMyUser(changes)
@@ -112,30 +150,42 @@ export default {
     nameState () {
       return this.name.length >= 2
     },
+    picUrlState () {
+      const c0 = this.picURL.slice(0, 33) === 'https://lh3.googleusercontent.com'
+      const c1 = this.picURL.slice(0, 26) === 'https://cdn.discordapp.com'
+      const c2 = this.picURL.slice(0, 28) === 'https://media-exp1.licdn.com'
+      const c3 = this.picURL.slice(0, 38) === 'https://scontent.ffln1-1.fna.fbcdn.net'
+      if (c0 || c1 || c2 || c3) {
+        return true
+      }
+      return false
+    },
     descriptionState () {
       return this.description.length <= 140
     },
     invalidNameFeedback () {
       return 'Insira pelo menos 2 caracteres.'
     },
+    invalidPicUrlFeedback () {
+      const title = 'Insira uma URL do LinkedIn, Facebook, Google ou Discord \n'
+      // const sub = 'Uma URL desses site começa com: \n'
+      // const disc = 'Discord: https://cdn.discordapp... \n'
+      // const gogl = 'Google: https://lh3.googleusercontent... \n'
+      // const lkdn = 'LinkedIn: https://media-exp1.licdn... \n'
+      // const fb = 'Facebook: https://scontent.ffln1-1.fna...\n'
+      // return title + sub + disc + gogl + lkdn + fb
+      return title
+    },
     invalidDescriptionFeedback () {
-      return 'Descrição precisa ser menor que 140 caracteres.'
+      return 'Descrição deve ter no máximo 140 caracteres.'
     },
     normalizedDescription () {
       return `(${this.description.length}/140)`
-    },
-    normName () {
-      return this.name
-    },
-    normTitle () {
-      return this.title
-    },
-    normDescription () {
-      return this.description
     }
   },
 
   created () {
+    this.picURL = this.user.picture
     this.name = this.user.name
     this.title = this.user.title
     this.description = this.user.description
