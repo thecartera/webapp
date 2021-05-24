@@ -27,7 +27,7 @@
           <b-row>
             <!-- Picture -->
             <b-col cols="auto" class="p-0 m-0">
-              <b-avatar rounded :src="item.picture" />
+              <b-avatar :src="item.picture" />
             </b-col>
 
             <!-- Info -->
