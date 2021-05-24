@@ -11,6 +11,7 @@ import WalletEditorView from '@/views/WalletEditorView'
 import TermsOfService from '@/views/TermsOfService'
 import PrivacyPolicy from '@/views/PrivacyPolicy'
 import FeedView from '@/views/FeedView'
+import testimg from '@/components/testimg'
 
 import AuthGuard from './auth.guard'
 import FeedGuard from './feed.guard'
@@ -30,6 +31,11 @@ const routes = [
     path: '/callback',
     name: 'Callback',
     beforeEnter: CallbackGuard
+  },
+  {
+    path: '/testimg',
+    name: 'testimg',
+    component: testimg
   },
   {
     path: '/profile',
