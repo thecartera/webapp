@@ -1,13 +1,11 @@
 import Vue from 'vue'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFacebook, faTwitter, faTelegram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
-import { faShare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faFacebook)
-library.add(faTwitter)
-library.add(faTelegram)
-library.add(faWhatsapp)
-library.add(faShare)
+// Add all icons to the library
+library.add(fas, far, fab)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
