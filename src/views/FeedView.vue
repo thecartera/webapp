@@ -5,9 +5,9 @@
     <!-- Feed -->
     <b-container fluid>
       <b-row>
-        <b-col cols="0" md="0" lg="3" />
+        <b-col cols="0" md="0" lg="2" xl="3" />
 
-        <b-col cols="12" md="8" lg="6" class="p-0">
+        <b-col cols="12" md="7" lg="6" xl="6" class="p-0">
           <b-row v-for="i of feed" :key="i.id" class="mt-1">
             <b-col>
               <FeedItem :item="i" />
@@ -16,7 +16,9 @@
           <b-badge style="color:#F3F2EF; background-color:#F3F2EF" v-if="this.feed.length" v-b-visible="loadFeedItems">.</b-badge>
         </b-col>
 
-        <b-col cols="0" md="4" lg="3" />
+        <b-col class="p-0 d-none d-md-block" cols="0" md="5" lg="4" xl="3">
+          <InviteFriends/>
+        </b-col>
       </b-row>
     </b-container>
   </div>
@@ -27,13 +29,15 @@ import client from '@/commons/client.api'
 
 import Navbar from '@/components/Navbar'
 import FeedItem from '@/components/FeedItem'
+import InviteFriends from '@/components/InviteFriends'
 
 export default {
   name: 'FeedView',
 
   components: {
     Navbar,
-    FeedItem
+    FeedItem,
+    InviteFriends
   },
 
   data: () => ({
