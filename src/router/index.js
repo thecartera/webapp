@@ -12,6 +12,7 @@ import TermsOfService from '@/views/TermsOfService'
 import PrivacyPolicy from '@/views/PrivacyPolicy'
 import FeedView from '@/views/FeedView'
 import testimg from '@/components/testimg'
+import WalletNotFoundView from '@/views/WalletNotFoundView'
 
 import AuthGuard from './auth.guard'
 import FeedGuard from './feed.guard'
@@ -36,6 +37,11 @@ const routes = [
     path: '/testimg',
     name: 'testimg',
     component: testimg
+  },
+  {
+    path: '/walletNotFound',
+    name: 'walletNotFound',
+    component: WalletNotFoundView
   },
   {
     path: '/profile',

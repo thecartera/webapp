@@ -65,7 +65,11 @@ export default {
   },
 
   async created () {
-    this.wallet = await client.wallets.fetchById(this.id)
+    try {
+      this.wallet = await client.wallets.fetchById(this.id)
+    } catch {
+      this.$router.push('/walletNotFound')
+    }
   }
 }
 </script>
