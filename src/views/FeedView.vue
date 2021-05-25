@@ -12,6 +12,7 @@
         <b-col cols="12" md="7" lg="6" xl="5" class="p-1">
           <b-row v-for="item of feed" :key="item.id" class="mt-3">
             <b-col>
+              <NewUser v-if="feed.length === 0" />
               <FeedItem :item="item" />
             </b-col>
           </b-row>
@@ -38,6 +39,7 @@ import client from '@/commons/client.api'
 import Navbar from '@/components/Navbar'
 import FeedItem from '@/components/FeedItem'
 import InviteFriends from '@/components/InviteFriends'
+import NewUser from '@/components/NewUser'
 
 export default {
   name: 'FeedView',
@@ -45,7 +47,8 @@ export default {
   components: {
     Navbar,
     FeedItem,
-    InviteFriends
+    InviteFriends,
+    NewUser
   },
 
   data: () => ({
