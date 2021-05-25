@@ -34,7 +34,7 @@
   </b-card-body>
 
   <!-- Table -->
-  <b-card-footer class="px-0" footer-bg-variant="white">
+  <b-card-footer class="p-0">
     <b-table
       :fields="fields"
       :items="assets"

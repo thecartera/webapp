@@ -1,5 +1,12 @@
 <template>
-  <b-table responsive='lg' hover :fields="fields" :items="assets" small borderless>
+  <b-table
+    responsive='lg'
+    hover
+    :fields="fields"
+    :items="assets"
+    small
+    borderless
+  >
     <!-- Thumbnail -->
     <template #cell(imageLink)="data">
       <b-avatar
