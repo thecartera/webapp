@@ -6,10 +6,10 @@
     <b-container fluid>
       <b-row>
         <!-- Left -->
-        <b-col cols="0" md="0" lg="2" xl="3" />
+        <b-col cols="0" md="0" lg="1" xl="3"/>
 
-        <!-- Center -->
-        <b-col cols="12" md="7" lg="6" xl="6">
+        <!-- Center Left -->
+        <b-col cols="12" md="7" lg="6" xl="5" class="p-1">
           <b-row v-for="item of feed" :key="item.id" class="mt-3">
             <b-col>
               <FeedItem :item="item" />
@@ -20,10 +20,13 @@
           <p class="invisible" v-b-visible="loadFeedItems"></p>
         </b-col>
 
-        <!-- Right -->
-        <b-col cols="0" md="5" lg="4" xl="3">
-          <InviteFriends class="position-fixed" />
+        <!-- Center Right -->
+        <b-col class="d-none d-md-block" cols="0" md="5" lg="4" xl="3">
+          <InviteFriends />
         </b-col>
+
+        <!-- Right -->
+        <b-col cols="0" md="0" lg="1" xl="1"/>
       </b-row>
     </b-container>
   </div>
@@ -56,7 +59,7 @@ export default {
       }
 
       const lastId = this.feed[this.feed.length - 1].id
-      const newItems = await client.feed.getFeed(20, lastId)
+      const newItems = await client.feed.getFeed(10, lastId)
       this.feed = [...this.feed, ...newItems]
     }
   },
