@@ -7,13 +7,16 @@
         <b-avatar size="3rem" :src="item.owner.picture" :to="`/users/${item.owner.username}`"/>
       </b-col>
 
-      <!-- Names -->
-      <b-col style="line-height: 1.1rem" class="text-truncate pl-4">
+      <b-col style="line-height: 1.1rem" class="pl-4">
+        <!-- Username -->
         <b-row>
-          <strong> {{ item.owner.username }} </strong>
+          <strong class="text-truncate"> {{ item.owner.username }} </strong>
         </b-row>
+        <!-- Title -->
         <b-row>
-          <span v-if="item.owner.title" class="text-secondary" style="font-size: 0.85rem"> {{ item.owner.title }} </span>
+          <span v-if="item.owner.title" class="text-secondary" style="font-size: 0.85rem">
+            {{ item.owner.title }}
+          </span>
         </b-row>
         <!-- Timestamp -->
         <b-row class="text-secondary text-truncate" style="font-size: 0.75rem">
@@ -31,7 +34,8 @@
       </b-col>
     </b-row>
 
-    <b-row class="pt-2 mb-2" v-if="buys.length > 0">
+    <!-- Buys -->
+    <b-row class="py-2" v-if="buys.length > 0">
       <b-col cols="auto" style="width:6.5rem" align-self="center" class="text-success">
         Compras:
       </b-col>
@@ -44,11 +48,16 @@
         v-for="event of buys.slice(0, 4)"
         :key="event.ticker"
         :src="thumb(event.ticker)"
-      >
-      </b-avatar>
-      <b-avatar size="2.2rem" rounded v-if="buys.length >= 4" icon="three-dots" variant="primary"/>
+      />
+      <b-avatar
+        size="2.2rem"
+        rounded v-if="buys.length >= 4"
+        icon="three-dots"
+        variant="primary"
+      />
     </b-row>
 
+    <!-- Sells -->
     <b-row class="pt-2 mb-2" v-if="sells.length > 0">
       <b-col cols="auto" style="width:6.5rem" align-self="center" class="text-danger">
         Vendas:
@@ -60,19 +69,28 @@
         v-for="event of sells.slice(0, 4)"
         :key="event.ticker"
         :src="thumb(event.ticker)"
-      >
-      </b-avatar>
-      <b-avatar size="2.2rem" rounded v-if="sells.length >= 4" icon="three-dots" variant="primary"/>
+      />
+      <b-avatar
+        size="2.2rem"
+        rounded
+        v-if="sells.length >= 4"
+        icon="three-dots"
+        variant="primary"
+      />
     </b-row>
 
+    <!-- Reaction button -->
     <b-card-footer class="pt-0 m-0 px-3 pb-0" footer-bg-variant="white">
       <b-row align-v="center">
-        <b-button v-if="!this.like" @click="likePost" variant="white" size="sm">
-          <font-awesome-icon :icon="['far', 'thumbs-up']" style="color:#302f33; height: 1.3rem; width: 1.3rem"/>
+        <!-- Like -->
+        <b-button v-if="!this.like" @click="likePost" variant="white" size="md">
+          <font-awesome-icon :icon="['far', 'thumbs-up']" />
           <span> {{ likeCount }} </span>
         </b-button>
-        <b-button v-else @click="unlikePost" variant="white" size="sm">
-          <font-awesome-icon :icon="['fas', 'thumbs-up']" style="color:#4e79a7; height: 1.3rem; width: 1.3rem"/>
+
+        <!-- Unlike -->
+        <b-button v-else @click="unlikePost" variant="white" size="md">
+          <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-primary" />
           <span> {{ likeCount }} </span>
         </b-button>
       </b-row>
