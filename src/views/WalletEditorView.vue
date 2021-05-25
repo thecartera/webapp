@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="min-height: 60rem">
     <Navbar />
     <WalletEditor :id="id" />
   </div>
