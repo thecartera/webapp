@@ -5,19 +5,24 @@
     <!-- Feed -->
     <b-container fluid>
       <b-row>
+        <!-- Left -->
         <b-col cols="0" md="0" lg="2" xl="3" />
 
-        <b-col cols="12" md="7" lg="6" xl="6" class="p-0">
-          <b-row v-for="i of feed" :key="i.id" class="mt-3">
+        <!-- Center -->
+        <b-col cols="12" md="7" lg="6" xl="6">
+          <b-row v-for="item of feed" :key="item.id" class="mt-3">
             <b-col>
-              <FeedItem :item="i" />
+              <FeedItem :item="item" />
             </b-col>
           </b-row>
-          <b-badge style="color:#F3F2EF; background-color:#F3F2EF" v-if="this.feed.length" v-b-visible="loadFeedItems">.</b-badge>
+
+          <!-- TODO: this is very silly -->
+          <p class="invisible" v-b-visible="loadFeedItems"></p>
         </b-col>
 
-        <b-col class="p-0 d-none d-md-block" cols="0" md="5" lg="4" xl="3">
-          <InviteFriends style="position: fixed"/>
+        <!-- Right -->
+        <b-col cols="0" md="5" lg="4" xl="3">
+          <InviteFriends class="position-fixed" />
         </b-col>
       </b-row>
     </b-container>
@@ -46,9 +51,13 @@ export default {
 
   methods: {
     async loadFeedItems () {
+      if (this.feed.length === 0) {
+        return
+      }
+
       const lastId = this.feed[this.feed.length - 1].id
       const newItems = await client.feed.getFeed(20, lastId)
-      this.feed.push.apply(this.feed, newItems)
+      this.feed = [...this.feed, ...newItems]
     }
   },
 
