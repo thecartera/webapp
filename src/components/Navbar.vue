@@ -15,24 +15,37 @@
 
     <!-- All items of navbar -->
     <b-collapse class="text-center" id="collapse" is-nav>
+
       <b-navbar-nav class="ml-auto">
+
+        <!-- Home button -->
+        <b-nav-item v-if="auth" to="/">
+          <b-button size="md" variant="primary">
+            <b-iconstack scale="1">
+              <b-icon stacked icon="house-door"></b-icon>
+              <b-icon stacked icon="house"></b-icon>
+            </b-iconstack>
+            <span> feed </span>
+          </b-button>
+        </b-nav-item>
+
         <!-- Create wallet button -->
         <b-nav-item to="/wallets">
-          <b-button v-if="auth" size="sm" variant="primary">
-            Nova carteira
+          <b-button v-if="auth" size="md" variant="primary">
+            nova <span style="color: lime"> Cartera </span>
           </b-button>
         </b-nav-item>
 
         <!-- Login/logout buttons -->
         <b-nav-item>
           <!-- Login -->
-          <b-button size="sm" variant="primary" v-if="auth" @click="logout">
-            Sair
+          <b-button size="md" variant="primary" v-if="auth" @click="logout">
+            sair
           </b-button>
 
           <!-- Logout -->
-          <b-button size="sm" variant="primary" v-else @click="login">
-            Entrar
+          <b-button size="md" variant="primary" v-else @click="login">
+            entrar
           </b-button>
         </b-nav-item>
 
