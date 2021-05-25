@@ -1,17 +1,16 @@
 <template>
-  <b-card no-body class="p-1 mt-1" :bg-variant="bgcolor" :border-variant="bordercolor">
+  <b-card no-body class="p-1 mt-1">
     <b-row>
       <!-- Image -->
-      <b-col cols="auto">
+      <b-col align-self="center" cols="auto">
         <b-avatar
-          size="2.8rem"
           :src="user.picture"
           :to="`/users/${user.username}`"
         />
       </b-col>
 
       <!-- User Info -->
-      <b-col class="pl-2 user-info-text">
+      <b-col class="pl-2 pr-2 user-info-text">
         <b-row>
           <b-link class="text-dark" :to="`/users/${user.username}`">
             <b> {{ user.username }} </b>
@@ -26,20 +25,18 @@
         <!-- Unfollow -->
         <b-button
         v-if="user.following"
+        class="p-1 user-info-text"
         variant="outline-dark"
-        @click="unfollow"
-        size="sm"
-        style="width: 5rem">
+        @click="unfollow">
           Seguindo
         </b-button>
 
         <!-- Follow -->
         <b-button
-          v-if="!user.following && logged_user.username !== user.username"
+          class="p-1 user-info-text"
           variant="success"
-          @click="follow"
-          size="sm"
-          style="width: 5rem">
+          v-if="!user.following && logged_user.username !== user.username"
+          @click="follow">
           <b> Seguir </b>
         </b-button>
       </b-col>
@@ -55,14 +52,12 @@ export default {
     user: {
       type: Object,
       required: true
-    },
-    bgcolor: {
-      type: String
-    },
-    bordercolor: {
-      type: String
     }
   },
+
+  data: () => ({
+    loading: false
+  }),
 
   computed: {
     name () {
