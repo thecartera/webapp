@@ -35,48 +35,68 @@
     </b-row>
 
     <!-- Buys -->
-    <b-row class="py-2" v-if="buys.length > 0">
-      <b-col cols="auto" style="width:6.5rem" align-self="center" class="text-success">
+    <b-row class="pt-3" v-if="buys.length > 0">
+      <b-col cols="auto" style="width:6.3rem"  align-self="start" class="text-success">
         Compras:
       </b-col>
-      <b-avatar
-        icon="wallet"
-        variant="success"
-        rounded
-        size="2.2rem"
-        class="mr-1"
-        v-for="event of buys.slice(0, 4)"
-        :key="event.ticker"
-        :src="thumb(event.ticker)"
-      />
-      <b-avatar
-        size="2.2rem"
-        rounded v-if="buys.length >= 4"
-        icon="three-dots"
-        variant="primary"
-      />
+      <b-col cols="auto" class="mr-2" v-for="event of buys.slice(0, 4)" :key="event.ticker">
+        <b-row>
+          <b-avatar
+            icon="wallet"
+            variant="success"
+            rounded
+            size="md"
+            class="mr-1"
+            :src="thumb(event.ticker)"
+          />
+        </b-row>
+        <b-row>
+          <span style="font-size: 0.7rem">
+            {{event.ticker}}
+          </span>
+        </b-row>
+      </b-col>
+      <b-col cols="auto" class="px-0 mx-0">
+        <b-avatar
+          size="md"
+          rounded v-if="buys.length >= 4"
+          icon="three-dots"
+          variant="primary"
+        />
+      </b-col>
     </b-row>
 
     <!-- Sells -->
-    <b-row class="pt-2 mb-2" v-if="sells.length > 0">
-      <b-col cols="auto" style="width:6.5rem" align-self="center" class="text-danger">
+    <b-row class="pt-3 mb-2" v-if="sells.length > 0">
+      <b-col cols="auto" style="width:6.3rem" align-self="start" class="text-danger">
         Vendas:
       </b-col>
-      <b-avatar
-        rounded
-        size="2.2rem"
-        class="mr-1"
-        v-for="event of sells.slice(0, 4)"
-        :key="event.ticker"
-        :src="thumb(event.ticker)"
-      />
-      <b-avatar
-        size="2.2rem"
-        rounded
-        v-if="sells.length >= 4"
-        icon="three-dots"
-        variant="primary"
-      />
+      <b-col cols="auto" class="mr-2" v-for="event of sells.slice(0, 4)" :key="event.ticker">
+        <b-row>
+          <b-avatar
+            icon="wallet"
+            variant="success"
+            rounded
+            size="md"
+            class="mr-1"
+            :src="thumb(event.ticker)"
+          />
+        </b-row>
+        <b-row>
+          <span style="font-size: 0.7rem">
+            {{event.ticker}}
+          </span>
+        </b-row>
+      </b-col>
+      <b-col cols="auto" class="px-0 mx-0">
+        <b-avatar
+          size="md"
+          rounded
+          v-if="sells.length >= 4"
+          icon="three-dots"
+          variant="primary"
+        />
+      </b-col>
     </b-row>
 
     <!-- Reaction button -->
