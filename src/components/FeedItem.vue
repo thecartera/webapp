@@ -28,25 +28,31 @@
     <!-- Event -->
     <b-row class="pt-1">
       <b-col>
-        <b-link :to="`/users/${item.owner.username}`"> {{ item.owner.name }} </b-link>
+        <span> {{ item.owner.name }} </span>
         {{ text }}
-        <b-link :to="`/wallets/${item.data.walletId}`"> cartera </b-link>
+        <b-link :to="`/wallets/${item.data.walletId}`" class="text-success">
+          <span> Cartera </span>
+        </b-link>
       </b-col>
     </b-row>
 
     <!-- Buys -->
     <b-row class="pt-3" v-if="buys.length > 0">
-      <b-col cols="auto" style="width:6.3rem"  align-self="start" class="text-success">
-        Compras:
+      <b-col cols="auto" style="width:6.3rem"  align-self="start" class="mt-2 text-secondary">
+        Compras
       </b-col>
-      <b-col cols="auto" class="mr-2" v-for="event of buys.slice(0, 4)" :key="event.ticker">
+      <b-col
+        cols="auto"
+        class="mr-2"
+        v-for="event of buys.slice(0, 4)"
+        :key="event.ticker">
         <b-row>
           <b-avatar
             icon="wallet"
             variant="success"
             rounded
             size="md"
-            class="mr-1"
+            class="mr-1 "
             :src="thumb(event.ticker)"
           />
         </b-row>
@@ -68,8 +74,8 @@
 
     <!-- Sells -->
     <b-row class="pt-3 mb-2" v-if="sells.length > 0">
-      <b-col cols="auto" style="width:6.3rem" align-self="start" class="text-danger">
-        Vendas:
+      <b-col cols="auto" style="width:6.3rem" align-self="start" class="mt-2 text-secondary">
+        Vendas
       </b-col>
       <b-col cols="auto" class="mr-2" v-for="event of sells.slice(0, 4)" :key="event.ticker">
         <b-row>
@@ -78,7 +84,7 @@
             variant="success"
             rounded
             size="md"
-            class="mr-1"
+            class="mr-1 "
             :src="thumb(event.ticker)"
           />
         </b-row>
