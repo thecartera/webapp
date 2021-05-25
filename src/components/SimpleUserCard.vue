@@ -1,29 +1,28 @@
 <template>
-  <b-card no-body class="user-card">
+  <b-card no-body class="p-1 mt-1" :bg-variant="bgcolor" :border-variant="bordercolor">
     <b-row>
       <!-- Image -->
       <b-col cols="auto">
         <b-avatar
-          rounded
-          size="3rem"
+          size="2.8rem"
           :src="user.picture"
           :to="`/users/${user.username}`"
         />
       </b-col>
 
       <!-- User Info -->
-      <b-col class="user-info-padding user-info-text">
+      <b-col class="pl-2 user-info-text">
         <b-row>
-          <b-link class="username" :to="`/users/${user.username}`">
+          <b-link class="text-dark" :to="`/users/${user.username}`">
             <b> {{ user.username }} </b>
           </b-link>
         </b-row>
         <b-row> {{ name }} </b-row>
-        <b-row class="usertitle"> {{ user.title }} </b-row>
+        <b-row class="text-secondary"> {{ user.title }} </b-row>
       </b-col>
 
       <!-- Buttons -->
-      <b-col class="follow-buttons-padding" cols="auto" v-if="$store.state.auth.auth">
+      <b-col class="pt-2 pr-3 pb-2" cols="auto" v-if="$store.state.auth.auth">
         <!-- Unfollow -->
         <b-button
         v-if="user.following"
@@ -56,6 +55,12 @@ export default {
     user: {
       type: Object,
       required: true
+    },
+    bgcolor: {
+      type: String
+    },
+    bordercolor: {
+      type: String
     }
   },
 
@@ -81,34 +86,8 @@ export default {
 </script>
 
 <style scoped>
-.follow-buttons-padding {
-  padding-top: 0.5rem;
-  padding-right: 1.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-}
-
-.user-card {
-  padding: 0.5rem;
-  margin-top: 0.3rem;
-  border-color: lightgray;
-}
-
-.user-info-padding {
-  padding-left: 0.5rem;
-}
-
 .user-info-text {
   font-size: 0.9rem;
   line-height: 1rem;
 }
-
-.username {
-  color: black;
-}
-
-.usertitle {
-  color: gray;
-}
-
 </style>
