@@ -8,7 +8,7 @@
         <b-col cols="0" md="0" lg="2" xl="3" />
 
         <b-col cols="12" md="7" lg="6" xl="6" class="p-0">
-          <b-row v-for="i of feed" :key="i.id" class="mt-1">
+          <b-row v-for="i of feed" :key="i.id" class="mt-3">
             <b-col>
               <FeedItem :item="i" />
             </b-col>
