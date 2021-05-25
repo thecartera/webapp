@@ -17,7 +17,7 @@
         </b-col>
 
         <b-col class="p-0 d-none d-md-block" cols="0" md="5" lg="4" xl="3">
-          <InviteFriends/>
+          <InviteFriends style="position: fixed"/>
         </b-col>
       </b-row>
     </b-container>

@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="p-2">
+  <b-card no-body class="px-2 pt-2">
     <!-- User -->
     <b-row class="m-0" >
       <!-- Picture -->
@@ -31,9 +31,9 @@
       </b-col>
     </b-row>
 
-    <b-row class="pt-2">
-      <b-col cols="auto" align-self="center" class="text-success" v-if="buys.length > 0">
-        Compras
+    <b-row class="pt-2 mb-2" v-if="buys.length > 0">
+      <b-col cols="auto" align-self="center" class="text-success">
+        Compras:
       </b-col>
       <b-avatar
         rounded
@@ -47,9 +47,9 @@
       <b-avatar size="2.2rem" rounded v-if="buys.length >= 5" icon="three-dots" variant="info"/>
     </b-row>
 
-    <b-row class="pt-2">
-      <b-col cols="auto" align-self="center" class="text-danger" v-if="sells.length > 0">
-        Vendas
+    <b-row class="pt-2 mb-2" v-if="sells.length > 0">
+      <b-col cols="auto" align-self="center" class="text-danger">
+        Vendas:
       </b-col>
       <b-avatar
         rounded
@@ -63,6 +63,18 @@
       <b-avatar size="2.2rem" rounded v-if="sells.length >= 5" icon="three-dots" variant="info"/>
     </b-row>
 
+    <b-card-footer class="pt-0 m-0 px-3 pb-0" footer-bg-variant="white">
+      <b-row align-v="center">
+        <b-button v-if="!this.like" @click="likePost" variant="white" size="sm">
+          <font-awesome-icon :icon="['far', 'thumbs-up']" style="color:#302f33; height: 1.3rem; width: 1.3rem"/>
+          <span> {{ likeCount }} </span>
+        </b-button>
+        <b-button v-else @click="unlikePost" variant="white" size="sm">
+          <font-awesome-icon :icon="['fas', 'thumbs-up']" style="color:#4e79a7; height: 1.3rem; width: 1.3rem"/>
+          <span> {{ likeCount }} </span>
+        </b-button>
+      </b-row>
+    </b-card-footer>
   </b-card>
 </template>
 
@@ -78,6 +90,11 @@ export default {
       required: true
     }
   },
+
+  data: () => ({
+    like: false,
+    likeCount: 0
+  }),
 
   computed: {
     text () {
@@ -103,11 +120,21 @@ export default {
     thumb (ticker) {
       return client.utils.thumbUrl(ticker)
     },
-    log (a) {
-      console.log(a)
-      const b = 5
-      return b
+    async likePost () {
+      await client.post.likePost(this.item.id)
+      this.like = true
+      this.likeCount += 1
+    },
+    async unlikePost () {
+      await client.post.unlikePost(this.item.id)
+      this.like = false
+      this.likeCount -= 1
     }
+  },
+
+  created () {
+    this.like = this.item.like
+    this.likeCount = this.item.likeCount
   }
 }
 </script>
