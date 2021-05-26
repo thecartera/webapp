@@ -36,7 +36,7 @@
         </b-col> -->
       </b-row>
 
-      <b-row v-for="suggestedUser of suggestedUsers.slice(0,5)" :key="suggestedUser.username">
+      <b-row v-for="suggestedUser of suggestedUsers" :key="suggestedUser.username">
         <b-col class="pl-0 pr-2">
           <SimpleInviteUserCard
             :user="suggestedUser"
@@ -85,7 +85,9 @@ export default {
   },
 
   async mounted () {
-    this.suggestedUsers = await client.users.following('mauriciomb97')
+    const suggestions = await client.users.getSuggestedFriends(30)
+    const shuffle = suggestions.sort(() => 0.5 - Math.random())
+    this.suggestedUsers = shuffle.slice(0, 5)
   }
 }
 </script>

@@ -13,6 +13,10 @@ export default class extends Client {
     return this.request('GET', 'profile')
   }
 
+  getSuggestedFriends (size = 5, page = 0) {
+    return this.request('GET', `profile/suggestions?size=${size}&page=${page}`)
+  }
+
   follow (username) {
     return this.request('POST', `users/${username}/follow`, {}, false)
   }
