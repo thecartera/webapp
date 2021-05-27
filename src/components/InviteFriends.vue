@@ -4,12 +4,18 @@
       <b-row align-h="center">
         <!-- LOGGED USER PICTURE -->
         <b-col cols="auto" class="p-0">
-          <b-avatar size="lg" :src="logged_user.picture"/>
+          <b-avatar
+            size="lg"
+            :src="logged_user.picture"
+            :to="`/users/${logged_user.username}`"
+          />
         </b-col>
       </b-row>
 
       <b-row align-h="center">
-        <b class="text-dark"> {{ logged_user.username }} </b>
+        <b-link class="text-decoration-none">
+          <b class="text-dark"> {{ logged_user.username }} </b>
+        </b-link>
       </b-row>
 
       <b-row align-h="center">
