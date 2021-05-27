@@ -22,10 +22,18 @@
 
       <hr class="m-2">
 
-      <b-row style="font-size: 0.8rem" class="pl-1">
+      <b-row align-h="start" align-v="center" style="font-size: 0.8rem" class="pl-1">
         <b-col cols="auto">
-          <b-row align-h="start">
           <span class="text-secondary"> Sugestões de amizade </span>
+        </b-col>
+        <b-col>
+          <b-row align-h="end">
+            <b-button variant="cartera-blue" :disabled="page === 0" size="sm" @click="pageDec">
+              <b-icon icon="caret-left-fill"/>
+            </b-button>
+            <b-button variant="cartera-blue" :disabled="lastPage" size="sm" @click="pageInc">
+              <b-icon icon="caret-right-fill"/>
+            </b-button>
           </b-row>
         </b-col>
         <!-- TODO: REDIRECT TO SUGGESTED FRIENDS VIEW -->
@@ -36,7 +44,7 @@
         </b-col> -->
       </b-row>
 
-      <b-row v-for="suggestedUser of suggestedUsers" :key="suggestedUser.username">
+      <b-row v-for="suggestedUser of suggestedUsers.slice(firstIndexUser, lastIndexUser)" :key="suggestedUser.username">
         <b-col class="pl-0 pr-2">
           <SimpleInviteUserCard
             :user="suggestedUser"
@@ -64,12 +72,23 @@ export default {
   },
 
   data: () => ({
-    suggestedUsers: []
+    suggestedUsers: [],
+    page: 0,
+    size: 5
   }),
 
   computed: {
     logged_user () {
       return this.$store.state.auth.user
+    },
+    firstIndexUser () {
+      return this.size * this.page
+    },
+    lastIndexUser () {
+      return this.size + (this.size * this.page)
+    },
+    lastPage () {
+      return this.lastIndexUser >= this.suggestedUsers.length
     }
   },
 
@@ -81,13 +100,22 @@ export default {
     async unfollow (user) {
       await client.users.unfollow(user.username)
       user.following = false
+    },
+    pageDec () {
+      if (this.page !== 0) {
+        this.page = this.page - 1
+      }
+    },
+    pageInc () {
+      if (!this.lastPage) {
+        this.page = this.page + 1
+      }
     }
   },
 
   async mounted () {
     const suggestions = await client.users.getSuggestedFriends(30)
-    const shuffle = suggestions.sort(() => 0.5 - Math.random())
-    this.suggestedUsers = shuffle.slice(0, 5)
+    this.suggestedUsers = suggestions.sort(() => 0.5 - Math.random())
   }
 }
 </script>
