@@ -115,7 +115,7 @@ export default {
     async resetModal () {
       this.name = this.user.name
       this.title = this.user.title
-      this.description = this.user.description
+      this.description = this.user.description || ''
       this.picURL = this.user.picture
     },
     async commitChanges () {
@@ -185,10 +185,7 @@ export default {
   },
 
   created () {
-    this.picURL = this.user.picture
-    this.name = this.user.name
-    this.title = this.user.title
-    this.description = this.user.description
+    this.resetModal()
   }
 }
 </script>

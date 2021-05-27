@@ -63,7 +63,7 @@
       </b-row>
 
       <!-- DESCRIPTION -->
-      <b-row style="white-space: pre-wrap; padding: 0rem 0rem 0rem 0.5rem">
+      <b-row v-if="wallet.description" style="white-space: pre-wrap; padding: 0rem 0rem 0rem 0.5rem">
         <span
         class="portfolio-description"
         style="font-size: 0.9rem">{{ wallet.description }}
