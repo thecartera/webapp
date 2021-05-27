@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <WalletNotFound />
+    <WalletNotFound style="overflow-x: hidden"/>
   </div>
 </template>
 

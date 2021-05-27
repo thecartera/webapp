@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="min-height: 200vh">
     <Navbar />
-    <Wallet :id="id" style="min-height: 60rem"/>
+    <Wallet :id="id" style="overflow-x: hidden"/>
   </div>
 </template>
 

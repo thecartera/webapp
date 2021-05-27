@@ -3,7 +3,7 @@
     <Navbar />
 
     <!-- Feed -->
-    <b-container fluid>
+    <b-container fluid style="overflow-x: hidden">
       <b-row>
         <!-- Left -->
         <b-col cols="0" md="0" lg="1" xl="3"/>

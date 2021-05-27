@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <LandingPage />
+    <LandingPage style="overflow-x: hidden"/>
     <Footer />
   </div>
 </template>
