@@ -10,7 +10,9 @@
       <b-col style="line-height: 1.1rem" class="pl-4">
         <!-- Username -->
         <b-row>
-          <strong class="text-truncate"> {{ item.owner.username }} </strong>
+          <b-link :to="`/users/${item.owner.username}`" class="text-dark text-decoration-none">
+            <strong class="text-truncate"> {{ item.owner.username }} </strong>
+          </b-link>
         </b-row>
         <!-- Title -->
         <b-row>
@@ -30,7 +32,7 @@
       <b-col>
         <span> {{ item.owner.name }} </span>
         {{ text }}
-        <b-link :to="`/wallets/${item.data.walletId}`" class="text-success">
+        <b-link :to="`/wallets/${item.data.walletId}`" class="text-success text-decoration-none">
           <span> Cartera </span>
         </b-link>
       </b-col>
