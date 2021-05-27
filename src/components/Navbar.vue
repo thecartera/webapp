@@ -20,38 +20,52 @@
 
         <!-- Home button -->
         <b-nav-item v-if="auth" to="/">
-          <b-button size="md" variant="primary">
+          <b-button class="max-height" size="md" variant="primary">
             <b-iconstack scale="1">
               <b-icon stacked icon="house-door"></b-icon>
               <b-icon stacked icon="house"></b-icon>
             </b-iconstack>
-            <span> feed </span>
+            <span> Feed </span>
           </b-button>
         </b-nav-item>
 
         <!-- Create wallet button -->
         <b-nav-item to="/wallets">
-          <b-button v-if="auth" size="md" variant="primary">
-            nova <span style="color: lime"> Cartera </span>
+          <b-button class="max-height" v-if="auth" size="md" variant="primary">
+            Nova <span style="color: lime"> Cartera </span>
           </b-button>
         </b-nav-item>
 
         <!-- Login/logout buttons -->
         <b-nav-item>
           <!-- Login -->
-          <b-button size="md" variant="primary" v-if="auth" @click="logout">
-            sair
+          <b-button
+            size="md"
+            class="max-height"
+            variant="primary"
+            v-if="auth"
+            @click="logout"
+          >
+            Sair
           </b-button>
 
           <!-- Logout -->
-          <b-button size="md" variant="primary" v-else @click="login">
-            entrar
+          <b-button
+            size="md"
+            class="max-height"
+            variant="primary"
+            v-else
+            @click="login"
+          >
+            Entrar
           </b-button>
         </b-nav-item>
 
         <!-- Profile button -->
         <b-nav-item v-if="auth" :to="`/users/${user.username}`">
-          <b-avatar size="2.1rem" :src="user.picture" />
+          <b-button class="max-height" variant="primary">
+            <b-avatar size="2rem" :src="user.picture" />
+          </b-button>
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -91,6 +105,13 @@ export default {
 </script>
 
 <style scoped>
+.max-height {
+  max-height:  45px;
+  height: 45px;
+  line-height: 1.2rem;
+  overflow-y: hidden;
+}
+
 /* Small devices (mobile & Tablet, 575px and below) */
 @media only screen and (max-width: 575px) {
   #navbarStyle {
