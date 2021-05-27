@@ -232,7 +232,9 @@ export default {
       try {
         await client.wallets.deleteById(this.selected.id)
         const index = this.wallets.map(i => i.id).indexOf(this.selected.id)
-        this.wallets.splice(index, 1)
+        if (index > -1) {
+          this.wallets.splice(index, 1)
+        }
       } catch (e) {
         console.error(e)
         // TODO: alert that it did not work
