@@ -68,7 +68,7 @@ export default {
     try {
       this.wallet = await client.wallets.fetchById(this.id)
     } catch {
-      this.$router.push('/walletNotFound')
+      this.$router.replace('/walletNotFound')
     }
   }
 }
