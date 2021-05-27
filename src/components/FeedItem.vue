@@ -38,15 +38,20 @@
       </b-col>
     </b-row>
 
-    <!-- Buys -->
-    <b-row class="pt-3" v-if="buys.length > 0">
-      <b-col cols="auto" style="width:6.3rem"  align-self="start" class="mt-2 text-secondary">
-        Compras
+    <!-- STARTS A POSITION-->
+    <b-row class="pt-3" v-if="starts.length > 0">
+      <b-col cols="auto" style="width:6.3rem"  align-self="start" class="text-secondary">
+        <b-row class="m-0 p-0">
+          Iniciou
+        </b-row>
+        <b-row class="m-0 p-0">
+          posição
+        </b-row>
       </b-col>
       <b-col
         cols="auto"
         class="mr-2"
-        v-for="event of buys.slice(0, 4)"
+        v-for="event of starts.slice(0, 4)"
         :key="event.ticker">
         <b-row>
           <b-avatar
@@ -67,19 +72,24 @@
       <b-col cols="auto" class="px-0 mx-0">
         <b-avatar
           size="md"
-          rounded v-if="buys.length >= 4"
+          rounded v-if="starts.length >= 4"
           icon="three-dots"
           variant="primary"
         />
       </b-col>
     </b-row>
 
-    <!-- Sells -->
-    <b-row class="pt-3 mb-2" v-if="sells.length > 0">
-      <b-col cols="auto" style="width:6.3rem" align-self="start" class="mt-2 text-secondary">
-        Vendas
+    <!-- ENDS A POSITION -->
+    <b-row class="pt-3 mb-2" v-if="ends.length > 0">
+      <b-col cols="auto" style="width:6.3rem" align-self="start" class="text-secondary">
+        <b-row class="m-0 p-0">
+          Encerrou
+        </b-row>
+        <b-row class="m-0 p-0">
+          posição
+        </b-row>
       </b-col>
-      <b-col cols="auto" class="mr-2" v-for="event of sells.slice(0, 4)" :key="event.ticker">
+      <b-col cols="auto" class="mr-2" v-for="event of ends.slice(0, 4)" :key="event.ticker">
         <b-row>
           <b-avatar
             icon="wallet"
@@ -100,7 +110,86 @@
         <b-avatar
           size="md"
           rounded
-          v-if="sells.length >= 4"
+          v-if="ends.length >= 4"
+          icon="three-dots"
+          variant="primary"
+        />
+      </b-col>
+    </b-row>
+
+    <!-- INCREASES A POSITION-->
+    <b-row class="pt-3" v-if="increases.length > 0">
+      <b-col cols="auto" style="width:6.3rem"  align-self="start" class="text-secondary">
+        <b-row class="m-0 p-0">
+          Aumentou
+        </b-row>
+        <b-row class="m-0 p-0">
+          Posição
+        </b-row>
+      </b-col>
+      <b-col
+        cols="auto"
+        class="mr-2"
+        v-for="event of increases.slice(0, 4)"
+        :key="event.ticker">
+        <b-row>
+          <b-avatar
+            icon="wallet"
+            variant="success"
+            rounded
+            size="md"
+            class="mr-1 "
+            :src="thumb(event.ticker)"
+          />
+        </b-row>
+        <b-row>
+          <span style="font-size: 0.7rem">
+            {{event.ticker}}
+          </span>
+        </b-row>
+      </b-col>
+      <b-col cols="auto" class="px-0 mx-0">
+        <b-avatar
+          size="md"
+          rounded v-if="increases.length >= 4"
+          icon="three-dots"
+          variant="primary"
+        />
+      </b-col>
+    </b-row>
+
+    <!-- DECREASES A POSITION -->
+    <b-row class="pt-3 mb-2" v-if="decreases.length > 0">
+      <b-col cols="auto" style="width:6.3rem" align-self="start" class="text-secondary">
+        <b-row class="m-0 p-0">
+          Diminuiu
+        </b-row>
+        <b-row class="m-0 p-0">
+          Posição
+        </b-row>
+      </b-col>
+      <b-col cols="auto" class="mr-2" v-for="event of decreases.slice(0, 4)" :key="event.ticker">
+        <b-row>
+          <b-avatar
+            icon="wallet"
+            variant="success"
+            rounded
+            size="md"
+            class="mr-1 "
+            :src="thumb(event.ticker)"
+          />
+        </b-row>
+        <b-row>
+          <span style="font-size: 0.7rem">
+            {{event.ticker}}
+          </span>
+        </b-row>
+      </b-col>
+      <b-col cols="auto" class="px-0 mx-0">
+        <b-avatar
+          size="md"
+          rounded
+          v-if="decreases.length >= 4"
           icon="three-dots"
           variant="primary"
         />
@@ -156,11 +245,17 @@ export default {
     timestamp () {
       return new Date(this.item.timestamp).toLocaleString('pt-BR').substring(0, 16)
     },
-    buys () {
-      return this.item.data.changes.filter(evt => evt.change === 'INC' || evt.change === 'START')
+    increases () {
+      return this.item.data.changes.filter(evt => evt.change === 'INC')
     },
-    sells () {
-      return this.item.data.changes.filter(evt => evt.change === 'DEC' || evt.change === 'END')
+    decreases () {
+      return this.item.data.changes.filter(evt => evt.change === 'DEC')
+    },
+    starts () {
+      return this.item.data.changes.filter(evt => evt.change === 'START')
+    },
+    ends () {
+      return this.item.data.changes.filter(evt => evt.change === 'END')
     }
   },
 
