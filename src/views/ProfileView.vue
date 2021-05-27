@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <Profile :id="id" style="min-height: 60rem"/>
+    <Profile :id="id" style="overflow-x: hidden"/>
   </div>
 </template>
 

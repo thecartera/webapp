@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height: 60rem">
+  <div >
     <Navbar />
     <WalletCreate />
   </div>

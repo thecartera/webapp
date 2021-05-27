@@ -2,7 +2,7 @@
   <div>
     <Navbar />
 
-    <b-container class="container px-0" style="min-height: 60rem">
+    <b-container class="container px-0" style="overflow-x: hidden">
       <b-row>
         <b-col cols="0" md="2" lg="3"/>
         <b-col cols="12" md="8" lg="6">
