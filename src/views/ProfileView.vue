@@ -3,7 +3,7 @@
     <Navbar />
 
     <!-- Profile -->
-    <b-container fluid style="overflow-x: hidden" class="p-0 m-0">
+    <b-container fluid style="overflow-x: hidden">
       <b-row>
         <!-- Left -->
         <b-col cols="0" md="0" lg="2" xl="3"/>
@@ -14,9 +14,7 @@
             <Profile :id="id" class="mt-2"/>
           </b-row>
           <b-row v-for="item of events" :key="item.id" class="mt-2">
-            <b-col>
-              <FeedItem :item="item" />
-            </b-col>
+            <FeedItem :item="item" class="vw-100"/>
           </b-row>
         </b-col>
 
