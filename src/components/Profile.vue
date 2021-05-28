@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="p-0">
     <!-- User -->
     <b-card class="p-2 border-color" no-body>
       <b-row>
