@@ -33,6 +33,10 @@ export default class extends Client {
     return this.request('GET', `users/${username}/followers`)
   }
 
+  events (username) {
+    return this.request('GET', `users/${username}/events`)
+  }
+
   updateMyUser (data) {
     const options = {
       body: JSON.stringify(data),

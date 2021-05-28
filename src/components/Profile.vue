@@ -1,5 +1,5 @@
 <template>
-  <b-container class="p-2" id="screenSize">
+  <b-container>
     <!-- User -->
     <b-card class="p-2 border-color" no-body>
       <b-row>
@@ -311,20 +311,6 @@ export default {
 
 .follow-list-clickable {
   cursor: pointer;
-}
-
-/* Small devices (mobile & Tablet, 768px and below) */
-@media only screen and (max-width: 768px) {
-  #screenSize {
-    width: 100%;
-  }
-}
-
-/* Medium devices (desktops, 769px and up) */
-@media only screen and (min-width: 769px) {
-  #screenSize {
-    width: 50%;
-  }
 }
 
 </style>
