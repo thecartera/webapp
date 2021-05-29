@@ -42,7 +42,7 @@
 
     <!-- Profit -->
     <template #cell(gain)="data">
-      <span class="cell-name"> Ganho 30d </span>
+      <span class="cell-name"> Variação 30d </span>
       <br>
       <span :class="positive(data.value)" class="cell-value">
         {{ data.value.toFixed(2) }}%
@@ -61,9 +61,9 @@ export default {
     fields: [
       { key: 'imageLink', label: '', class: 'text-center' },
       { key: 'nameticker', label: '', class: 'text-left' },
-      { key: 'weight', label: 'Peso', class: 'text-center', sortable: true },
-      { key: 'price', label: 'Preço', class: 'text-center', sortable: true },
-      { key: 'gain', label: 'Lucro', class: 'text-center', sortable: true }
+      { key: 'weight', label: 'Peso', class: 'text-center h6', sortable: true },
+      { key: 'price', label: 'Preço', class: 'text-center h6', sortable: true },
+      { key: 'gain', label: 'Variação', class: 'text-center h6', sortable: true }
     ]
   }),
 
