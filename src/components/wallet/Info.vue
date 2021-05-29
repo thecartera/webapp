@@ -35,7 +35,8 @@
               <b-dropdown-item-button
                 style="width:15rem"
                 v-if="wallet.username === user.username"
-                @click="gotoWalletEditor">
+                @click="gotoWalletEditor"
+              >
                 <b-icon
                   scale="1"
                   icon="pencil-square"
@@ -106,9 +107,12 @@
         <!-- Share buttons -->
         <b-col align-self="center" cols="auto" class="pr-4">
           <b-row>
-            <b-dropdown right no-caret variant="light">
+            <b-dropdown right no-caret variant="white">
               <template #button-content>
-                <font-awesome-icon :icon="['fas', 'share']" style="color: black; width: 1.5rem; height: 1.5rem"/>
+                <font-awesome-icon
+                  :icon="['fas', 'share']"
+                  style="color: black; width: 1.5rem; height: 1.5rem"
+                />
               </template>
               <Socials v-if="wallet.id" :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"/>
             </b-dropdown>

@@ -6,47 +6,78 @@
     :items="assets"
     small
     borderless
+    class="line-sm pl-3"
   >
     <!-- Thumbnail -->
     <template #cell(imageLink)="data">
-      <b-avatar
-        rounded
-        icon="wallet2"
-        variant="light"
-        class="image-size"
-        :src="thumb(data.item.ticker)"
-      />
+      <b-row>
+        <b-avatar
+          rounded
+          icon="wallet2"
+          variant="success"
+          class="image-size"
+          :src="thumb(data.item.ticker)"
+        />
+      </b-row>
     </template>
 
     <!-- Name and ticker -->
     <template #cell(nameticker)="data">
-      <span class="cell-name"> {{ data.item.name }} </span>
-      <br>
-      <span class="cell-name"> {{ data.index + 1 }}. </span>
-      <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
+      <b-row>
+        <b-col>
+          <b-row class="ml-2">
+            <span class="cell-name"> {{ data.item.name }} </span>
+          </b-row>
+          <b-row class="ml-2">
+            <span class="cell-name"> {{ (data.index + 1).toString() + ' .'}} </span>
+            <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
+          </b-row>
+        </b-col>
+      </b-row>
     </template>
 
     <!-- Weight -->
     <template #cell(weight)="data">
-      <span class="cell-name"> Peso </span>
-      <br>
-      <span class="primary cell-value"> {{ data.value.toFixed(1) }}% </span>
+      <b-row>
+        <b-col>
+          <b-row align-h="center">
+            <span class="cell-name"> Peso </span>
+          </b-row>
+          <b-row align-h="center">
+            <span class="primary cell-value"> {{ data.value.toFixed(1) }}% </span>
+          </b-row>
+        </b-col>
+      </b-row>
     </template>
 
     <!-- Price -->
     <template #cell(price)="data">
-      <span class="cell-name"> Preço (R$) </span>
-      <br>
-      <span class="primary cell-value">{{ data.value.toFixed(2) }}</span>
+      <b-row>
+        <b-col>
+          <b-row align-h="center">
+            <span class="cell-name"> Preço (R$) </span>
+          </b-row>
+          <b-row align-h="center">
+            <span class="primary cell-value">{{ data.value.toFixed(2) }}</span>
+          </b-row>
+        </b-col>
+      </b-row>
     </template>
 
     <!-- Profit -->
     <template #cell(gain)="data">
-      <span class="cell-name"> Variação 30d </span>
-      <br>
-      <span :class="positive(data.value)" class="cell-value">
-        {{ data.value.toFixed(2) }}%
-      </span>
+      <b-row>
+        <b-col>
+          <b-row align-h="center">
+            <span class="cell-name"> Variação 30d </span>
+          </b-row>
+          <b-row align-h="center">
+            <span :class="positive(data.value)" class="cell-value">
+              {{ data.value.toFixed(2) }}%
+            </span>
+          </b-row>
+        </b-col>
+      </b-row>
     </template>
   </b-table>
 </template>
@@ -87,6 +118,10 @@ export default {
 </script>
 
 <style scoped>
+
+.line-sm {
+  line-height: 1rem;
+}
 
 @media only screen and (max-width: 767px) {
   .cell-value {
