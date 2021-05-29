@@ -137,27 +137,8 @@
           <b-link class="text-primary" :to="`/wallets/${item.id}`">
             {{ item.name }}
           </b-link>
-          <b-icon
-            icon="x"
-            variant="dark"
-            id="wallet-delete-icon"
-            v-if="id === user.username"
-            @click="showPopup(item.id, item.name)"
-          />
         </b-col>
       </b-row>
-
-      <!-- Delete popover -->
-      <b-popover placement="right" :show.sync="show" target="wallet-delete-icon" title="Excluir carteira">
-        <p>
-          Você deseja excluir:
-          <strong> {{ selected.name }} </strong>
-        </p>
-        <div class="row justify-content-around">
-          <b-button variant="danger" @click="deleteWallet"> Excluir </b-button>
-          <b-button variant="secondary" @click="closePopup"> Cancelar </b-button>
-        </div>
-      </b-popover>
     </b-card>
   </b-container>
 </template>
@@ -184,9 +165,7 @@ export default {
   data: () => ({
     profile: {},
     wallets: [],
-    show: false,
     showUnfollow: false,
-    selected: {},
     showFollowingList: false,
     followingList: Array,
     showFollowersList: false,
@@ -227,29 +206,6 @@ export default {
         const temp = await client.wallets.fetchById(wallets[ii].id)
         this.wallets.push(temp)
       }
-    },
-    async deleteWallet () {
-      try {
-        await client.wallets.deleteById(this.selected.id)
-        const index = this.wallets.map(i => i.id).indexOf(this.selected.id)
-        if (index > -1) {
-          this.wallets.splice(index, 1)
-        }
-      } catch (e) {
-        console.error(e)
-        // TODO: alert that it did not work
-      } finally {
-        this.closePopup()
-      }
-    },
-    showPopup (id, name) {
-      this.show = true
-      this.selected.id = id
-      this.selected.name = name
-    },
-    closePopup () {
-      this.show = false
-      this.selected = {}
     },
     async follow () {
       if (!this.$store.state.auth.auth) {
