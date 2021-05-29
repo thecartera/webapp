@@ -44,6 +44,27 @@
                   style="cursor: pointer"
                 /> Editar carteira
               </b-dropdown-item-button>
+
+              <!-- Delete Portfolio -->
+              <b-dropdown-item-button
+                v-b-modal.modal-1>
+                <b-icon
+                  icon="trash"
+                  variant="secondary"
+                /> Excluir carteira
+                <b-modal
+                  id="modal-1"
+                  title="Excluir carteira?"
+                  ok-title="Excluir"
+                  ok-variant="danger"
+                  @ok="deleteWallet"
+                >
+                <span class="text-danger"> ATENÇÃO: </span>
+                <span> Esta ação é irreversível </span>
+                </b-modal>
+              </b-dropdown-item-button>
+
+              <!-- SHARE BUTTONS -->
               <Socials v-if="wallet.id" :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"/>
             </b-dropdown>
           </b-row>
@@ -162,6 +183,15 @@ export default {
     async getOwnerImage () {
       const owner = await client.users.fetchByUsername(this.wallet.username)
       this.ownerImage = owner.picture
+    },
+    async deleteWallet () {
+      try {
+        await client.wallets.deleteById(this.wallet.id)
+        this.$router.push(`/users/${this.user.username}`)
+      } catch (e) {
+        // TODO: alert that it did not work
+        console.error(e)
+      }
     }
   },
 
