@@ -47,6 +47,7 @@
 
               <!-- Delete Portfolio -->
               <b-dropdown-item-button
+                v-if="wallet.username === user.username"
                 v-b-modal.modal-1>
                 <b-icon
                   icon="trash"
