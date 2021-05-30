@@ -200,11 +200,10 @@ export default {
   methods: {
     async fetchProfileById (id) {
       this.wallets = []
-      this.profile = await client.users.fetchByUsername(id)
+      client.users.fetchByUsername(id).then(i => { this.profile = i })
       const wallets = await client.wallets.fetchByOwner(id)
-      for (let ii = 0; ii < wallets.length; ii++) {
-        const temp = await client.wallets.fetchById(wallets[ii].id)
-        this.wallets.push(temp)
+      for (const wall of wallets) {
+        client.wallets.fetchById(wall.id).then(i => this.wallets.push(i))
       }
     },
     async follow () {
