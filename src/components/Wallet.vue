@@ -55,18 +55,19 @@ export default {
   },
 
   data: () => ({
-    wallet: {}
+    wallet: {},
+    days: 30
   }),
 
   watch: {
     id: async function (newVal) {
-      this.wallet = await client.wallets.fetchById(newVal)
+      this.wallet = await client.wallets.fetchById(newVal, this.days)
     }
   },
 
   async created () {
     try {
-      this.wallet = await client.wallets.fetchById(this.id)
+      this.wallet = await client.wallets.fetchById(this.id, this.days)
     } catch {
       this.$router.replace('/walletNotFound')
     }

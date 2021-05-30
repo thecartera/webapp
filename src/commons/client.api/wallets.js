@@ -1,8 +1,8 @@
 import Client from './client'
 
 export default class extends Client {
-  fetchById (id) {
-    return this.request('GET', `wallets/${id}`)
+  fetchById (id, days = 30) {
+    return this.request('GET', `wallets/${id}?days=${days}`)
   }
 
   fetchMyById (id) {
