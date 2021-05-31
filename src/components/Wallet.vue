@@ -1,11 +1,15 @@
 <template>
 <b-container style="margin-top: 1rem" class="container px-0">
-  <WalletInfo style="border-color: #DBDAD7" :wallet="wallet" />
+  <WalletInfo
+    :wallet="wallet"
+    :showValues='showValues'
+    @changeSelectedPeriod="changeSelectedPeriod"
+  />
   <b-card no-body style="border-color: #DBDAD7; margin-top: 1rem">
     <b-tabs>
       <!-- Table -->
       <b-tab title="Tabela">
-        <AssetTable :assets="wallet.assets"/>
+        <AssetTable :assets="wallet.assets" :show='showValues' :selectedPeriod="days"/>
       </b-tab>
 
       <!-- Chart -->
@@ -56,12 +60,29 @@ export default {
 
   data: () => ({
     wallet: {},
-    days: 30
+    days: 30,
+    showValues: false
   }),
 
+  methods: {
+    changeSelectedPeriod (newPeriod) {
+      this.days = newPeriod
+      this.fetchWallet(this.id)
+      this.showValues = true
+    },
+    async fetchWallet (id) {
+      try {
+        this.wallet = await client.wallets.fetchById(id, this.days)
+        this.showValues = true
+      } catch {
+        console.error('error fetching wallet')
+      }
+    }
+  },
+
   watch: {
-    id: async function (newVal) {
-      this.wallet = await client.wallets.fetchById(newVal, this.days)
+    id: async function (newId) {
+      this.fetchWallet(newId)
     }
   },
 
