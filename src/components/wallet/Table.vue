@@ -69,12 +69,15 @@
       <b-row>
         <b-col>
           <b-row align-h="center">
-            <span class="cell-name"> Variação 30d </span>
+            <span class="cell-name"> Variação
+              <span v-if="show"> {{ getSelectedPeriodText }} </span>
+            </span>
           </b-row>
           <b-row align-h="center">
-            <span :class="positive(data.value)" class="cell-value">
+            <span v-if="show" :class="positive(data.value)" class="cell-value">
               {{ data.value.toFixed(2) }}%
             </span>
+            <span v-else class="cell-value"> -.--% </span>
           </b-row>
         </b-col>
       </b-row>
@@ -102,6 +105,35 @@ export default {
     assets: {
       type: Array,
       default: () => []
+    },
+    show: {
+      type: Boolean,
+      default: false
+    },
+    selectedPeriod: {
+      type: Number,
+      default: 30
+    }
+  },
+
+  computed: {
+    getSelectedPeriodText () {
+      let newText = '--'
+      switch (this.selectedPeriod) {
+        case (7):
+          newText = '7d'
+          break
+        case (30):
+          newText = '30d'
+          break
+        case (90):
+          newText = '90d'
+          break
+        default:
+          newText = 'YTD'
+          break
+      }
+      return newText
     }
   },
 

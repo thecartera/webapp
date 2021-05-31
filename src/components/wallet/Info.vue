@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body>
+  <b-card style="border-color: #DBDAD7" no-body>
     <b-card-header class="pt-1 pb-1 m-0">
       <b-row>
         <b-col cols="auto" class="pl-0 pr-0">
@@ -97,21 +97,20 @@
       <!-- Wallet info -->
         <b-col class="h6" style="margin-top: 1rem">
           <dl>
-            <b-row style="margin-left: auto"> Retorno (30d)
-              <b-icon icon="question-circle-fill"
-                scale="0.7"
-                variant="secondary"
-                shift-h="-4"
-                shift-v="5"
-                id="return-tooltip"
+            <b-row style="margin-left: auto" align-v="center">
+              Variação
+              <b-dropdown
+                size="sm"
+                id="dropdown-1"
+                variant="primary"
+                :text="showValues ? selectedPeriodText : 'Selecione o período'"
+                class="m-2"
               >
-              </b-icon>
-              <b-tooltip
-              target="return-tooltip"
-              triggers="click"
-              placement="topright">
-                Em relação aos preços de fechamento de ontem e 30 dias antes
-              </b-tooltip>
+                <b-dropdown-item @click="changeSelectedPeriod(7)">em 7 dias</b-dropdown-item>
+                <b-dropdown-item @click="changeSelectedPeriod(30)"> em 30 dias</b-dropdown-item>
+                <b-dropdown-item @click="changeSelectedPeriod(90)"> em 90 dias</b-dropdown-item>
+                <b-dropdown-item @click="changeSelectedPeriod(getYTD())"> YTD (no ano)</b-dropdown-item>
+              </b-dropdown>
             </b-row>
             <b-row class="mt-1 ml-2" align-v="center">
                 <b-iconstack shift-v="1">
@@ -119,8 +118,11 @@
                   <b-icon v-if="wallet.gain < 0" stacked icon="arrow-down" variant="danger"/>
                   <b-icon v-else stacked icon="arrow-up" variant="success"/>
                 </b-iconstack>
-                <span class="pl-2 mr-2" style="font-size: 1rem">
-                  {{ wallet.gain ? wallet.gain.toFixed(2) : 0.0 }}%
+                <span
+                  class="pl-2 mr-2"
+                  style="font-size: 1rem"
+                >
+                  {{ showValues ? (wallet.gain ? wallet.gain.toFixed(2) : 0.0) : '-.--' }}%
                 </span>
             </b-row>
           </dl>
@@ -161,11 +163,17 @@ export default {
     wallet: {
       type: Object,
       required: true
+    },
+    showValues: {
+      type: Boolean,
+      required: true
     }
   },
 
   data: () => ({
-    ownerImage: ''
+    ownerImage: '',
+    selectedPeriod: 30,
+    selectedPeriodText: 'Selecione o período'
   }),
 
   computed: {
@@ -193,6 +201,37 @@ export default {
         // TODO: alert that it did not work
         console.error(e)
       }
+    },
+    changeSelectedPeriod (newPeriod) {
+      this.selectedPeriod = newPeriod
+      this.$emit('changeSelectedPeriod', newPeriod)
+      this.changeSelectedPeriodText(newPeriod)
+    },
+    changeSelectedPeriodText (newPeriod) {
+      let newText = '--'
+      switch (newPeriod) {
+        case (7):
+          newText = `em ${newPeriod} dias`
+          break
+        case (30):
+          newText = `em ${newPeriod} dias`
+          break
+        case (90):
+          newText = `em ${newPeriod} dias`
+          break
+        default:
+          newText = 'no ano'
+          break
+      }
+      this.selectedPeriodText = newText
+    },
+    getYTD () {
+      const now = new Date()
+      const start = new Date(now.getFullYear(), 0, 0)
+      const diff = now - start
+      const oneDay = 1000 * 60 * 60 * 24
+      const day = Math.floor(diff / oneDay)
+      return day
     }
   },
 
