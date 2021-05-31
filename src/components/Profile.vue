@@ -118,18 +118,11 @@
         <h3> Carteiras </h3>
         </b-col>
       </b-row>
-      <b-row v-for="item in normalizedWallets" :key="item.id" class="mt-2 ml-2 mr-1">
+      <b-row v-for="item in wallets" :key="item.id" class="mt-2 ml-2 mr-1">
 
         <b-col cols="auto" class="pl-2 ml-2 mt-2">
-          <b-row style="width: 6rem" align-v="center">
-              <b-iconstack shift-v="3">
-                <b-icon scale="1.8" stacked icon="circle" :variant="item.gain < 0? 'danger' : 'success'"/>
-                <b-icon v-if="item.gain < 0" stacked icon="arrow-down" variant="danger"/>
-                <b-icon v-else stacked icon="arrow-up" variant="success"/>
-              </b-iconstack>
-              <span class="pl-3 mr-2" style="font-size: 1rem">
-                {{ item.gain.toFixed(2) }}%
-              </span>
+          <b-row align-v="center">
+            <PerformanceCircle :pctChange="item.gain"/>
           </b-row>
         </b-col>
 
@@ -146,13 +139,15 @@
 <script>
 import client from '@/commons/client.api'
 import EditProfile from '@/components/EditProfile'
+import PerformanceCircle from '@/components/PerformanceCircle'
 import { LOGIN } from '@/store/actions.type'
 
 export default {
   name: 'Profile',
 
   components: {
-    EditProfile
+    EditProfile,
+    PerformanceCircle
   },
 
   props: {
@@ -174,9 +169,6 @@ export default {
   }),
 
   computed: {
-    normalizedWallets () {
-      return this.wallets.map((w, i) => ({ id: w.id, name: w.name, gain: w.gain }))
-    },
     user () {
       return this.$store.state.auth.user
     },
