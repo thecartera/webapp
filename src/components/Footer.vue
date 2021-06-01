@@ -4,12 +4,12 @@
       <div class="p-3 py-5 px-md-5 mx-auto container-md">
         <div class="px-2 px-md-0 my-4">
           <div class="row">
-            <div class="col-12 col-md-4 mb-4 mb-md-0 text-center text-md-left">
+            <div class="col-12 col-md-3 mb-4 mb-md-0 text-center text-md-left">
               <div class="mb-4 mb-md-5">
                 <img src="@/assets/logo512x512.png" width="50" alt="..." />
               </div>
             </div>
-            <div class="col-12 col-md-2 text-center text-md-left">
+            <div class="col-12 col-md-3 text-center text-md-left">
               <div
                 class="d-block mb-2"
                 v-for="link in Llinks"
@@ -18,7 +18,7 @@
                 <a class="link-style" :href="link.href"> {{ link.name }} </a>
               </div>
             </div>
-            <div class="col-12 col-md-2 text-center text-md-left">
+            <div class="col-12 col-md-3 text-center text-md-left">
               <div
                 class="d-block mb-2"
                 v-for="link in Rlinks"
@@ -27,7 +27,7 @@
                 <a class="link-style" :href="link.href"> {{ link.name }} </a>
               </div>
             </div>
-            <div class="col-12 col-md-4 mt-4 mt-md-0 text-center">
+            <div class="col-12 col-md-3 mt-4 mt-md-0 text-center">
               <div class="mb-4">
                 <b-icon icon="envelope-fill" variant="light" />
                 <a href="mailto:monnedanetwork@gmail.com" class="link-style">
@@ -47,24 +47,24 @@ export default {
   data () {
     return {
       Llinks: [
-        // {
-        //   name: 'Sobre',
-        //   href: '#'
-        // },
-        // {
-        //   name: 'Contato',
-        //   href: '#'
-        // }
+        {
+          name: 'Dúvida ou sugestão?',
+          href: 'https://forms.gle/9TBhQtpSSAzwfjQe7'
+        },
+        {
+          name: 'Relatar bug/erro',
+          href: 'https://forms.gle/9TBhQtpSSAzwfjQe7'
+        }
       ],
       Rlinks: [
-        // {
-        //   name: 'Vagas',
-        //   href: '#'
-        // },
-        // {
-        //   name: 'Termos de uso',
-        //   href: '#'
-        // }
+        {
+          name: 'Política de privacidade',
+          href: '#/privacy_policy'
+        },
+        {
+          name: 'Termos de uso',
+          href: '#/terms_of_service'
+        }
       ]
     }
   }
