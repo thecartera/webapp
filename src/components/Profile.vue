@@ -116,6 +116,21 @@
       <b-row>
         <b-col>
         <h3> Carteiras </h3>
+          <b-row style="margin-left: auto" align-v="center">
+            Variação
+            <b-dropdown
+              size="sm"
+              id="dropdown-1"
+              variant="primary"
+              :text="selectedPeriodText"
+              class="m-2"
+            >
+              <b-dropdown-item @click="changeSelectedPeriod(7)">em 7 dias</b-dropdown-item>
+              <b-dropdown-item @click="changeSelectedPeriod(30)"> em 30 dias</b-dropdown-item>
+              <b-dropdown-item @click="changeSelectedPeriod(90)"> em 90 dias</b-dropdown-item>
+              <b-dropdown-item @click="changeSelectedPeriod(getYTD())"> YTD (no ano)</b-dropdown-item>
+            </b-dropdown>
+          </b-row>
         </b-col>
       </b-row>
       <b-row v-for="item in wallets" :key="item.id" class="mt-2 ml-2 mr-1">
@@ -165,7 +180,9 @@ export default {
     followingList: Array,
     showFollowersList: false,
     followersList: Array,
-    modalShow: true
+    modalShow: true,
+    selectedPeriod: Number,
+    selectedPeriodText: 'YTD (no ano)'
   }),
 
   computed: {
@@ -190,13 +207,9 @@ export default {
   },
 
   methods: {
-    async fetchProfileById (id) {
+    async fetchProfileById () {
       this.wallets = []
-      client.users.fetchByUsername(id).then(i => { this.profile = i })
-      const wallets = await client.wallets.fetchByOwner(id)
-      for (const wall of wallets) {
-        client.wallets.fetchById(wall.id).then(i => this.wallets.push(i))
-      }
+      client.users.fetchByUsername(this.id).then(i => { this.profile = i })
     },
     async follow () {
       if (!this.$store.state.auth.auth) {
@@ -236,6 +249,48 @@ export default {
     },
     showModal () {
       this.$refs.editProfileModal.show()
+    },
+    changeSelectedPeriod (newPeriod) {
+      this.selectedPeriod = newPeriod
+      this.fetchWallets()
+      this.changeSelectedPeriodText(newPeriod)
+    },
+    changeSelectedPeriodText (newPeriod) {
+      let newText = '--'
+      switch (newPeriod) {
+        case (7):
+          newText = `em ${newPeriod} dias`
+          break
+        case (30):
+          newText = `em ${newPeriod} dias`
+          break
+        case (90):
+          newText = `em ${newPeriod} dias`
+          break
+        default:
+          newText = 'no ano'
+          break
+      }
+      this.selectedPeriodText = newText
+    },
+    async fetchWallets () {
+      try {
+        this.wallets = []
+        const wallets = await client.wallets.fetchByOwner(this.id)
+        for (const wall of wallets) {
+          client.wallets.fetchById(wall.id, this.selectedPeriod).then(i => this.wallets.push(i))
+        }
+      } catch {
+        console.error('error fetching wallet')
+      }
+    },
+    getYTD () {
+      const now = new Date()
+      const start = new Date(now.getFullYear(), 0, 0)
+      const diff = now - start
+      const oneDay = 1000 * 60 * 60 * 24
+      const day = Math.floor(diff / oneDay)
+      return day
     }
   },
 
@@ -246,7 +301,9 @@ export default {
   },
 
   async created () {
-    await this.fetchProfileById(this.id)
+    this.selectedPeriod = this.getYTD()
+    await this.fetchProfileById()
+    await this.fetchWallets()
   }
 }
 </script>
