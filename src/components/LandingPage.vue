@@ -50,7 +50,7 @@
           <div class="col-12 col-md-6">
             <div class="title mb-4">
               <p class="h1 font-weight-normal text-center text-md-left">
-                Por que entrar na <span class="cartera">Cartera</span>?
+                Por que entrar no <span class="cartera">Cartera</span>?
               </p>
             </div>
             <div class="sub-title text-grey">
