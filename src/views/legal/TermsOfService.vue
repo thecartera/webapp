@@ -1,22 +1,22 @@
 <template>
   <div>
     <Navbar />
-    <PrivacyPolicy style="overflow-x: hidden"/>
+    <TermsOfService style="overflow-x: hidden"/>
     <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
-import PrivacyPolicy from '@/components/PrivacyPolicy'
+import TermsOfService from '@/components/legal/TermsOfService'
 import Footer from '@/components/Footer'
 
 export default {
-  name: 'PrivacyPolicyView',
+  name: 'TermsOfServiceView',
 
   components: {
     Navbar,
-    PrivacyPolicy,
+    TermsOfService,
     Footer
   }
 }
