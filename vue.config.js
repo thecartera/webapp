@@ -11,7 +11,7 @@ module.exports = {
       lang: 'pt',
       background_color: '#4e79a7', // used automatically by android for splash screen
       description: 'A rede social de investidores para você ver e acompanhar as carteiras de ações dos seus amigos',
-      categories: ["financas", "investimentos", "finances", "investments", "b3", "ações"]
+      categories: ['financas', 'investimentos', 'finances', 'investments', 'b3', 'ações']
     },
     iconPaths: {
       favicon32: 'img/icons/favicon-32x32.png',
