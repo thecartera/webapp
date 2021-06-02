@@ -1,218 +1,220 @@
 <template>
-  <b-card no-body class="px-2 pt-2">
-    <!-- User -->
-    <b-row class="m-0" >
-      <!-- Picture -->
-      <b-col cols="auto" class="p-0">
-        <b-avatar size="3rem" :src="item.owner.picture" :to="`/users/${item.owner.username}`"/>
-      </b-col>
+  <b-container class="p-0">
+    <b-card no-body class="px-2 pt-2">
+      <!-- User -->
+      <b-row class="m-0" >
+        <!-- Picture -->
+        <b-col cols="auto" class="p-0">
+          <b-avatar size="3rem" :src="item.owner.picture" :to="`/users/${item.owner.username}`"/>
+        </b-col>
 
-      <b-col style="line-height: 1.1rem" class="pl-4">
-        <!-- Username -->
-        <b-row>
-          <b-link :to="`/users/${item.owner.username}`" class="text-dark text-decoration-none">
-            <strong class="text-truncate"> {{ item.owner.username }} </strong>
-          </b-link>
-        </b-row>
-        <!-- Title -->
-        <b-row>
+        <b-col style="line-height: 1.1rem" class="pl-4">
+          <!-- Username -->
+          <b-row>
+            <b-link :to="`/users/${item.owner.username}`" class="text-dark text-decoration-none">
+              <strong class="text-truncate"> {{ item.owner.username }} </strong>
+            </b-link>
+          </b-row>
+          <!-- Title -->
+          <b-row>
           <span v-if="item.owner.title" class="text-secondary" style="font-size: 0.85rem">
             {{ item.owner.title }}
           </span>
-        </b-row>
-        <!-- Timestamp -->
-        <b-row class="text-secondary text-truncate" style="font-size: 0.75rem">
-          {{ timestamp }}
-        </b-row>
-      </b-col>
-    </b-row>
-
-    <!-- Event -->
-    <b-row class="pt-1">
-      <b-col>
-        <span> {{ item.owner.name }} </span>
-        {{ text }}
-        <b-link :to="`/wallets/${item.data.walletId}`" class="text-success text-decoration-none">
-          <span> Cartera </span>
-        </b-link>
-      </b-col>
-    </b-row>
-
-    <!-- STARTS A POSITION-->
-    <b-row class="pt-3" v-if="starts.length > 0">
-      <b-col cols="auto" style="width:6.3rem"  align-self="start" class="text-secondary">
-        <b-row class="m-0 p-0">
-          Iniciou
-        </b-row>
-        <b-row class="m-0 p-0">
-          posição
-        </b-row>
-      </b-col>
-      <b-col
-        cols="auto"
-        class="mr-2"
-        v-for="event of starts.slice(0, 4)"
-        :key="event.ticker">
-        <b-row>
-          <b-avatar
-            icon="wallet"
-            variant="success"
-            rounded
-            size="md"
-            class="mr-1 "
-            :src="thumb(event.ticker)"
-          />
-        </b-row>
-        <b-row>
-          <span style="font-size: 0.7rem">
-            {{event.ticker}}
-          </span>
-        </b-row>
-      </b-col>
-      <b-col cols="auto" class="px-0 mx-0">
-        <b-avatar
-          size="md"
-          rounded v-if="starts.length >= 4"
-          icon="three-dots"
-          variant="primary"
-        />
-      </b-col>
-    </b-row>
-
-    <!-- ENDS A POSITION -->
-    <b-row class="pt-3 mb-2" v-if="ends.length > 0">
-      <b-col cols="auto" style="width:6.3rem" align-self="start" class="text-secondary">
-        <b-row class="m-0 p-0">
-          Encerrou
-        </b-row>
-        <b-row class="m-0 p-0">
-          posição
-        </b-row>
-      </b-col>
-      <b-col cols="auto" class="mr-2" v-for="event of ends.slice(0, 4)" :key="event.ticker">
-        <b-row>
-          <b-avatar
-            icon="wallet"
-            variant="success"
-            rounded
-            size="md"
-            class="mr-1 "
-            :src="thumb(event.ticker)"
-          />
-        </b-row>
-        <b-row>
-          <span style="font-size: 0.7rem">
-            {{event.ticker}}
-          </span>
-        </b-row>
-      </b-col>
-      <b-col cols="auto" class="px-0 mx-0">
-        <b-avatar
-          size="md"
-          rounded
-          v-if="ends.length >= 4"
-          icon="three-dots"
-          variant="primary"
-        />
-      </b-col>
-    </b-row>
-
-    <!-- INCREASES A POSITION-->
-    <b-row class="pt-3" v-if="increases.length > 0">
-      <b-col cols="auto" style="width:6.3rem"  align-self="start" class="text-secondary">
-        <b-row class="m-0 p-0">
-          Aumentou
-        </b-row>
-        <b-row class="m-0 p-0">
-          Posição
-        </b-row>
-      </b-col>
-      <b-col
-        cols="auto"
-        class="mr-2"
-        v-for="event of increases.slice(0, 4)"
-        :key="event.ticker">
-        <b-row>
-          <b-avatar
-            icon="wallet"
-            variant="success"
-            rounded
-            size="md"
-            class="mr-1 "
-            :src="thumb(event.ticker)"
-          />
-        </b-row>
-        <b-row>
-          <span style="font-size: 0.7rem">
-            {{event.ticker}}
-          </span>
-        </b-row>
-      </b-col>
-      <b-col cols="auto" class="px-0 mx-0">
-        <b-avatar
-          size="md"
-          rounded v-if="increases.length >= 4"
-          icon="three-dots"
-          variant="primary"
-        />
-      </b-col>
-    </b-row>
-
-    <!-- DECREASES A POSITION -->
-    <b-row class="pt-3 mb-2" v-if="decreases.length > 0">
-      <b-col cols="auto" style="width:6.3rem" align-self="start" class="text-secondary">
-        <b-row class="m-0 p-0">
-          Diminuiu
-        </b-row>
-        <b-row class="m-0 p-0">
-          Posição
-        </b-row>
-      </b-col>
-      <b-col cols="auto" class="mr-2" v-for="event of decreases.slice(0, 4)" :key="event.ticker">
-        <b-row>
-          <b-avatar
-            icon="wallet"
-            variant="success"
-            rounded
-            size="md"
-            class="mr-1 "
-            :src="thumb(event.ticker)"
-          />
-        </b-row>
-        <b-row>
-          <span style="font-size: 0.7rem">
-            {{event.ticker}}
-          </span>
-        </b-row>
-      </b-col>
-      <b-col cols="auto" class="px-0 mx-0">
-        <b-avatar
-          size="md"
-          rounded
-          v-if="decreases.length >= 4"
-          icon="three-dots"
-          variant="primary"
-        />
-      </b-col>
-    </b-row>
-
-    <!-- Reaction button -->
-    <b-card-footer class="pt-0 m-0 px-3 pb-0" footer-bg-variant="white">
-      <b-row align-v="center">
-        <!-- Like -->
-        <b-button v-if="!this.like" @click="likePost" variant="white" size="md">
-          <font-awesome-icon :icon="['far', 'thumbs-up']" />
-          <span> {{ likeCount }} </span>
-        </b-button>
-
-        <!-- Unlike -->
-        <b-button v-else @click="unlikePost" variant="white" size="md">
-          <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-primary" />
-          <span> {{ likeCount }} </span>
-        </b-button>
+          </b-row>
+          <!-- Timestamp -->
+          <b-row class="text-secondary text-truncate" style="font-size: 0.75rem">
+            {{ timestamp }}
+          </b-row>
+        </b-col>
       </b-row>
-    </b-card-footer>
-  </b-card>
+
+      <!-- Event -->
+      <b-row class="pt-1">
+        <b-col>
+          <span> {{ item.owner.name }} </span>
+          {{ text }}
+          <b-link :to="`/wallets/${item.data.walletId}`" class="text-success text-decoration-none">
+            <span> Cartera </span>
+          </b-link>
+        </b-col>
+      </b-row>
+
+      <!-- STARTS A POSITION-->
+      <b-row class="pt-3" v-if="starts.length > 0">
+        <b-col cols="auto" style="width:6.3rem"  align-self="start" class="text-secondary">
+          <b-row class="m-0 p-0">
+            Iniciou
+          </b-row>
+          <b-row class="m-0 p-0">
+            posição
+          </b-row>
+        </b-col>
+        <b-col
+          cols="auto"
+          class="mr-2"
+          v-for="event of starts.slice(0, 4)"
+          :key="event.ticker">
+          <b-row>
+            <b-avatar
+              icon="wallet"
+              variant="success"
+              rounded
+              size="md"
+              class="mr-1 "
+              :src="thumb(event.ticker)"
+            />
+          </b-row>
+          <b-row>
+          <span style="font-size: 0.7rem">
+            {{event.ticker}}
+          </span>
+          </b-row>
+        </b-col>
+        <b-col cols="auto" class="px-0 mx-0">
+          <b-avatar
+            size="md"
+            rounded v-if="starts.length >= 4"
+            icon="three-dots"
+            variant="primary"
+          />
+        </b-col>
+      </b-row>
+
+      <!-- ENDS A POSITION -->
+      <b-row class="pt-3 mb-2" v-if="ends.length > 0">
+        <b-col cols="auto" style="width:6.3rem" align-self="start" class="text-secondary">
+          <b-row class="m-0 p-0">
+            Encerrou
+          </b-row>
+          <b-row class="m-0 p-0">
+            posição
+          </b-row>
+        </b-col>
+        <b-col cols="auto" class="mr-2" v-for="event of ends.slice(0, 4)" :key="event.ticker">
+          <b-row>
+            <b-avatar
+              icon="wallet"
+              variant="success"
+              rounded
+              size="md"
+              class="mr-1 "
+              :src="thumb(event.ticker)"
+            />
+          </b-row>
+          <b-row>
+          <span style="font-size: 0.7rem">
+            {{event.ticker}}
+          </span>
+          </b-row>
+        </b-col>
+        <b-col cols="auto" class="px-0 mx-0">
+          <b-avatar
+            size="md"
+            rounded
+            v-if="ends.length >= 4"
+            icon="three-dots"
+            variant="primary"
+          />
+        </b-col>
+      </b-row>
+
+      <!-- INCREASES A POSITION-->
+      <b-row class="pt-3" v-if="increases.length > 0">
+        <b-col cols="auto" style="width:6.3rem"  align-self="start" class="text-secondary">
+          <b-row class="m-0 p-0">
+            Aumentou
+          </b-row>
+          <b-row class="m-0 p-0">
+            Posição
+          </b-row>
+        </b-col>
+        <b-col
+          cols="auto"
+          class="mr-2"
+          v-for="event of increases.slice(0, 4)"
+          :key="event.ticker">
+          <b-row>
+            <b-avatar
+              icon="wallet"
+              variant="success"
+              rounded
+              size="md"
+              class="mr-1 "
+              :src="thumb(event.ticker)"
+            />
+          </b-row>
+          <b-row>
+          <span style="font-size: 0.7rem">
+            {{event.ticker}}
+          </span>
+          </b-row>
+        </b-col>
+        <b-col cols="auto" class="px-0 mx-0">
+          <b-avatar
+            size="md"
+            rounded v-if="increases.length >= 4"
+            icon="three-dots"
+            variant="primary"
+          />
+        </b-col>
+      </b-row>
+
+      <!-- DECREASES A POSITION -->
+      <b-row class="pt-3 mb-2" v-if="decreases.length > 0">
+        <b-col cols="auto" style="width:6.3rem" align-self="start" class="text-secondary">
+          <b-row class="m-0 p-0">
+            Diminuiu
+          </b-row>
+          <b-row class="m-0 p-0">
+            Posição
+          </b-row>
+        </b-col>
+        <b-col cols="auto" class="mr-2" v-for="event of decreases.slice(0, 4)" :key="event.ticker">
+          <b-row>
+            <b-avatar
+              icon="wallet"
+              variant="success"
+              rounded
+              size="md"
+              class="mr-1 "
+              :src="thumb(event.ticker)"
+            />
+          </b-row>
+          <b-row>
+          <span style="font-size: 0.7rem">
+            {{event.ticker}}
+          </span>
+          </b-row>
+        </b-col>
+        <b-col cols="auto" class="px-0 mx-0">
+          <b-avatar
+            size="md"
+            rounded
+            v-if="decreases.length >= 4"
+            icon="three-dots"
+            variant="primary"
+          />
+        </b-col>
+      </b-row>
+
+      <!-- Reaction button -->
+      <b-card-footer class="pt-0 m-0 px-3 pb-0" footer-bg-variant="white">
+        <b-row align-v="center">
+          <!-- Like -->
+          <b-button v-if="!this.like" @click="likePost" variant="white" size="md">
+            <font-awesome-icon :icon="['far', 'thumbs-up']" />
+            <span> {{ likeCount }} </span>
+          </b-button>
+
+          <!-- Unlike -->
+          <b-button v-else @click="unlikePost" variant="white" size="md">
+            <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-primary" />
+            <span> {{ likeCount }} </span>
+          </b-button>
+        </b-row>
+      </b-card-footer>
+    </b-card>
+  </b-container>
 </template>
 
 <script>
