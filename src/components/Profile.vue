@@ -116,7 +116,10 @@
       <b-row>
         <b-col>
         <h3> Carteiras </h3>
-          <b-row style="margin-left: auto" align-v="center">
+          <b-row v-if="wallets.length === 0">
+            <b-container> Este usuário ainda não criou uma carteira </b-container>
+          </b-row>
+          <b-row v-else style="margin-left: auto" align-v="center">
             Variação
             <b-dropdown
               size="sm"
