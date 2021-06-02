@@ -51,7 +51,7 @@
       </b-row>
 
       <b-row v-for="suggestedUser of suggestedUsers.slice(firstIndexUser, lastIndexUser)" :key="suggestedUser.username">
-        <b-col class="pl-0 pr-2">
+        <b-col class="px-0">
           <SimpleInviteUserCard
             :user="suggestedUser"
             :bgcolor="'cartera-blue'"

@@ -22,7 +22,7 @@
       </b-col>
 
       <!-- Clickable text to follow/unfollow -->
-      <b-col style="font-size: 0.8rem" class="ml-3 p-1" align-self="center" cols="auto" v-if="$store.state.auth.auth">
+      <b-col style="font-size: 0.8rem" align-self="center" cols="auto" v-if="$store.state.auth.auth">
         <!-- Unfollow -->
         <b-card-text
         v-if="user.following"
