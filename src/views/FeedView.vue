@@ -10,9 +10,11 @@
 
         <!-- Center Left -->
         <b-col cols="12" md="7" lg="6" xl="5" class="p-1">
+          <b-row v-if="feed.length === 0" class="mt-3">
+              <NewUser @updateFeed="updateFeed"/>
+          </b-row>
           <b-row v-for="item of feed" :key="item.id" class="mt-3">
             <b-col>
-              <NewUser v-if="feed.length === 0" />
               <FeedItem :item="item" />
             </b-col>
           </b-row>
@@ -63,6 +65,11 @@ export default {
 
       const lastId = this.feed[this.feed.length - 1].id
       const newItems = await client.feed.getFeed(10, lastId)
+      this.feed = [...this.feed, ...newItems]
+    },
+    async updateFeed () {
+      console.log('here')
+      const newItems = await client.feed.getFeed(10)
       this.feed = [...this.feed, ...newItems]
     }
   },
