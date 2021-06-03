@@ -3,6 +3,7 @@
   title="Bem vindo!"
   tag="article"
   no-body
+  class="mx-3"
   >
 
   <b-card-header>
@@ -46,7 +47,7 @@
     <b-row align-v="center">
       <!-- Like -->
       <b-button v-if="this.likeCount === 133" @click="likeCount = 134" variant="white" size="lg">
-        <font-awesome-icon :icon="['far', 'thumbs-up']" />
+        <font-awesome-icon :icon="['far', 'thumbs-up']"/>
         <span class="small"> {{ likeCount }} </span>
       </b-button>
 
