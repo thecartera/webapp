@@ -2,6 +2,7 @@
   <b-container class="p-0">
     <!-- User -->
     <b-card class="p-2 border-color" no-body>
+      <Loading v-if="loadingUser"/>
       <b-row>
         <!-- Image -->
         <b-col cols="auto">
@@ -116,7 +117,8 @@
       <b-row>
         <b-col>
         <h3> Carteiras </h3>
-          <b-row v-if="wallets.length === 0">
+          <Loading v-if="loadingWallets"/>
+          <b-row v-if="wallets.length === 0 && !loading">
             <b-container> Este usuário ainda não criou uma carteira </b-container>
           </b-row>
           <b-row v-else style="margin-left: auto" align-v="center">
@@ -156,16 +158,18 @@
 
 <script>
 import client from '@/commons/client.api'
+import { LOGIN } from '@/store/actions.type'
 import EditProfile from '@/components/EditProfile'
 import PerformanceCircle from '@/components/PerformanceCircle'
-import { LOGIN } from '@/store/actions.type'
+import Loading from '@/components/Loading'
 
 export default {
   name: 'Profile',
 
   components: {
     EditProfile,
-    PerformanceCircle
+    PerformanceCircle,
+    Loading
   },
 
   props: {
@@ -185,7 +189,9 @@ export default {
     followersList: Array,
     modalShow: true,
     selectedPeriod: Number,
-    selectedPeriodText: 'YTD (no ano)'
+    selectedPeriodText: 'YTD (no ano)',
+    loadingUser: true,
+    loadingWalllets: true
   }),
 
   computed: {
@@ -307,7 +313,9 @@ export default {
   async created () {
     this.selectedPeriod = this.getYTD()
     await this.fetchProfileById()
+    this.loadingUser = false
     await this.fetchWallets()
+    this.loadingWalllets = false
   }
 }
 </script>
