@@ -8,8 +8,9 @@ import FollowersView from '@/views/FollowersView'
 import FollowingView from '@/views/FollowingView'
 import LandingPage from '@/views/LandingPageView'
 import WalletEditorView from '@/views/WalletEditorView'
-import TermsOfService from '@/views/legal/TermsOfService'
-import PrivacyPolicy from '@/views/legal/PrivacyPolicy'
+import TermsOfService from '@/views/legal/TermsOfServiceView'
+import PrivacyPolicy from '@/views/legal/PrivacyPolicyView'
+import Settings from '@/views/SettingsView'
 import FeedView from '@/views/FeedView'
 import WalletNotFoundView from '@/views/WalletNotFoundView'
 
@@ -65,6 +66,11 @@ const routes = [
     path: '/landing',
     name: 'landing',
     component: LandingPage
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: Settings
   },
   {
     path: '/feed',
