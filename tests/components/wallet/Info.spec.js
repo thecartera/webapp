@@ -80,3 +80,22 @@ test("dropdown of logged user's wallet has visible remove and edit options", () 
   expect(removeWalletBtn).toBeTruthy()
   expect(editWalletBtn).toBeTruthy()
 })
+
+test("dropdown of any user's wallet has no remove and edit options", () => {
+  const infoWrapper = mount(Info, {
+    propsData: {
+      wallet: fakeWallet('any'),
+      showValues: false
+    },
+    mocks: {
+      $store: storeWithUsr('doesnt matter')
+    }
+  })
+  const dropdownButtons = infoWrapper.findAll('b-dropdown-item-button')
+  const removeWalletBtnArr = dropdownButtons.filter(
+    btn => btn.text().includes('Excluir carteira'))
+  const editWalletBtnArr = dropdownButtons.filter(
+    btn => btn.text().includes('Editar carteira'))
+  expect(removeWalletBtnArr.length).toBe(0)
+  expect(editWalletBtnArr.length).toBe(0)
+})
