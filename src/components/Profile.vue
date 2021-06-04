@@ -298,8 +298,9 @@ export default {
   },
 
   watch: {
-    async id (newVal) { // watch if opening another user profile
-      await this.fetchProfileById(newVal)
+    async id () { // watch if opening another user profile
+      await this.fetchProfileById()
+      await this.fetchWallets()
     }
   },
 
