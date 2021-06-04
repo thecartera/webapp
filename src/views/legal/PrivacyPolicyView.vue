@@ -1,14 +1,14 @@
 <template>
   <div>
     <Navbar />
-      <b-row class="m-3" style="width=10rem">
-        <b-dropdown
-        size="sm"
-        id="dropdown-1"
-        variant="primary"
-        text="Language"
-        class="m-2"
-        >
+    <b-row class="m-3" style="width=10rem">
+      <b-dropdown
+      size="sm"
+      id="dropdown-1"
+      variant="primary"
+      text="Language"
+      class="m-2"
+      >
         <b-dropdown-item @click="updateLanguage('portuguese')">Português</b-dropdown-item>
         <b-dropdown-item @click="updateLanguage('english')">English</b-dropdown-item>
       </b-dropdown>
