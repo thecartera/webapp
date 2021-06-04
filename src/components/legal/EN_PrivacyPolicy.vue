@@ -7,7 +7,7 @@
   <h5> Last updated June 1, 2021 </h5>
 
   <p>
-  Thank you for choosing to be part of our community at Cartera ("Company", "we", "us", "our"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice, or our practices with regards to your personal information, please contact us at gmbueno1802@gmail.com.
+  Thank you for choosing to be part of our community at Cartera ("Company", "we", "us", "our"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice, or our practices with regards to your personal information, please contact us at monnedanetwork@gmail.com.
   </p>
   <p>
   When you visit our website https://cartera.com.br (the "Website"), and more generally, use any of our services (the "Services", which include the Website), we appreciate that you are trusting us with your personal information. We take your privacy very seriously. In this privacy notice, we seek to explain to you in the clearest way possible what information we collect, how we use it and what rights you have in relation to it. We hope you take some time to read through it carefully, as it is important. If there are any terms in this privacy notice that you do not agree with, please discontinue use of our Services immediately.
@@ -47,7 +47,7 @@
 
   <p> Personal Information Provided by You. We collect email addresses; usernames; and other similar information. </p>
 
-  <p> Social Media Login Data. We may provide you with the option to register with us using your existing social media account details, like your Facebook, Twitter or other social media account. If you choose to register in this way, we will collect the information described in the section called "HOW DO WE HANDLE YOUR SOCIAL LOGINS" below. </p>
+  <p> Social Media Login Data. We may provide you with the option to register with us using your existing social media account details, like your Facebook, Google or other social media account. If you choose to register in this way, we will collect the information described in the section called "HOW DO WE HANDLE YOUR SOCIAL LOGINS" below. </p>
 
   <p> All personal information that you provide to us must be true, complete and accurate, and you must notify us of any changes to such personal information. </p>
 
@@ -61,7 +61,7 @@
 
   <p> To facilitate account creation and logon process. If you choose to link your account with us to a third-party account (such as your Google or Facebook account), we use the information you allowed us to collect from those third parties to facilitate account creation and logon process for the performance of the contract. See the section below headed "HOW DO WE HANDLE YOUR SOCIAL LOGINS" for further information. </p>
 
-  <p> To post testimonials. We post testimonials on our Website that may contain personal information. Prior to posting a testimonial, we will obtain your consent to use your name and the content of the testimonial. If you wish to update, or delete your testimonial, please contact us at gmbueno1802@gmail.com and be sure to include your name, testimonial location, and contact information. </p>
+  <p> To post testimonials. We post testimonials on our Website that may contain personal information. Prior to posting a testimonial, we will obtain your consent to use your name and the content of the testimonial. If you wish to update, or delete your testimonial, please contact us at monnedanetwork@gmail.com and be sure to include your name, testimonial location, and contact information. </p>
 
   <p> Request feedback. We may use your information to request feedback and to contact you about your use of our Website. </p>
 
@@ -93,7 +93,7 @@
 
   <p> In Short:  If you choose to register or log in to our services using a social media account,  we may have access to certain information about you. </p>
 
-  <p> Our Website offers you the ability to register and log in using your third-party social media account details (like your Facebook or Twitter logins). Where you choose to do this, we will receive certain profile information about you from your social media provider. The profile information we receive may vary depending on the social media provider concerned, but will often include your name, email address, friends list, profile picture as well as other information you choose to make public on such social media platform. </p>
+  <p> Our Website offers you the ability to register and log in using your third-party social media account details (like your Facebook or Google logins). Where you choose to do this, we will receive certain profile information about you from your social media provider. The profile information we receive may vary depending on the social media provider concerned, but will often include your name, email address, friends list, profile picture as well as other information you choose to make public on such social media platform. </p>
 
   <p> We will use the information we receive only for the purposes that are described in this privacy notice or that are otherwise made clear to you on the relevant Website. Please note that we do not control, and are not responsible for, other uses of your personal information by your third-party social media provider. We recommend that you review their privacy notice to understand how they collect, use and share your personal information, and how you can set your privacy preferences on their sites and apps. </p>
 
@@ -123,7 +123,7 @@
 
   <p> If you are a resident in Switzerland, the contact details for the data protection authorities are available here: https://www.edoeb.admin.ch/edoeb/en/home.html.  </p>
 
-  <p> If you have questions or comments about your privacy rights, you may email us at gmbueno1802@gmail.com. </p>
+  <p> If you have questions or comments about your privacy rights, you may email us at monnedanetwork@gmail.com. </p>
 
   <p> Account Information </p>
 
@@ -217,7 +217,7 @@
 
   <h4> 11. HOW CAN YOU CONTACT US ABOUT THIS NOTICE? </h4>
 
-  <p> If you have questions or comments about this notice, you may email us at gmbueno1802@gmail.com or by post to: </p>
+  <p> If you have questions or comments about this notice, you may email us at monnedanetwork@gmail.com or by post to: </p>
 
   <b-card bg-variant="light" no-body class="px-3 pt-3">
   <b-card-title> Cartera </b-card-title>
@@ -229,7 +229,7 @@
 
   <h4> 12. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU? </h4>
 
-  <p> Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete your personal information, please visit: https://cartera.com.br. We will respond to your request within 30 days. </p>
+  <p> Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete your personal information, please contact us at monnedanetwork@gmail.com. We will respond to your request within 30 days. </p>
   </b-card>
 </template>
 

@@ -8,7 +8,7 @@
   <h5> Última atualização em 1º de junho de 2021 </h5>
 
   <p>
-  Obrigado por escolher fazer parte da nossa comunidade na Cartera ("Compania", "nós", "nosso"). Temos o compromisso de proteger suas informações pessoais e seu direito à privacidade. Se você tiver alguma dúvida ou preocupação sobre este aviso de privacidade ou sobre nossas práticas em relação às suas informações pessoais, entre em contato conosco pelo e-mail gmbueno1802@gmail.com.
+  Obrigado por escolher fazer parte da nossa comunidade na Cartera ("Compania", "nós", "nosso"). Temos o compromisso de proteger suas informações pessoais e seu direito à privacidade. Se você tiver alguma dúvida ou preocupação sobre este aviso de privacidade ou sobre nossas práticas em relação às suas informações pessoais, entre em contato conosco pelo e-mail monnedanetwork@gmail.com.
   </p>
   <p>
   Quando você visita nosso site https://cartera.com.br (o "Site") e, de maneira mais geral, usa qualquer um dos nossos serviços (os "Serviços", que incluem o Site), agradecemos por você estar nos confiando suas informações pessoais. Nós levamos sua privacidade muito a sério. Neste aviso de privacidade, procuramos explicar da forma mais clara possível quais informações coletamos, como as usamos e quais direitos você tem em relação a elas. Esperamos que você reserve algum tempo para lê-lo com atenção, pois é importante. Se houver algum termo neste aviso de privacidade com o qual você não concorda, interrompa o uso de nossos Serviços imediatamente.
@@ -48,7 +48,7 @@
 
   <p> Informações pessoais fornecidas por você. Coletamos endereços de e-mail; nomes de usuário; e outras informações semelhantes. </p>
 
-  <p> Dados de login de mídia social. Podemos fornecer a você a opção de se registrar conosco usando os detalhes de sua conta de mídia social existente, como Facebook, Twitter ou outra conta de mídia social. Se você optar por se registrar desta forma, coletaremos as informações descritas na seção "COMO TRATAMOS SEUS LOGINS SOCIAIS" abaixo. </p>
+  <p> Dados de login de mídia social. Podemos fornecer a você a opção de se registrar conosco usando os detalhes de sua conta de mídia social existente, como Facebook, Google ou outra conta de mídia social. Se você optar por se registrar desta forma, coletaremos as informações descritas na seção "COMO TRATAMOS SEUS LOGINS SOCIAIS" abaixo. </p>
 
   <p> Todas as informações pessoais que você nos fornece devem ser verdadeiras, completas e precisas e você deve nos notificar sobre quaisquer alterações nessas informações pessoais. </p>
 
@@ -61,7 +61,7 @@
   <p> Usamos as informações que coletamos ou recebemos: </p>
 
   <p> Para facilitar a criação de contas e o processo de logon. Se você optar por vincular sua conta conosco a uma conta de terceiros (como sua conta do Google ou Facebook), usaremos as informações que você nos permitiu coletar desses terceiros para facilitar a criação de conta e o processo de logon para o desempenho do contrato. Consulte a seção a seguir intitulada "COMO TRATAMOS SEUS LOGINS SOCIAIS" para obter mais informações. </p>
-  <p> Para postar depoimentos. Publicamos depoimentos em nosso site que podem conter informações pessoais. Antes de publicar um depoimento, obteremos seu consentimento para usar seu nome e o conteúdo do depoimento. Se você deseja atualizar ou excluir seu depoimento, entre em contato conosco em gmbueno1802@gmail.com e certifique-se de incluir seu nome, local do depoimento e informações de contato. </p>
+  <p> Para postar depoimentos. Publicamos depoimentos em nosso site que podem conter informações pessoais. Antes de publicar um depoimento, obteremos seu consentimento para usar seu nome e o conteúdo do depoimento. Se você deseja atualizar ou excluir seu depoimento, entre em contato conosco em monnedanetwork@gmail.com e certifique-se de incluir seu nome, local do depoimento e informações de contato. </p>
 
   <p> Solicite feedback. Podemos usar suas informações para solicitar comentários e contatá-lo sobre o uso de nosso site. </p>
 
@@ -93,7 +93,7 @@
 
   <p> Resumindo: Se você decidir se registrar ou fazer login em nossos serviços usando uma conta de mídia social, podemos ter acesso a certas informações sobre você. </p>
 
-  <p> Nosso site oferece a capacidade de registrar-se e fazer login usando os detalhes de sua conta de terceiros nas redes sociais (como login do Facebook ou Twitter). Quando você decidir fazer isso, receberemos certas informações de perfil sobre você do seu provedor de mídia social. As informações de perfil que recebemos podem variar dependendo do provedor de mídia social em questão, mas geralmente incluem seu nome, endereço de e-mail, lista de amigos, foto do perfil, bem como outras informações que você decida tornar públicas nessa plataforma de mídia social. </p>
+  <p> Nosso site oferece a capacidade de registrar-se e fazer login usando os detalhes de sua conta de terceiros nas redes sociais (como login do Facebook ou Google). Quando você decidir fazer isso, receberemos certas informações de perfil sobre você do seu provedor de mídia social. As informações de perfil que recebemos podem variar dependendo do provedor de mídia social em questão, mas geralmente incluem seu nome, endereço de e-mail, lista de amigos, foto do perfil, bem como outras informações que você decida tornar públicas nessa plataforma de mídia social. </p>
 
   <p> Usaremos as informações que recebermos apenas para os fins descritos neste aviso de privacidade ou que sejam de outra forma esclarecidos para você no site relevante. Observe que não controlamos e não somos responsáveis por outros usos de suas informações pessoais por seu provedor de mídia social terceirizado. Recomendamos que você analise seu aviso de privacidade para entender como eles coletam, usam e compartilham suas informações pessoais e como você pode definir suas preferências de privacidade em seus sites e aplicativos. </p>
 
@@ -123,7 +123,7 @@
 
   <p> Se você é residente na Suíça, os detalhes de contato das autoridades de proteção de dados estão disponíveis aqui: https://www.edoeb.admin.ch/edoeb/en/home.html. </p>
 
-  <p> Se você tiver perguntas ou comentários sobre seus direitos de privacidade, envie um e-mail para gmbueno1802@gmail.com. </p>
+  <p> Se você tiver perguntas ou comentários sobre seus direitos de privacidade, envie um e-mail para monnedanetwork@gmail.com. </p>
 
   <p> Informações da conta </p>
 
@@ -217,7 +217,7 @@
 
   <h4> 11. COMO VOCÊ PODE NOS CONTATAR SOBRE ESTE AVISO? </h4>
 
-  <p> Se você tiver perguntas ou comentários sobre este aviso, pode nos enviar um e-mail para gmbueno1802@gmail.com ou por correio para: </p>
+  <p> Se você tiver perguntas ou comentários sobre este aviso, pode nos enviar um e-mail para monnedanetwork@gmail.com ou por correio para: </p>
 
   <b-card bg-variant = "light" no-body class = "px-3 pt-3">
   <b-card-title> Cartera </b-card-title>
@@ -229,7 +229,7 @@
 
   <h4> 12. COMO VOCÊ PODE REVER, ATUALIZAR OU EXCLUIR OS DADOS QUE COLETAMOS DE VOCÊ? </h4>
 
-  <p> Com base nas leis aplicáveis do seu país, você pode ter o direito de solicitar acesso às informações pessoais que coletamos de você, alterar essas informações ou excluí-las em algumas circunstâncias. Para solicitar a revisão, atualização ou exclusão de suas informações pessoais, visite: https://cartera.com.br. Responderemos à sua solicitação em 30 dias. </p>
+  <p> Com base nas leis aplicáveis do seu país, você pode ter o direito de solicitar acesso às informações pessoais que coletamos de você, alterar essas informações ou excluí-las em algumas circunstâncias. Para solicitar a revisão, atualização ou exclusão de suas informações pessoais, mande um email a monnedanetwork@gmail.com. Responderemos à sua solicitação em 30 dias. </p>
   </b-card>
 </template>
 
