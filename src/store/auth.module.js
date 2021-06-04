@@ -40,6 +40,7 @@ const actions = {
       ctx.commit(SET_USER, user)
       ctx.commit(SET_AUTH, true)
     } catch (e) {
+      client.setToken(null)
       ctx.commit(SET_ERROR, e)
       ctx.commit(SET_USER, {})
       ctx.commit(SET_AUTH, false)
@@ -49,6 +50,7 @@ const actions = {
     await auth0.loginWithRedirect({ appState: state })
   },
   async [LOGOUT] (ctx) {
+    client.setToken(null)
     ctx.commit(PURGE_AUTH)
     await auth0.logout()
   }
