@@ -42,12 +42,6 @@
             </b-button>
           </b-row>
         </b-col>
-        <!-- TODO: REDIRECT TO SUGGESTED FRIENDS VIEW -->
-        <!-- <b-col>
-          <b-row align-h="end">
-          <span class="text-primary" style="cursor: pointer"> ver mais </span>
-          </b-row>
-        </b-col> -->
       </b-row>
 
       <b-row v-for="suggestedUser of suggestedUsers.slice(firstIndexUser, lastIndexUser)" :key="suggestedUser.username">

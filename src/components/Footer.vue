@@ -52,7 +52,7 @@ export default {
           href: 'https://forms.gle/9TBhQtpSSAzwfjQe7'
         },
         {
-          name: 'Relatar bug/erro',
+          name: 'Relatar bug ou erro',
           href: 'https://forms.gle/9TBhQtpSSAzwfjQe7'
         }
       ],

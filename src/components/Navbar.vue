@@ -29,16 +29,118 @@
           </b-button>
         </b-nav-item>
 
+        <!-- Profile button mobile -->
+        <b-nav-item class="d-sm-none" v-if="auth" :to="`/users/${user.username}`">
+          <b-button variant="primary">
+            <b-icon icon="person-circle"/>
+            <span class="text-white"> Perfil </span>
+          </b-button>
+        </b-nav-item>
+
         <!-- Create wallet button -->
         <b-nav-item to="/wallets">
           <b-button class="max-height" v-if="auth" size="md" variant="primary">
+            <b-icon icon="plus" shift-h="16" shift-v="-1" scale="0.8"/>
+            <b-icon icon="wallet2"/>
             Nova <span style="color: lime"> Cartera </span>
           </b-button>
         </b-nav-item>
 
-        <!-- Login/logout buttons -->
-        <b-nav-item>
-          <!-- Login -->
+        <!-- Profile dropdown desktop -->
+        <b-col
+          v-if="auth"
+          class="p-0 m-0 d-none d-sm-block"
+          align-self="center"
+        >
+          <b-dropdown
+            no-caret
+            size="sm"
+            variant="primary"
+            style="height:43px"
+            right
+          >
+            <template #button-content>
+              <b-avatar size="2rem" :src="user.picture" />
+            </template>
+
+            <b-dropdown-item>
+              <b-row align-h="left">
+                <b-nav-item :to="`/users/${user.username}`">
+                  <b-icon icon="person-circle" variant="dark"/>
+                  <span class="text-dark"> Perfil </span>
+                </b-nav-item>
+              </b-row>
+            </b-dropdown-item>
+
+            <b-dropdown-item href="https://forms.gle/9TBhQtpSSAzwfjQe7">
+              <b-row align-h="left">
+                <b-nav-item href="https://forms.gle/9TBhQtpSSAzwfjQe7">
+                  <b-icon icon="question-circle" variant="dark"/>
+                  <span class="text-dark">
+                    Dúvida ou sugestão?
+                  </span>
+                </b-nav-item>
+              </b-row>
+            </b-dropdown-item>
+
+            <b-dropdown-item>
+              <b-row align-h="left">
+                <b-nav-item to="/settings">
+                  <b-icon icon="gear-fill" variant="dark"/>
+                  <span class="text-dark"> Configurações </span>
+                </b-nav-item>
+              </b-row>
+            </b-dropdown-item>
+
+            <b-dropdown-divider/>
+
+            <b-dropdown-item
+                class="max-height"
+                size="md"
+                variant="primary"
+                @click="logout"
+              >
+              <b-row align-h="left">
+                <b-nav-item>
+                  <b-icon icon="box-arrow-left" variant="dark"/>
+                  <span class="text-dark"> Sair </span>
+                </b-nav-item>
+              </b-row>
+            </b-dropdown-item>
+          </b-dropdown>
+        </b-col>
+
+        <!-- Login -->
+        <b-button
+          size="md"
+          class="max-height"
+          variant="primary"
+          v-else
+          @click="login"
+        >
+          Entrar
+        </b-button>
+
+        <!-- Doubts and suggestions -->
+        <b-nav-item class="d-sm-none" href="https://forms.gle/9TBhQtpSSAzwfjQe7">
+          <b-button variant="primary">
+            <b-icon icon="question-circle" variant="white"/>
+            <span class="text-white">
+              Dúvida ou sugestão?
+            </span>
+          </b-button>
+        </b-nav-item>
+
+        <!-- Settings -->
+        <b-nav-item class="d-sm-none" to="/settings">
+          <b-button variant="primary">
+            <b-icon icon="gear-fill" variant="white"/>
+            <span class="text-white"> Configurações </span>
+          </b-button>
+        </b-nav-item>
+
+        <!-- Logout -->
+        <b-nav-item class="d-sm-none">
           <b-button
             size="md"
             class="max-height"
@@ -46,27 +148,11 @@
             v-if="auth"
             @click="logout"
           >
+            <b-icon icon="box-arrow-left" />
             Sair
           </b-button>
-
-          <!-- Logout -->
-          <b-button
-            size="md"
-            class="max-height"
-            variant="primary"
-            v-else
-            @click="login"
-          >
-            Entrar
-          </b-button>
         </b-nav-item>
 
-        <!-- Profile button -->
-        <b-nav-item v-if="auth" :to="`/users/${user.username}`">
-          <b-button class="max-height" variant="primary">
-            <b-avatar size="2rem" :src="user.picture" />
-          </b-button>
-        </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -105,6 +191,11 @@ export default {
 </script>
 
 <style scoped>
+
+.bg-dropdown-color {
+  background-color: #4e79a7
+}
+
 .max-height {
   max-height:  45px;
   height: 45px;
