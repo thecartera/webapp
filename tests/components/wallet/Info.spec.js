@@ -16,9 +16,7 @@ test("dropdown of any user's wallet is visible", () => {
       $store: storeWithUsr('doesnt matter')
     }
   })
-
   const dropdown = infoWrapper.get('b-dropdown')
-
   expect(dropdown.isVisible()).toBe(true)
 })
 
