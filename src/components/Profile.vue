@@ -118,7 +118,7 @@
         <b-col>
         <h3> Carteiras </h3>
           <Loading v-if="loadingWallets"/>
-          <b-row v-if="wallets.length === 0 && !loading">
+          <b-row v-if="wallets.length === 0 && !loadingWallets">
             <b-container> Este usuário ainda não criou uma carteira </b-container>
           </b-row>
           <b-row v-else style="margin-left: auto" align-v="center">
@@ -191,7 +191,7 @@ export default {
     selectedPeriod: Number,
     selectedPeriodText: 'YTD (no ano)',
     loadingUser: true,
-    loadingWalllets: true
+    loadingWallets: true
   }),
 
   computed: {
@@ -310,12 +310,12 @@ export default {
     }
   },
 
-  async created () {
+  async mounted () {
     this.selectedPeriod = this.getYTD()
     await this.fetchProfileById()
     this.loadingUser = false
     await this.fetchWallets()
-    this.loadingWalllets = false
+    this.loadingWallets = false
   }
 }
 </script>
