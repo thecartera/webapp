@@ -63,7 +63,7 @@
               <b-avatar size="2rem" :src="user.picture" />
             </template>
 
-            <b-dropdown-item>
+            <b-dropdown-item :to="`/users/${user.username}`">
               <b-row align-h="left">
                 <b-nav-item :to="`/users/${user.username}`">
                   <b-icon icon="person-circle" variant="dark"/>
@@ -83,7 +83,7 @@
               </b-row>
             </b-dropdown-item>
 
-            <b-dropdown-item>
+            <b-dropdown-item to="/settings">
               <b-row align-h="left">
                 <b-nav-item to="/settings">
                   <b-icon icon="gear-fill" variant="dark"/>
