@@ -1,4 +1,4 @@
-import { mount, shallowMount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import Info from '@/components/wallet/Info.vue'
 import Socials from '@/components/Socials.vue'
 
@@ -63,7 +63,7 @@ test("dropdown of logged user's wallet has visible Socials", () => {
 })
 
 test("dropdown of logged user's wallet has visible remove and edit options", () => {
-  const infoWrapper = mount(Info, {
+  const infoWrapper = shallowMount(Info, {
     propsData: {
       wallet: fakeWallet(loggedUsr),
       showValues: false
@@ -82,7 +82,7 @@ test("dropdown of logged user's wallet has visible remove and edit options", () 
 })
 
 test("dropdown of any user's wallet has no remove and edit options", () => {
-  const infoWrapper = mount(Info, {
+  const infoWrapper = shallowMount(Info, {
     propsData: {
       wallet: fakeWallet('any'),
       showValues: false
