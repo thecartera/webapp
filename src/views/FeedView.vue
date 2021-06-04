@@ -10,9 +10,10 @@
 
         <!-- Center Left -->
         <b-col cols="12" md="7" lg="6" xl="5" class="p-1">
-          <b-row v-if="feed.length === 0" class="mt-3">
+          <b-row v-if="feed.length === 0 && !loading" class="mt-3">
               <NewUser @updateFeed="updateFeed"/>
           </b-row>
+          <Loading v-if="loading"/>
           <b-row v-for="item of feed" :key="item.id" class="mt-3">
             <b-col>
               <FeedItem :item="item" />
@@ -42,6 +43,7 @@ import Navbar from '@/components/Navbar'
 import FeedItem from '@/components/FeedItem'
 import InviteFriends from '@/components/InviteFriends'
 import NewUser from '@/components/NewUser'
+import Loading from '@/components/Loading'
 
 export default {
   name: 'FeedView',
@@ -50,11 +52,13 @@ export default {
     Navbar,
     FeedItem,
     InviteFriends,
-    NewUser
+    NewUser,
+    Loading
   },
 
   data: () => ({
-    feed: []
+    feed: [],
+    loading: true
   }),
 
   methods: {
@@ -76,6 +80,13 @@ export default {
 
   async mounted () {
     this.feed = await client.feed.getFeed(10)
+    this.loading = false
   }
 }
 </script>
+
+<style scoped>
+.vh-80 {
+  height: 80vh;
+}
+</style>
