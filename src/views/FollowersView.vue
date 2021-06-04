@@ -6,6 +6,7 @@
       <b-row>
         <b-col cols="0" md="2" lg="3"/>
         <b-col cols="12" md="8" lg="6">
+          <Loading v-if="loading"/>
           <b-row v-for="f of followers" :key="f.username">
             <b-col>
               <SimpleUserCard
@@ -13,6 +14,11 @@
                 @follow="follow"
                 @unfollow="unfollow"
               />
+            </b-col>
+          </b-row>
+          <b-row class="pt-2" v-if="followers.length === 0 && !loading">
+            <b-col>
+              <b-card> Esse usuário não tem seguidores </b-card>
             </b-col>
           </b-row>
         </b-col>
@@ -27,13 +33,15 @@ import client from '@/commons/client.api'
 
 import FollowsNavbar from '@/components/FollowsNavbar'
 import SimpleUserCard from '@/components/SimpleUserCard'
+import Loading from '@/components/Loading'
 
 export default {
   name: 'FollowersView',
 
   components: {
     FollowsNavbar,
-    SimpleUserCard
+    SimpleUserCard,
+    Loading
   },
 
   props: {
@@ -44,7 +52,8 @@ export default {
   },
 
   data: () => ({
-    followers: []
+    followers: [],
+    loading: true
   }),
 
   methods: {
@@ -59,7 +68,21 @@ export default {
   },
 
   async mounted () {
-    this.followers = await client.users.followers(this.id)
+    const followers = await client.users.followers(this.id)
+    const cleanFollowers = []
+    for (const f of followers) {
+      if (f) {
+        cleanFollowers.push(f)
+      }
+    }
+    this.followers = cleanFollowers
+    this.loading = false
   }
 }
 </script>
+
+<style scoped>
+.vh-80 {
+  height: 80vh;
+}
+</style>
