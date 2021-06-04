@@ -72,7 +72,6 @@ export default {
       this.feed = [...this.feed, ...newItems]
     },
     async updateFeed () {
-      console.log('here')
       const newItems = await client.feed.getFeed(10)
       this.feed = [...this.feed, ...newItems]
     }
