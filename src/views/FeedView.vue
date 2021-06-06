@@ -25,7 +25,9 @@
           </b-row>
           <!-- suggested friends -->
           <b-row class="mt-3" v-if="feed.length !== 0">
-          <SuggestedFriendsMobile/>
+            <b-col>
+              <SuggestedFriendsMobile/>
+            </b-col>
           </b-row>
           <!-- rest of feed (that grows as scrolls down) -->
           <b-row v-for="item of feed.slice(5)" :key="item.id" class="mt-3">
