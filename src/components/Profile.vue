@@ -217,7 +217,6 @@ export default {
 
   methods: {
     async fetchProfileById () {
-      this.wallets = []
       client.users.fetchByUsername(this.id).then(i => { this.profile = i })
     },
     async follow () {
