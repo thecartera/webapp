@@ -14,7 +14,7 @@
             <Profile :id="id" class="mt-2"/>
           </b-row>
           <b-row v-for="item of events" :key="item.id" class="mt-2">
-            <FeedItem :item="item" class="vw-100"/>
+            <EventItem :item="item" class="vw-100"/>
           </b-row>
         </b-col>
 
@@ -28,7 +28,7 @@
 <script>
 import Navbar from '@/components/Navbar'
 import Profile from '@/components/Profile'
-import FeedItem from '@/components/FeedItem'
+import EventItem from '@/components/EventItem'
 
 import client from '@/commons/client.api'
 
@@ -37,7 +37,7 @@ export default {
 
   components: {
     Navbar,
-    FeedItem,
+    EventItem,
     Profile
   },
 
