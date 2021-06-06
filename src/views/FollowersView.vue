@@ -1,39 +1,30 @@
 <template>
-  <div>
-    <FollowsNavbar/>
+<div>
+  <FollowsNavbar />
 
-    <b-container class="container px-0" style="overflow-x: hidden">
-      <b-row>
-        <b-col cols="0" md="2" lg="3"/>
-        <b-col cols="12" md="8" lg="6">
-          <Loading v-if="loading"/>
-          <b-row v-for="f of followers" :key="f.username">
-            <b-col>
-              <SimpleUserCard
-                :user="f"
-                @follow="follow"
-                @unfollow="unfollow"
-              />
-            </b-col>
-          </b-row>
-          <b-row class="pt-2" v-if="followers.length === 0 && !loading">
-            <b-col>
-              <b-card> Esse usuário não tem seguidores </b-card>
-            </b-col>
-          </b-row>
-        </b-col>
-        <b-col cols="0" md="2" lg="3"/>
-      </b-row>
-    </b-container>
-  </div>
+  <BaseView>
+    <Loading v-if="loading"/>
+    <SimpleUserCard
+      v-for="f of followers"
+      :key="f.username"
+      :user="f"
+      @follow="follow"
+      @unfollow="unfollow"
+    />
+    <b-card v-if="followers.length === 0 && !loading">
+      Esse usuário não tem seguidores
+    </b-card>
+  </BaseView>
+</div>
 </template>
 
 <script>
 import client from '@/commons/client.api'
 
+import BaseView from '@/views/BaseView'
+import Loading from '@/components/Loading'
 import FollowsNavbar from '@/components/FollowsNavbar'
 import SimpleUserCard from '@/components/SimpleUserCard'
-import Loading from '@/components/Loading'
 
 export default {
   name: 'FollowersView',
@@ -41,7 +32,8 @@ export default {
   components: {
     FollowsNavbar,
     SimpleUserCard,
-    Loading
+    Loading,
+    BaseView
   },
 
   props: {
