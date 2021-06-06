@@ -19,11 +19,8 @@ export default {
     }
   },
   computed: {
-    timestamp () {
-      return new Date(this.item.timestamp).toLocaleString('pt-BR').substring(0, 16).split(' ')[0]
-    },
     text () {
-      return '🎉 ' + this.item.owner.name + ' criou uma conta em ' + this.timestamp + '. 🎉 '
+      return '🎉 ' + this.item.owner.name + ' criou sua conta 🎉 '
     }
   }
 }
