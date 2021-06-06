@@ -11,10 +11,24 @@
         <!-- Center Left -->
         <b-col cols="12" md="7" lg="6" xl="5" class="p-1">
           <b-row v-if="feed.length === 0 && !loading" class="mt-3">
-              <NewUser @updateFeed="updateFeed"/>
+            <NewUser @updateFeed="updateFeed"/>
+            <SuggestedFriendsMobile/>
           </b-row>
           <Loading v-if="loading"/>
-          <b-row v-for="item of feed" :key="item.id" class="mt-3">
+
+          <!-- 5 items of feed, then suggested friends, then rest of feed (that grows) -->
+          <!-- 5 items of feed -->
+          <b-row v-for="item of feed.slice(0,5)" :key="item.id" class="mt-3">
+            <b-col>
+              <FeedItem :item="item" />
+            </b-col>
+          </b-row>
+          <!-- suggested friends -->
+          <b-row class="mt-3" v-if="feed.length !== 0">
+          <SuggestedFriendsMobile/>
+          </b-row>
+          <!-- rest of feed (that grows as scrolls down) -->
+          <b-row v-for="item of feed.slice(5)" :key="item.id" class="mt-3">
             <b-col>
               <FeedItem :item="item" />
             </b-col>
@@ -43,6 +57,7 @@ import Navbar from '@/components/Navbar'
 import FeedItem from '@/components/FeedItem'
 import InviteFriends from '@/components/InviteFriends'
 import NewUser from '@/components/NewUser'
+import SuggestedFriendsMobile from '@/components/SuggestedFriendsMobile'
 import Loading from '@/components/Loading'
 
 export default {
@@ -53,7 +68,8 @@ export default {
     FeedItem,
     InviteFriends,
     NewUser,
-    Loading
+    Loading,
+    SuggestedFriendsMobile
   },
 
   data: () => ({
