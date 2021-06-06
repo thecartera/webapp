@@ -60,21 +60,9 @@ export default {
   },
 
   async mounted () {
-    const following = await client.users.following(this.id)
-    const cleanFollowing = []
-    for (const f of following) {
-      if (f) {
-        cleanFollowing.push(f)
-      }
-    }
-    this.following = cleanFollowing
+    this.loading = true
+    this.following = await client.users.following(this.id)
     this.loading = false
   }
 }
 </script>
-
-<style scoped>
-.vh-80 {
-  height: 80vh;
-}
-</style>
