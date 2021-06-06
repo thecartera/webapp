@@ -20,7 +20,7 @@
         <b-form-group
           id="fieldPicture"
           label="URL da imagem:"
-          description="só serão aceitas URLs do LinkedIn, Facebook, Google e Discord."
+          description="Só serão aceitas URLs do LinkedIn e Facebook (selecione 'copiar link da imagem')"
           label-for="picURLInput"
           style="white-space: pre-wrap"
           :invalid-feedback="invalidPicUrlFeedback"
