@@ -9,7 +9,11 @@
     <b-tabs>
       <!-- Table -->
       <b-tab title="Tabela">
-        <AssetTable :assets="wallet.assets" :show='showValues' :selectedPeriod="days"/>
+        <AssetTable
+          :assets="wallet.assets"
+          :show='showValues'
+          :selectedPeriod="days"
+        />
       </b-tab>
 
       <!-- Chart -->
@@ -22,7 +26,14 @@
       </b-tab>
 
       <!-- Thesis -->
-      <b-tab v-if="wallet.thesis" title="Tese" class="m-3" style="white-space: pre-wrap">{{ wallet.thesis }}</b-tab>
+      <b-tab
+        v-if="wallet.thesis"
+        title="Tese"
+        class="m-3"
+        style="white-space: pre-wrap"
+      >
+        {{ wallet.thesis }}
+      </b-tab>
 
       <!-- Portfolio History -->
       <b-tab title="Histórico">

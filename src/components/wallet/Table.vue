@@ -1,86 +1,57 @@
 <template>
   <b-table
-    responsive='lg'
+    :responsive="true"
     hover
     :fields="fields"
     :items="assets"
     small
     borderless
-    class="line-sm pl-3"
+    tbody-tr-class="text-nowrap"
   >
     <!-- Thumbnail -->
     <template #cell(imageLink)="data">
-      <b-row>
-        <b-avatar
-          rounded
-          icon="wallet2"
-          variant="success"
-          class="image-size"
-          :src="thumb(data.item.ticker)"
-        />
-      </b-row>
+      <b-avatar
+        rounded
+        responsive="true"
+        icon="wallet2"
+        variant="success"
+        :src="thumb(data.item.ticker)"
+      />
     </template>
 
     <!-- Name and ticker -->
     <template #cell(nameticker)="data">
-      <b-row>
-        <b-col>
-          <b-row class="ml-2">
-            <span class="cell-name"> {{ data.item.name }} </span>
-          </b-row>
-          <b-row class="ml-2">
-            <span class="cell-name"> {{ (data.index + 1).toString() + ' .'}} </span>
-            <span class="cell-value"> {{ data.item.ticker.toUpperCase() }} </span>
-          </b-row>
-        </b-col>
-      </b-row>
+      <small class="text-secondary text-truncate"> {{ data.item.name }} </small>
+      <br>
+      <small class="text-secondary"> {{ (data.index + 1).toString() + ' .'}} </small>
+      <span class="text-monospace"> {{ data.item.ticker.toUpperCase() }} </span>
     </template>
 
     <!-- Weight -->
     <template #cell(weight)="data">
-      <b-row>
-        <b-col>
-          <b-row align-h="center">
-            <span class="cell-name"> Peso </span>
-          </b-row>
-          <b-row align-h="center">
-            <span class="primary cell-value"> {{ data.value.toFixed(1) }}% </span>
-          </b-row>
-        </b-col>
-      </b-row>
+      <small class="text-secondary"> Peso </small>
+      <br>
+      <span class="text-monospace"> {{ data.value.toFixed(1) }}% </span>
     </template>
 
     <!-- Price -->
     <template #cell(price)="data">
-      <b-row>
-        <b-col>
-          <b-row align-h="center">
-            <span class="cell-name"> Preço (R$) </span>
-          </b-row>
-          <b-row align-h="center">
-            <span class="primary cell-value">{{ data.value.toFixed(2) }}</span>
-          </b-row>
-        </b-col>
-      </b-row>
+      <small class="text-secondary"> Preço (R$) </small>
+      <br>
+      <span class="text-monospace"> {{ data.value.toFixed(2) }} </span>
     </template>
 
     <!-- Profit -->
     <template #cell(gain)="data">
-      <b-row>
-        <b-col>
-          <b-row align-h="center">
-            <span class="cell-name"> Variação
-              <span v-if="show"> {{ getSelectedPeriodText }} </span>
-            </span>
-          </b-row>
-          <b-row align-h="center">
-            <span v-if="show" :class="positive(data.value)" class="cell-value">
-              {{ data.value.toFixed(2) }}%
-            </span>
-            <span v-else class="cell-value"> -.--% </span>
-          </b-row>
-        </b-col>
-      </b-row>
+      <small class="text-secondary"> Variação </small>
+      <small class="text-secondary" v-if="show">
+        {{ getSelectedPeriodText }}
+      </small>
+      <br>
+      <span v-if="show" :class="positive(data.value)" class="text-monospace">
+        {{ data.value.toFixed(2) }}%
+      </span>
+      <span v-else class="text-monospace"> -.--% </span>
     </template>
   </b-table>
 </template>
@@ -148,45 +119,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-.line-sm {
-  line-height: 1rem;
-}
-
-@media only screen and (max-width: 767px) {
-  .cell-value {
-    font-family: 'Courier New';
-    font-size: 0.95rem;
-  }
-
-  .cell-name {
-    font-size: 0.75rem;
-    color: gray;
-  }
-
-  .image-size {
-    width: 2.2rem;
-    height: 2.2rem;
-  }
-}
-
-@media only screen and (min-width: 767px) {
-  .cell-value {
-    font-family: 'Courier New';
-    font-size: 1.1rem;
-  }
-
-  .cell-name {
-    font-size: 0.7rem;
-    color: gray;
-  }
-
-  .image-size {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-}
-
-</style>
