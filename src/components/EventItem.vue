@@ -78,28 +78,8 @@ export default {
   }),
 
   computed: {
-    text () {
-      switch (this.item.type) {
-        case 'NEW_WALLET':
-          return 'criou uma'
-        default:
-          return 'atualizou sua'
-      }
-    },
     timestamp () {
       return new Date(this.item.timestamp).toLocaleString('pt-BR').substring(0, 16)
-    },
-    increases () {
-      return this.item.data.changes.filter(evt => evt.change === 'INC')
-    },
-    decreases () {
-      return this.item.data.changes.filter(evt => evt.change === 'DEC')
-    },
-    starts () {
-      return this.item.data.changes.filter(evt => evt.change === 'START')
-    },
-    ends () {
-      return this.item.data.changes.filter(evt => evt.change === 'END')
     }
   },
 
