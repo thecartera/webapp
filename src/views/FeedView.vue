@@ -12,7 +12,7 @@
         <b-col cols="12" md="7" lg="6" xl="5" class="p-1">
           <b-row v-if="feed.length === 0 && !loading" class="mt-3">
             <NewUser @updateFeed="updateFeed"/>
-            <SuggestedFriendsMobile/>
+            <SuggestedFriendsMobile class="mt-3"/>
           </b-row>
           <Loading v-if="loading"/>
 
