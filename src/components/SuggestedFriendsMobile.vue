@@ -1,8 +1,9 @@
 <template>
-  <b-card no-body class="vw-100 mx-3 mt-3 px-3">
-    <b-row class="pt-1 m-0">
-      <b-col cols="auto" align-self="center" class="p-0">
-        <span> Sugeridos para você </span>
+<b-container class="p-0">
+  <b-card no-body class="px-3">
+    <b-row>
+      <b-col cols="auto" align-self="center">
+        <span class="text-secondary"> Sugeridos para você </span>
       </b-col>
       <b-col>
         <b-row align-h="end">
@@ -16,7 +17,7 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col cols="4" class="p-1" v-for="suggestedUser of suggestedUsers.slice(firstIndexUser, lastIndexUser)" :key="suggestedUser.username">
+      <b-col class="px-1" cols="4" v-for="suggestedUser of suggestedUsers.slice(firstIndexUser, lastIndexUser)" :key="suggestedUser.username">
           <b-card>
             <b-row align-h="center">
               <b-avatar
@@ -53,6 +54,7 @@
       </b-col>
     </b-row>
   </b-card>
+</b-container>
 </template>
 
 <script>
