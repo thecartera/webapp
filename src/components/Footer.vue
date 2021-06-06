@@ -1,5 +1,5 @@
 <template>
-   <div class="container-fluid p-0 overflow">
+   <div class="container-fluid p-0">
     <footer class="p-0 custom-footer d-flex align-items-center justify-content-center">
       <div class="p-3 py-5 px-md-5 mx-auto container-md">
         <div class="px-2 px-md-0 my-4">
