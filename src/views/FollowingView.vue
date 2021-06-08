@@ -2,7 +2,7 @@
 <div>
   <FollowsNavbar />
 
-  <BaseView>
+  <ThreeColumnsLayout>
     <Loading v-if="loading"/>
     <SimpleUserCard
       v-for="f of following"
@@ -14,17 +14,17 @@
     <b-card v-if="following.length === 0 && !loading">
       Esse usuário não segue ninguém
     </b-card>
-  </BaseView>
+  </ThreeColumnsLayout>
 </div>
 </template>
 
 <script>
 import client from '@/commons/client.api'
 
-import BaseView from '@/views/BaseView'
 import Loading from '@/components/Loading'
 import FollowsNavbar from '@/components/FollowsNavbar'
 import SimpleUserCard from '@/components/SimpleUserCard'
+import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
 
 export default {
   name: 'FollowingView',
@@ -32,7 +32,7 @@ export default {
   components: {
     FollowsNavbar,
     SimpleUserCard,
-    BaseView,
+    ThreeColumnsLayout,
     Loading
   },
 

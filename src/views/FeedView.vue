@@ -1,57 +1,27 @@
 <template>
-  <div>
-    <Navbar />
+<div>
+  <Navbar />
 
-    <!-- Feed -->
-    <b-container fluid style="overflow-x: hidden">
-      <b-row>
-        <!-- Left -->
-        <b-col cols="0" md="0" lg="1" xl="3"/>
+  <ThreeColumnsLayout>
+    <Loading v-if="loading" />
+    <template v-if="feed.length === 0 && !loading">
+      <NewUser @updateFeed="updateFeed" class="mt-2" />
+      <SuggestedFriendsMobile class="mt-2" />
+    </template>
 
-        <!-- Center Left -->
-        <b-col cols="12" md="7" lg="6" xl="5" class="p-1">
-          <b-row v-if="feed.length === 0 && !loading" class="mt-3">
-            <b-col>
-              <NewUser @updateFeed="updateFeed"/>
-              <SuggestedFriendsMobile class="mt-3"/>
-            </b-col>
-          </b-row>
-          <Loading v-if="loading"/>
+    <template v-for="item of feed.slice(0, 5)">
+      <EventItem :key="item.id" :item="item" class="mt-2" />
+    </template>
+    <SuggestedFriendsMobile class="mt-2" />
+    <template v-for="item of feed.slice(5)">
+      <EventItem :key="item.id" :item="item" class="mt-2" />
+    </template>
 
-          <!-- 5 items of feed, then suggested friends, then rest of feed (that grows) -->
-          <!-- 5 items of feed -->
-          <b-row v-for="item of feed.slice(0,5)" :key="item.id" class="mt-3">
-            <b-col>
-              <EventItem :item="item" />
-            </b-col>
-          </b-row>
-          <!-- suggested friends -->
-          <b-row class="mt-3" v-if="feed.length !== 0">
-            <b-col>
-              <SuggestedFriendsMobile/>
-            </b-col>
-          </b-row>
-          <!-- rest of feed (that grows as scrolls down) -->
-          <b-row v-for="item of feed.slice(5)" :key="item.id" class="mt-3">
-            <b-col>
-              <EventItem :item="item" />
-            </b-col>
-          </b-row>
-
-          <!-- TODO: this is very silly -->
-          <p class="invisible" v-b-visible="loadFeedItems"></p>
-        </b-col>
-
-        <!-- Center Right -->
-        <b-col class="d-none d-md-block" cols="0" md="5" lg="4" xl="3">
-          <InviteFriends />
-        </b-col>
-
-        <!-- Right -->
-        <b-col cols="0" md="0" lg="1" xl="1"/>
-      </b-row>
-    </b-container>
-  </div>
+    <template v-slot:right>
+      <InviteFriends />
+    </template>
+  </ThreeColumnsLayout>
+</div>
 </template>
 
 <script>
@@ -63,6 +33,7 @@ import InviteFriends from '@/components/InviteFriends'
 import NewUser from '@/components/NewUser'
 import SuggestedFriendsMobile from '@/components/SuggestedFriendsMobile'
 import Loading from '@/components/Loading'
+import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
 
 export default {
   name: 'FeedView',
@@ -73,7 +44,8 @@ export default {
     InviteFriends,
     NewUser,
     Loading,
-    SuggestedFriendsMobile
+    SuggestedFriendsMobile,
+    ThreeColumnsLayout
   },
 
   data: () => ({
