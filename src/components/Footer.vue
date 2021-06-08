@@ -59,11 +59,11 @@ export default {
       Rlinks: [
         {
           name: 'Política de privacidade',
-          href: '#/privacy_policy'
+          href: '#/settings'
         },
         {
           name: 'Termos de uso',
-          href: '#/terms_of_service'
+          href: '#/settings'
         }
       ]
     }
