@@ -2,26 +2,12 @@
   <div>
     <Navbar />
 
-    <!-- Profile -->
-    <b-container fluid style="overflow-x: hidden">
-      <b-row>
-        <!-- Left -->
-        <b-col cols="0" md="0" lg="2" xl="3"/>
-
-        <!-- Center -->
-        <b-col cols="12" md="7" lg="6" xl="6">
-          <b-row>
-            <Profile :id="id" class="mt-2"/>
-          </b-row>
-          <b-row v-for="item of events" :key="item.id" class="mt-2">
-            <EventItem :item="item" class="vw-100"/>
-          </b-row>
-        </b-col>
-
-        <!-- Right -->
-        <b-col class="d-none d-md-block" cols="0" md="5" lg="4" xl="3"/>
-      </b-row>
-    </b-container>
+    <ThreeColumnsLayout>
+      <Profile :id="id" class="mt-2"/>
+      <template v-for="item of events">
+        <EventItem :key="item.id" :item="item" class="mt-2"/>
+      </template>
+    </ThreeColumnsLayout>
   </div>
 </template>
 
@@ -29,6 +15,7 @@
 import Navbar from '@/components/Navbar'
 import Profile from '@/components/Profile'
 import EventItem from '@/components/EventItem'
+import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
 
 import client from '@/commons/client.api'
 
@@ -38,7 +25,8 @@ export default {
   components: {
     Navbar,
     EventItem,
-    Profile
+    Profile,
+    ThreeColumnsLayout
   },
 
   props: {

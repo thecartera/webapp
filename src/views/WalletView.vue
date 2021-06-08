@@ -1,20 +1,25 @@
 <template>
-  <div style="min-height: 200vh">
+  <div>
     <Navbar />
-    <Wallet :id="id" style="overflow-x: hidden"/>
+
+    <ThreeColumnsLayout>
+      <Wallet :id="id" />
+    </ThreeColumnsLayout>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
 import Wallet from '@/components/Wallet'
+import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
 
 export default {
   name: 'WalletView',
 
   components: {
     Navbar,
-    Wallet
+    Wallet,
+    ThreeColumnsLayout
   },
 
   props: {
