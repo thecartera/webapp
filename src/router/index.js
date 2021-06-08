@@ -8,8 +8,6 @@ import FollowersView from '@/views/FollowersView'
 import FollowingView from '@/views/FollowingView'
 import LandingPage from '@/views/LandingPageView'
 import WalletEditorView from '@/views/WalletEditorView'
-import TermsOfService from '@/views/legal/TermsOfServiceView'
-import PrivacyPolicy from '@/views/legal/PrivacyPolicyView'
 import Settings from '@/views/SettingsView'
 import FeedView from '@/views/FeedView'
 import WalletNotFoundView from '@/views/WalletNotFoundView'
@@ -98,12 +96,18 @@ const routes = [
   {
     path: '/terms_of_service',
     name: 'termsOfService',
-    component: TermsOfService
+    component: Settings
   },
   {
     path: '/privacy_policy',
     name: 'PrivacyPolicy',
-    component: PrivacyPolicy
+    component: Settings
+  },
+  {
+    path: '*',
+    beforeEnter: (to, from, next) => {
+      next('/') // redirect "404" to root url
+    }
   }
 ]
 
