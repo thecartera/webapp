@@ -69,12 +69,18 @@
       <template #cell(amount)="data">
         <span class="cell-name"> Qtd. </span>
         <br>
-        <span class="cell-value"> {{ data.value }} </span>
+        <b-row align-h="center">
+        <b-form-input size="sm" class="cell-value" style="width:6rem"
+          v-model="data.value"
+          @change="updateQuantity(data.item.ticker, data.value)"
+          @keypress="validateQuantity($event, data.value)"
+        />
+        </b-row>
       </template>
 
       <!-- ASSET CURRENT PRICE -->
       <template #cell(formattedPrice)="data">
-        <span class="cell-name"> Preço (R$) </span>
+        <span class="cell-name"> Preço hoje </span>
         <br>
         <span class="text-primary cell-value"> {{ data.value }} </span>
       </template>
@@ -119,8 +125,8 @@ export default {
       { key: 'image', label: '', class: 'text-center' },
       { key: 'nameticker', label: '', class: 'text-left' },
       { key: 'amount', label: 'Qtd.', class: 'text-center' },
-      { key: 'formattedPrice', label: 'Preço', class: 'text-center' },
-      { key: 'formattedGain', label: 'Lucro', class: 'text-center' },
+      { key: 'formattedPrice', label: 'Preço R$', class: 'text-center' },
+      { key: 'formattedGain', label: 'Lucro', class: 'text-center d-none d-md-block' },
       { key: 'remove', label: '', class: 'text-center' }
     ],
     assets: [],
@@ -214,8 +220,27 @@ export default {
       this.assets.splice(i, 1)
     },
 
+    updateQuantity (ticker, newQtd) {
+      for (let i = 0; i < this.assets.length; i++) {
+        if (this.assets[i].ticker === ticker) {
+          this.assets[i].amount = newQtd
+        }
+      }
+    },
+
     positive (value) {
       return value < 0 ? 'text-danger' : 'text-success'
+    },
+
+    validateQuantity (evt, newQtd) {
+      // we only want integers.
+      // using 'isNaN' lets unwanted chars like '-' and math numbers like 'e'
+      const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+      if (evt.key in numbers && String(newQtd).length < 8) {
+        return true
+      } else {
+        evt.preventDefault()
+      }
     }
   },
 
