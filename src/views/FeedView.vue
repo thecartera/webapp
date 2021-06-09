@@ -9,11 +9,11 @@
       <SuggestedFriendsMobile class="mt-2" />
     </template>
 
-    <template v-for="item of feed.slice(0, 5)">
+    <template v-for="item of feed.slice(0, 3)">
       <EventItem :key="item.id" :item="item" class="mt-2" />
     </template>
-    <SuggestedFriendsMobile class="mt-2" />
-    <template v-for="item of feed.slice(5)">
+    <SuggestedFriendsMobile v-if="feed.length !== 0" class="mt-2" />
+    <template v-for="item of feed.slice(3)">
       <EventItem :key="item.id" :item="item" class="mt-2" />
     </template>
 
