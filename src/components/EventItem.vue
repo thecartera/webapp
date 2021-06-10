@@ -48,7 +48,10 @@
         </b-row>
       </b-card-footer>
       <NewComment @post-comment="postComment"/>
-      <CommentsSection :comments="comments" @load-more-comments="loadMoreComments"/>
+      <CommentsSection
+        :comments="comments"
+        :alreadyRenderedCommentsIds="alreadyRenderedCommentsIds"
+        @load-more-comments="loadMoreComments"/>
     </b-card>
   </b-container>
 </template>
@@ -81,7 +84,8 @@ export default {
     like: false,
     likeCount: 0,
     comments: [],
-    userEndpointAddr: ''
+    userEndpointAddr: '',
+    alreadyRenderedCommentsIds: new Set()
   }),
 
   computed: {
@@ -106,8 +110,9 @@ export default {
     },
     async postComment (comment) {
       try {
-        await client.events.newComment(this.item.id, comment.text)
-        this.comments.push(comment)
+        this.comments.unshift(comment)
+        const myNewComment = await client.events.newComment(this.item.id, comment.text)
+        this.alreadyRenderedCommentsIds.add(myNewComment.id)
       } catch (e) {
         console.error(e)
       }
@@ -115,7 +120,13 @@ export default {
     async loadMoreComments (beforeId) {
       try {
         const moreComments = await client.events.getComments(this.item.id, beforeId, 1000)
-        this.comments = [...this.comments, ...moreComments]
+        const moreCommentsClean = []
+        for (const newComment of moreComments) {
+          if (!this.alreadyRenderedCommentsIds.has(newComment.id)) {
+            moreCommentsClean.push(newComment)
+          }
+        }
+        this.comments = [...this.comments, ...moreCommentsClean]
       } catch (e) {
         console.error(e)
       }

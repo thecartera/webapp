@@ -45,7 +45,8 @@
 
 export default {
   props: {
-    comments: []
+    comments: [],
+    alreadyRenderedCommentsIds: Set
   },
 
   data: () => ({
