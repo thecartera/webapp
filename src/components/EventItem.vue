@@ -50,8 +50,11 @@
       <NewComment @post-comment="postComment"/>
       <CommentsSection
         :comments="comments"
+        :commentCount="commentCount"
         :alreadyRenderedCommentsIds="alreadyRenderedCommentsIds"
-        @load-more-comments="loadMoreComments"/>
+        @load-more-comments="loadMoreComments"
+        @delete-comment="deleteComment"
+      />
     </b-card>
   </b-container>
 </template>
@@ -84,6 +87,7 @@ export default {
     like: false,
     likeCount: 0,
     comments: [],
+    commentCount: 0,
     userEndpointAddr: '',
     alreadyRenderedCommentsIds: new Set()
   }),
@@ -111,15 +115,16 @@ export default {
     async postComment (comment) {
       try {
         this.comments.unshift(comment)
+        this.commentCount += 1
         const myNewComment = await client.events.newComment(this.item.id, comment.text)
         this.alreadyRenderedCommentsIds.add(myNewComment.id)
       } catch (e) {
         console.error(e)
       }
     },
-    async loadMoreComments (beforeId) {
+    async loadMoreComments (beforeId, size) {
       try {
-        const moreComments = await client.events.getComments(this.item.id, beforeId, 1000)
+        const moreComments = await client.events.getComments(this.item.id, beforeId, size)
         const moreCommentsClean = []
         for (const newComment of moreComments) {
           if (!this.alreadyRenderedCommentsIds.has(newComment.id)) {
@@ -130,13 +135,26 @@ export default {
       } catch (e) {
         console.error(e)
       }
+    },
+    async deleteComment (commentId) {
+      try {
+        for (let ci = 0; ci < this.comments.length; ci++) {
+          if (this.comments[ci].id === commentId) {
+            this.comments.splice(ci, 1)
+          }
+        }
+        await client.events.deleteComment(this.item.id, commentId)
+      } catch (e) {
+        console.error(e)
+      }
     }
   },
 
   async created () {
     this.like = this.item.like
     this.likeCount = this.item.likeCount
-    this.comments = await client.events.getComments(this.item.id, null, 5)
+    this.comments = await client.events.getComments(this.item.id, null, 7)
+    this.commentCount = this.item.commentCount
     this.userEndpointAddr = `/users/${this.item.owner.username}`
   }
 }

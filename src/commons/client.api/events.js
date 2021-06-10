@@ -30,8 +30,9 @@ export default class extends Client {
 
   deleteComment (eventId, commentId) {
     if (eventId && commentId) {
-      return this.request('DELETE', `events/${eventId}/comments/${commentId}`)
+      return this.request('DELETE', `events/${eventId}/comments/${commentId}`, {}, false)
+    } else {
+      console.error('deleteComment API call')
     }
-    console.error('deleteComment API call')
   }
 }
