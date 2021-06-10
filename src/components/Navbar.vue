@@ -64,7 +64,7 @@
             </template>
 
             <b-dropdown-item :to="`/users/${user.username}`">
-              <b-row align-h="left">
+              <b-row align-h="start">
                 <b-nav-item :to="`/users/${user.username}`">
                   <b-icon icon="person-circle" variant="dark"/>
                   <span class="text-dark"> Perfil </span>
@@ -73,7 +73,7 @@
             </b-dropdown-item>
 
             <b-dropdown-item href="https://forms.gle/9TBhQtpSSAzwfjQe7">
-              <b-row align-h="left">
+              <b-row align-h="start">
                 <b-nav-item href="https://forms.gle/9TBhQtpSSAzwfjQe7">
                   <b-icon icon="question-circle" variant="dark"/>
                   <span class="text-dark">
@@ -84,7 +84,7 @@
             </b-dropdown-item>
 
             <b-dropdown-item to="/settings">
-              <b-row align-h="left">
+              <b-row align-h="start">
                 <b-nav-item to="/settings">
                   <b-icon icon="gear-fill" variant="dark"/>
                   <span class="text-dark"> Configurações </span>
@@ -100,7 +100,7 @@
                 variant="primary"
                 @click="logout"
               >
-              <b-row align-h="left">
+              <b-row align-h="start">
                 <b-nav-item>
                   <b-icon icon="box-arrow-left" variant="dark"/>
                   <span class="text-dark"> Sair </span>

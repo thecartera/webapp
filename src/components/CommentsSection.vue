@@ -1,6 +1,6 @@
 <template>
   <b-card no-body class="pl-3" border-variant="white">
-    <b-row class="mt-2" align-h="left" v-for="comment of comments.slice(0, visibleQtty)" :key="comment.id">
+    <b-row class="mt-2" align-h="start" v-for="comment of comments.slice(0, visibleQtty)" :key="comment.id">
       <b-col class="px-0 pt-1" cols="auto" align-self="start">
         <b-avatar :src="comment.user.picture" size="2rem" :to="`users/${comment.user.username}`"/>
       </b-col>
