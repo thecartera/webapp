@@ -48,7 +48,7 @@
         </b-row>
       </b-card-footer>
       <NewComment @post-comment="postComment"/>
-      <CommentsSection :comments="comments"/>
+      <CommentsSection :comments="comments" @load-more-comments="loadMoreComments"/>
     </b-card>
   </b-container>
 </template>
@@ -105,10 +105,17 @@ export default {
       this.likeCount -= 1
     },
     async postComment (comment) {
-      console.log('here' + this.item.id + comment.text)
       try {
         await client.events.newComment(this.item.id, comment.text)
         this.comments.push(comment)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async loadMoreComments (beforeId) {
+      try {
+        const moreComments = await client.events.getComments(this.item.id, beforeId, 1000)
+        this.comments = [...this.comments, ...moreComments]
       } catch (e) {
         console.error(e)
       }
@@ -118,7 +125,7 @@ export default {
   async created () {
     this.like = this.item.like
     this.likeCount = this.item.likeCount
-    this.comments = await client.events.getComments(this.item.id)
+    this.comments = await client.events.getComments(this.item.id, null, 5)
     this.userEndpointAddr = `/users/${this.item.owner.username}`
   }
 }

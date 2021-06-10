@@ -5,16 +5,16 @@
   <ThreeColumnsLayout>
     <Loading v-if="loading" />
     <template v-if="feed.length === 0 && !loading">
-      <NewUser @updateFeed="updateFeed" class="mt-2" />
-      <SuggestedFriendsMobile class="mt-2" />
+      <NewUser @updateFeed="updateFeed" class="mt-3" />
+      <SuggestedFriendsMobile class="mt-3" />
     </template>
 
     <template v-for="item of feed.slice(0, 3)">
-      <EventItem :key="item.id" :item="item" class="mt-2" />
+      <EventItem :key="item.id" :item="item" class="mt-3" />
     </template>
-    <SuggestedFriendsMobile v-if="feed.length !== 0" class="mt-2" />
+    <SuggestedFriendsMobile v-if="feed.length !== 0" class="mt-3" />
     <template v-for="item of feed.slice(3)">
-      <EventItem :key="item.id" :item="item" class="mt-2" />
+      <EventItem :key="item.id" :item="item" class="mt-3" />
     </template>
 
     <template v-slot:right>
