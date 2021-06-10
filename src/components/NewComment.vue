@@ -4,7 +4,7 @@
       <b-col class="px-0" cols="auto">
         <b-avatar :src="loggedUser.picture" size="2rem"/>
       </b-col>
-      <b-col class="px-1">
+      <b-col class="pl-2 pr-0">
         <b-input-group>
           <b-form-input v-model="newCommentText" size="sm" placeholder="Adicione um comentário..."/>
           <b-input-group-append>
@@ -44,7 +44,7 @@ export default {
           name: this.loggedUser.name,
           picture: this.loggedUser.picture,
           username: this.loggedUser.username,
-          title: this.loggedUser.name.title
+          title: this.loggedUser.title
         }
       }
       this.$emit('post-comment', data)

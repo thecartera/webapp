@@ -4,7 +4,7 @@
       <b-col class="px-0 pt-1" cols="auto" align-self="start">
         <b-avatar :src="comment.user.picture" size="2rem" :to="`users/${comment.user.username}`"/>
       </b-col>
-      <b-col class="pl-1" style="line-height: 1rem" align-self="start">
+      <b-col class="pl-2" style="line-height: 1rem" align-self="start">
         <b-card bg-variant="cartera-blue" no-body class="py-1 mb-1">
           <b-row class="pl-4 pr-3">
             <b-link
@@ -26,8 +26,15 @@
     </b-row>
     <b-row align-h="center">
       <b-col cols="auto">
-        <b-container v-if="visibleQtty !== 9999 && comments.length > 0" class="my-1" size="sm" @click="visibleQtty = 9999">
+        <b-container
+          v-if="visibleQtty !== 9999 && comments.length > visibleQtty"
+          class="my-1"
+          size="sm"
+          @click="loadMoreComments">
           <span class="text-bold text-primary show-clickable"> Ver todos </span>
+        </b-container>
+        <b-container v-if="visibleQtty === 9999" @click="visibleQtty = 3">
+          <span class="text-bold text-primary show-clickable"> Ver menos </span>
         </b-container>
       </b-col>
     </b-row>
@@ -48,6 +55,14 @@ export default {
   computed: {
     loggedUser () {
       return this.$store.state.auth.user
+    }
+  },
+
+  methods: {
+    loadMoreComments () {
+      this.visibleQtty = 9999
+      const beforeId = this.comments[this.comments.length - 1].id
+      this.$emit('load-more-comments', beforeId)
     }
   }
 }
