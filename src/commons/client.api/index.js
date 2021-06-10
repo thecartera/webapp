@@ -5,6 +5,7 @@ import Wallets from './wallets'
 import Feed from './feed'
 import Utils from './utils'
 import Post from './post'
+import Events from './events'
 
 class MyClient extends Client {
   constructor (token) {
@@ -14,6 +15,7 @@ class MyClient extends Client {
     this.wallets = new Wallets(token)
     this.feed = new Feed(token)
     this.post = new Post(token)
+    this.events = new Events(token)
     this.utils = Utils
   }
 
@@ -24,6 +26,7 @@ class MyClient extends Client {
     this.wallets.token = token
     this.feed.token = token
     this.post.token = token
+    this.events.token = token
   }
 }
 

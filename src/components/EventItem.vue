@@ -47,6 +47,8 @@
           </b-button>
         </b-row>
       </b-card-footer>
+      <NewComment @post-comment="postComment"/>
+      <CommentsSection :comments="comments"/>
     </b-card>
   </b-container>
 </template>
@@ -54,6 +56,8 @@
 <script>
 import client from '@/commons/client.api'
 import WalletEventItem from '@/components/WalletEventItem'
+import CommentsSection from '@/components/CommentsSection'
+import NewComment from '@/components/NewComment'
 import NewAccountEventItem from '@/components/NewAccountEventItem'
 
 export default {
@@ -61,7 +65,9 @@ export default {
 
   components: {
     WalletEventItem,
-    NewAccountEventItem
+    NewAccountEventItem,
+    CommentsSection,
+    NewComment
   },
 
   props: {
@@ -74,6 +80,7 @@ export default {
   data: () => ({
     like: false,
     likeCount: 0,
+    comments: [],
     userEndpointAddr: ''
   }),
 
@@ -96,12 +103,22 @@ export default {
       await client.post.unlikePost(this.item.id)
       this.like = false
       this.likeCount -= 1
+    },
+    async postComment (comment) {
+      console.log('here' + this.item.id + comment.text)
+      try {
+        await client.events.newComment(this.item.id, comment.text)
+        this.comments.push(comment)
+      } catch (e) {
+        console.error(e)
+      }
     }
   },
 
-  created () {
+  async created () {
     this.like = this.item.like
     this.likeCount = this.item.likeCount
+    this.comments = await client.events.getComments(this.item.id)
     this.userEndpointAddr = `/users/${this.item.owner.username}`
   }
 }
