@@ -35,6 +35,9 @@
     </template>
 
     <!-- Price -->
+    <template #head(price)="data">
+      <span v-b-tooltip.hover title="Relativo ao último fechamento">{{ data.label }}</span>
+    </template>
     <template #cell(price)="data">
       <small class="text-secondary"> Preço (R$) </small>
       <br>
