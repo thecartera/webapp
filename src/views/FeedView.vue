@@ -16,7 +16,7 @@
     <template v-for="item of feed.slice(3)">
       <EventItem :key="item.id" :item="item" class="mt-3" />
     </template>
-
+    <p class="invisible" v-b-visible="loadFeedItems"></p>
     <template v-slot:right>
       <InviteFriends />
     </template>
