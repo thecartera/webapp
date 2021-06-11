@@ -103,12 +103,12 @@ export default {
       return client.utils.thumbUrl(ticker)
     },
     async likePost () {
-      await client.post.likePost(this.item.id)
+      await client.events.likeEvent(this.item.id)
       this.like = true
       this.likeCount += 1
     },
     async unlikePost () {
-      await client.post.unlikePost(this.item.id)
+      await client.events.unlikeEvent(this.item.id)
       this.like = false
       this.likeCount -= 1
     },

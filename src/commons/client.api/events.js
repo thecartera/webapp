@@ -35,4 +35,20 @@ export default class extends Client {
       console.error('deleteComment API call')
     }
   }
+
+  getEvent (id) {
+    return this.request('GET', `events/${id}`)
+  }
+
+  likeEvent (id) {
+    return this.request('POST', `events/${id}/reactions`, {}, false)
+  }
+
+  unlikeEvent (id) {
+    return this.request('DELETE', `events/${id}/reactions`, {}, false)
+  }
+
+  getReactions (id) {
+    return this.request('GET', `events/${id}/reactions`)
+  }
 }
