@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
-import Wallet from '@/components/Wallet'
+import Navbar from '@/components/navbars/Navbar'
+import Wallet from '@/components/wallet/Wallet'
 import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
 
 export default {

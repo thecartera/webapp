@@ -27,12 +27,12 @@
 <script>
 import client from '@/commons/client.api'
 
-import Navbar from '@/components/Navbar'
-import EventItem from '@/components/EventItem'
-import InviteFriends from '@/components/InviteFriends'
-import NewUser from '@/components/NewUser'
-import SuggestedFriendsMobile from '@/components/SuggestedFriendsMobile'
-import Loading from '@/components/Loading'
+import Navbar from '@/components/navbars/Navbar'
+import EventItem from '@/components/posts/EventItem'
+import InviteFriends from '@/components/utils/InviteFriends'
+import NewUser from '@/components/posts/NewUser'
+import SuggestedFriendsMobile from '@/components/posts/SuggestedFriendsMobile'
+import Loading from '@/components/utils/Loading'
 import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
 
 export default {

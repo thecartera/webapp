@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/navbars/Navbar'
 import PrivacyPolicyEN from '@/components/legal/EN_PrivacyPolicy'
 import PrivacyPolicyPT from '@/components/legal/PT_PrivacyPolicy'
 import TermsOfServiceEN from '@/components/legal/EN_TermsOfService'

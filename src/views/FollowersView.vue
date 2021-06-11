@@ -22,9 +22,9 @@
 import client from '@/commons/client.api'
 
 import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
-import Loading from '@/components/Loading'
-import FollowsNavbar from '@/components/FollowsNavbar'
-import SimpleUserCard from '@/components/SimpleUserCard'
+import Loading from '@/components/utils/Loading'
+import FollowsNavbar from '@/components/navbars/FollowsNavbar'
+import SimpleUserCard from '@/components/utils/SimpleUserCard'
 
 export default {
   name: 'FollowersView',

@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
-import Profile from '@/components/Profile'
-import EventItem from '@/components/EventItem'
+import Navbar from '@/components/navbars/Navbar'
+import Profile from '@/components/profile/Profile'
+import EventItem from '@/components/posts/EventItem'
 import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
 
 import client from '@/commons/client.api'

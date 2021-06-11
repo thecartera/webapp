@@ -150,7 +150,7 @@
 
 <script>
 import client from '@/commons/client.api'
-import Socials from '@/components/Socials'
+import Socials from '@/components/utils/Socials'
 
 export default {
   name: 'WalletInfo',

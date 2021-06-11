@@ -158,9 +158,9 @@
 <script>
 import client from '@/commons/client.api'
 import { LOGIN } from '@/store/actions.type'
-import EditProfile from '@/components/EditProfile'
-import PerformanceCircle from '@/components/PerformanceCircle'
-import Loading from '@/components/Loading'
+import EditProfile from '@/components/profile/EditProfile'
+import PerformanceCircle from '@/components/utils/PerformanceCircle'
+import Loading from '@/components/utils/Loading'
 
 export default {
   name: 'Profile',

@@ -62,7 +62,7 @@
 
 <script>
 import client from '@/commons/client.api'
-import SimpleInviteUserCard from '@/components/SimpleInviteUserCard'
+import SimpleInviteUserCard from '@/components/utils/SimpleInviteUserCard'
 
 export default {
   name: 'InviteFriends',

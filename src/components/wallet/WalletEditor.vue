@@ -109,8 +109,8 @@
 <script>
 import client from '@/commons/client.api'
 
-import WalletAddTicker from '@/components/WalletAddTicker'
-import WalletAddDescription from '@/components/WalletAddDescription'
+import WalletAddTicker from '@/components/wallet/subcomponents/WalletAddTicker'
+import WalletAddDescription from '@/components/wallet/subcomponents/WalletAddDescription'
 
 export default {
   name: 'WalletEditor',

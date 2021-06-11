@@ -61,10 +61,10 @@
 
 <script>
 import client from '@/commons/client.api'
-import WalletEventItem from '@/components/WalletEventItem'
-import CommentsSection from '@/components/CommentsSection'
-import NewComment from '@/components/NewComment'
-import NewAccountEventItem from '@/components/NewAccountEventItem'
+import WalletEventItem from '@/components/posts/WalletEventItem'
+import CommentsSection from '@/components/posts/CommentsSection'
+import NewComment from '@/components/posts/NewComment'
+import NewAccountEventItem from '@/components/posts/NewAccountEventItem'
 
 export default {
   name: 'EventItem',

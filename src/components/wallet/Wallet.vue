@@ -47,10 +47,10 @@
 <script>
 import client from '@/commons/client.api'
 
-import AssetTable from '@/components/wallet/Table'
-import WalletChart from '@/components/wallet/Chart'
-import WalletInfo from '@/components/wallet/Info'
-import PortfolioHistory from '@/components/wallet/PortfolioHistory'
+import AssetTable from '@/components/wallet/subcomponents/Table'
+import WalletChart from '@/components/wallet/subcomponents/Chart'
+import WalletInfo from '@/components/wallet/subcomponents/Info'
+import PortfolioHistory from '@/components/wallet/subcomponents/PortfolioHistory'
 
 export default {
   name: 'Wallet',

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/navbars/Navbar'
 import LandingPage from '@/components/LandingPage'
 import Footer from '@/components/Footer'
 

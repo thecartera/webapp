@@ -159,7 +159,7 @@
 </template>
 
 <script>
-import Search from '@/components/Search'
+import Search from '@/components/utils/Search'
 import { LOGIN, LOGOUT } from '@/store/actions.type'
 
 export default {
