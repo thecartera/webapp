@@ -51,4 +51,8 @@ export default class extends Client {
   getReactions (id) {
     return this.request('GET', `events/${id}/reactions`)
   }
+
+  deleteEvent (id) {
+    return this.request('DELETE', `events/${id}`, {}, false)
+  }
 }
