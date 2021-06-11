@@ -2,7 +2,6 @@
   <b-container class="p-0">
     <!-- User -->
     <b-card class="p-2 border-color" no-body>
-      <Loading v-if="loadingUser"/>
       <b-row>
         <!-- Image -->
         <b-col cols="auto">
@@ -117,11 +116,7 @@
       <b-row>
         <b-col>
         <h3> Carteiras </h3>
-          <Loading v-if="loadingWallets"/>
-          <b-row v-if="wallets.length === 0 && !loadingWallets">
-            <b-container> Este usuário ainda não criou uma carteira </b-container>
-          </b-row>
-          <b-row v-else style="margin-left: auto" align-v="center">
+          <b-row style="margin-left: auto" align-v="center">
             Variação
             <b-dropdown
               size="sm"
@@ -136,6 +131,10 @@
               <b-dropdown-item @click="changeSelectedPeriod(getYTD())"> YTD (no ano)</b-dropdown-item>
             </b-dropdown>
           </b-row>
+          <b-row v-if="!hasWallets">
+            <b-container> Este usuário ainda não criou uma carteira </b-container>
+          </b-row>
+          <Loading v-if="loadingWallets && hasWallets" style="height:4rem"/>
         </b-col>
       </b-row>
       <b-row v-for="item in wallets" :key="item.id" class="mt-2 ml-2 mr-1">
@@ -182,6 +181,7 @@ export default {
   data: () => ({
     profile: {},
     wallets: [],
+    hasWallets: false,
     showUnfollow: false,
     showFollowingList: false,
     followingList: Array,
@@ -189,9 +189,7 @@ export default {
     followersList: Array,
     modalShow: true,
     selectedPeriod: Number,
-    selectedPeriodText: 'YTD (no ano)',
-    loadingUser: true,
-    loadingWallets: true
+    selectedPeriodText: 'YTD (no ano)'
   }),
 
   computed: {
@@ -212,6 +210,12 @@ export default {
     },
     normProfile () {
       return this.profile
+    },
+    loadingWallets () {
+      if (this.hasWallets) {
+        return this.wallets.length === 0
+      }
+      return false
     }
   },
 
@@ -285,6 +289,7 @@ export default {
       try {
         this.wallets = []
         const wallets = await client.wallets.fetchByOwner(this.id)
+        this.hasWallets = wallets.length > 0
         for (const wall of wallets) {
           client.wallets.fetchById(wall.id, this.selectedPeriod).then(i => this.wallets.push(i))
         }
@@ -312,9 +317,7 @@ export default {
   async mounted () {
     this.selectedPeriod = this.getYTD()
     await this.fetchProfileById()
-    this.loadingUser = false
     await this.fetchWallets()
-    this.loadingWallets = false
   }
 }
 </script>
