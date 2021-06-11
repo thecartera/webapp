@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
-import Info from '@/components/wallet/Info.vue'
-import Socials from '@/components/Socials.vue'
+import Info from '@/components/wallet/subcomponents/Info.vue'
+import Socials from '@/components/utils/Socials.vue'
 
 import { storeWithUsr, fakeWallet } from '../../utils.js'
 
