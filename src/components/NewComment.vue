@@ -36,18 +36,9 @@ export default {
   },
 
   methods: {
-    postComment (comment) {
+    postComment (text) {
       this.newCommentText = ''
-      const data = {
-        text: comment,
-        user: {
-          name: this.loggedUser.name,
-          picture: this.loggedUser.picture,
-          username: this.loggedUser.username,
-          title: this.loggedUser.title
-        }
-      }
-      this.$emit('post-comment', data)
+      this.$emit('post-comment', text)
     }
   }
 }

@@ -112,11 +112,11 @@ export default {
       this.like = false
       this.likeCount -= 1
     },
-    async postComment (comment) {
+    async postComment (text) {
       try {
-        this.comments.unshift(comment)
+        const myNewComment = await client.events.newComment(this.item.id, text)
+        this.comments.unshift(myNewComment)
         this.commentCount += 1
-        const myNewComment = await client.events.newComment(this.item.id, comment.text)
         this.alreadyRenderedCommentsIds.add(myNewComment.id)
       } catch (e) {
         console.error(e)
