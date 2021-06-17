@@ -26,6 +26,27 @@
             {{ timestamp }}
           </b-row>
         </b-col>
+        <b-col cols="auto" class="pr-0" v-if="loggedUser.username === item.owner.username">
+          <b-dropdown no-caret right variant="white" size="sm">
+            <template #button-content>
+              <b-icon
+                icon="three-dots-vertical"
+                style="cursor: pointer"
+                variant="dark"
+              />
+            </template>
+
+            <!-- Delete Event -->
+            <b-dropdown-item-button
+              @click="deleteEvent()"
+            >
+              <b-icon
+                icon="trash"
+                variant="secondary"
+              /> Excluir postagem
+            </b-dropdown-item-button>
+          </b-dropdown>
+        </b-col>
       </b-row>
 
       <NewAccountEventItem v-if="item.type === 'USER_CREATED'" :item="item"/>
@@ -98,6 +119,9 @@ export default {
   computed: {
     timestamp () {
       return new Date(this.item.timestamp).toLocaleString('pt-BR').substring(0, 16)
+    },
+    loggedUser () {
+      return this.$store.state.auth.user
     }
   },
 
@@ -147,6 +171,16 @@ export default {
           }
         }
         await client.events.deleteComment(this.item.id, commentId)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async deleteEvent () {
+      try {
+        // delete in backend
+        await client.events.deleteEvent(this.item.id)
+        // delete in frontend
+        this.$emit('delete-event', this.item.id)
       } catch (e) {
         console.error(e)
       }

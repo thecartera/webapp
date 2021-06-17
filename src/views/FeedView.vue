@@ -14,11 +14,11 @@
     </template>
 
     <template v-for="item of feed.slice(0, 3)">
-      <EventItem :key="item.id" :item="item" class="mt-3" />
+      <EventItem :key="item.id" :item="item" class="mt-3" @delete-event="deleteEvent" />
     </template>
     <SuggestedFriendsMobile v-if="feed.length !== 0" class="mt-3" />
     <template v-for="item of feed.slice(3)">
-      <EventItem :key="item.id" :item="item" class="mt-3" />
+      <EventItem :key="item.id" :item="item" class="mt-3" @delete-event="deleteEvent" />
     </template>
     <p class="invisible" v-b-visible="loadFeedItems"></p>
     <template v-slot:right>
@@ -75,6 +75,13 @@ export default {
     async updateFeed () {
       const newItems = await client.feed.getFeed(10)
       this.feed = [...this.feed, ...newItems]
+    },
+    deleteEvent (eventId) {
+      for (let ci = 0; ci < this.feed.length; ci++) {
+        if (this.feed[ci].id === eventId) {
+          this.feed.splice(ci, 1)
+        }
+      }
     }
   },
 
