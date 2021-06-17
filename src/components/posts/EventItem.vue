@@ -26,7 +26,7 @@
             {{ timestamp }}
           </b-row>
         </b-col>
-        <b-col cols="auto" class="pr-0" v-if="loggedUser.username === item.owner.username">
+        <b-col cols="auto" class="pr-0">
           <b-dropdown no-caret right variant="white" size="sm">
             <template #button-content>
               <b-icon
@@ -36,13 +36,17 @@
               />
             </template>
 
+            <!-- Share Event -->
+            <SocialsEvent :url="`https://cartera.com.br/#/events/${item.id}`"/>
+
             <!-- Delete Event -->
             <b-dropdown-item-button
+              v-if="loggedUser.username === item.owner.username"
               @click="deleteEvent()"
             >
               <b-icon
                 icon="trash"
-                variant="secondary"
+                variant="danger"
               /> Excluir postagem
             </b-dropdown-item-button>
           </b-dropdown>
@@ -89,6 +93,7 @@ import PostEventItem from '@/components/posts/PostEventItem'
 import CommentsSection from '@/components/posts/CommentsSection'
 import NewComment from '@/components/posts/NewComment'
 import NewAccountEventItem from '@/components/posts/NewAccountEventItem'
+import SocialsEvent from '@/components/utils/SocialsEvent'
 import { LOGIN } from '@/store/actions.type'
 
 export default {
@@ -96,9 +101,10 @@ export default {
 
   components: {
     WalletEventItem,
+    CommentsSection,
     PostEventItem,
     NewAccountEventItem,
-    CommentsSection,
+    SocialsEvent,
     NewComment
   },
 

@@ -53,17 +53,17 @@
         </b-card>
       </b-col>
     </b-row>
-    <b-row align-h="center">
+    <b-row align-h="center" class="mb-2">
       <b-col cols="auto">
         <b-container
           v-if="visibleQtty < commentCount && comments.length > visibleQtty"
-          class="my-1"
+          class="mt-2"
           @click="loadMoreComments">
           <span class="text-bold text-primary show-clickable"> Ver mais </span>
         </b-container>
       </b-col>
       <b-col v-if="visibleQtty != 3" cols="auto">
-        <b-container @click="visibleQtty = 3" class="my-1">
+        <b-container @click="visibleQtty = 3" class="mt-2">
           <span class="text-bold text-primary show-clickable"> Ver menos </span>
         </b-container>
       </b-col>
