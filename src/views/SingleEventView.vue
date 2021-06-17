@@ -7,7 +7,11 @@
     <template>
       <EventItem v-if="item" :item="item" class="mt-3" @delete-event="deleteEvent" />
     </template>
-    <b-button block class="mt-3"> Ir ao feed </b-button>
+    <b-row align-h="center">
+      <b-col cols="4">
+        <b-button v-if="auth" block class="mt-3" to="/"> Ir ao feed </b-button>
+      </b-col>
+    </b-row>
   </ThreeColumnsLayout>
 </div>
 </template>
@@ -34,6 +38,12 @@ export default {
     id: {
       type: String,
       required: true
+    }
+  },
+
+  computed: {
+    auth () {
+      return this.$store.state.auth.auth
     }
   },
 
