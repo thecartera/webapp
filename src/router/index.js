@@ -9,6 +9,7 @@ import FollowingView from '@/views/FollowingView'
 import LandingPage from '@/views/LandingPageView'
 import WalletEditorView from '@/views/WalletEditorView'
 import Settings from '@/views/SettingsView'
+import SingleEventView from '@/views/SingleEventView'
 import FeedView from '@/views/FeedView'
 import WalletNotFoundView from '@/views/WalletNotFoundView'
 
@@ -74,6 +75,12 @@ const routes = [
     path: '/feed',
     name: 'feed',
     component: FeedView
+  },
+  {
+    path: '/events/:id',
+    name: 'event',
+    component: SingleEventView,
+    props: true
   },
   {
     path: '/users/:id',

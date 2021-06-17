@@ -69,7 +69,8 @@
           </b-button>
         </b-row>
       </b-card-footer>
-      <NewComment @post-comment="postComment"/>
+      <NewComment v-if="auth" @post-comment="postComment"/>
+      <b-button v-else variant="primary" size="sm" @click="login"> Faça login para comentar </b-button>
       <CommentsSection
         :comments="comments"
         :commentCount="commentCount"
@@ -88,6 +89,7 @@ import PostEventItem from '@/components/posts/PostEventItem'
 import CommentsSection from '@/components/posts/CommentsSection'
 import NewComment from '@/components/posts/NewComment'
 import NewAccountEventItem from '@/components/posts/NewAccountEventItem'
+import { LOGIN } from '@/store/actions.type'
 
 export default {
   name: 'EventItem',
@@ -122,6 +124,9 @@ export default {
     },
     loggedUser () {
       return this.$store.state.auth.user
+    },
+    auth () {
+      return this.$store.state.auth.auth
     }
   },
 
@@ -130,9 +135,11 @@ export default {
       return client.utils.thumbUrl(ticker)
     },
     async likePost () {
-      await client.events.likeEvent(this.item.id)
-      this.like = true
-      this.likeCount += 1
+      if (this.auth) {
+        await client.events.likeEvent(this.item.id)
+        this.like = true
+        this.likeCount += 1
+      }
     },
     async unlikePost () {
       await client.events.unlikeEvent(this.item.id)
@@ -184,6 +191,10 @@ export default {
       } catch (e) {
         console.error(e)
       }
+    },
+    login () {
+      const state = { to: this.$router.currentRoute.path }
+      this.$store.dispatch(LOGIN, state)
     }
   },
 

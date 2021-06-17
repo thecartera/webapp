@@ -1,14 +1,14 @@
 <template>
-  <b-card no-body class="pl-3" border-variant="white">
+  <b-card no-body class="px-3" border-variant="white">
     <b-row class="mt-2" align-h="start" v-for="comment of comments.slice(0, visibleQtty)" :key="comment.id">
       <b-col class="px-0 pt-1" cols="auto" align-self="start">
         <b-avatar :src="comment.user.picture" size="2rem" :to="`/users/${comment.user.username}`"/>
       </b-col>
-      <b-col class="pl-2" style="line-height: 1rem" align-self="start">
-        <b-card bg-variant="cartera-blue" no-body class="py-1 mb-1">
-          <b-row>
-            <b-col>
-              <b-row class="pl-4 pr-3" align-h="start">
+      <b-col class="my-0 p-0" style="line-height: 1rem" align-self="start">
+        <b-card bg-variant="cartera-blue" class="ml-2 py-1" no-body>
+          <b-row class="mx-0">
+            <b-col class="pl-4" >
+              <b-row align-h="start">
                 <b-link
                   :to="`/users/${comment.user.username}`"
                   style="font-size: 0.9rem"
@@ -17,13 +17,13 @@
                     {{ comment.user.username }}
                 </b-link>
               </b-row>
-              <b-row class="px-4 small text-secondary text-truncate">
-                <span> {{ comment.user.title }} </span>
+              <b-row class="px-0 small text-secondary">
+                <span class="text-wrap"> {{ comment.user.title }} </span>
               </b-row>
             </b-col>
-            <b-col class="mr-3" v-if="loggedUser.username === comment.user.username">
+            <b-col cols="auto" class="mr-3 p-0" v-if="loggedUser.username === comment.user.username">
               <b-row align-h="end">
-                <b-dropdown no-caret right variant="cartera-blue">
+                <b-dropdown no-caret size="sm" right variant="cartera-blue">
                   <template #button-content>
                     <b-icon
                       icon="three-dots-vertical"
@@ -41,13 +41,13 @@
                   <b-icon
                     icon="trash"
                     variant="secondary"
-                  /> Excluir comentário
+                  /> <span> Excluir comentário </span>
                 </b-dropdown-item-button>
                 </b-dropdown>
               </b-row>
             </b-col>
           </b-row>
-          <b-row :class="`px-4 ${loggedUser.username === comment.user.username? 'pt-0': 'pt-2'} text-break`">
+          <b-row :class="`px-4 pt-2 text-wrap`">
             <span> {{ comment.text }} </span>
           </b-row>
         </b-card>
@@ -62,9 +62,9 @@
           <span class="text-bold text-primary show-clickable"> Ver mais </span>
         </b-container>
       </b-col>
-      <b-col cols="auto">
+      <b-col v-if="visibleQtty != 3" cols="auto">
         <b-container @click="visibleQtty = 3" class="my-1">
-          <span v-if="visibleQtty != 3" class="text-bold text-primary show-clickable"> Ver menos </span>
+          <span class="text-bold text-primary show-clickable"> Ver menos </span>
         </b-container>
       </b-col>
     </b-row>
