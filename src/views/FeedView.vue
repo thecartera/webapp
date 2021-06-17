@@ -9,6 +9,10 @@
       <SuggestedFriendsMobile class="mt-3" />
     </template>
 
+    <template v-if="!loading">
+      <WritePost class="mt-3" @new-post="newPost" />
+    </template>
+
     <template v-for="item of feed.slice(0, 3)">
       <EventItem :key="item.id" :item="item" class="mt-3" />
     </template>
@@ -32,6 +36,7 @@ import EventItem from '@/components/posts/EventItem'
 import InviteFriends from '@/components/utils/InviteFriends'
 import NewUser from '@/components/posts/NewUser'
 import SuggestedFriendsMobile from '@/components/posts/SuggestedFriendsMobile'
+import WritePost from '@/components/posts/WritePost'
 import Loading from '@/components/utils/Loading'
 import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
 
@@ -45,6 +50,7 @@ export default {
     NewUser,
     Loading,
     SuggestedFriendsMobile,
+    WritePost,
     ThreeColumnsLayout
   },
 
@@ -62,6 +68,9 @@ export default {
       const lastId = this.feed[this.feed.length - 1].id
       const newItems = await client.feed.getFeed(10, lastId)
       this.feed = [...this.feed, ...newItems]
+    },
+    async newPost (newPost) {
+      this.feed.unshift(newPost)
     },
     async updateFeed () {
       const newItems = await client.feed.getFeed(10)

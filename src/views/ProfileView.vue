@@ -40,6 +40,12 @@ export default {
     events: []
   }),
 
+  computed: {
+    logged_user () {
+      return this.$store.state.auth.user
+    }
+  },
+
   watch: {
     async id (newVal) { // watch if opening another user profile
       await this.loadEvents(newVal)

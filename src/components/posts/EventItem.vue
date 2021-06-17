@@ -29,7 +29,8 @@
       </b-row>
 
       <NewAccountEventItem v-if="item.type === 'USER_CREATED'" :item="item"/>
-      <WalletEventItem v-else :item="item"/>
+      <PostEventItem v-if="item.type === 'TEXT_POST_CREATED'" :item="item" />
+      <WalletEventItem v-if="item.type === 'WALLET_ASSETS_EDIT' || item.type === 'NEW_WALLET'" :item="item"/>
 
       <!-- Reaction button -->
       <b-card-footer class="pt-0 m-0 px-3 pb-0" footer-bg-variant="white">
@@ -62,6 +63,7 @@
 <script>
 import client from '@/commons/client.api'
 import WalletEventItem from '@/components/posts/WalletEventItem'
+import PostEventItem from '@/components/posts/PostEventItem'
 import CommentsSection from '@/components/posts/CommentsSection'
 import NewComment from '@/components/posts/NewComment'
 import NewAccountEventItem from '@/components/posts/NewAccountEventItem'
@@ -71,6 +73,7 @@ export default {
 
   components: {
     WalletEventItem,
+    PostEventItem,
     NewAccountEventItem,
     CommentsSection,
     NewComment
