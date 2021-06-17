@@ -2,7 +2,7 @@
   <b-card no-body class="pl-3" border-variant="white">
     <b-row class="mt-2" align-h="start" v-for="comment of comments.slice(0, visibleQtty)" :key="comment.id">
       <b-col class="px-0 pt-1" cols="auto" align-self="start">
-        <b-avatar :src="comment.user.picture" size="2rem" :to="`users/${comment.user.username}`"/>
+        <b-avatar :src="comment.user.picture" size="2rem" :to="`/users/${comment.user.username}`"/>
       </b-col>
       <b-col class="pl-2" style="line-height: 1rem" align-self="start">
         <b-card bg-variant="cartera-blue" no-body class="py-1 mb-1">
@@ -10,7 +10,7 @@
             <b-col>
               <b-row class="pl-4 pr-3" align-h="start">
                 <b-link
-                  :to="`users/${comment.user.username}`"
+                  :to="`/users/${comment.user.username}`"
                   style="font-size: 0.9rem"
                   class="font-weight-bold text-dark"
                 >
