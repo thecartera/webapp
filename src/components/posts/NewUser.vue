@@ -102,6 +102,7 @@ export default {
   methods: {
     async start () {
       await client.users.follow('gmbueno1802')
+      await client.users.follow('mauriciomb97')
       this.$emit('updateFeed')
     }
   },

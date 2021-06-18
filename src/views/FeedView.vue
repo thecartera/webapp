@@ -4,13 +4,13 @@
 
   <ThreeColumnsLayout>
     <Loading v-if="loading" />
-    <template v-if="feed.length === 0 && !loading">
-      <NewUser @updateFeed="updateFeed" class="mt-3" />
-      <SuggestedFriendsMobile class="mt-3" />
-    </template>
-
     <template v-if="!loading">
       <WritePost class="mt-3" @new-post="newPost" />
+    </template>
+
+    <template v-if="feed.length <= 1 && !loading && showWelcome">
+      <NewUser @updateFeed="updateFeed" class="mt-3" />
+      <SuggestedFriendsMobile class="mt-3" />
     </template>
 
     <template v-for="item of feed.slice(0, 3)">
@@ -56,7 +56,8 @@ export default {
 
   data: () => ({
     feed: [],
-    loading: true
+    loading: true,
+    showWelcome: true
   }),
 
   methods: {
@@ -73,6 +74,7 @@ export default {
       this.feed.unshift(newPost)
     },
     async updateFeed () {
+      this.showWelcome = false
       const newItems = await client.feed.getFeed(10)
       this.feed = [...this.feed, ...newItems]
     },
