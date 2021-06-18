@@ -4,10 +4,10 @@
       <b-col class="px-0 pt-1" cols="auto" align-self="start">
         <b-avatar :src="comment.user.picture" size="2rem" :to="`/users/${comment.user.username}`"/>
       </b-col>
-      <b-col class="my-0 p-0" style="line-height: 1rem" align-self="start">
+      <b-col class="my-0 p-0" align-self="start">
         <b-card bg-variant="cartera-blue" class="ml-2 py-1" no-body>
           <b-row class="mx-0">
-            <b-col class="pl-4" >
+            <b-col class="pl-4" style="line-height: 1rem">
               <b-row align-h="start">
                 <b-link
                   :to="`/users/${comment.user.username}`"
@@ -47,8 +47,8 @@
               </b-row>
             </b-col>
           </b-row>
-          <b-row :class="`px-4 pt-2 text-wrap`">
-            <span> {{ comment.text }} </span>
+          <b-row class="px-4 pt-1" style="line-height: 1.2rem">
+            <span class="text-break"> {{ comment.text }} </span>
           </b-row>
         </b-card>
       </b-col>
