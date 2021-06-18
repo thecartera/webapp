@@ -22,8 +22,8 @@
           </span>
           </b-row>
           <!-- Timestamp -->
-          <b-row class="text-secondary text-truncate" style="font-size: 0.75rem">
-            {{ timestamp }}
+          <b-row class="text-secondary text-truncate small">
+            {{ humanTime(item.timestamp) }}
           </b-row>
         </b-col>
         <b-col cols="auto" class="pr-0">
@@ -125,7 +125,7 @@ export default {
   }),
 
   computed: {
-    timestamp () {
+    timestampBrazil () {
       return new Date(this.item.timestamp).toLocaleString('pt-BR').substring(0, 16)
     },
     loggedUser () {
@@ -201,6 +201,9 @@ export default {
     login () {
       const state = { to: this.$router.currentRoute.path }
       this.$store.dispatch(LOGIN, state)
+    },
+    humanTime (timestamp) {
+      return client.utils.humanTime(timestamp)
     }
   },
 

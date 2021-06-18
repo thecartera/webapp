@@ -16,6 +16,7 @@
                 >
                     {{ comment.user.username }}
                 </b-link>
+                <span class="small text-secondary pl-2"> {{ humanTime(comment.createdAt) }} </span>
               </b-row>
               <b-row class="px-0 small text-secondary">
                 <span class="text-wrap"> {{ comment.user.title }} </span>
@@ -72,6 +73,7 @@
 </template>
 
 <script>
+import client from '@/commons/client.api'
 
 export default {
   props: {
@@ -98,6 +100,9 @@ export default {
     },
     deleteComment (commentId) {
       this.$emit('delete-comment', commentId)
+    },
+    humanTime (timestamp) {
+      return client.utils.humanTime(timestamp)
     }
   }
 }
