@@ -27,7 +27,7 @@
 
               <b-icon @click="showModal" style="cursor: pointer" scale="1.4" icon="pencil-square" variant="secondary"/>
 
-              <EditProfile @profileUpdate=fetchProfileById(user.username) ref="editProfileModal"/>
+              <EditProfile @profileUpdate=fetchProfileById ref="editProfileModal"/>
               </b-row>
             </b-col>
           </b-row>

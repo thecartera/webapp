@@ -9,6 +9,7 @@
     @ok="handleOk"
     @hidden="resetModal"
     @show="resetModal"
+    :ok-disabled="validState"
   >
 
     <!-- PICTURE -->
@@ -45,6 +46,17 @@
       :state="nameState"
     >
       <b-form-input id="nameInput" v-model="name" :state="nameState" trim/>
+    </b-form-group>
+
+    <!-- USERNAME -->
+    <b-form-group
+      id="fieldUsername"
+      label="Nome de usuário:"
+      label-for="usernameInput"
+      :invalid-feedback="invalidUsernameFeedback"
+      :state="usernameState"
+    >
+      <b-form-input id="usernameInput" v-model="username" :state="usernameState"  @input="validateUsername" trim/>
     </b-form-group>
 
     <!-- TITLE -->
@@ -95,7 +107,10 @@ export default {
     name: '',
     title: '',
     description: '',
-    picURL: ''
+    picURL: '',
+    username: '',
+    usernameValid: true,
+    usernameRegex: /^[a-z0-9]([._-](?![._-])|[a-z0-9]){3,18}[a-z0-9]$/
   }),
 
   methods: {
@@ -105,7 +120,7 @@ export default {
 
     handleOk (evt) {
       evt.preventDefault()
-      if (!this.nameState || !this.descriptionState) {
+      if (this.validState) {
         return
       }
       this.commitChanges()
@@ -117,6 +132,7 @@ export default {
       this.title = this.user.title
       this.description = this.user.description || ''
       this.picURL = this.user.picture
+      this.username = this.user.username
     },
     async commitChanges () {
       try {
@@ -133,12 +149,30 @@ export default {
         if (this.picURL !== this.user.picture) {
           changes.push({ op: 'replace', path: '/picture', value: this.picURL })
         }
+        if (this.username !== this.user.username) {
+          changes.push({ op: 'replace', path: '/username', value: this.username })
+        }
         if (changes.length) {
+          const oldUsername = this.user.username
           const user = await client.users.updateMyUser(changes)
+          const newUsername = user.username
           this.$store.commit(SET_USER, user)
-          this.$emit('profileUpdate', user)
+          if (oldUsername !== newUsername) {
+            await this.$router.push(`/users/${this.$store.state.auth.user.username}`)
+          } else {
+            this.$emit('profileUpdate', user.id)
+          }
         }
       } catch (e) {
+      }
+    },
+    async validateUsername () {
+      this.username = this.username.toLowerCase()
+      try {
+        await client.users.fetchByUsername(this.username)
+        this.usernameValid = false
+      } catch (e) {
+        this.usernameValid = true
       }
     }
   },
@@ -163,6 +197,15 @@ export default {
     descriptionState () {
       return this.description.length <= 140
     },
+    usernameState () {
+      if (this.user.username === this.username) {
+        return true
+      }
+      return (this.usernameRegex.test(this.username) && this.usernameValid)
+    },
+    invalidUsernameFeedback () {
+      return 'Username não disponível.'
+    },
     invalidNameFeedback () {
       return 'Insira pelo menos 2 caracteres.'
     },
@@ -181,6 +224,12 @@ export default {
     },
     normalizedDescription () {
       return `(${this.description.length}/140)`
+    },
+    validState () {
+      if (!this.picUrlState || !this.nameState || !this.descriptionState || !this.usernameState) {
+        return true
+      }
+      return false
     }
   },
 
