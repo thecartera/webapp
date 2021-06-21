@@ -49,7 +49,7 @@
             </b-col>
           </b-row>
           <b-row class="px-4 pt-1" style="line-height: 1.2rem">
-            <span class="text-break"> {{ comment.text }} </span>
+            <span class="text-break" v-html="linkify(comment.text)">  </span>
           </b-row>
         </b-card>
       </b-col>
@@ -103,6 +103,9 @@ export default {
     },
     humanTime (timestamp) {
       return client.utils.humanTime(timestamp)
+    },
+    linkify (text) {
+      return client.utils.linkify(text)
     }
   }
 }
