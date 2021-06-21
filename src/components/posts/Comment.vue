@@ -45,9 +45,11 @@
 
     <!-- Comment text -->
     <b-row class="px-2 py-1">
-      <span style="line-height: 1.2rem;" class="text-break">
-        {{ comment.text }}
-      </span>
+      <span
+        style="line-height: 1.2rem;"
+        class="text-break"
+        v-html="linkify(comment.text)"
+      />
     </b-row>
   </b-col>
 </b-row>
@@ -79,6 +81,10 @@ export default {
   methods: {
     humanTime (timestamp) {
       return client.utils.humanTime(timestamp)
+    },
+
+    linkify (text) {
+      return client.utils.linkify(text)
     },
 
     emitDelete () {
