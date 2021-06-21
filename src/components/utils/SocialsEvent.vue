@@ -5,7 +5,6 @@
         network="whatsapp"
         title="Olha essa postagem na Cartera!"
         :url="url"
-        description="💲 Cartera - a rede social dos investidores"
       >
         <font-awesome-icon :icon="['fab', 'whatsapp']" class="size whatsapp-color"/>
         Enviar no Whatsapp
@@ -17,7 +16,6 @@
         network="telegram"
         title="Olha essa postagem na Cartera!"
         :url="url"
-        description="💲 Cartera - a rede social dos investidores"
       >
         <font-awesome-icon :icon="['fab', 'telegram']" class="size telegram-color"/>
         Enviar no Telegram
@@ -42,7 +40,6 @@
         network="facebook"
         :url="url"
         title="Olha essa postagem na Cartera!"
-        description="💲 Cartera - a rede social dos investidores"
       >
         <font-awesome-icon :icon="['fab', 'facebook']" class="size fb-color"/>
         Enviar no Facebook
