@@ -26,6 +26,8 @@
 import Comment from '@/components/posts/Comment'
 
 export default {
+  name: 'CommentsSection',
+
   components: {
     Comment
   },
