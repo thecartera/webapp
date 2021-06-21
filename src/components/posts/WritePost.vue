@@ -35,7 +35,6 @@
       </b-col>
       <b-col cols="auto" class="p-0">
         <b-button
-          pill
           size="sm"
           variant="primary"
           :disabled="postLen > maxLenInChars ? true : false"
