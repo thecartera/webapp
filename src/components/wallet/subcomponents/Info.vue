@@ -4,7 +4,6 @@
       <b-row>
         <b-col cols="auto" class="pl-0 pr-0">
           <b-avatar
-            rounded
             :src="ownerImage"
             size="md"
             :to="`/users/${wallet.username}`"
