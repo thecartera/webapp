@@ -188,8 +188,10 @@ export default {
       const c0 = this.picURL.slice(0, 33) === 'https://lh3.googleusercontent.com'
       const c1 = this.picURL.slice(0, 26) === 'https://cdn.discordapp.com'
       const c2 = this.picURL.slice(0, 28) === 'https://media-exp1.licdn.com'
-      const c3 = this.picURL.slice(0, 38) === 'https://scontent.ffln1-1.fna.fbcdn.net'
-      if (c0 || c1 || c2 || c3) {
+      const c3 = this.picURL.slice(0, 28) === 'https://media-exp2.licdn.com'
+      const c4 = this.picURL.slice(0, 28) === 'https://media-exp3.licdn.com'
+      const c5 = this.picURL.slice(0, 38) === 'https://scontent.ffln1-1.fna.fbcdn.net'
+      if (c0 || c1 || c2 || c3 || c4 || c5) {
         return true
       }
       return false
