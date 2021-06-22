@@ -12,21 +12,21 @@
 
       <!-- Picture -->
       <b-col cols="auto" class="p-0">
-        <b-avatar size="3rem" :src="user_bueno.picture" :to="`/users/${user_bueno.username}`"/>
+        <b-avatar size="3rem" :src="user_cartera.picture" :to="`/users/${user_cartera.username}`"/>
       </b-col>
 
       <b-col style="line-height: 1.1rem" class="pl-4">
         <!-- Username -->
         <b-row>
-          <b-link :to="`/users/${user_bueno.username}`" class="text-dark text-decoration-none">
-            <strong class="text-truncate"> {{ user_bueno.username }} </strong>
+          <b-link :to="`/users/${user_cartera.username}`" class="text-dark text-decoration-none">
+            <strong class="text-truncate"> {{ user_cartera.username }} </strong>
           </b-link>
         </b-row>
 
         <!-- Title -->
         <b-row>
-          <span v-if="user_bueno.title" class="text-secondary" style="font-size: 0.85rem">
-          {{ user_bueno.title }}
+          <span v-if="user_cartera.title" class="text-secondary" style="font-size: 0.85rem">
+          {{ user_cartera.title }}
           </span>
         </b-row>
 
@@ -59,10 +59,10 @@
       </b-row>
 
       <b-row class="px-2 pb-2">
-        <b-link :to="`/users/${user_bueno.username}`" class="text-dark pr-2">
-          <strong> {{ user_bueno.username }} </strong>
+        <b-link :to="`/users/${user_cartera.username}`" class="text-dark pr-2">
+          <strong> {{ user_cartera.username }} </strong>
         </b-link>
-          Bem vindos ao <b class="pl-1 text-success"> Cartera </b>!
+          Bem vindos à <b class="pl-1 text-success"> Cartera </b>!
         <b-card-text class="pt-1">
           🔔 Esse é seu feed, parecido com o do Twitter + Instagram, só que com
           funções específicas para investidores! Por exemplo, é aqui que você vai
@@ -71,7 +71,7 @@
         <b-card-text>
           ⚡️ Comece seguindo outros usuários, vendo uma
           <b-link to="/wallets/6073e39242cb2b06e78c1cb1">
-            carteira minha
+            carteira
           </b-link>
           ou
           <b-link to="/wallets"> criando a sua própria. </b-link>
@@ -95,20 +95,21 @@ import client from '@/commons/client.api'
 export default {
 
   data: () => ({
-    user_bueno: {},
+    user_cartera: {},
     likeCount: 31
   }),
 
   methods: {
     async start () {
-      await client.users.follow('gmbueno1802')
-      await client.users.follow('mauriciomb97')
+      await client.users.follow('cartera')
+      await client.users.follow('bueno')
+      await client.users.follow('mauricio')
       this.$emit('updateFeed')
     }
   },
 
   async created () {
-    this.user_bueno = await client.users.fetchByUsername('gmbueno1802')
+    this.user_cartera = await client.users.fetchByUsername('cartera')
   }
 }
 </script>
