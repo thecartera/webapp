@@ -11,7 +11,6 @@
       icon="person-plus"
       scale="1"
       style="cursor: pointer"
-      variant="dark"
     />
   </template>
 
