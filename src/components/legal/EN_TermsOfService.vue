@@ -116,7 +116,7 @@
     <p>
       If you have any questions or suggestions about our
       Terms and Conditions, do not hesitate to contact us
-      at monnedanetwork@gmail.com.
+      at contato@cartera.com.br.
     </p>
   </b-card>
 </template>
