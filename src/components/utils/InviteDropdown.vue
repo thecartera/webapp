@@ -29,7 +29,8 @@ export default {
   },
   data: () => {
     return {
-      message: 'Você recebeu um convite para fazer parte do Cartera. Veja as carteiras de investimento de seus amigos, saiba quando eles fazem movimentações e conheça sua estratégia.'
+      message: 'Você recebeu um convite para fazer parte do Cartera. Crie' +
+          ' uma conta e vem ver no que seus amigos estão investindo!'
     }
   }
 }
