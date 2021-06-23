@@ -1,44 +1,41 @@
 <template>
-  <b-container class="cards-l-r-margins">
-    <ul class="list-unstyled">
-      <li v-for="(item, i) in visibleEvents" :key="i" class="my-2">
-        <b-card no-body>
-          <b-card-body>
-            <b-row>
-              <b-col>
-                <h6 class="title"> {{ item.timestamp }} </h6>
-                <span style="line-height:3rem" v-for="(descr, d) in item.description" :key="d">
-                  <b-avatar
-                    rounded
-                    icon="wallet2"
-                    variant="success"
-                    class="image-size"
-                    :src="thumb(descr[3])"
-                  />
-                  <span :class="positive(descr[2])">
-                    {{ descr[0] }}
-                  </span>
-                  <span> {{ descr[1] }} </span>
-                  <br>
-                </span>
-              </b-col>
-            </b-row>
-          </b-card-body>
-        </b-card>
-      </li>
-      <li v-if="loading" class="text-center mt-5"><b-spinner /></li>
-    </ul>
-    <b-row align-h="center">
-      <b-badge style="color:white; background-color:white" v-b-visible="loadEvents">.</b-badge>
-    </b-row>
-  </b-container>
+<b-container>
+  <b-card v-for="(item, i) in parsedEvents" :key="i" class="my-2">
+    <!-- Title -->
+    <b-card-title>
+      <small>
+        <strong> {{ item.timestamp }} </strong>
+      </small>
+    </b-card-title>
+
+    <!-- Changes -->
+    <b-card-body style="line-height: 3rem;" class="py-0">
+      <b-row v-for="([verb, txt, action, code], d) in item.description" :key="d">
+        <AssetIcon :code="code" class="mr-2" />
+        <span :class="positive(action)"> {{ verb }} </span>
+        <span class="ml-1"> {{ txt }} </span>
+      </b-row>
+    </b-card-body>
+  </b-card>
+
+  <b-spinner class="text-center" v-if="loading"/>
+
+  <b-badge style="color:white; background-color:white" v-b-visible="loadEvents">.</b-badge>
+</b-container>
 </template>
 
 <script>
 import client from '@/commons/client.api'
 
+import AssetIcon from '@/components/utils/AssetIcon'
+
 export default {
   name: 'PortfolioTimeline',
+
+  components: {
+    AssetIcon
+  },
+
   props: {
     id: {
       type: String,
@@ -53,36 +50,34 @@ export default {
       loading: false
     }
   },
+
   computed: {
     visibleEvents () {
       return this.events.slice(0, this.show)
+    },
+    parsedEvents () {
+      return this.events.map(i => this.parseEvent(i))
     }
   },
+
   methods: {
     loadEvents () {
       if (!this.loading && this.show < this.events.length) {
         this.loading = true
         this.show += 5
         this.loading = false
-
-        this.parseEvents(this.raw)
       }
     },
-    parseEvents (newEvents) {
-      for (let evtIndex = 0; evtIndex < newEvents.length; evtIndex++) {
-        this.parseEvent(newEvents[evtIndex])
-      }
-    },
-    parseEvent (newEvent) {
+    parseEvent (event) {
       const descrs = []
-      if (newEvent.data.type === 'CREATION') {
+      if (event.data.type === 'CREATION') {
         descrs.push(['', 'Criou esta carteira', 'CREATION', 'bueno_no_icon_for_walletcreation'])
       }
-      for (let i = 0; i < newEvent.data.changes.length; i++) {
-        const subevent = newEvent.data.changes[i]
-        const str = ` sua posição em ${subevent.ticker}`
+
+      for (const { ticker, change } of event.data.changes) {
+        const str = ` sua posição em ${ticker}`
         let prestr = '- '
-        switch (subevent.change) {
+        switch (change) {
           case 'START':
             prestr = 'Iniciou'
             break
@@ -98,14 +93,15 @@ export default {
           default:
             prestr = '---'
         }
-        descrs.push([prestr, str, subevent.change, subevent.ticker])
+
+        descrs.push([prestr, str, change, ticker])
       }
-      const date = new Date(newEvent.timestamp)
-      const parsedEvent = {
+
+      const date = new Date(event.timestamp)
+      return {
         timestamp: date.toLocaleString('pt-BR').slice(0, -3),
         description: descrs
       }
-      this.events.push(parsedEvent)
     },
     positive (value) {
       switch (value) {
@@ -120,14 +116,11 @@ export default {
         default:
           return 'black'
       }
-    },
-    thumb (ticker) {
-      return client.utils.thumbUrl(ticker)
     }
   },
+
   async created () {
-    const rawEvents = await client.wallets.getHistory(this.id)
-    this.parseEvents(rawEvents)
+    this.events = await client.wallets.getHistory(this.id)
   }
 }
 </script>
