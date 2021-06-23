@@ -137,9 +137,6 @@ export default {
   },
 
   methods: {
-    thumb (ticker) {
-      return client.utils.thumbUrl(ticker)
-    },
     async likePost () {
       if (this.auth) {
         await client.events.likeEvent(this.item.id)

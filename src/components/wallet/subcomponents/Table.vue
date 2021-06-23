@@ -10,13 +10,7 @@
   >
     <!-- Thumbnail -->
     <template #cell(imageLink)="data">
-      <b-avatar
-        rounded
-        responsive="true"
-        icon="wallet2"
-        variant="success"
-        :src="thumb(data.item.ticker)"
-      />
+      <AssetIcon :code="data.item.ticker" />
     </template>
 
     <!-- Name and ticker -->
@@ -34,10 +28,14 @@
       <span class="text-monospace"> {{ data.value.toFixed(1) }}% </span>
     </template>
 
-    <!-- Price -->
+    <!-- Price header -->
     <template #head(price)="data">
-      <span v-b-tooltip.hover title="Relativo ao último fechamento">{{ data.label }}</span>
+      <span v-b-tooltip.hover title="Relativo ao último fechamento">
+        {{ data.label }}
+      </span>
     </template>
+
+    <!-- Price cell -->
     <template #cell(price)="data">
       <small class="text-secondary"> Preço (R$) </small>
       <br>
@@ -62,8 +60,14 @@
 <script>
 import client from '@/commons/client.api'
 
+import AssetIcon from '@/components/utils/AssetIcon'
+
 export default {
   name: 'AssetTable',
+
+  components: {
+    AssetIcon
+  },
 
   data: () => ({
     fields: [
