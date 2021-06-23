@@ -18,6 +18,15 @@
 
       <b-navbar-nav class="ml-auto">
 
+        <!-- Invite friend dropdown -->
+        <b-col
+          v-if="auth"
+          class="p-0 m-0 d-none d-sm-block"
+          align-self="center"
+        >
+          <InviteDropdown/>
+        </b-col>
+
         <!-- Home button -->
         <b-nav-item v-if="auth" to="/">
           <b-button class="max-height" size="md" variant="primary">
@@ -159,6 +168,7 @@
 </template>
 
 <script>
+import InviteDropdown from '@/components/utils/InviteDropdown'
 import Search from '@/components/utils/Search'
 import { LOGIN, LOGOUT } from '@/store/actions.type'
 
@@ -166,7 +176,8 @@ export default {
   name: 'Navbar',
 
   components: {
-    Search
+    Search,
+    InviteDropdown
   },
 
   computed: {
