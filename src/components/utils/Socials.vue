@@ -3,9 +3,9 @@
     <b-dropdown-item-button>
       <ShareNetwork
         network="whatsapp"
-        title="Olha essa carteira! 🤑"
+        :title="title"
         :url="url"
-        description="💲 Cartera - a rede para todo investidor"
+        :description="description"
       >
         <font-awesome-icon :icon="['fab', 'whatsapp']" class="size whatsapp-color"/>
         Enviar no Whatsapp
@@ -15,9 +15,9 @@
     <b-dropdown-item-button>
       <ShareNetwork
         network="telegram"
-        title="Olha essa carteira! 🤑"
+        :title="title"
         :url="url"
-        description="💲 Cartera - a rede para todo investidor"
+        :description="description"
       >
         <font-awesome-icon :icon="['fab', 'telegram']" class="size telegram-color"/>
         Enviar no Telegram
@@ -28,7 +28,7 @@
       <ShareNetwork
         network="twitter"
         :url="url"
-        title="Olha essa carteira! 🤑"
+        :title="title"
         hashtags="Cartera"
         quote="'Penso logo invisto'"
       >
@@ -41,8 +41,8 @@
       <ShareNetwork
         network="facebook"
         :url="url"
-        title="Olha essa carteira! 🤑"
-        description="💲 Cartera - a rede para todo investidor"
+        :title="title"
+        :description="description"
       >
         <font-awesome-icon :icon="['fab', 'facebook']" class="size fb-color"/>
         Enviar no Facebook
@@ -60,6 +60,16 @@ export default {
     url: {
       type: String,
       required: true
+    },
+    title: {
+      type: String,
+      required: false,
+      default: 'Olha essa carteira! 🤑'
+    },
+    description: {
+      type: String,
+      required: false,
+      default: '💲 Cartera - a rede para todo investidor'
     }
   }
 
