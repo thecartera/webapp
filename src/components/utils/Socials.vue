@@ -68,8 +68,7 @@ export default {
     },
     description: {
       type: String,
-      required: false,
-      default: '💲 Cartera - a rede para todo investidor'
+      required: false
     }
   }
 
