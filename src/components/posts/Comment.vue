@@ -45,10 +45,10 @@
 
     <!-- Comment text -->
     <b-row class="px-2 py-1">
-      <span
+      <Linkify
         style="line-height: 1.2rem;"
         class="text-break"
-        v-html="linkify(comment.text)"
+        :text="comment.text"
       />
     </b-row>
   </b-col>
@@ -58,8 +58,14 @@
 <script>
 import client from '@/commons/client.api'
 
+import Linkify from '@/components/utils/Linkify'
+
 export default {
   name: 'Comment',
+
+  components: {
+    Linkify
+  },
 
   props: {
     comment: {
