@@ -1,12 +1,8 @@
 <template>
 <span>
   <template v-for="({ text, link }, i) of tags">
-    <a v-if="link" :key="i" :href="text">
-      {{ text }}
-    </a>
-    <template v-else>
-      {{ text }}
-    </template>
+    <a v-if="link" :key="i" :href="text">{{ text }}</a>
+    <template v-else>{{ text }}</template>
   </template>
 </span>
 </template>
