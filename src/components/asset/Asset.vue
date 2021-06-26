@@ -2,6 +2,7 @@
 <b-container style="margin-top: 1rem" class="container px-0">
   <AssetInfo
     :ticker="ticker"
+    v-if="ticker"
   />
   <b-card no-body style="border-color: #DBDAD7; margin-top: 1rem">
     <b-tabs>
@@ -29,7 +30,7 @@
 import AssetInfo from '@/components/asset/subcomponents/Info'
 
 export default {
-  name: 'Wallet',
+  name: 'Asset',
 
   components: {
     AssetInfo

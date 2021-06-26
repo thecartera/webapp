@@ -1,7 +1,7 @@
 import Client from './client'
 
 export default class extends Client {
-  fetchByTicker (ticker) {
-    return this.request('GET', `assets/${ticker}`)
+  fetchByTicker (ticker, days = 30) {
+    return this.request('GET', `assets/${ticker}?days=${days}`)
   }
 }
