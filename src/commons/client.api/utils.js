@@ -1,3 +1,6 @@
+import ticker2sector from './ticker_to_sector'
+import ticker2industry from './ticker_to_industry'
+import ticker2code from './ticker_to_code'
 
 const thumbUrl = ticker => {
   return `https://raw.githubusercontent.com/monneda/B3-Assets-Images/main/imgs/${ticker}.png`
@@ -71,9 +74,24 @@ const extractUrls = inputText => {
   return []
 }
 
+const getSector = ticker => {
+  return ticker2sector.ticker2sector[ticker]
+}
+
+const getIndustry = ticker => {
+  return ticker2industry.ticker2industry[ticker]
+}
+
+const getCode = ticker => {
+  return ticker2code.ticker2code[ticker]
+}
+
 export default {
   thumbUrl,
   humanTime,
   linkify,
-  extractUrls
+  extractUrls,
+  getSector,
+  getIndustry,
+  getCode
 }

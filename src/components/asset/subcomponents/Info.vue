@@ -31,43 +31,46 @@
               </template>
 
               <!-- SHARE BUTTONS -->
-              <Socials :url="`https://cartera.com.br/#/assets/${ticker}`"/>
+              <Socials title="Da uma olhada nesse ativo!" :url="`https://cartera.com.br/#/assets/${ticker}`"/>
             </b-dropdown>
           </b-row>
         </b-col>
       </b-row>
-      <b-row>
-        <b-col class="p-1">
-          <b-button-group size="sm">
-            <b-button
-              v-for="(btn, idx) in periods"
-              :key="idx"
-              :pressed.sync="btn.state"
-              variant="light"
-              :class="activeClass(btn.state)"
-              @click="onPress(idx, btn.caption)"
-            >
-              {{ btn.caption }}
-            </b-button>
-          </b-button-group>
-        </b-col>
-        <b-col align-self="center" cols="auto">
-          <b-iconstack shift-v="1">
-            <b-icon scale="1.2" stacked icon="circle" :variant="gain < 0? 'danger' : 'success'"/>
-            <b-icon v-if="gain < 0" stacked icon="arrow-down" variant="danger"/>
-            <b-icon v-else stacked icon="arrow-up" variant="success"/>
-          </b-iconstack>
-          <span
-            class="pl-2 mr-2"
-            style="font-size: 1rem"
-          >
-                  {{ gain }}%
-                </span>
-        </b-col>
-      </b-row>
     </b-card-header>
 
-    <b-card-body class="pl-2 pt-2 pb-0">
+    <b-card-body class="px-4 py-1">
+      <b-row>
+        <b-button-group size="sm" >
+          <b-button
+            v-for="(btn, idx) in periods"
+            :key="idx"
+            pill
+            :pressed.sync="btn.state"
+            variant="white"
+            :class="activeClass(btn.state)"
+            @click="onPress(idx, btn.caption)"
+          >
+            {{ btn.caption }}
+          </b-button>
+        </b-button-group>
+      </b-row>
+      <b-row>
+        <b-col class="p-2" cols="auto">
+          <PerformanceCircle :pctChange="parseFloat(gain)"/>
+        </b-col>
+      </b-row>
+      <b-row align-v="end">
+        <span> Setor </span>
+      </b-row>
+      <b-row align-v="end">
+        <h5> {{ getSector(ticker) }} </h5>
+      </b-row>
+      <b-row align-v="end">
+        <span> Indústria </span>
+      </b-row>
+      <b-row align-v="end">
+        <h5> {{ getIndustry(ticker) }} </h5>
+      </b-row>
     </b-card-body>
   </b-card>
 </template>
@@ -75,12 +78,14 @@
 <script>
 import client from '@/commons/client.api'
 import Socials from '@/components/utils/Socials'
+import PerformanceCircle from '@/components/utils/PerformanceCircle'
 
 export default {
   name: 'AssetInfo',
 
   components: {
-    Socials
+    Socials,
+    PerformanceCircle
   },
 
   props: {
@@ -174,6 +179,14 @@ export default {
         return 'text-primary'
       }
       return 'text-secondary'
+    },
+
+    getSector (ticker) {
+      return client.utils.getSector(ticker)
+    },
+
+    getIndustry (ticker) {
+      return client.utils.getIndustry(ticker)
     }
   },
 
