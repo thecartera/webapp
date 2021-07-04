@@ -1,46 +1,9 @@
 <template>
   <b-card style="border-color: #DBDAD7" no-body>
-    <b-card-header class="pt-1 pb-1 m-0">
-      <b-row>
-        <b-col cols="auto" class="pl-0 pr-0">
-          <b-avatar
-            rounded
-            :src="thumb"
-            size="md"
-          />
-        </b-col>
-        <b-col class="pl-4" style="line-height:1.35rem">
-          <b-row>
-            <span> {{ ticker }} </span>
-            <span class="text-secondary text-capitalize pl-2"> | {{ name }} </span>
-          </b-row>
-          <b-row>
-            <span class="font-weight-bold"> R${{ price }}</span>
-          </b-row>
-        </b-col>
-        <b-col>
-          <b-row align-h="end" class="pt-1 pr-1">
-            <b-dropdown no-caret right variant="outline-light">
-              <template #button-content>
-                <b-icon
-                  icon="three-dots-vertical"
-                  scale="1"
-                  style="cursor: pointer"
-                  variant="dark"
-                />
-              </template>
-
-              <!-- SHARE BUTTONS -->
-              <Socials title="Da uma olhada nesse ativo!" :url="`https://cartera.com.br/#/assets/${ticker}`"/>
-            </b-dropdown>
-          </b-row>
-        </b-col>
-      </b-row>
-    </b-card-header>
 
     <b-card-body class="px-4 py-1">
       <b-row>
-        <b-button-group size="sm" >
+        <b-button-group size="md" >
           <b-button
             v-for="(btn, idx) in periods"
             :key="idx"
@@ -55,21 +18,15 @@
         </b-button-group>
       </b-row>
       <b-row>
-        <b-col class="p-2" cols="auto">
+        <b-col class="p-3" cols="auto">
           <PerformanceCircle :pctChange="parseFloat(gain)"/>
         </b-col>
       </b-row>
-      <b-row align-v="end">
-        <span> Setor </span>
-      </b-row>
-      <b-row align-v="end">
-        <h5> {{ getSector(ticker) }} </h5>
-      </b-row>
-      <b-row align-v="end">
-        <span> Indústria </span>
-      </b-row>
-      <b-row align-v="end">
-        <h5> {{ getIndustry(ticker) }} </h5>
+      <b-row>
+        <AssetChartTab
+          :days="selectedPeriod"
+          :ticker="ticker"
+        />
       </b-row>
     </b-card-body>
   </b-card>
@@ -77,14 +34,14 @@
 
 <script>
 import client from '@/commons/client.api'
-import Socials from '@/components/utils/Socials'
 import PerformanceCircle from '@/components/utils/PerformanceCircle'
+import AssetChartTab from '@/components/asset/subcomponents/AssetChartTab'
 
 export default {
   name: 'AssetInfo',
 
   components: {
-    Socials,
+    AssetChartTab,
     PerformanceCircle
   },
 
@@ -110,13 +67,6 @@ export default {
   computed: {
     user () {
       return this.$store.state.auth.user
-    },
-    thumb () {
-      try {
-        return client.utils.thumbUrl(this.ticker)
-      } catch {
-        return ''
-      }
     },
     gain () {
       if (this.loading) {
