@@ -9,7 +9,7 @@
             size="md"
           />
         </b-col>
-        <b-col class="pl-4" style="line-height:1.35rem">
+        <b-col cols="auto" class="pl-4" style="line-height:1.35rem">
           <b-row>
             <span> {{ ticker }} </span>
             <span class="text-secondary text-capitalize pl-2"> | {{ name }} </span>
