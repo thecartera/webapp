@@ -1,8 +1,8 @@
 <template>
   <b-container class="p-0 m-0">
     <b-iconstack shift-v="3" :scale="scale">
-      <b-icon scale="1.8" stacked icon="circle" :variant="pctChange < 0? 'danger' : 'success'"/>
-      <b-icon v-if="pctChange < 0" stacked icon="arrow-down" variant="danger"/>
+      <b-icon scale="1.8" stacked icon="circle" :variant="pctChange < 0? 'red' : 'success'"/>
+      <b-icon v-if="pctChange < 0" stacked icon="arrow-down" variant="red"/>
       <b-icon v-else stacked icon="arrow-up" variant="success"/>
     </b-iconstack>
     <span class="pl-3 mr-2" style="font-size: 1rem">

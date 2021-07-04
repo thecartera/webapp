@@ -5,7 +5,7 @@
       :ticker="ticker"
       v-if="ticker"
     />
-    <b-tabs card pills align="center" active-nav-item-class="bg-primary">
+    <b-tabs card end pills align="center" active-nav-item-class="bg-primary">
 
       <!-- Charts -->
       <b-tab title="Gráfico" no-body>

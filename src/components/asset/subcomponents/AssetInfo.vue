@@ -2,24 +2,28 @@
   <b-card style="border-color: #DBDAD7" no-body>
 
     <b-card-body class="px-4 py-1">
-      <b-row>
+      <b-row align-h="center">
         <b-button-group size="md" >
-          <b-button
+          <b-col
             v-for="(btn, idx) in periods"
             :key="idx"
-            pill
+            @mouseover="addHoverColor(idx)"
+            @mouseleave="removeHoverColor(idx)"
+            :style="btn.state ? 'text-decoration: underline; cursor: pointer' : 'cursor: pointer'"
             :pressed.sync="btn.state"
             variant="white"
-            :class="activeClass(btn.state)"
+            :class="btn.textColor"
             @click="onPress(idx, btn.caption)"
           >
             {{ btn.caption }}
-          </b-button>
+          </b-col>
         </b-button-group>
       </b-row>
-      <b-row>
+      <b-row align-h="center">
         <b-col class="p-3" cols="auto">
-          <PerformanceCircle :pctChange="parseFloat(gain)"/>
+          <h5 :class="gain > 0 ? 'text-success' : 'text-red'">
+            {{ gain > 0 ? '+' + gain : gain  }}%
+          </h5>
         </b-col>
       </b-row>
       <b-row>
@@ -34,15 +38,13 @@
 
 <script>
 import client from '@/commons/client.api'
-import PerformanceCircle from '@/components/utils/PerformanceCircle'
 import AssetChartTab from '@/components/asset/subcomponents/AssetChartTab'
 
 export default {
   name: 'AssetInfo',
 
   components: {
-    AssetChartTab,
-    PerformanceCircle
+    AssetChartTab
   },
 
   props: {
@@ -57,10 +59,10 @@ export default {
     asset: Object,
     selectedPeriod: 30,
     periods: [
-      { caption: '7d', state: false },
-      { caption: '30d', state: true },
-      { caption: '90d', state: false },
-      { caption: 'YTD', state: false }
+      { caption: '7D', state: false, textColor: 'text-secondary' },
+      { caption: '1M', state: true, textColor: 'text-success' },
+      { caption: '3M', state: false, textColor: 'text-secondary' },
+      { caption: 'YTD', state: false, textColor: 'text-secondary' }
     ]
   }),
 
@@ -106,13 +108,13 @@ export default {
     },
     async onPress (i, caption) {
       switch (caption) {
-        case '7d':
+        case '7D':
           this.selectedPeriod = 7
           break
-        case '30d':
+        case '1M':
           this.selectedPeriod = 30
           break
-        case '90d':
+        case '3M':
           this.selectedPeriod = 90
           break
         default:
@@ -122,13 +124,32 @@ export default {
       await this.fetchAsset()
       this.periods.forEach((b, index) => {
         b.state = i === index
+        if (i === index) {
+          if (this.gain > 0) {
+            b.textColor = 'text-success'
+          } else {
+            b.textColor = 'text-red'
+          }
+        } else {
+          b.textColor = 'text-secondary'
+        }
       })
     },
-    activeClass (state) {
-      if (state === true) {
-        return 'text-primary'
+
+    addHoverColor (id) {
+      if (this.periods[id].state === false) {
+        if (this.gain > 0) {
+          this.periods[id].textColor = 'text-success'
+        } else {
+          this.periods[id].textColor = 'text-red'
+        }
       }
-      return 'text-secondary'
+    },
+
+    removeHoverColor (id) {
+      if (this.periods[id].state === false) {
+        this.periods[id].textColor = 'text-secondary'
+      }
     },
 
     getSector (ticker) {
