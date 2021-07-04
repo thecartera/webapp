@@ -27,8 +27,8 @@ export default {
         dates.push(localDate)
       }
       console.log(dates)
-      const color = prices[prices.length - 1] > prices[0] ? '#00ff0033' : '#ff000033'
-      const pointcolor = prices[prices.length - 1] > prices[0] ? '#00ff00' : '#ff000066'
+      const color = prices[prices.length - 1] > prices[0] ? '#00ff0015' : '#ff000022'
+      const bordercolor = prices[prices.length - 1] > prices[0] ? '#28ee45' : '#ff0000bb'
       prices.push(Math.max(...prices) * 1.03) // max Y val so highest point doesn't touch top of chart
       prices.push(Math.min(...prices) * 0.97) // min Y val so lowest point doesn't touch bottom of chart
       this.renderChart({
@@ -39,10 +39,18 @@ export default {
             data: prices,
             lineTension: 0,
             fill: true,
-            borderColor: color,
+            borderColor: bordercolor,
+            borderWidth: 3,
             backgroundColor: color,
-            pointBackgroundColor: pointcolor,
-            pointBorderColor: pointcolor,
+            pointBackgroundColor: '#00000000', // so no points on chart but still can hover
+            pointBorderColor: '#00000000', // so no points on chart but still can hover
+            pointRadius: 4,
+            hoverBackgroundColor: bordercolor,
+            hoverBorderColor: bordercolor,
+            pointHoverBackgroundColor: bordercolor,
+            pointHoverBorderColor: bordercolor,
+            pointHoverBorderWidth: 2,
+            hoverBorderWidth: 5,
             clip: { left: -1, top: -1, right: -1, bottom: -1 }
           }
         ]
