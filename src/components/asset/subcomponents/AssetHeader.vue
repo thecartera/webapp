@@ -4,6 +4,8 @@
       <b-row>
         <b-col cols="auto" class="pl-0 pr-0">
           <b-avatar
+            icon="wallet"
+            variant="success"
             rounded
             :src="thumb"
             size="md"

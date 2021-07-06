@@ -15,6 +15,7 @@
         responsive="true"
         icon="wallet2"
         variant="success"
+        :to="`/assets/${data.item.ticker}`"
         :src="thumb(data.item.ticker)"
       />
     </template>

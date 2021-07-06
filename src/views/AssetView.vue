@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+    <FollowsNavbar />
 
     <ThreeColumnsLayout>
       <Asset :ticker="ticker" />
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Navbar from '@/components/navbars/Navbar'
+import FollowsNavbar from '@/components/navbars/FollowsNavbar'
 import Asset from '@/components/asset/Asset'
 import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
 
@@ -17,7 +17,7 @@ export default {
   name: 'AssetView',
 
   components: {
-    Navbar,
+    FollowsNavbar,
     Asset,
     ThreeColumnsLayout
   },

@@ -121,8 +121,8 @@ export default {
       this.profit = prices[prices.length - 1] > prices[0]
       const color = prices[prices.length - 1] > prices[0] ? '#00c80515' : '#ff000022'
       const bordercolor = prices[prices.length - 1] > prices[0] ? '#00c805' : '#ff0000bb'
-      prices.push(Math.max(...prices) * 1.15) // max Y val so highest point doesn't touch top of chart
-      prices.push(Math.min(...prices) * 0.85) // min Y val so lowest point doesn't touch bottom of chart
+      prices.push(Math.max(...prices) * 1.02) // max Y val so highest point doesn't touch top of chart
+      prices.push(Math.min(...prices) * 0.98) // min Y val so lowest point doesn't touch bottom of chart
       this.renderChart({
         labels: dates,
         datasets: [

@@ -5,25 +5,19 @@
       :ticker="ticker"
       v-if="ticker"
     />
-    <b-tabs card end pills align="center" active-nav-item-class="bg-primary">
 
-      <!-- Charts -->
-      <b-tab title="Gráfico" no-body>
-        <AssetInfo
-          :ticker="ticker"
-          v-if="ticker"
-        />
-      </b-tab>
+    <!-- Charts -->
+    <AssetInfo
+      :ticker="ticker"
+      v-if="ticker"
+    />
 
-      <!-- About -->
-      <b-tab title="Sobre" no-body>
-        <AssetIndustry
-          :ticker="ticker"
-          v-if="ticker"
-        />
-      </b-tab>
+    <!-- About -->
+    <AssetIndustry
+      :ticker="ticker"
+      v-if="ticker"
+    />
 
-    </b-tabs>
   </b-card>
 </b-container>
 </template>

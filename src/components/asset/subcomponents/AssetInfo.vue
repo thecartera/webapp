@@ -60,7 +60,7 @@ export default {
     selectedPeriod: 30,
     periods: [
       { caption: '7D', state: false, textColor: 'text-secondary' },
-      { caption: '1M', state: true, textColor: 'text-success' },
+      { caption: '1M', state: true, textColor: 'text-secondary' },
       { caption: '3M', state: false, textColor: 'text-secondary' },
       { caption: 'YTD', state: false, textColor: 'text-secondary' }
     ]
@@ -94,9 +94,19 @@ export default {
     async fetchAsset () {
       try {
         this.asset = await client.assets.fetchByTicker(this.ticker, this.selectedPeriod)
+        this.updateTextColor()
       } catch {
         await this.$router.push('/feed')
       }
+    },
+    updateTextColor () {
+      this.periods.forEach((b) => {
+        if (b.state) {
+          b.textColor = this.gain > 0 ? 'text-success' : 'text-red'
+        } else {
+          b.textColor = 'text-secondary'
+        }
+      })
     },
     getYTD () {
       const now = new Date()
@@ -172,6 +182,7 @@ export default {
   async created () {
     this.asset = await client.assets.fetchByTicker(this.ticker, this.selectedPeriod)
     this.loading = false
+    this.updateTextColor()
   }
 }
 </script>

@@ -25,7 +25,8 @@
           cols="auto"
           class="mr-2"
           v-for="event of starts.slice(0, 4)"
-          :key="event.ticker">
+          :key="event.ticker"
+        >
           <b-row>
             <b-avatar
               icon="wallet"
@@ -33,6 +34,7 @@
               rounded
               size="md"
               class="mr-1 "
+              :to="`/assets/${event.ticker}`"
               :src="thumb(event.ticker)"
             />
           </b-row>
@@ -70,6 +72,7 @@
               rounded
               size="md"
               class="mr-1 "
+              :to="`/assets/${event.ticker}`"
               :src="thumb(event.ticker)"
             />
           </b-row>
@@ -112,6 +115,7 @@
               rounded
               size="md"
               class="mr-1 "
+              :to="`/assets/${event.ticker}`"
               :src="thumb(event.ticker)"
             />
           </b-row>
@@ -149,6 +153,7 @@
               rounded
               size="md"
               class="mr-1 "
+              :to="`/assets/${event.ticker}`"
               :src="thumb(event.ticker)"
             />
           </b-row>

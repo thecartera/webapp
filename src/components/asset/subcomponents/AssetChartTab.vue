@@ -9,7 +9,7 @@
         style="height: 12rem"
       />
     </b-row>
-    <b-row class="mt-5 mx-auto">
+    <b-row class="mt-3 mr-3" align-h="end">
       <span class="pr-1"> Ver no </span>
       <b-link
       :href="`https://tvc6.investing.com/init.php?family_prefix=tvc6&

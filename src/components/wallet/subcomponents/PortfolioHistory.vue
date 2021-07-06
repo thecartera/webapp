@@ -13,6 +13,7 @@
                     icon="wallet2"
                     variant="success"
                     class="image-size"
+                    :to="`/assets/${descr[3]}`"
                     :src="thumb(descr[3])"
                   />
                   <span :class="positive(descr[2])">
