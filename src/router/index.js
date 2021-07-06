@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import WalletView from '@/views/WalletView'
+import AssetView from '@/views/AssetView'
 import ProfileView from '@/views/ProfileView'
 import WalletCreateView from '@/views/WalletCreateView'
 import FollowersView from '@/views/FollowersView'
@@ -53,6 +54,12 @@ const routes = [
     path: '/wallets/:id',
     name: 'wallet',
     component: WalletView,
+    props: true
+  },
+  {
+    path: '/assets/:ticker',
+    name: 'asset',
+    component: AssetView,
     props: true
   },
   {
