@@ -8,23 +8,42 @@
           :src="logged_user.picture"
         />
       </b-col>
-      <b-col class="pr-0 pl-2" align-self="center">
-        <b-input-group>
-          <!--
-            The "overflow:auto" is needed to only show scroll when needed
-            The ":max-rows" works beause without the : Vue will strip
-            everything so that the prop is only a string hence the newline
-            character will not work.
-          -->
-          <b-form-textarea
-            style="overflow:auto"
-            size="md"
-            placeholder="No que você está pensando?"
-            :value="postLen > 0 ? postText : ''"
-            :max-rows="10"
-            @update="updateText"
-          />
-        </b-input-group>
+      <b-col class="mr-0 ml-2" align-self="center">
+        <b-row>
+          <b-input-group>
+            <!--
+              The "overflow:auto" is needed to only show scroll when needed
+              The ":max-rows" works beause without the : Vue will strip
+              everything so that the prop is only a string hence the newline
+              character will not work.
+            -->
+            <b-form-textarea
+              style="overflow:auto"
+              size="md"
+              placeholder="No que você está pensando?"
+              :value="postLen > 0 ? postText : ''"
+              :max-rows="5"
+              @update="updateText"
+            />
+          </b-input-group>
+        </b-row>
+        <b-row v-if="picURL" style="background-color: #f3f2ef;">
+          <b-img
+            thumbnail
+            center
+            :src="picURL"
+            style="max-width: 100%; max-height: 25rem; z-index: 1"
+          >
+          </b-img>
+          <b-button
+            class="ml-2 mt-2"
+            style="z-index: 2; position: absolute; opacity: 0.5"
+            variant="secondary"
+            @click="picURL=''"
+          >
+            <b-icon scale="1.3" icon="x-circle"></b-icon>
+          </b-button>
+        </b-row>
       </b-col>
     </b-row>
     <b-row align-h="end" class="pt-2">
@@ -32,6 +51,12 @@
         <span :class="postLen > maxLenInChars ? 'text-danger font-weight-bold' : ''">
           {{ `${postLen}/${maxLenInChars}` }}
         </span>
+      </b-col>
+      <b-col cols="auto">
+        <b-button size="sm" variant="white" pill class="mb-2" @click="showAddImageModal">
+          <b-icon icon="image" ></b-icon>
+        </b-button>
+        <AddImage ref="addImageModal" @updateImage="updateImage"/>
       </b-col>
       <b-col cols="auto" class="p-0">
         <b-button
@@ -50,13 +75,19 @@
 
 <script>
 import client from '@/commons/client.api'
+import AddImage from '@/components/posts/AddImage'
 
 export default {
-  name: 'InviteFriendMobile',
+  name: 'WritePost',
+
+  components: {
+    AddImage
+  },
 
   data: () => ({
     postText: '',
-    maxLenInChars: 560
+    maxLenInChars: 560,
+    picURL: ''
   }),
 
   computed: {
@@ -75,12 +106,19 @@ export default {
     },
     async postPost () {
       try {
-        const newPost = await client.posts.postPost(this.postText)
+        const newPost = await client.posts.postPost(this.postText, this.picURL)
         this.postText = ''
+        this.picURL = ''
         this.$emit('new-post', newPost)
       } catch (e) {
         console.error(e)
       }
+    },
+    showAddImageModal () {
+      this.$refs.addImageModal.show(this.picURL)
+    },
+    updateImage (event) {
+      this.picURL = event
     }
   },
 

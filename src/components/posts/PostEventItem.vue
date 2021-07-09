@@ -10,6 +10,14 @@
         />
       </b-col>
     </b-row>
+    <b-row class="p-2" v-if="item.data.picture">
+      <b-img
+        :src="item.data.picture"
+        style="max-width: 100%; max-height: 25rem"
+        center
+      >
+      </b-img>
+    </b-row>
   </div>
 </template>
 
