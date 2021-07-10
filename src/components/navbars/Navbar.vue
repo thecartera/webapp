@@ -18,15 +18,6 @@
 
       <b-navbar-nav class="ml-auto">
 
-        <!-- Invite friend dropdown -->
-        <b-col
-          v-if="auth"
-          class="p-0 m-0 d-none d-sm-block"
-          align-self="center"
-        >
-          <InviteDropdown/>
-        </b-col>
-
         <!-- Home button -->
         <b-nav-item v-if="auth" to="/">
           <b-button class="max-height" size="md" variant="primary">
@@ -54,6 +45,8 @@
             Nova <span style="color: lime"> Cartera </span>
           </b-button>
         </b-nav-item>
+
+        <InviteDropdown/>
 
         <!-- Profile dropdown desktop -->
         <b-col
