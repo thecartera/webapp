@@ -15,7 +15,7 @@
       <span class="text-white"> Convidar</span>
     </template>
 
-    <Socials :url="`https://cartera.com.br`" />
+    <Socials :title="message" :url="`https://cartera.com.br`" />
   </b-nav-item-dropdown>
 </template>
 
