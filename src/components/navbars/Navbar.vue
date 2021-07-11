@@ -46,7 +46,7 @@
           </b-button>
         </b-nav-item>
 
-        <InviteDropdown/>
+        <InviteDropdown v-if="auth"/>
 
         <!-- Profile dropdown desktop -->
         <b-col
