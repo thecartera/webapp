@@ -11,12 +11,21 @@
   </template>
 
   <!-- See more button -->
-  <b-row align-h="center" class="my-2">
-    <b-col cols="auto" v-if="canShowLess">
-      <b-link @click="showLess"> Ver menos </b-link>
+  <b-row class="m-2">
+    <b-col cols="4">
+      <b-row align-h="center">
+        <b-link v-if="canShowLess" @click="showLess"> Ver menos </b-link>
+      </b-row>
     </b-col>
-    <b-col cols="auto" v-if="canShowMore">
-      <b-link @click="showMore"> Ver mais </b-link>
+    <b-col cols="4">
+      <b-row align-h="center">
+        <b-link v-if="canShowMore" @click="showMore"> Ver mais </b-link>
+      </b-row>
+    </b-col>
+    <b-col cols="4">
+      <b-row align-h="center">
+        <span v-if="canShowMoreText" style="font-size:0.9rem; color: gray"> {{showMoreText}} </span>
+      </b-row>
     </b-col>
   </b-row>
 </b-container>
@@ -38,6 +47,7 @@ export default {
   },
 
   data: () => ({
+    initialVisibleQtty: 3,
     visibleQtty: 3,
     step: 4
   }),
@@ -53,19 +63,34 @@ export default {
     },
 
     canShowLess () {
-      return this.visibleQtty !== 3
+      return this.visibleQtty !== this.initialVisibleQtty
+    },
+
+    showMoreText () {
+      if (this.visibleQtty > this.comments.length) {
+        return `${this.comments.length} de ${this.commentCount}`
+      }
+      return `${this.visibleQtty} de ${this.commentCount}`
+    },
+
+    canShowMoreText () {
+      return this.canShowMore || this.canShowLess
     }
   },
 
   methods: {
     showMore () {
-      this.visibleQtty += this.step
+      if (this.visibleQtty + this.step > this.commentCount) {
+        this.visibleQtty = this.commentCount
+      } else {
+        this.visibleQtty += this.step
+      }
       const beforeId = this.comments[this.comments.length - 1].id
       this.$emit('load-more-comments', beforeId, this.step)
     },
 
     showLess () {
-      this.visibleQtty = 3
+      this.visibleQtty = this.initialVisibleQtty
     },
 
     deleteComment ({ id }) {

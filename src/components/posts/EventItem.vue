@@ -60,17 +60,25 @@
       <!-- Reaction button -->
       <b-card-footer class="pt-0 m-0 px-3 pb-0" footer-bg-variant="white">
         <b-row align-v="center">
-          <!-- Like -->
-          <b-button v-if="!this.like" @click="likePost" variant="white" size="md">
-            <font-awesome-icon :icon="['far', 'thumbs-up']" />
-            <span> {{ likeCount }} </span>
-          </b-button>
-
-          <!-- Unlike -->
-          <b-button v-else @click="unlikePost" variant="white" size="md">
-            <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-primary" />
-            <span> {{ likeCount }} </span>
-          </b-button>
+          <b-col>
+            <b-row align-h="start">
+              <!-- Like -->
+              <b-button v-if="!this.like" @click="likePost" variant="white" size="md">
+                <font-awesome-icon :icon="['far', 'thumbs-up']" />
+                <span> {{ likeCount }} </span>
+              </b-button>
+              <!-- Unlike -->
+              <b-button v-else @click="unlikePost" variant="white" size="md">
+                <font-awesome-icon :icon="['fas', 'thumbs-up']" class="text-primary" />
+                <span> {{ likeCount }} </span>
+              </b-button>
+            </b-row>
+          </b-col>
+          <b-col>
+            <b-row align-h="end" class="mr-1">
+              <span style="font-size:0.9rem; color: gray"> {{ commentText }} </span>
+            </b-row>
+          </b-col>
         </b-row>
       </b-card-footer>
       <NewComment v-if="auth" @post-comment="postComment"/>
@@ -133,6 +141,14 @@ export default {
     },
     auth () {
       return this.$store.state.auth.auth
+    },
+    commentText () {
+      if (this.commentCount === 1) {
+        return '1 comentário'
+      } else if (this.commentCount > 1) {
+        return `${this.commentCount} comentários`
+      }
+      return ''
     }
   },
 
