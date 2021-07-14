@@ -47,7 +47,7 @@
       </b-col>
     </b-row>
     <b-row align-h="end" class="pt-2">
-      <b-col cols="auto" v-if="postLen > 420" align-self="center">
+      <b-col cols="auto" v-if="postLen > 630">
         <span :class="postLen > maxLenInChars ? 'text-danger font-weight-bold' : ''">
           {{ `${postLen}/${maxLenInChars}` }}
         </span>
@@ -62,7 +62,7 @@
         <b-button
           size="sm"
           variant="primary"
-          :disabled="postLen > maxLenInChars ? true : false"
+          :disabled="postLen > maxLenInChars"
           @click="postPost"
         >
           Publicar
@@ -86,7 +86,7 @@ export default {
 
   data: () => ({
     postText: '',
-    maxLenInChars: 560,
+    maxLenInChars: 840,
     picURL: ''
   }),
 
