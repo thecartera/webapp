@@ -13,7 +13,7 @@
           <b-input-group>
             <!--
               The "overflow:auto" is needed to only show scroll when needed
-              The ":max-rows" works beause without the : Vue will strip
+              The ":max-rows" works because without the : Vue will strip
               everything so that the prop is only a string hence the newline
               character will not work.
             -->
