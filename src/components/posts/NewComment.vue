@@ -16,6 +16,7 @@
       </b-col>
       <b-col cols="auto" class="p-0">
         <b-button
+            v-if="commentLength > 0"
             size="sm"
             variant="primary"
             :disabled="maxCommentLengthExceeded"
