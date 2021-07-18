@@ -144,14 +144,6 @@ export default {
         return 'text-primary'
       }
       return 'text-secondary'
-    },
-
-    getSector (ticker) {
-      return client.utils.getSector(ticker)
-    },
-
-    getIndustry (ticker) {
-      return client.utils.getIndustry(ticker)
     }
   },
 

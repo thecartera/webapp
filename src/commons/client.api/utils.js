@@ -1,5 +1,4 @@
-import ticker2sector from './ticker_to_sector'
-import ticker2industry from './ticker_to_industry'
+import tickerToSectorSubsectorSegment from './tickerToSectorSubsectorSegment'
 import ticker2code from './ticker_to_code'
 
 const thumbUrl = ticker => {
@@ -75,11 +74,15 @@ const extractUrls = inputText => {
 }
 
 const getSector = ticker => {
-  return ticker2sector.ticker2sector[ticker]
+  return tickerToSectorSubsectorSegment.tickerToSectorSubsectorSegment[ticker].sector
 }
 
-const getIndustry = ticker => {
-  return ticker2industry.ticker2industry[ticker]
+const getSubsector = ticker => {
+  return tickerToSectorSubsectorSegment.tickerToSectorSubsectorSegment[ticker].subsector
+}
+
+const getSegment = ticker => {
+  return tickerToSectorSubsectorSegment.tickerToSectorSubsectorSegment[ticker].segment
 }
 
 const getCode = ticker => {
@@ -92,6 +95,7 @@ export default {
   linkify,
   extractUrls,
   getSector,
-  getIndustry,
+  getSubsector,
+  getSegment,
   getCode
 }

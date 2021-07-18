@@ -1,16 +1,22 @@
 <template>
-  <b-card v-if="sector || industry" style="border-color: #DBDAD7" class="pl-3">
+  <b-card v-if="sector || subsector || segment" style="border-color: #DBDAD7" class="pl-3">
     <b-row v-if="sector" align-v="end">
       <span class="text-secondary"> Setor </span>
     </b-row>
     <b-row v-if="sector" align-v="end">
       <span> {{ sector }} </span>
     </b-row>
-    <b-row class="mt-3" v-if="industry" align-v="end">
-      <span class="text-secondary"> Indústria </span>
+    <b-row class="mt-3" v-if="subsector" align-v="end">
+      <span class="text-secondary"> Subsetor </span>
     </b-row>
-    <b-row v-if="industry" align-v="end">
-      <span> {{ industry }} </span>
+    <b-row v-if="subsector" align-v="end">
+      <span> {{ subsector }} </span>
+    </b-row>
+    <b-row class="mt-3" v-if="segment" align-v="end">
+      <span class="text-secondary"> Segmento </span>
+    </b-row>
+    <b-row v-if="segment" align-v="end">
+      <span> {{ segment }} </span>
     </b-row>
   </b-card>
 </template>
@@ -30,7 +36,7 @@ export default {
 
   data: () => ({
     sector: '',
-    industry: ''
+    subsector: ''
   }),
 
   methods: {
@@ -38,8 +44,12 @@ export default {
       return client.utils.getSector(ticker)
     },
 
-    getIndustry (ticker) {
-      return client.utils.getIndustry(ticker)
+    getSubsector (ticker) {
+      return client.utils.getSubsector(ticker)
+    },
+
+    getSegment (ticker) {
+      return client.utils.getSegment(ticker)
     }
   },
 
@@ -51,7 +61,8 @@ export default {
         console.log(ticker)
       }
       this.sector = this.getSector(ticker)
-      this.industry = this.getIndustry(ticker)
+      this.subsector = this.getSubsector(ticker)
+      this.segment = this.getSegment(ticker)
     }
   },
 
@@ -62,7 +73,8 @@ export default {
       console.log(ticker)
     }
     this.sector = this.getSector(ticker)
-    this.industry = this.getIndustry(ticker)
+    this.subsector = this.getSubsector(ticker)
+    this.segment = this.getSegment(ticker)
   }
 }
 </script>

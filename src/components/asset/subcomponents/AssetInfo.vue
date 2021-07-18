@@ -160,14 +160,6 @@ export default {
       if (this.periods[id].state === false) {
         this.periods[id].textColor = 'text-secondary'
       }
-    },
-
-    getSector (ticker) {
-      return client.utils.getSector(ticker)
-    },
-
-    getIndustry (ticker) {
-      return client.utils.getIndustry(ticker)
     }
   },
 
