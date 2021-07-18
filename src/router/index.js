@@ -13,6 +13,7 @@ import Settings from '@/views/SettingsView'
 import SingleEventView from '@/views/SingleEventView'
 import FeedView from '@/views/FeedView'
 import WalletNotFoundView from '@/views/WalletNotFoundView'
+import Error404View from '@/views/Error404View'
 
 import AuthGuard from './auth.guard'
 import FeedGuard from './feed.guard'
@@ -119,9 +120,8 @@ const routes = [
   },
   {
     path: '*',
-    beforeEnter: (to, from, next) => {
-      next('/') // redirect "404" to root url
-    }
+    name: 'Error404',
+    component: Error404View
   }
 ]
 
