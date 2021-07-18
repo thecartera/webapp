@@ -1,13 +1,29 @@
 <template>
 <span>
-  <template v-for="({ text, link }, i) of tags">
-    <a v-if="link" :key="i" :href="text">{{ text }}</a>
+  <template v-for="({ text, tag }, i) of tags">
+    <b-link v-if="tag === 'link'" :key="i" :href="text">{{ text }}</b-link>
+    <b-link v-else-if="tag === 'cash'" :key="i" :to="`/assets/${text}`">${{ text }}</b-link>
+    <b-link v-else-if="tag === 'mention'" :key="i" :to="`/users/${text}`">@{{ text }}</b-link>
     <template v-else>{{ text }}</template>
   </template>
 </span>
 </template>
 
 <script>
+const split = (text, regex, tag) => {
+  const splits = text.split(regex)
+  const matches = Array.from(text.matchAll(regex))
+
+  const results = []
+  for (let i = 0; i < splits.length - 1; i += 2) {
+    results.push({ text: splits[i], tag: 'text' })
+    results.push({ text: matches[i / 2][1], tag: tag })
+  }
+  results.push({ text: splits[splits.length - 1], tag: 'text' })
+
+  return results
+}
+
 export default {
   name: 'Linkify',
 
@@ -15,28 +31,36 @@ export default {
     text: {
       type: String,
       default: ''
-    },
-    regex: {
-      type: String,
-      default: 'https?://[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|]'
     }
   },
 
   computed: {
     tags () {
-      const http = new RegExp(this.regex, 'gim')
+      const cash = /\$(\w+)/gim
+      const mention = /@(\w+)/gim
+      const http = /(https?:\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gim
 
-      const splitted = this.text.split(http)
-      const urls = Array.from(this.text.matchAll(http)).map(i => i[0])
+      let results = split(this.text, http, 'link')
 
-      const res = []
-      for (let i = 0; i < splitted.length; i++) {
-        res.push({ text: splitted[i], link: false })
-        res.push({ text: urls[i], link: true })
+      for (let i = 0; i < results.length; i++) {
+        const { text, tag } = results[i]
+        if (tag === 'text') {
+          const splits = split(text, cash, 'cash')
+          results.splice(i, 1, splits)
+        }
       }
-      res.pop()
 
-      return res
+      results = results.flat()
+
+      for (let i = 0; i < results.length; i++) {
+        const { text, tag } = results[i]
+        if (tag === 'text') {
+          const splits = split(text, mention, 'mention')
+          results.splice(i, 1, splits)
+        }
+      }
+
+      return results.flat()
     }
   }
 }
