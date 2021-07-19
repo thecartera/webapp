@@ -1,10 +1,10 @@
 <template>
-  <!-- pt-l-2 is needed here because alignment of the items in the navbar is messed up -->
+  <!-- pt-2 is needed here because alignment of the items in the navbar is messed up -->
   <b-nav-item-dropdown title="Convidar amigo(a)"
                        no-caret dropleft
                        size="sm"
                        variant="primary"
-                       class="pt-lg-2"
+                       class="pt-2"
   >
     <b-dropdown-header id="dropdown-header-label">
       Convidar um amigo
