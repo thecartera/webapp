@@ -74,15 +74,27 @@ const extractUrls = inputText => {
 }
 
 const getSector = ticker => {
-  return tickerToSectorSubsectorSegment.tickerToSectorSubsectorSegment[ticker].sector
+  let cleanTicker = ticker
+  if (ticker[ticker.length - 1] === 'F') {
+    cleanTicker = ticker.substring(0, ticker.length - 1)
+  }
+  return tickerToSectorSubsectorSegment.tickerToSectorSubsectorSegment[cleanTicker].sector
 }
 
 const getSubsector = ticker => {
-  return tickerToSectorSubsectorSegment.tickerToSectorSubsectorSegment[ticker].subsector
+  let cleanTicker = ticker
+  if (ticker[ticker.length - 1] === 'F') {
+    cleanTicker = ticker.substring(0, ticker.length - 1)
+  }
+  return tickerToSectorSubsectorSegment.tickerToSectorSubsectorSegment[cleanTicker].subsector
 }
 
 const getSegment = ticker => {
-  return tickerToSectorSubsectorSegment.tickerToSectorSubsectorSegment[ticker].segment
+  let cleanTicker = ticker
+  if (ticker[ticker.length - 1] === 'F') {
+    cleanTicker = ticker.substring(0, ticker.length - 1)
+  }
+  return tickerToSectorSubsectorSegment.tickerToSectorSubsectorSegment[cleanTicker].segment
 }
 
 const getCode = ticker => {

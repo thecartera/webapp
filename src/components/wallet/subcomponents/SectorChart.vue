@@ -93,8 +93,8 @@ export default {
 
   methods: {
     getSector (ticker) {
-      // TODO: we need to get the proper sectors from ETFs as we don't have it now
-      const sector = 'ETF'
+      // TODO: we need to get the proper sectors from ETFs (and FIIs) as we don't have them now
+      const sector = 'FIIs e ETFs'
       try {
         return client.utils.getSector(ticker)
       } catch {
