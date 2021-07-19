@@ -1,24 +1,12 @@
 <template>
-  <b-card v-if="sector || subsector || segment" style="border-color: #DBDAD7" class="pl-3">
-    <b-row v-if="sector" align-v="end">
-      <span class="text-secondary"> Setor </span>
-    </b-row>
-    <b-row v-if="sector" align-v="end">
-      <span> {{ sector }} </span>
-    </b-row>
-    <b-row class="mt-3" v-if="subsector" align-v="end">
-      <span class="text-secondary"> Subsetor </span>
-    </b-row>
-    <b-row v-if="subsector" align-v="end">
-      <span> {{ subsector }} </span>
-    </b-row>
-    <b-row class="mt-3" v-if="segment" align-v="end">
-      <span class="text-secondary"> Segmento </span>
-    </b-row>
-    <b-row v-if="segment" align-v="end">
-      <span> {{ segment }} </span>
-    </b-row>
-  </b-card>
+<div>
+  <span class="text-secondary"> Setor </span>
+  <p> {{ sector }} </p>
+  <span class="text-secondary"> Subsetor </span>
+  <p> {{ subsector }} </p>
+  <span class="text-secondary"> Segmento </span>
+  <p> {{ segment }} </p>
+</div>
 </template>
 
 <script>

@@ -1,11 +1,10 @@
 <template>
-<b-card>
+<b-card no-body>
   <b-card-header>
     <b-row>
       <AssetIcon :code="asset.ticker" class="ml-1" />
       <span class="ml-2">
-        <span> {{ asset.ticker }} </span>
-        |
+        <span> {{ asset.ticker }} </span> |
         <span class="text-secondary text-capitalize"> {{ asset.name }} </span>
         <br>
         <strong> R${{ asset.price }} </strong>
@@ -18,7 +17,7 @@
     <!-- Buttons -->
     <b-row align-h="center">
       <template v-for="i of buttons">
-        <b-button @click="click(i)" :key="i.text" :pressed="i.selected" class="ml-1" variant="light">
+        <b-button @click="click(i)" :key="i.text" :pressed="i.selected" class="my-1" variant="light">
           {{ i.text }}
         </b-button>
       </template>
@@ -30,11 +29,21 @@
     <b-row align-h="center">
       <h3 :class="priceClass"> {{ asset.gain.toFixed(2) }}% </h3>
     </b-row>
+
     <AssetChart style="height: 12rem;" :ticker="this.ticker" :days="this.days" />
+
+    <b-row align-h="end" class="mx-1 mt-1">
+      Ver no
+      <b-link class="ml-1" :href="`https://www.tradingview.com/chart/?symbol=${asset.ticker}`">
+        Trading View
+      </b-link>
+    </b-row>
   </b-card-body>
 
+  <hr>
+
   <!-- Industry -->
-  <AssetIndustry :ticker="ticker" />
+  <AssetIndustry class="m-4" :ticker="ticker" />
 </b-card>
 </template>
 
