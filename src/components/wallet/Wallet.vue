@@ -18,11 +18,26 @@
 
       <!-- Chart -->
       <b-tab title="Gráfico" lazy>
-        <WalletChart
-          class="mx-auto"
-          style="max-width: 23rem"
-          :assets="wallet.assets"
-        />
+        <b-row class="mt-2" align-h="center">
+          <h5 class="mb-2"> Composição por ativo </h5>
+        </b-row>
+        <b-row>
+          <WalletChart
+            class="mx-auto"
+            style="max-width: 23rem"
+            :assets="wallet.assets"
+          />
+        </b-row>
+        <b-row class="mt-5" align-h="center">
+          <h5 class="mb-2"> Composição por setores </h5>
+        </b-row>
+        <b-row>
+          <WalletSectorChart
+            class="mx-auto"
+            style="max-width: 23rem"
+            :assets="wallet.assets"
+          />
+        </b-row>
       </b-tab>
 
       <!-- Thesis -->
@@ -49,6 +64,7 @@ import client from '@/commons/client.api'
 
 import AssetTable from '@/components/wallet/subcomponents/Table'
 import WalletChart from '@/components/wallet/subcomponents/Chart'
+import WalletSectorChart from '@/components/wallet/subcomponents/SectorChart'
 import WalletInfo from '@/components/wallet/subcomponents/Info'
 import PortfolioHistory from '@/components/wallet/subcomponents/PortfolioHistory'
 
@@ -58,6 +74,7 @@ export default {
   components: {
     AssetTable,
     WalletChart,
+    WalletSectorChart,
     WalletInfo,
     PortfolioHistory
   },

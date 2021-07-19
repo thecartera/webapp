@@ -58,7 +58,6 @@ export default {
       let ticker = newTicker
       if (newTicker.slice(-1) === 'F') {
         ticker = newTicker.slice(0, newTicker.length - 1)
-        console.log(ticker)
       }
       this.sector = this.getSector(ticker)
       this.subsector = this.getSubsector(ticker)
@@ -70,7 +69,6 @@ export default {
     let ticker = this.ticker
     if (this.ticker.slice(-1) === 'F') {
       ticker = this.ticker.slice(0, this.ticker.length - 1)
-      console.log(ticker)
     }
     this.sector = this.getSector(ticker)
     this.subsector = this.getSubsector(ticker)
