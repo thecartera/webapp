@@ -65,7 +65,7 @@ export default {
 
   computed: {
     tags () {
-      const cash = /\$(\w+)/gim
+      const cash = /\$([a-z]\w+)/gim
       const mention = /@(\w+)/gim
       const http = /(https?:\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gim
 
