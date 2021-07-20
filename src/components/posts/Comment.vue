@@ -89,10 +89,6 @@ export default {
       return client.utils.humanTime(timestamp)
     },
 
-    linkify (text) {
-      return client.utils.linkify(text)
-    },
-
     emitDelete () {
       this.$emit('delete', this.comment)
     }

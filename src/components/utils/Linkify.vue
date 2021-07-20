@@ -2,8 +2,8 @@
 <span>
   <template v-for="({ text, tag }, i) of tags">
     <b-link v-if="tag === 'link'" :key="i" :href="text">{{ text }}</b-link>
-    <b-link v-else-if="tag === 'cash'" :key="i" :to="`/assets/${text}`">${{ text }}</b-link>
-    <b-link v-else-if="tag === 'mention'" :key="i" :to="`/users/${text}`">@{{ text }}</b-link>
+    <b-link v-else-if="tag === 'cash'" :key="i" :to="`/assets/${text.toUpperCase()}`">${{ text.toUpperCase() }}</b-link>
+    <b-link v-else-if="tag === 'mention'" :key="i" :to="`/users/${text.toLowerCase()}`">@{{ text }}</b-link>
     <template v-else>{{ text }}</template>
   </template>
 </span>
@@ -66,7 +66,7 @@ export default {
   computed: {
     tags () {
       const cash = /\$([a-z]\w+)/gim
-      const mention = /@(\w+)/gim
+      const mention = /@([\w.-]+)/gim
       const http = /(https?:\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gim
 
       // Links
