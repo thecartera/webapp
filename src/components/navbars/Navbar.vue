@@ -1,14 +1,17 @@
 <template>
-  <b-navbar sticky toggleable="sm" id="navbarStyle" type="dark">
-    <!-- Homme button -->
+  <b-navbar sticky toggleable="sm"  id="navbarStyle" type="dark">
+    <!-- Logo button -->
     <b-navbar-brand to="/">
       <img src="@/assets/logo512x512.png" width="32" alt="Monneda" />
     </b-navbar-brand>
 
     <!-- Search bar -->
     <b-navbar-nav>
-      <Search index="users" :hits="4" style="max-width: 12rem" />
+      <Search index="users" :hits="4" style="max-width: 10rem" />
     </b-navbar-nav>
+
+    <!-- Notifications button on mobile (small-sized screens and smaller) -->
+    <Notifications v-if="auth" style="list-style: none" class="d-sm-none" :text="false" />
 
     <!-- Toggle navbar button -->
     <b-navbar-toggle target="collapse" />
@@ -21,32 +24,38 @@
         <!-- Home button -->
         <b-nav-item v-if="auth" to="/">
           <b-button class="max-height" size="md" variant="primary">
-            <b-iconstack scale="1">
-              <b-icon stacked icon="house-door"></b-icon>
-              <b-icon stacked icon="house"></b-icon>
-            </b-iconstack>
-            <span> Feed </span>
+            <b-row align-h="center" class="m-0">
+              <b-iconstack scale="1">
+                <b-icon stacked icon="house-door"></b-icon>
+                <b-icon stacked icon="house"></b-icon>
+              </b-iconstack>
+            </b-row>
+            <b-row align-h="center" class="m-0"> <span> Feed </span> </b-row>
           </b-button>
         </b-nav-item>
+
+        <!-- Notifications button on desktop (medium-sized screens and larger) -->
+        <Notifications class="d-none d-sm-block" v-if="auth"/>
 
         <!-- Profile button mobile -->
         <b-nav-item class="d-sm-none" v-if="auth" :to="`/users/${user.username}`">
-          <b-button variant="primary">
-            <b-icon icon="person-circle"/>
-            <span class="text-white"> Perfil </span>
-          </b-button>
+          <b-icon variant="white" icon="person-circle"/>
+          <span class="text-white"> Perfil </span>
         </b-nav-item>
 
         <!-- Create wallet button -->
-        <b-nav-item to="/wallets">
-          <b-button class="max-height" v-if="auth" size="md" variant="primary">
-            <b-icon icon="plus" shift-h="16" shift-v="-1" scale="0.8"/>
-            <b-icon icon="wallet2"/>
-            Nova <span style="color: lime"> Cartera </span>
-          </b-button>
+        <b-nav-item to="/wallets" v-if="auth">
+          <b-row align-h="center" class="p-0 m-0">
+            <b-icon variant="white" icon="plus" shift-h="8" shift-v="-1" scale="0.8"/>
+            <b-icon variant="white" shift-h="-8" icon="wallet2"/>
+          </b-row>
+          <b-row align-h="center" class="p-0 m-0">
+            <span class="text-white"> Nova </span>
+            <span class="pl-1 text-white"> carteira </span>
+          </b-row>
         </b-nav-item>
 
-        <InviteDropdown class="mt-1" v-if="auth"/>
+        <InviteDropdown v-if="auth"/>
 
         <!-- Profile dropdown desktop -->
         <b-col
@@ -162,6 +171,7 @@
 
 <script>
 import InviteDropdown from '@/components/utils/InviteDropdown'
+import Notifications from '@/components/navbars/subcomponents/Notifications'
 import Search from '@/components/utils/Search'
 import { LOGIN, LOGOUT } from '@/store/actions.type'
 
@@ -170,7 +180,8 @@ export default {
 
   components: {
     Search,
-    InviteDropdown
+    InviteDropdown,
+    Notifications
   },
 
   computed: {
@@ -218,7 +229,7 @@ export default {
 /* Medium devices (desktops, 576px and up) */
 @media only screen and (min-width: 576px) {
   #navbarStyle {
-    height: 45px;
+    height: 50px;
     background-color: #4e79a7;
   }
 }
