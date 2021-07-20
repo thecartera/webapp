@@ -1,18 +1,24 @@
 <template>
   <!-- pt-2 is needed here because alignment of the items in the navbar is messed up -->
-  <b-nav-item-dropdown title="Convidar amigo(a)"
-                       no-caret dropleft
-                       size="sm"
-                       variant="primary"
-                       class="pt-2"
+  <b-nav-item-dropdown
+    title="Convidar amigo(a)"
+    no-caret
+    right
+    size="sm"
+    variant="primary"
+    class="pt-1 mx-1"
   >
     <b-dropdown-header id="dropdown-header-label">
       Convidar um amigo
     </b-dropdown-header>
 
     <template #button-content>
-      <b-icon icon="person-plus" style="cursor: pointer" class="text-white"/>
-      <span class="text-white"> Convidar</span>
+      <b-row align-h="center" class="m-0">
+        <b-icon icon="person-plus" style="cursor: pointer" class="text-white"/>
+      </b-row>
+      <b-row align-h="center" class="m-0">
+        <span class="text-white"> Convidar</span>
+      </b-row>
     </template>
 
     <Socials :title="message" :url="`https://cartera.com.br`" />
