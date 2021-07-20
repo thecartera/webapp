@@ -11,10 +11,17 @@
     </b-navbar-nav>
 
     <!-- Notifications button on mobile (small-sized screens and smaller) -->
-    <Notifications v-if="auth" style="list-style: none" class="d-sm-none" :text="false" />
+    <b-button to="/notifications" variant="primary">
+      <b-icon icon="bell" scale="1.2"/>
+    </b-button>
 
     <!-- Toggle navbar button -->
-    <b-navbar-toggle target="collapse" />
+    <b-navbar-toggle target="collapse" style="border-color: #4e79a7; color: #fff">
+      <template #default="{ expanded }">
+        <b-icon v-if="expanded" icon="chevron-double-up"></b-icon>
+        <b-icon v-else icon="chevron-double-down"></b-icon>
+      </template>
+    </b-navbar-toggle>
 
     <!-- All items of navbar -->
     <b-collapse class="text-center" id="collapse" is-nav>
@@ -22,16 +29,16 @@
       <b-navbar-nav class="ml-auto">
 
         <!-- Home button -->
-        <b-nav-item v-if="auth" to="/">
-          <b-button class="max-height" size="md" variant="primary">
-            <b-row align-h="center" class="m-0">
-              <b-iconstack scale="1">
-                <b-icon stacked icon="house-door"></b-icon>
-                <b-icon stacked icon="house"></b-icon>
-              </b-iconstack>
-            </b-row>
-            <b-row align-h="center" class="m-0"> <span> Feed </span> </b-row>
-          </b-button>
+        <b-nav-item v-if="auth" to="/" class="pt-1">
+          <b-row align-h="center" class="m-0">
+            <b-iconstack scale="1">
+              <b-icon variant="white" stacked icon="house-door"></b-icon>
+              <b-icon variant="white" stacked icon="house"></b-icon>
+            </b-iconstack>
+          </b-row>
+          <b-row align-h="center" class="m-0">
+            <span class="text-white"> Feed </span>
+          </b-row>
         </b-nav-item>
 
         <!-- Notifications button on desktop (medium-sized screens and larger) -->
@@ -44,7 +51,7 @@
         </b-nav-item>
 
         <!-- Create wallet button -->
-        <b-nav-item to="/wallets" v-if="auth">
+        <b-nav-item to="/wallets" class="pt-1" v-if="auth">
           <b-row align-h="center" class="p-0 m-0">
             <b-icon variant="white" icon="plus" shift-h="8" shift-v="-1" scale="0.8"/>
             <b-icon variant="white" shift-h="-8" icon="wallet2"/>
