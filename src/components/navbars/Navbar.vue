@@ -11,7 +11,7 @@
     </b-navbar-nav>
 
     <!-- Notifications button on mobile (small-sized screens and smaller) -->
-    <b-button to="/notifications" variant="primary">
+    <b-button to="/notifications" variant="primary" class="d-sm-none">
       <b-icon icon="bell" scale="1.2"/>
     </b-button>
 
@@ -53,8 +53,10 @@
         <!-- Create wallet button -->
         <b-nav-item to="/wallets" class="pt-1" v-if="auth">
           <b-row align-h="center" class="p-0 m-0">
-            <b-icon variant="white" icon="plus" shift-h="8" shift-v="-1" scale="0.8"/>
-            <b-icon variant="white" shift-h="-8" icon="wallet2"/>
+            <b-iconstack scale="0.6">
+              <b-icon variant="white" icon="plus" shift-v="1" scale="0.8"/>
+              <b-icon variant="white" shift-v="2" icon="wallet2"/>
+            </b-iconstack>
           </b-row>
           <b-row align-h="center" class="p-0 m-0">
             <span class="text-white"> Nova </span>
