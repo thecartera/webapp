@@ -1,42 +1,30 @@
 <template>
-    <b-nav-item-dropdown
-      no-caret
-      :size="small ? 'sm' : 'md'"
-      title="Convidar amigo(a)"
-      right
-      variant="primary"
-      class="pt-1 mx-1"
-    >
-      <template #button-content>
-        <b-row align-h="center" class="m-0 p-0">
-          <b-icon scale="1" variant="white" icon="bell"></b-icon>
-        </b-row>
-        <b-row v-if="text" align-h="center" class="m-0 p-0">
-          <span class="text-white"> Notificações </span>
-        </b-row>
-      </template>
+  <div>
+    <FollowsNavbar />
 
-      <b-dropdown-item
-        :to="`/users/bueno`"
+    <ThreeColumnsLayout>
+      <NotificationsMobile
         v-for="notification in notifications"
         :key="notification.id"
-        class="p-0 m-0"
-      >
-        <b-row align-h="start">
-          <b-nav-item :to="`/users/bueno`">
-            <b-avatar :src="notification.user.picture" icon="person-circle" variant="dark"/>
-            <span class="text-dark"> {{ notification.user.name }} </span>
-            <span class="text-dark"> comentou no seu post </span>
-          </b-nav-item>
-        </b-row>
-      </b-dropdown-item>
-    </b-nav-item-dropdown>
+        :notification="notification"
+      />
+  </ThreeColumnsLayout>
+</div>
 </template>
 
 <script>
+import ThreeColumnsLayout from '@/components/layout/ThreeColumnsLayout'
+import FollowsNavbar from '@/components/navbars/FollowsNavbar'
+import NotificationsMobile from '@/components/utils/NotificationsMobile'
 
 export default {
-  name: 'Notifications',
+  name: 'NotificationsMobileView',
+
+  components: {
+    FollowsNavbar,
+    NotificationsMobile,
+    ThreeColumnsLayout
+  },
 
   data: () => ({
     notifications: [

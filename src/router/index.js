@@ -13,6 +13,7 @@ import Settings from '@/views/SettingsView'
 import SingleEventView from '@/views/SingleEventView'
 import FeedView from '@/views/FeedView'
 import WalletNotFoundView from '@/views/WalletNotFoundView'
+import NotificationsMobileView from '@/views/NotificationsMobileView'
 import Error404View from '@/views/Error404View'
 
 import AuthGuard from './auth.guard'
@@ -38,6 +39,11 @@ const routes = [
     path: '/walletNotFound',
     name: 'walletNotFound',
     component: WalletNotFoundView
+  },
+  {
+    path: '/notifications',
+    name: 'notifications',
+    component: NotificationsMobileView
   },
   {
     path: '/profile',
