@@ -4,6 +4,7 @@ import Assets from './assets'
 import Wallets from './wallets'
 import Posts from './posts'
 import Feed from './feed'
+import Notifications from './notifications'
 import Utils from './utils'
 import Events from './events'
 
@@ -15,6 +16,7 @@ class MyClient extends Client {
     this.wallets = new Wallets(token)
     this.posts = new Posts(token)
     this.feed = new Feed(token)
+    this.notifications = new Notifications(token)
     this.events = new Events(token)
     this.utils = Utils
   }
@@ -26,6 +28,7 @@ class MyClient extends Client {
     this.wallets.token = token
     this.posts.token = token
     this.feed.token = token
+    this.notifications.token = token
     this.events.token = token
   }
 }
