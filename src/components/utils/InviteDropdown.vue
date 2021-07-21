@@ -13,12 +13,7 @@
     </b-dropdown-header>
 
     <template #button-content>
-      <b-row align-h="center" class="m-0">
-        <b-icon icon="person-plus" style="cursor: pointer" class="text-white"/>
-      </b-row>
-      <b-row align-h="center" class="m-0">
-        <span class="text-white"> Convidar</span>
-      </b-row>
+      <b-icon scale="1.5" shift-v="-7" icon="person-plus" style="cursor: pointer" class="text-white"/>
     </template>
 
     <Socials :title="message" :url="`https://cartera.com.br`" />

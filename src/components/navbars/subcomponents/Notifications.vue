@@ -1,17 +1,21 @@
 <template>
     <b-nav-item-dropdown
       no-caret
-      size="sm"
+      size="md"
       right
       variant="primary"
-      class="pt-1 mx-1"
     >
       <template #button-content>
-        <b-row align-h="center" class="m-0 p-0">
-          <b-icon scale="1" variant="white" @click="getNotifications" icon="bell"></b-icon>
-        </b-row>
-        <b-row align-h="center" class="m-0 p-0">
-          <span class="text-white"> Notificações </span>
+        <b-row align-h="center" class="m-0 p-0 pt-1" @click="getNotifications">
+          <b-avatar
+            size="md"
+            :badge="unreadNotificationsCount > 0 ? unreadNotificationsCount : ''"
+            badge-top
+            variant="primary"
+            :badge-variant="unreadNotificationsCount > 0 ? 'red' : 'primary'"
+            icon="bell"
+          >
+          </b-avatar>
         </b-row>
       </template>
 
@@ -39,6 +43,13 @@ export default {
   data: () => ({
     notifications: []
   }),
+
+  props: {
+    unreadNotificationsCount: {
+      type: String,
+      required: true
+    }
+  },
 
   methods: {
     async getNotifications () {
