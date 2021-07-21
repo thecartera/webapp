@@ -1,7 +1,7 @@
 <template>
   <b-row align-h="start" @click="$router.replace(redirectLink)">
     <b-nav-item>
-      <b-avatar :src="thumb" icon="person-circle" variant="dark"/>
+      <b-avatar :src="thumb" icon="person" variant="primary"/>
       <span class="text-dark"> {{ actorName }} </span>
       <span class="text-dark"> {{ text }} </span>
       <span class="text-secondary"> {{ timestamp }} </span>

@@ -37,21 +37,13 @@ export default {
   },
 
   data: () => ({
-    notifications: [],
-    unreadNotificationsCount: 0
+    notifications: []
   }),
 
   methods: {
     async getNotifications () {
       this.notifications = await client.notifications.getNotifications()
     }
-  },
-
-  async created () {
-    this.notifications = await client.notifications.getNotifications()
-    const count = await client.notifications.getUnreadNotificationsCount()
-    this.unreadNotificationsCount = count.counter
   }
-
 }
 </script>

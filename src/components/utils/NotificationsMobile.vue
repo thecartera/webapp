@@ -8,7 +8,7 @@
   >
     <b-row>
       <b-col class="pr-0" cols="auto" align-h="start">
-        <b-avatar :src="thumb" icon="person-circle" variant="dark"/>
+        <b-avatar :src="thumb" icon="person" variant="primary"/>
       </b-col>
       <b-col class="px-1" align-self="center" style="line-height:1.1rem">
         <b-row class="ml-0 mr-2 px-1">
