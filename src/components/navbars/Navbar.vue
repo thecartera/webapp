@@ -1,5 +1,5 @@
 <template>
-  <b-navbar sticky toggleable="sm"  id="navbarStyle" type="dark">
+  <b-navbar sticky toggleable="sm" id="navbarStyle" type="dark">
     <!-- Logo button -->
     <b-navbar-brand to="/">
       <img src="@/assets/logo512x512.png" width="32" alt="Monneda" />
@@ -7,11 +7,11 @@
 
     <!-- Search bar -->
     <b-navbar-nav>
-      <Search index="users" :hits="4" style="max-width: 10rem" />
+      <Search index="users" :hits="4" style="max-width: 11rem" />
     </b-navbar-nav>
 
     <!-- Notifications button on mobile (small-sized screens and smaller) -->
-    <b-button to="/notifications" variant="primary" class="d-sm-none">
+    <b-button to="/notifications" variant="primary" class="d-sm-none py-0 pl-1 pr-0 m-0">
       <b-avatar
         icon="bell"
         :badge="unreadNotificationsCount > 0 ? unreadNotificationsCount : ''"
@@ -35,39 +35,24 @@
       <b-navbar-nav class="ml-auto">
 
         <!-- Home button -->
-        <b-nav-item v-if="auth" to="/" class="pt-1">
-          <b-row align-h="center" class="m-0">
-            <b-iconstack scale="1">
-              <b-icon variant="white" stacked icon="house-door"></b-icon>
-              <b-icon variant="white" stacked icon="house"></b-icon>
-            </b-iconstack>
-          </b-row>
-          <b-row align-h="center" class="m-0">
-            <span class="text-white"> Feed </span>
-          </b-row>
+        <b-nav-item v-if="auth" to="/" class="pt-2">
+          <b-iconstack scale="1.5" shift-v="-4">
+            <b-icon variant="white" stacked icon="house-door"></b-icon>
+            <b-icon variant="white" stacked icon="chevron-up" shift-v="2.7" scale="1.2"></b-icon>
+          </b-iconstack>
         </b-nav-item>
 
         <!-- Notifications button on desktop (medium-sized screens and larger) -->
-        <Notifications class="d-none d-sm-block" v-if="auth"/>
+        <Notifications
+          :unreadNotificationsCount="unreadNotificationsCount"
+          class="d-none d-sm-block"
+          v-if="auth"
+        />
 
         <!-- Profile button mobile -->
         <b-nav-item class="d-sm-none" v-if="auth" :to="`/users/${user.username}`">
           <b-icon variant="white" icon="person-circle"/>
           <span class="text-white"> Perfil </span>
-        </b-nav-item>
-
-        <!-- Create wallet button -->
-        <b-nav-item to="/wallets" class="pt-1" v-if="auth">
-          <b-row align-h="center" class="p-0 m-0">
-            <b-iconstack scale="0.6">
-              <b-icon variant="white" icon="plus" shift-v="1" scale="0.8"/>
-              <b-icon variant="white" shift-v="2" icon="wallet2"/>
-            </b-iconstack>
-          </b-row>
-          <b-row align-h="center" class="p-0 m-0">
-            <span class="text-white"> Nova </span>
-            <span class="pl-1 text-white"> carteira </span>
-          </b-row>
         </b-nav-item>
 
         <InviteDropdown v-if="auth"/>
@@ -94,6 +79,19 @@
                 <b-nav-item :to="`/users/${user.username}`">
                   <b-icon icon="person-circle" variant="dark"/>
                   <span class="text-dark"> Perfil </span>
+                </b-nav-item>
+              </b-row>
+            </b-dropdown-item>
+
+            <!-- Create wallet button -->
+            <b-dropdown-item :to="`/wallets`">
+              <b-row align-h="start">
+                <b-nav-item :to="`/wallets`">
+                  <b-iconstack scale="0.65" shift-h="-3">
+                    <b-icon variant="dark" icon="plus" shift-v="1" scale="0.8"/>
+                    <b-icon variant="dark" shift-v="2" icon="wallet2"/>
+                  </b-iconstack>
+                  <span class="text-dark"> Nova carteira </span>
                 </b-nav-item>
               </b-row>
             </b-dropdown-item>
