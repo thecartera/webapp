@@ -12,7 +12,13 @@
 
     <!-- Notifications button on mobile (small-sized screens and smaller) -->
     <b-button to="/notifications" variant="primary" class="d-sm-none">
-      <b-icon icon="bell" scale="1.2"/>
+      <b-avatar
+        icon="bell"
+        :badge="unreadNotificationsCount > 0 ? unreadNotificationsCount : ''"
+        badge-top
+        variant="primary"
+        :badge-variant="unreadNotificationsCount > 0 ? 'red' : 'primary'">
+      </b-avatar>
     </b-button>
 
     <!-- Toggle navbar button -->
@@ -179,6 +185,7 @@
 </template>
 
 <script>
+import client from '@/commons/client.api'
 import InviteDropdown from '@/components/utils/InviteDropdown'
 import Notifications from '@/components/navbars/subcomponents/Notifications'
 import Search from '@/components/utils/Search'
@@ -192,6 +199,10 @@ export default {
     InviteDropdown,
     Notifications
   },
+
+  data: () => ({
+    unreadNotificationsCount: '0'
+  }),
 
   computed: {
     user () {
@@ -210,6 +221,11 @@ export default {
     logout () {
       this.$store.dispatch(LOGOUT)
     }
+  },
+
+  async created () {
+    const count = await client.notifications.getUnreadNotificationsCount()
+    this.unreadNotificationsCount = count.counter.toString()
   }
 }
 </script>
