@@ -30,7 +30,7 @@
           <b-row>
             <b-avatar
               icon="wallet"
-              variant="success"
+              variant="white"
               rounded
               size="md"
               class="mr-1 "
@@ -68,7 +68,7 @@
           <b-row>
             <b-avatar
               icon="wallet"
-              variant="success"
+              variant="white"
               rounded
               size="md"
               class="mr-1 "
@@ -111,7 +111,7 @@
           <b-row>
             <b-avatar
               icon="wallet"
-              variant="success"
+              variant="white"
               rounded
               size="md"
               class="mr-1 "
@@ -149,7 +149,7 @@
           <b-row>
             <b-avatar
               icon="wallet"
-              variant="success"
+              variant="white"
               rounded
               size="md"
               class="mr-1 "

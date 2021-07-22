@@ -7,6 +7,7 @@
           <b-avatar
             size="lg"
             :src="logged_user.picture"
+            variant="white"
             :to="`/users/${logged_user.username}`"
           />
         </b-col>

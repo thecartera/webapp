@@ -26,7 +26,7 @@
             <b-row>
               <!-- Picture -->
               <b-col cols="auto" class="p-0 m-0">
-                <b-avatar :src="item.picture" />
+                <b-avatar :src="item.picture" variant="white" />
               </b-col>
 
               <!-- Info -->

@@ -15,7 +15,7 @@
     <!-- PICTURE -->
     <b-row class="mb-2" align-h="center">
       <b-col cols="auto" class="mx-2">
-        <b-avatar size="lg" :src="picURL"/>
+        <b-avatar size="lg" :src="picURL" variant="white"/>
       </b-col>
       <b-col class="pl-0">
         <b-form-group

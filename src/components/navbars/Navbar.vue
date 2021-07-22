@@ -72,7 +72,7 @@
             right
           >
             <template #button-content>
-              <b-avatar size="2rem" :src="user.picture" />
+              <b-avatar size="2rem" :src="user.picture" variant="primary" />
             </template>
 
             <b-dropdown-item :to="`/users/${user.username}`">

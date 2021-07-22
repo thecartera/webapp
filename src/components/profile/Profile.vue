@@ -5,7 +5,7 @@
       <b-row>
         <!-- Image -->
         <b-col cols="auto">
-          <b-avatar :src="profile.picture" size="5rem" />
+          <b-avatar :src="profile.picture" variant="white" size="5rem" />
         </b-col>
 
         <!-- User information -->

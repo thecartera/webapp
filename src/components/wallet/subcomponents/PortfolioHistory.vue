@@ -11,7 +11,7 @@
                   <b-avatar
                     rounded
                     icon="wallet2"
-                    variant="success"
+                    variant="white"
                     class="image-size"
                     :to="`/assets/${descr[3]}`"
                     :src="thumb(descr[3])"

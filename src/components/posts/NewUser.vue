@@ -12,7 +12,7 @@
 
       <!-- Picture -->
       <b-col cols="auto" class="p-0">
-        <b-avatar size="3rem" :src="user_cartera.picture" :to="`/users/${user_cartera.username}`"/>
+        <b-avatar size="3rem" :src="user_cartera.picture" variant="white" :to="`/users/${user_cartera.username}`"/>
       </b-col>
 
       <b-col style="line-height: 1.1rem" class="pl-4">

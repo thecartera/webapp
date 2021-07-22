@@ -22,6 +22,7 @@
             <b-row align-h="center">
               <b-avatar
                 :src="suggestedUser.picture"
+                variant="white"
                 size="lg"
                 :to="`/users/${suggestedUser.username}`"
                 icon="person-fill">

@@ -4,6 +4,7 @@
     size="2rem"
     class="mr-2"
     :src="user.picture"
+    variant="white"
     :to="`/users/${user.username}`"
   />
   <b-col class="bg-cartera-blue border rounded">

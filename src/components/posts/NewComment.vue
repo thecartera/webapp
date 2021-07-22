@@ -2,7 +2,7 @@
   <b-card no-body class="px-3" border-variant="white">
     <b-row align-h="center">
       <b-col class="px-0" cols="auto">
-        <b-avatar :src="loggedUser.picture" size="2rem"/>
+        <b-avatar :src="loggedUser.picture" size="2rem" variant="white"/>
       </b-col>
       <b-col class="pl-2 pr-0">
         <b-form-input v-model="newCommentText" size="sm" placeholder="Adicione um comentário..."/>

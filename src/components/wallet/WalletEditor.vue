@@ -53,7 +53,7 @@
           rounded
           class="mt-1"
           icon="wallet2"
-          variant="light"
+          variant="white"
           :src="data.item.imageLink"
         />
       </template>

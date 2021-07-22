@@ -30,7 +30,7 @@
                     <b-avatar
                       rounded
                       icon="wallet2"
-                      variant="light"
+                      variant="white"
                       :src="thumb(item.codneg)"
                     />
                     <b-col cols="auto">

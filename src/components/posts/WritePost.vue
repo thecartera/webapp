@@ -6,6 +6,7 @@
         <b-avatar
           size="3rem"
           :src="logged_user.picture"
+          variant="white"
         />
       </b-col>
       <b-col class="mr-0 ml-2" align-self="center">

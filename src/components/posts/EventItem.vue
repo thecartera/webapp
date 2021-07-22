@@ -5,7 +5,7 @@
       <b-row class="m-0" >
         <!-- Picture -->
         <b-col cols="auto" class="p-0">
-          <b-avatar size="3rem" :src="item.owner.picture" :to="userEndpointAddr"/>
+          <b-avatar size="3rem" :src="item.owner.picture" :to="userEndpointAddr" variant="white"/>
         </b-col>
 
         <b-col style="line-height: 1.1rem" class="pl-4">

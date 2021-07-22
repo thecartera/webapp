@@ -5,6 +5,7 @@
       <b-col align-self="center" cols="auto">
         <b-avatar
           :src="user.picture"
+          variant="white"
           :to="`/users/${user.username}`"
         />
       </b-col>

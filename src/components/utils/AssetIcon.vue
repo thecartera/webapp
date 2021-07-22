@@ -2,7 +2,7 @@
 <b-avatar
   rounded
   icon="wallet2"
-  variant="success"
+  variant="white"
   responsive="true"
   v-bind="$attrs"
   :src="url"
