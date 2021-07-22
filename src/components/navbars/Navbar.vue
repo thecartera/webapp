@@ -11,7 +11,7 @@
     </b-navbar-nav>
 
     <!-- Notifications button on mobile (small-sized screens and smaller) -->
-    <b-button to="/notifications" variant="primary" class="d-sm-none py-0 pl-1 pr-0 m-0">
+    <b-button to="/notifications" v-if="auth" variant="primary" class="d-sm-none py-0 pl-1 pr-0 m-0">
       <b-avatar
         icon="bell"
         :badge="unreadNotificationsCount > 0 ? unreadNotificationsCount : null"
