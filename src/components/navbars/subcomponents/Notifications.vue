@@ -83,7 +83,7 @@ export default {
 <style>
 .scrollable-menu {
   height: auto;
-  max-height: 40vh;
+  max-height: 45vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
