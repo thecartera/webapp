@@ -1,21 +1,21 @@
 <template>
   <b-card
     no-body
-    @click="$router.replace(redirectLink)"
+    @click="redirect"
     class="mt-1 p-1"
     bg-variant="cartera-blue"
     border-variant="cartera-blue"
   >
     <b-row>
       <b-col class="pr-0" cols="auto" align-h="start">
-        <b-avatar :src="thumb" icon="person" variant="primary"/>
+        <b-avatar v-if="thumb" :src="thumb" icon="person" variant="primary"/>
       </b-col>
       <b-col class="px-1" align-self="center" style="line-height:1.1rem">
         <b-row class="ml-0 mr-2 px-1">
           <span>
             <b> {{ actorUsername }} </b>
             <span> {{ text }} </span>
-            <span class="text-secondary"> {{ timestamp }} </span>
+            <span v-if="timestamp" class="text-secondary"> {{ timestamp }} </span>
           </span>
         </b-row>
       </b-col>
@@ -41,6 +41,14 @@ export default {
     notification: {
       type: Object,
       required: true
+    }
+  },
+
+  methods: {
+    redirect () {
+      if (this.redirectLink) {
+        this.$router.replace(this.redirectLink)
+      }
     }
   },
 

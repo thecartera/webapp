@@ -37,7 +37,7 @@ export default {
       this.notifications = await client.notifications.getNotifications()
     },
     async loadMoreNotifications () {
-      if (this.notifications.length === 0) {
+      if (this.notifications.length === 0 || this.notifications[0].type === 'DUMMY') {
         return
       }
       const lastId = this.notifications[this.notifications.length - 1].id
@@ -47,7 +47,11 @@ export default {
   },
 
   async created () {
-    this.notifications = await client.notifications.getNotifications(20)
+    let notifications = await client.notifications.getNotifications(20)
+    if (notifications.length === 0) {
+      notifications = client.utils.getDummyNotification()
+    }
+    this.notifications = notifications
   }
 }
 </script>

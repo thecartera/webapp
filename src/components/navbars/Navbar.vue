@@ -14,7 +14,7 @@
     <b-button to="/notifications" variant="primary" class="d-sm-none py-0 pl-1 pr-0 m-0">
       <b-avatar
         icon="bell"
-        :badge="unreadNotificationsCount > 0 ? unreadNotificationsCount : ''"
+        :badge="unreadNotificationsCount > 0 ? unreadNotificationsCount : null"
         badge-top
         variant="primary"
         :badge-variant="unreadNotificationsCount > 0 ? 'red' : 'primary'">
@@ -36,7 +36,7 @@
 
         <!-- Home button -->
         <b-nav-item v-if="auth" to="/" class="pt-2">
-          <b-iconstack scale="1.5" shift-v="-4">
+          <b-iconstack scale="1.5" shift-v="-3">
             <b-icon variant="white" stacked icon="house-door"></b-icon>
             <b-icon variant="white" stacked icon="chevron-up" shift-v="2.7" scale="1.2"></b-icon>
           </b-iconstack>
@@ -47,6 +47,7 @@
           :unreadNotificationsCount="unreadNotificationsCount"
           class="d-none d-sm-block"
           v-if="auth"
+          @notificationsFetched="notificationsViewed"
         />
 
         <!-- Profile button mobile -->
@@ -218,6 +219,9 @@ export default {
     },
     logout () {
       this.$store.dispatch(LOGOUT)
+    },
+    notificationsViewed () {
+      this.unreadNotificationsCount = '0'
     }
   },
 

@@ -1,10 +1,10 @@
 <template>
-  <b-row align-h="start" @click="$router.replace(redirectLink)">
+  <b-row align-h="start" @click="redirect">
     <b-nav-item>
-      <b-avatar :src="thumb" icon="person" variant="primary"/>
+      <b-avatar v-if="thumb" :src="thumb" icon="person" variant="primary"/>
       <span class="text-dark"> {{ actorName }} </span>
       <span class="text-dark"> {{ text }} </span>
-      <span class="text-secondary"> {{ timestamp }} </span>
+      <span v-if="timestamp" class="text-secondary"> {{ timestamp }} </span>
     </b-nav-item>
   </b-row>
 </template>
@@ -27,6 +27,14 @@ export default {
     notification: {
       type: Object,
       required: true
+    }
+  },
+
+  methods: {
+    redirect () {
+      if (this.redirectLink) {
+        this.$router.replace(this.redirectLink)
+      }
     }
   },
 
