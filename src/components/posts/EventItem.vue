@@ -200,6 +200,7 @@ export default {
           }
         }
         await client.events.deleteComment(this.item.id, commentId)
+        this.commentCount -= 1
       } catch (e) {
         console.error(e)
       }

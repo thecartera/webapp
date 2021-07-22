@@ -41,6 +41,9 @@ const humanTime = timestamp => {
 }
 
 const simpleHumanTime = timestamp => {
+  if (!timestamp) {
+    return null
+  }
   const diff = Date.now() - Date.parse(timestamp)
   const second = 1000
   const minute = 60 * second
@@ -130,6 +133,8 @@ const generateNotificationText = notificationType => {
       return 'curtiu sua postagem'
     case 'USER_TAGGED_COMMENT_EVENT':
       return 'te marcou em um comentário'
+    case 'DUMMY':
+      return 'ainda não tem notificações.'
     default:
       return ': nova notificação'
   }
@@ -147,8 +152,25 @@ const generateNotificationRedirectLink = notification => {
     case 'USER_FOLLOWED':
       return `/users/${notification.user.username}`
     default:
-      return ': nova notificação'
+      return ''
   }
+}
+
+const getDummyNotification = () => {
+  return [{
+    id: null,
+    createdAt: null,
+    viewedAt: null,
+    user: {
+      name: 'Você',
+      picture: null,
+      username: 'Você',
+      title: '',
+      following: false
+    },
+    type: 'DUMMY',
+    data: null
+  }]
 }
 
 export default {
@@ -161,5 +183,6 @@ export default {
   getSegment,
   getCode,
   generateNotificationText,
-  generateNotificationRedirectLink
+  generateNotificationRedirectLink,
+  getDummyNotification
 }
