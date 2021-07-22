@@ -6,8 +6,9 @@
     <!-- Input -->
     <ais-search-box v-model="input">
       <b-form-input
-        size="sm"
-        placeholder="Encontre seus amigos"
+        size="md"
+        placeholder="Encontre investidores"
+        style="font-size:0.85rem"
         v-model="input"
         @keypress.enter.prevent="search"
       />

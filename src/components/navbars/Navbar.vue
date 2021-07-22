@@ -1,7 +1,7 @@
 <template>
   <b-navbar sticky toggleable="sm" id="navbarStyle" type="dark" class="px-2 py-0 m-0">
     <!-- Logo button -->
-    <b-navbar-brand to="/" class="pr-2 pl-0 m-0">
+    <b-navbar-brand to="/" class="pl-0 pr-1 m-0">
       <img src="@/assets/logo512x512.png" width="50" alt="Monneda" />
     </b-navbar-brand>
 
