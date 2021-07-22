@@ -62,6 +62,12 @@ export default {
     }
   },
 
+  watch: {
+    async id () { // watch if opening another event
+      this.item = await client.events.getEvent(this.id)
+    }
+  },
+
   async created () {
     this.item = await client.events.getEvent(this.id)
     this.loading = false
