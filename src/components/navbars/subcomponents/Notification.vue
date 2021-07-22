@@ -2,7 +2,7 @@
   <b-row align-h="start" @click="redirect">
     <b-nav-item>
       <b-avatar v-if="thumb" :src="thumb" icon="person" variant="primary"/>
-      <span class="text-dark"> {{ actorName }} </span>
+      <b class="text-dark"> {{ actorUsername }} </b>
       <span class="text-dark"> {{ text }} </span>
       <span v-if="timestamp" class="text-secondary"> {{ timestamp }} </span>
     </b-nav-item>
@@ -16,7 +16,7 @@ export default {
   name: 'Notification',
 
   data: () => ({
-    actorName: '',
+    actorUsername: '',
     text: '',
     thumb: '',
     timestamp: '',
@@ -39,7 +39,7 @@ export default {
   },
 
   mounted () {
-    this.actorName = this.notification.user.name
+    this.actorUsername = this.notification.user.username
     this.thumb = this.notification.user.picture
     this.timestamp = client.utils.simpleHumanTime(this.notification.createdAt)
     this.text = client.utils.generateNotificationText(this.notification.type)
