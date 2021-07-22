@@ -1,8 +1,8 @@
 <template>
-  <b-navbar sticky toggleable="sm" id="navbarStyle" type="dark">
+  <b-navbar sticky toggleable="sm" id="navbarStyle" type="dark" class="px-2 py-0 m-0">
     <!-- Logo button -->
-    <b-navbar-brand to="/">
-      <img src="@/assets/logo512x512.png" width="32" alt="Monneda" />
+    <b-navbar-brand to="/" class="pr-2 pl-0 m-0">
+      <img src="@/assets/logo512x512.png" width="50" alt="Monneda" />
     </b-navbar-brand>
 
     <!-- Search bar -->
@@ -35,17 +35,22 @@
       <b-navbar-nav class="ml-auto">
 
         <!-- Home button -->
-        <b-nav-item v-if="auth" to="/" class="pt-2">
+        <b-nav-item v-if="auth" to="/" class="pt-2 d-none d-sm-block">
+        <b-row align-h="center" class="pt-1">
           <b-iconstack scale="1.5" shift-v="-3">
             <b-icon variant="white" stacked icon="house-door"></b-icon>
             <b-icon variant="white" stacked icon="chevron-up" shift-v="2.7" scale="1.2"></b-icon>
           </b-iconstack>
+        </b-row>
+        <b-row class="pt-2" align-h="center">
+          <span class="text-white"> Feed </span>
+        </b-row>
         </b-nav-item>
 
         <!-- Notifications button on desktop (medium-sized screens and larger) -->
         <Notifications
           :unreadNotificationsCount="unreadNotificationsCount"
-          class="d-none d-sm-block"
+          class="d-none d-sm-block pl-2"
           v-if="auth"
           @notificationsFetched="notificationsViewed"
         />
@@ -56,7 +61,18 @@
           <span class="text-white"> Perfil </span>
         </b-nav-item>
 
-        <InviteDropdown v-if="auth"/>
+        <!-- New portfolio button mobile -->
+        <b-nav-item class="d-sm-none" v-if="auth" :to="`/wallets`">
+          <b-row align-h="center">
+            <b-iconstack scale="0.65" shift-h="-3">
+              <b-icon variant="white" icon="plus" shift-v="1" scale="0.8"/>
+              <b-icon variant="white" shift-v="2" icon="wallet2"/>
+            </b-iconstack>
+            <span class="text-white pl-2"> Nova carteira </span>
+          </b-row>
+        </b-nav-item>
+
+        <InviteDropdown v-if="auth" class="d-sm-none"/>
 
         <!-- Profile dropdown desktop -->
         <b-col
@@ -68,11 +84,10 @@
             no-caret
             size="sm"
             variant="primary"
-            style="height:43px"
             right
           >
             <template #button-content>
-              <b-avatar size="2rem" :src="user.picture" variant="primary" />
+              <b-avatar size="md" :src="user.picture" variant="primary" />
             </template>
 
             <b-dropdown-item :to="`/users/${user.username}`">
@@ -256,7 +271,7 @@ export default {
 /* Medium devices (desktops, 576px and up) */
 @media only screen and (min-width: 576px) {
   #navbarStyle {
-    height: 50px;
+    height: 60px;
     background-color: #4e79a7;
   }
 }

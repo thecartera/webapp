@@ -18,26 +18,29 @@
       <template slot-scope="{ items }">
         <b-dropdown-group v-show="input" class="dropdown" style="background-color: #ddd">
           <b-dropdown-item
-            dropleft
             v-for="item in items"
             :key="item.username"
             :to="`/users/${item.username}`"
             @click="clear"
           >
-          <b-row>
+          <b-row class="pr-2">
             <!-- Picture -->
             <b-col cols="auto" class="p-0 m-0">
               <b-avatar :src="item.picture" />
             </b-col>
 
             <!-- Info -->
-            <b-col class="pl-1 pr-1" style="line-height: 1.3rem">
-              <p class="m-0 p-0 text-sm font-weight-bold">
-                {{ item.username }}
-              </p>
-              <p class="m-0 p-0 text-sm">
-                {{ truncate(item.name) }}
-              </p>
+            <b-col class="pl-1 pr-0" style="line-height: 1.3rem">
+              <b-row>
+                <span class="m-0 py-0 pl-3 font-weight-bold">
+                  {{ truncate(item.username, 25) }}
+                </span>
+              </b-row>
+              <b-row>
+                <span class="m-0 py-0 pl-3">
+                  {{ truncate(item.name, 30) }}
+                </span>
+              </b-row>
             </b-col>
           </b-row>
           </b-dropdown-item>
@@ -70,11 +73,11 @@ export default {
   }),
 
   methods: {
-    truncate (name) {
-      if (name.length <= 25) {
+    truncate (name, size) {
+      if (name.length < size) {
         return name
       }
-      return name.substring(0, 22) + '...'
+      return name.substring(0, size - 3) + '...'
     },
     async search () {
       try {

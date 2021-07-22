@@ -5,18 +5,23 @@
       right
       variant="primary"
       menu-class="scrollable-menu"
+      class="mx-3 my-0 pb-0 pt-2"
     >
       <template #button-content>
-        <b-row align-h="center" class="m-0 p-0 pt-1" @click="getNotifications" >
+        <b-row align-h="center" class="m-0 p-0" @click="getNotifications" >
           <b-avatar
-            size="md"
+            size="2rem"
             :badge="unreadNotificationsCount > 0 ? unreadNotificationsCount : null"
             badge-top
             variant="primary"
             :badge-variant="unreadNotificationsCount > 0 ? 'red' : 'primary'"
-            icon="bell"
+            class="p-0 m-0"
           >
+            <b-icon icon="bell" scale="1.4"></b-icon>
           </b-avatar>
+        </b-row>
+        <b-row align-h="center" class="p-0 m-0">
+          <span class="text-white p-0 m-0"> Notificações </span>
         </b-row>
       </template>
 

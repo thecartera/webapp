@@ -6,14 +6,23 @@
     right
     size="sm"
     variant="primary"
-    class="pt-1 mx-1"
+    class="pt-0"
   >
     <b-dropdown-header id="dropdown-header-label">
-      Convidar um amigo
+      Convidar amigos
     </b-dropdown-header>
 
     <template #button-content>
-      <b-icon scale="1.5" shift-v="-7" icon="person-plus" style="cursor: pointer" class="text-white"/>
+      <b-row align-h="center" class="m-0 p-0">
+        <b-col class="m-0 p-0" cols="auto">
+          <b-icon scale="1.3" shift-v="-7" icon="person-plus" style="cursor: pointer" class="text-white"/>
+        </b-col>
+        <b-col class="m-0 pt-2 pl-2" cols="auto">
+          <span class="text-dark mt-2 pt-2 text-white">
+            Convidar amigos
+          </span>
+        </b-col>
+      </b-row>
     </template>
 
     <Socials :title="message" :url="`https://cartera.com.br`" />
