@@ -206,6 +206,9 @@ export default {
       return (this.usernameRegex.test(this.username) && this.usernameValid)
     },
     invalidUsernameFeedback () {
+      if (this.username.length > 20 || this.username.length < 5) {
+        return 'Username deve ter entre 5 e 20 caracteres'
+      }
       return 'Username não disponível.'
     },
     invalidNameFeedback () {
