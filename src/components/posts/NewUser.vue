@@ -32,39 +32,17 @@
 
         <!-- Timestamp -->
         <b-row class="text-secondary text-truncate" style="font-size: 0.75rem">
-          02/06/2021 18:32
+          agora
         </b-row>
       </b-col>
       </b-row>
     </b-card-header>
 
-    <b-card-img
-      src="https://cdn.discordapp.com/attachments/826824589312655427/849768240829169694/3.png"
-      alt="Cartera banner"
-    />
-
     <b-card-footer class="pt-0 m-0 px-3 pb-0" footer-bg-variant="white">
-      <b-row align-v="center">
-        <!-- Like -->
-        <b-button class="pb-0" v-if="this.likeCount === 31" @click="likeCount = 32" variant="white" size="sm">
-          <font-awesome-icon style="height: 1.3rem; width: 1.3rem" :icon="['far', 'thumbs-up']"/>
-          <span class="h6"> {{ likeCount }} </span>
-        </b-button>
-        <!-- Unlike -->
-        <b-button class="pb-0" v-else @click="likeCount = 31" variant="white" size="sm">
-          <font-awesome-icon style="height: 1.3rem; width: 1.3rem" :icon="['fas', 'thumbs-up']" class="text-primary" />
-          <span class="h6"> {{ likeCount }} </span>
-        </b-button>
-
-      </b-row>
-
       <b-row class="px-2 pb-2">
-        <b-link :to="`/users/${user_cartera.username}`" class="text-dark pr-2">
-          <strong> {{ user_cartera.username }} </strong>
-        </b-link>
           Bem vindos à <b class="pl-1 text-success"> Cartera </b>!
         <b-card-text class="pt-1">
-          🔔 Esse é seu feed, parecido com o do Twitter + Instagram, só que com
+          🔔 Esse é seu feed, parecido com o do Twitter + Instagram, e com muitas
           funções específicas para investidores! Por exemplo, é aqui que você vai
           ficar sabendo de atualizações das carteiras dos seus amigos.
         </b-card-text>
@@ -76,13 +54,18 @@
           ou
           <b-link to="/wallets"> criando a sua própria. </b-link>
           Ah, e você pode compartilhar qualquer carteira no WhatsApp, Twitter e
-          Telegram.
+          Telegram. Chame seus amigos e não perca nenhuma oportunidade!
         </b-card-text>
         <b-card-text>
           🤩 Fiquem ligados, teremos muitas novidades em breve!
         </b-card-text>
       </b-row>
     </b-card-footer>
+      <b-card-img
+        class=""
+        src="https://cdn.discordapp.com/attachments/826824589312655427/868240468213891172/Screenshot_from_2021-07-23_18-17-19.png"
+        alt="Cartera banner"
+      />
 
     <b-button @click="start" variant="primary">Começar!</b-button>
     </b-card>

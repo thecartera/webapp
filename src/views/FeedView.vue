@@ -75,7 +75,11 @@ export default {
     },
     async updateFeed () {
       this.showWelcome = false
-      const newItems = await client.feed.getFeed(10)
+      let lastId
+      if (this.feed.length > 0) {
+        lastId = this.feed[this.feed.length - 1].id
+      }
+      const newItems = await client.feed.getFeed(10, lastId)
       this.feed = [...this.feed, ...newItems]
     },
     deleteEvent (eventId) {
