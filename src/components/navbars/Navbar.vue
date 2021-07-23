@@ -241,8 +241,10 @@ export default {
   },
 
   async created () {
-    const count = await client.notifications.getUnreadNotificationsCount()
-    this.unreadNotificationsCount = count.counter.toString()
+    if (this.auth) {
+      const count = await client.notifications.getUnreadNotificationsCount()
+      this.unreadNotificationsCount = count.counter.toString()
+    }
   }
 }
 </script>
