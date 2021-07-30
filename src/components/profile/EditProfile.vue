@@ -191,7 +191,9 @@ export default {
       const c3 = this.picURL.slice(0, 28) === 'https://media-exp2.licdn.com'
       const c4 = this.picURL.slice(0, 28) === 'https://media-exp3.licdn.com'
       const c5 = this.picURL.slice(0, 38) === 'https://scontent.ffln1-1.fna.fbcdn.net'
-      if (c0 || c1 || c2 || c3 || c4 || c5) {
+      const c6 = this.picURL.slice(0, 30) === 'https://s.gravatar.com/avatar/'
+      const c7 = this.picURL.slice(0, 21) === 'https://i0.wp.com/cdn'
+      if (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7) {
         return true
       }
       return false
