@@ -99,6 +99,12 @@ export default {
     }
   },
 
+  watch: {
+    async ticker () { // watch if opening another asset page
+      this.asset = await client.assets.fetchByTicker(this.ticker, this.days)
+    }
+  },
+
   methods: {
     async click (item) {
       this.days = item.days

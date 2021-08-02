@@ -49,7 +49,7 @@ export default {
 
         datasets: [{
           label: 'Preço',
-          data: this.historic.prices.map(i => i.price),
+          data: this.historic.prices.map(i => i.price.toFixed(2)),
 
           // graph
           fill: true,
