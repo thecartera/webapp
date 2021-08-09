@@ -20,7 +20,7 @@
             <b-icon icon="bell" scale="1.4"></b-icon>
           </b-avatar>
         </b-row>
-        <b-row align-h="center" class="p-0 m-0">
+        <b-row align-h="center" class="p-0 m-0" @click="getNotifications">
           <span class="text-white p-0 m-0"> Notificações </span>
         </b-row>
       </template>
@@ -49,7 +49,7 @@ export default {
 
   data: () => ({
     notifications: [],
-    showing: false
+    show: false
   }),
 
   props: {
@@ -61,7 +61,10 @@ export default {
 
   methods: {
     async loadMoreNotifications () {
-      if (this.notifications.length === 0 || this.notifications[0].type === 'DUMMY') {
+      if (this.notifications.length === 0 ||
+        this.notifications[0].type === 'DUMMY' ||
+        !this.show ||
+        this.notifications.length < 10) {
         return
       }
 
