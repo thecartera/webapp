@@ -44,14 +44,13 @@ export default {
       return {
         labels: this.historic.prices
           .map(i => new Date(i.date))
-          .map(i => i.toLocaleDateString('pt-BR'))
-          .map(i => i.substring(0, 5)),
+          .map(i => i.toLocaleDateString('pt-BR', { month: '2-digit', day: '2-digit' })),
 
         datasets: [{
           label: 'Preço',
           data: this.historic.prices.map(i => i.price.toFixed(2)),
 
-          // graph
+          // chart
           fill: true,
           backgroundColor: this.backgroundColor, // color below line
           radius: 0, // zero so no points are rendered unless hovered
