@@ -3,6 +3,7 @@ import Vue from 'vue'
 
 // Plugins
 import './plugins/meili'
+import './plugins/vue-gtag'
 import './plugins/bootstrap'
 import './plugins/social-share'
 import './plugins/font-awesome'

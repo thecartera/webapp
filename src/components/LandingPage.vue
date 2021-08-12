@@ -126,6 +126,11 @@ export default {
 
   methods: {
     startUsing () {
+      this.$gtag.event('comecar-usar-button-clicked', {
+        event_category: 'landingpage',
+        event_label: 'Começar a usar Button clicked',
+        value: 1
+      })
       if (!this.$store.state.auth.auth) {
         const state = { to: this.$router.currentRoute.path }
         this.$store.dispatch(LOGIN, state)
