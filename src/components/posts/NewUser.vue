@@ -48,11 +48,11 @@
         </b-card-text>
         <b-card-text>
           ⚡️ Comece seguindo outros usuários, vendo uma
-          <b-link to="/wallets/6073e39242cb2b06e78c1cb1">
+          <b-link to="/c/6073e39242cb2b06e78c1cb1">
             carteira
           </b-link>
           ou
-          <b-link to="/wallets"> criando a sua própria. </b-link>
+          <b-link to="/c"> criando a sua própria. </b-link>
           Ah, e você pode compartilhar qualquer carteira no WhatsApp, Twitter e
           Telegram. Chame seus amigos e não perca nenhuma oportunidade!
         </b-card-text>

@@ -58,8 +58,20 @@ const routes = [
     beforeEnter: AuthGuard
   },
   {
+    path: '/c',
+    name: 'newCartera',
+    component: WalletCreateView,
+    beforeEnter: AuthGuard
+  },
+  {
     path: '/wallets/:id',
     name: 'wallet',
+    component: WalletView,
+    props: true
+  },
+  {
+    path: '/c/:id',
+    name: 'cartera',
     component: WalletView,
     props: true
   },
@@ -71,6 +83,12 @@ const routes = [
   },
   {
     path: '/wallets/:id/edit',
+    name: 'editwallet',
+    component: WalletEditorView,
+    props: true
+  },
+  {
+    path: '/c/:id/edit',
     name: 'editwallet',
     component: WalletEditorView,
     props: true

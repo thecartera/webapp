@@ -149,7 +149,7 @@ export default {
         return
       }
       const wallet = await client.wallets.postNewWallet(this.wallet)
-      this.$router.push(`/wallets/${wallet.id}`)
+      this.$router.push(`/c/${wallet.id}`)
     },
 
     async addTicker ({ ticker, amount }) {

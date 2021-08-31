@@ -167,11 +167,11 @@ export default {
         return
       }
       const wallet = await client.wallets.updateWallet(this.wallet, this.walleta.id)
-      this.$router.push(`/wallets/${wallet.id}`)
+      this.$router.push(`/c/${wallet.id}`)
     },
 
     cancelEdit () {
-      this.$router.push(`/wallets/${this.walleta.id}`)
+      this.$router.push(`/c/${this.walleta.id}`)
     },
 
     async addTicker ({ ticker, amount }) {

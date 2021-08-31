@@ -146,7 +146,7 @@
         </b-col>
 
         <b-col cols="auto" align-self="end">
-          <b-link class="text-primary" :to="`/wallets/${item.id}`">
+          <b-link class="text-primary" :to="`/c/${item.id}`">
             {{ item.name }}
           </b-link>
         </b-col>

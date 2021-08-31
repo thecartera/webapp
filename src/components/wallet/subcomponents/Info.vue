@@ -66,7 +66,7 @@
               </b-dropdown-item-button>
 
               <!-- SHARE BUTTONS -->
-              <Socials v-if="wallet.id" :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"/>
+              <Socials v-if="wallet.id" :url="`https://cartera.com.br/#/c/${wallet.id}/`"/>
             </b-dropdown>
           </b-row>
         </b-col>
@@ -138,7 +138,7 @@
                   style="color: black; width: 1.5rem; height: 1.5rem"
                 />
               </template>
-              <Socials v-if="wallet.id" :url="`https://cartera.com.br/#/wallets/${wallet.id}/`"/>
+              <Socials v-if="wallet.id" :url="`https://cartera.com.br/#/c/${wallet.id}/`"/>
             </b-dropdown>
           </b-row>
         </b-col>
@@ -184,7 +184,7 @@ export default {
 
   methods: {
     gotoWalletEditor () {
-      this.$router.push(`/wallets/${this.wallet.id}/edit`)
+      this.$router.push(`/c/${this.wallet.id}/edit`)
     },
     positive (value) {
       return value < 0 ? 'text-danger' : 'text-success'

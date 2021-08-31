@@ -5,7 +5,7 @@
         <b-col>
           <span> {{ item.owner.name }} </span>
           {{ text }}
-          <b-link :to="`/wallets/${item.data.walletId}`" class="text-success text-decoration-none">
+          <b-link :to="`/c/${item.data.walletId}`" class="text-success text-decoration-none">
             <span> Cartera </span>
           </b-link>
         </b-col>

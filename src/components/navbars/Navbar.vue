@@ -62,7 +62,7 @@
         </b-nav-item>
 
         <!-- New portfolio button mobile -->
-        <b-nav-item class="d-sm-none" v-if="auth" :to="`/wallets`">
+        <b-nav-item class="d-sm-none" v-if="auth" :to="`/c`">
           <b-row align-h="center">
             <b-iconstack scale="0.65" shift-h="-3">
               <b-icon variant="white" icon="plus" shift-v="1" scale="0.8"/>
@@ -100,9 +100,9 @@
             </b-dropdown-item>
 
             <!-- Create wallet button -->
-            <b-dropdown-item :to="`/wallets`">
+            <b-dropdown-item :to="`/c`">
               <b-row align-h="start">
-                <b-nav-item :to="`/wallets`">
+                <b-nav-item :to="`/c`">
                   <b-iconstack scale="0.65" shift-h="-3">
                     <b-icon variant="dark" icon="plus" shift-v="1" scale="0.8"/>
                     <b-icon variant="dark" shift-v="2" icon="wallet2"/>
