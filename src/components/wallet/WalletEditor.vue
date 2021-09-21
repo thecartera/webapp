@@ -87,7 +87,7 @@
 
       <!-- ASSET RETURN -->
       <template #cell(formattedGain)="data">
-        <span class="cell-name"> Lucro 30d </span>
+        <span class="cell-name"> Variação 30d </span>
         <br>
         <span :class="positive(data.value)" class="cell-value">
           {{ data.value }}%
@@ -125,8 +125,8 @@ export default {
       { key: 'image', label: '', class: 'text-center' },
       { key: 'nameticker', label: '', class: 'text-left' },
       { key: 'amount', label: 'Qtd.', class: 'text-center' },
-      { key: 'formattedPrice', label: 'Preço R$', class: 'text-center' },
-      { key: 'formattedGain', label: 'Lucro', class: 'text-center d-none d-md-block' },
+      { key: 'formattedPrice', label: 'Preço (R$)', class: 'text-center' },
+      { key: 'formattedGain', label: 'Variação', class: 'text-center d-none d-md-block' },
       { key: 'remove', label: '', class: 'text-center' }
     ],
     assets: [],

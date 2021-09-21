@@ -40,7 +40,7 @@
       <span v-b-tooltip.hover title="Relativo ao último fechamento">{{ data.label }}</span>
     </template>
     <template #cell(price)="data">
-      <small class="text-secondary"> Preço (R$) </small>
+      <small class="text-secondary"> Preço hoje </small>
       <br>
       <span class="text-monospace"> {{ data.value.toFixed(2) }} </span>
     </template>
@@ -71,7 +71,7 @@ export default {
       { key: 'imageLink', label: '', class: 'text-center' },
       { key: 'nameticker', label: '', class: 'text-left' },
       { key: 'weight', label: 'Peso', class: 'text-center h6', sortable: true },
-      { key: 'price', label: 'Preço', class: 'text-center h6', sortable: true },
+      { key: 'price', label: 'Preço (R$)', class: 'text-center h6', sortable: true },
       { key: 'gain', label: 'Variação', class: 'text-center h6', sortable: true }
     ]
   }),
