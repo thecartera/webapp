@@ -27,7 +27,7 @@
     "vue-chartjs": "^3.5.1",
     "vue-gtag": "^1.16.1",
     "vue-instantsearch": "^4.1.0",
-    "vue-router": "^3.5.2",
+    "vue-router": "^3.5.3",
     "vue-social-sharing": "^3.0.8",
     "vuex": "^3.6.2"
   },
